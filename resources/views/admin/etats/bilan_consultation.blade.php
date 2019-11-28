@@ -82,11 +82,14 @@
             </tr>
         </table>
         <div class="row">
-            <div class="col-md-6">
-                <p><u>LE COMPTABLE</u></p>
+            <div class="col-md-4 offset-10">
+                <p><u>GESTIONNAIRE</u></p>
             </div>
-            <div class="col-md-6 offset-10">
-                <p><u>L'ASSISTANTE</u></p>
+            <div class="col-md-4 offset-5">
+                <p><u>COMPTABLE</u></p>
+            </div>
+            <div class="col-md-4">
+                <p><u>ASSISTANTE</u></p>
             </div>
         </div>
     </div>
