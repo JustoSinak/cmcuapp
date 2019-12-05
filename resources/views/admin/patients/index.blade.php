@@ -50,7 +50,7 @@
                                     @endcan
                                     @can('print', \App\Patient::class)
                                         <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                            <a class="btn btn-success btn-xs mr-1" title="Générer la facture de consultation" href="{{ route('consultation.pdf', $patient->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
+                                            <a class="btn btn-success btn-xs mr-1" title="Générer la facture" href="{{ route('consultation.pdf', $patient->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
                                         </p>
                                     @endcan
                                     @can('delete', \App\Patient::class)

@@ -20,6 +20,8 @@ class CreatePatientsTable extends Migration
             $table->string('name')->unique();
             $table->string('assurance')->nullable();
             $table->string('numero_assurance')->nullable();
+            $table->string('motif')->nullable();
+            $table->string('details_motif')->nullable();
             $table->string('prise_en_charge')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

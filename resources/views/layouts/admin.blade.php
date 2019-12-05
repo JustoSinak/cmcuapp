@@ -60,7 +60,7 @@
 </div>
 @yield('content')
 
-
+@yield('script')
 
 <script src="{{ mix('js/all.js') }}"></script>
 <script src="{{ mix('js/app.js') }}"></script>

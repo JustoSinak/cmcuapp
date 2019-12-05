@@ -54,6 +54,7 @@ class PatientsController extends Controller
             'assurancec' => '',
             'assurec' => '',
             'motif' => '',
+            'details_motif' => 'required',
             'montant' => '',
             'avance' => '',
             'reste' => '',
@@ -73,6 +74,8 @@ class PatientsController extends Controller
         $patient->montant = $request->get('montant');
         $patient->assurance = $request->get('assurance');
         $patient->avance = $request->get('avance');
+        $patient->motif =$request->get('motif');
+        $patient->details_motif =$request->get('details_motif');
 
         $patient->numero_assurance = $request->get('numero_assurance');
         $patient->prise_en_charge = $request->get('prise_en_charge');
@@ -151,6 +154,7 @@ class PatientsController extends Controller
             'numero_dossier' => '',
             'montant' => '',
             'motif' => '',
+            'details_motif' => 'required',
             'avance' => '',
             'reste' => '',
             'reste1' => '',
@@ -167,6 +171,8 @@ class PatientsController extends Controller
         $patient->numero_assurance = $request->get('numero_assurance');
         $patient->name = $request->get('name');
         $patient->montant = $request->get('montant');
+        $patient->motif =$request->get('motif');
+        $patient->details_motif =$request->get('details_motif');
         $patient->avance = $request->get('avance');
         $patient->reste = $request->get('reste');
         $patient->reste1 = $request->get('reste1');
@@ -224,12 +230,12 @@ class PatientsController extends Controller
         $this->authorize('update', Patient::class);
         $this->authorize('print', Patient::class);
         $patient = Patient::find($id);
+        
+        // $factureConsultations = FactureConsultation::where('numero', '=', $patient->numero_dossier)->first();
 
-        $factureConsultations = FactureConsultation::where('numero', '=', $patient->numero_dossier)->first();
-
-        if ($factureConsultations) {
-            return back()->with('error', 'La facture existe déja');
-        } else {
+        // if ($factureConsultations) {
+        //     return back()->with('error', 'La facture existe déja');
+        // } else {
             FactureConsultation::create([
                 'numero' => $patient->numero_dossier,
                 'patient_id' => $patient->id,
@@ -237,6 +243,7 @@ class PatientsController extends Controller
                 'assurancec' => $patient->assurancec,
                 'assurec' => $patient->assurec,
                 'motif' => $patient->motif,
+                'details_motif' => $patient->details_motif,
                 'montant' => $patient->montant,
                 'demarcheur' => $patient->demarcheur,
                 'avance' => $patient->avance,
@@ -246,7 +253,7 @@ class PatientsController extends Controller
                 'date_insertion' => $patient->date_insertion,
                 'user_id' => auth()->user()->id,
             ]);
-        }
+        // }
 
 
         return redirect()->route('factures.consultation')->with('success', 'La facture a bien été généré veuillez consulter votre liste des factures');

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>Facture de {{ strtolower($patient->details_motif) ?? 'consultation'}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ asset('admin/css/bootstrap3.3.7.css') }}" rel="stylesheet" type="text/css" media="all" />
@@ -199,7 +199,7 @@
                 <div class="row contacts">
 
                     <div  class="col invoice-details ">
-                        <h6 class="invoice-id">RECU CONSULTATION N°{{ $patient->numero_dossier }}</h6>
+                        <h6 class="invoice-id">RECU {{ strtoupper($patient->details_motif) ?? 'CONSULTATION'}} N°{{ $patient->numero_dossier }}</h6>
                         <br>
                     </div>
                 </div>
@@ -269,7 +269,7 @@
                     <div class="row contacts">
 
                         <div  class="col invoice-details ">
-                            <h6 class="invoice-id">RECU CONSULTATION N°{{ $patient->numero_dossier }}</h6>
+                            <h6 class="invoice-id">RECU {{ strtoupper($patient->details_motif) ?? 'CONSULTATION'}} N°{{ $patient->numero_dossier }}</h6>
                             <br>
                         </div>
                     </div>

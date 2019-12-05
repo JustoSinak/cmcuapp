@@ -14,7 +14,7 @@
     <!--// top-bar -->
         @can('view', \App\User::class)
             <div class="container">
-                <h1 class="text-center">FACTURES CONSULTATIONS</h1>
+                <h1 class="text-center">FACTURES</h1>
                 <hr>
             </div>
             <div class="col-md-3 offset-md-8 text-center">
@@ -55,7 +55,7 @@
                                     <td>{{$facture->created_at }}</td>
                                     <td style="display: inline-flex;">
                                         <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
-                                            <a class="btn btn-success btn-xs mr-1" title="Imprimer la facture de consultation" href="{{ route('factures.consultation_pdf', $facture->patient->id) }}"><i class="fas fa-print"></i></a>
+                                            <a class="btn btn-success btn-xs mr-1" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->patient->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                         @can('update', \App\User::class)
                                             <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
