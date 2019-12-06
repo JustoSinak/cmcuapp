@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::post('patients', 'PatientsController@store')->name('patients.store');
     Route::get('patients/{patient}', 'PatientsController@show')->name('patients.show');
     Route::patch('patients/{patient}', 'PatientsController@update')->name('patients.update');
+    Route::put('patients/{patient}', 'PatientsController@motifMontantUpdate')->name('patients.motif_montant.update');
     Route::delete('patients/{patient}', 'PatientsController@destroy')->name('patients.destroy');
     Route::get('patient/{id}','PatientsController@generate_consultation')->name('consultation.pdf');
     Route::get('ordonance/{ordonance}','PatientsController@export_ordonance')->name('ordonance.pdf');

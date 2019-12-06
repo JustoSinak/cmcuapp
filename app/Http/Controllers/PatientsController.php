@@ -180,7 +180,6 @@ class PatientsController extends Controller
         $patient->assurec = $request->get('assurec');
         $patient->demarcheur = $request->get('demarcheur');
         $patient->prise_en_charge = $request->get('prise_en_charge');
-        $patient->motif = $request->get('motif');
         $patient->date_insertion = $request->get('date_insertion');
         $patient->prenom = $request->get('prenom');
         $patient->medecin_r = $request->get('medecin_r');
@@ -188,6 +187,27 @@ class PatientsController extends Controller
         $patient->save();
 
         return redirect()->route('patients.show', $patient->id)->with('success', 'Les informations du patient ont été mis à jour avec succès !');
+    }
+
+    public function motifMontantUpdate(Request $request, $id)
+    {
+        $this->authorize('update', Patient::class);
+        $request->validate([
+            'motif' => 'required',
+            'details_motif' => 'required',
+            'montant' => 'required',
+        ]);
+
+
+        $patient = Patient::findOrFail($id);
+
+        $patient->montant = $request->get('montant');
+        $patient->motif =$request->get('motif');
+        $patient->details_motif =$request->get('details_motif');
+        $patient->user_id = Auth::id();
+        $patient->save();
+
+        return redirect()->route('patients.show', $patient->id)->with('success', 'Le motif et le montant ont été mis à jour avec succès !');
     }
 
 

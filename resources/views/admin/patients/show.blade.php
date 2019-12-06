@@ -51,8 +51,9 @@
                                         <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails personnels
                                         </button>
                                         @can('secretaire', \App\Patient::class)
-                                        <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info">Completer le
-                                                                dossier</a> @endcan @can('med_inf_anes', \App\Patient::class)
+                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2">Completer le dossier</a>
+                                            <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
+                                         @endcan @can('med_inf_anes', \App\Patient::class)
                                         <a class="btn btn-dark mr-2" href="{{ route('prescription_medicale.index', $patient->id) }}" title="Prescriptions médicales">
                                             <i class="fas fa-book"></i> Prescripttions medicales
                                         </a>
@@ -60,7 +61,9 @@
                                         <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
                                             <i class="fas fa-book"></i> Fiche de paramètres
                                         </a>
-                                        @endcan @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
+                                        @endcan 
+                                        @include('admin.consultations.partials.motif_et_montant')
+                                        @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
 
                                     </table>
 
@@ -122,12 +125,30 @@
                     <script>
                         function ShowDetailsPatient() {
                             var x = document.getElementById("myDIV");
+                            var y = document.getElementById("editMotifMontform");
+                            if (y.style.display === "contents") {
+                                y.style.display = "none";
+                            }
                             if (x.style.display === "none") {
                                 x.style.display = "contents";
                             } else {
                                 x.style.display = "none";
                             }
                         }
+
+                        function ShoweditMotif_montant() {
+                            var x = document.getElementById("editMotifMontform");
+                            var y = document.getElementById("myDIV");
+                            if (y.style.display === "contents") {
+                                y.style.display = "none";
+                            }
+                            if (x.style.display === "none") {
+                                x.style.display = "contents";
+                            } else {
+                                x.style.display = "none";
+                            }
+                        }
+                        
                     </script>
 
 </body>

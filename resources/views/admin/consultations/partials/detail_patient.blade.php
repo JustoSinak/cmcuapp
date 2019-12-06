@@ -13,7 +13,7 @@
 </tr>
 <tr>
     <td>
-        <b>FRAIS DE CONSULTATION :</b>
+        <b>FRAIS DE {{ strtoupper($patient->details_motif) ?? 'CONSULTATION' }} :</b>
     </td>
     <td>{{ $patient->montant }} FCFA</td>
 </tr>

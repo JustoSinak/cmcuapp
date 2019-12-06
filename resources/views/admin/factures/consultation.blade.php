@@ -45,7 +45,7 @@
                                     <td>{{$facture->id}}</td>
                                     <td>{{$facture->numero}}</td>
                                     <td>{{$facture->patient->name }}</td>
-                                    <td>{{$facture->motif }}</td>
+                                    <td>{{$facture->details_motif ?? 'Consultation' }}</td>
                                     <td>{{$facture->montant }} <b>FCFA</b></td>
                                     <td>{{$facture->assurancec }} <b>FCFA</b></td>
                                     <td>{{$facture->assurec }} <b>FCFA</b></td>

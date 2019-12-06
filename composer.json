@@ -1,10 +1,10 @@
 {
-    "name": "laravel/laravel",
+    "name": "CMCUAPP",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "application de gestion hospitalière.",
     "keywords": [
-        "framework",
-        "laravel"
+        "Hospitalière",
+        "Gestion"
     ],
     "license": "MIT",
     "require": {
