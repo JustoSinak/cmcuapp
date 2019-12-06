@@ -107,8 +107,13 @@ class ParametresController extends Controller
 
     public function fiche_parametre_store(ParametreRequest $request)
     {
+        
         $patient = Patient::findOrFail($request->patient_id);
-
+        $request->validate([
+            'taille' => 'required',
+            'poids' => 'required',
+            'date_naissance' => 'required',
+        ]);
         Parametre::create([
 
             'user_id' => auth()->id(),

@@ -49,8 +49,8 @@
             <td>{{ Form::number('poids', null, ['class' => 'form-control col-md-5', 'placeholder' => '  Kgs', 'required' => 'required', 'step' => 'any']) }}</td>
         </tr>
         <tr>
-            <td><b>Taille :</b> </td>
-            <td>{{ Form::number('taille', null, ['class' => 'form-control col-md-5', 'placeholder' => '  M', 'step' => 'any']) }}</td>
+            <td><b>Taille :</b> <span class="text-danger">*</span></td>
+            <td>{{ Form::number('taille', null, ['class' => 'form-control col-md-5', 'placeholder' => '  M', 'required' => 'required', 'step' => 'any']) }}</td>
         </tr>
         </tbody>
     </table>

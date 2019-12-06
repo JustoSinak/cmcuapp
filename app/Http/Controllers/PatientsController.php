@@ -107,7 +107,6 @@ class PatientsController extends Controller
         }
 
         $patient->demarcheur = $request->get('demarcheur');
-        $patient->motif = 'CONSULTATION';
         $patient->date_insertion = $request->get('date_insertion');
         $patient->medecin_r = $request->get('medecin_r');
         $patient->user_id = Auth::id();
