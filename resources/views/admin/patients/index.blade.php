@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
-                        <table id="myTable" class="table table-bordred table-striped">
+                        <table id="myTable" class="table table-bordred table-hover">
                             <thead>
                             <th>
                                 NUMERO
