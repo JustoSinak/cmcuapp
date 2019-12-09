@@ -41,7 +41,7 @@
             <td>{{ Form::text('glycemie', null, ['class' => 'form-control', 'placeholder' => '  g/l']) }}</td>
         </tr>
         <tr>
-            <td><b>SPO2 :</b></td>
+            <td><b>SPO2 :</b><span class="text-danger">*</span></td>
             <td>{{ Form::text('spo2', null, ['class' => 'form-control', 'placeholder' => '  %']) }}</td>
         </tr>
         <tr>
@@ -49,8 +49,8 @@
             <td>{{ Form::number('poids', null, ['class' => 'form-control col-md-5', 'placeholder' => '  Kgs', 'required' => 'required', 'step' => 'any']) }}</td>
         </tr>
         <tr>
-            <td><b>Taille :</b> <span class="text-danger">*</span></td>
-            <td>{{ Form::number('taille', null, ['class' => 'form-control col-md-5', 'placeholder' => '  M', 'required' => 'required', 'step' => 'any']) }}</td>
+            <td><b>Taille (en metre):</b> <span class="text-danger">*</span></td>
+            <td>{{ Form::number('taille', null, ['class' => 'form-control col-md-5', 'placeholder' => '0.00', 'required' => 'required', 'step' => 'any']) }}</td>
         </tr>
         </tbody>
     </table>
