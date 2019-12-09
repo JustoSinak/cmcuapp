@@ -48,18 +48,18 @@
                                 <div class="card-body">
                                     <h2 class="card-title text-danger text-center">DOSSIER PATIENT</h2>
                                     <table class="table table-user-information ">
-                                        <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails personnels
+                                        <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
                                         </button>
                                         @can('secretaire', \App\Patient::class)
                                             <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2">Completer le dossier</a>
                                             <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
                                          @endcan @can('med_inf_anes', \App\Patient::class)
                                         <a class="btn btn-dark mr-2" href="{{ route('prescription_medicale.index', $patient->id) }}" title="Prescriptions médicales">
-                                            <i class="fas fa-book"></i> Prescripttions medicales
+                                            <i class="fas fa-book"></i> Prescriptions Medicales
                                         </a>
                                         @endcan @can('infirmier', \App\Patient::class)
                                         <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
-                                            <i class="fas fa-book"></i> Fiche de paramètres
+                                            <i class="fas fa-book"></i> Fiche De Paramètres
                                         </a>
                                         @endcan 
                                         @include('admin.consultations.partials.motif_et_montant')
@@ -87,28 +87,27 @@
                                                 <i class="fas fa-eye"></i> Ordonances
                                             </button>
                                             <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#biologieAll" data-whatever="@mdo">
-                                                <i class="fas fa-eye"></i> Examens Biologie
+                                                <i class="fas fa-eye"></i> Examens Biologiques
                                             </button>
                                             <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#imagerieAll" data-whatever="@mdo">
-                                                <i class="fas fa-eye"></i> Examens Imagerie
+                                                <i class="fas fa-eye"></i> Examens Imageries
                                             </button>
                                             <a href="{{ route('examens.index') }}" class="btn btn-primary btn-block mb-2" title="Détails surveillance post-aneshésiste">
-                                                <i class="fas fa-eye"></i> Résultats d'examens
+                                                <i class="fas fa-eye"></i> Résultats d'Examens
                                             </a>
                                             <a href="{{ route('surveillance_post_anesthesise.index', $patient->id) }}" class="btn btn-primary btn-block mb-2" title="Détails surveillance post-aneshésiste">
-                                                <i class="fas fa-eye"></i> Surveillance post-anesthésique
+                                                <i class="fas fa-eye"></i> Surveillance Post-Anesthésique
                                             </a>
                                             <button type="button" class="btn btn-primary btn-block" title="Fiches d'intervention" data-toggle="modal" data-target="#FicheInterventionAll" data-whatever="@mdo">
-                                                <i class="fas fa-eye"></i>
-                                                <small>Fiches d'intervention</small>
+                                                <i class="fas fa-eye"></i>Fiche d'Intervention
+                                                
                                             </button>
-                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info btn-block mb-2">Completer
-                                                le dossier</a> @if (count($patient->consultations)) @can('medecin', \App\Patient::class)
+                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info btn-block mb-2">Completer Le Dossier</a> @if (count($patient->consultations)) @can('medecin', \App\Patient::class)
                                             <a class="btn btn-success btn-block" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $patient->id) }}">
-                                                <i class="fas fa-print"></i> Lettre de consultation
+                                                <i class="fas fa-print"></i> Lettre De Consultation
                                             </a>
                                             <button type="button" class="btn btn-primary btn-block mb-2" title="Liste de fiches pour ce patient" data-toggle="modal" data-target="#ficheSuiviAll" data-whatever="@mdo">
-                                                <i class="fas fa-eye"></i> Fiche de suivi
+                                                <i class="fas fa-eye"></i> Fiche De Suivi
                                             </button>
                                             @endcan @endif
                                         </div>

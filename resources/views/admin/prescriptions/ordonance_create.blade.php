@@ -36,7 +36,7 @@
                                 <table class="table table-bordered table-striped" id="user_table">
                                     <thead>
                                     <tr>
-                                        <th width="35%">Médicament</th>
+                                        <th width="35%">Médicaments</th>
                                         <th width="35%">Quantité</th>
                                         <th width="35%">Posologie</th>
                                         <th width="30%">Action</th>
