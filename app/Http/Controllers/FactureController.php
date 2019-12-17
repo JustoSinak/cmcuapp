@@ -30,11 +30,12 @@ class FactureController extends Controller
         return view('admin.factures.index', compact('factures'));
     }
 
-    public function destroy(Facture $factures)
+    public function destroy($id)
     {
         $this->authorize('view', User::class);
-        $factures->delete();
-        return view('admin.factures.index')->with('info', 'La facture à bien été supprimer');
+        $facture = FactureConsultation::findOrFail($id);
+        $facture->delete();
+        return redirect()->action('FactureController@FactureConsultation')->with('info', 'La facture n° '.$id.' à bien été supprimée');
     }
 
     public function show(Facture $facture, Produit $produit)
@@ -46,27 +47,47 @@ class FactureController extends Controller
         ]);
     }
 
-    public function FactureConsultation(Patient $patient,User $user)
+    public function FactureConsultation(Patient $patient, User $user)
     {
         $this->authorize('view', User::class);
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
 
-        $start_date = "01-".$month."-".$year;
+        $start_date = "01-" . $month . "-" . $year;
         $start_time = strtotime($start_date);
 
         $end_time = strtotime("+1 month", $start_time);
 
-        for($i=$start_time; $i<$end_time; $i+=86400)
-        {
-           $lists[] = date('Y-m-d', $i);
+        for ($i = $start_time; $i < $end_time; $i += 86400) {
+            $lists[] = date('Y-m-d', $i);
         }
 
         $user = User::where('role_id', '=', 2)->get();
-        $factureConsultations = FactureConsultation::with('patient','user')->latest()->get();
-       
+        $factureConsultations = FactureConsultation::with('patient', 'user')->latest()->get();
+
 
         return view('admin.factures.consultation', compact('factureConsultations', 'lists'));
+    }
+
+    public function FactureConsultationUpdate( Request $request, $id){
+        
+        $this->authorize('update', new FactureConsultation);
+
+        $request->validate([
+            'montant' => 'required',
+            'avance' => 'required',
+            'reste' => '',
+
+        ]);
+
+        $facture = FactureConsultation::findOrFail($id);
+        $facture->montant = $request->get('montant');
+        $facture->avance = $request->get('avance');
+        $facture->assurec = FactureConsultation::calculAssurec($request->get('montant'), $facture->patient->prise_en_charge);
+        $facture->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $facture->patient->prise_en_charge);
+        $facture->reste = FactureConsultation::calculReste($facture->assurec, $request->get('avance'));
+        $facture->save();
+        return redirect()->action('FactureController@FactureConsultation')->with('info', 'La facture n° '.$id.' à bien été mise à jour');
     }
 
     public function FactureChambre(Patient $patient)
@@ -76,14 +97,13 @@ class FactureController extends Controller
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
 
-        $start_date = "01-".$month."-".$year;
+        $start_date = "01-" . $month . "-" . $year;
         $start_time = strtotime($start_date);
 
         $end_time = strtotime("+1 month", $start_time);
 
-        for($i=$start_time; $i<$end_time; $i+=86400)
-        {
-           $lists[] = date('Y-m-d', $i);
+        for ($i = $start_time; $i < $end_time; $i += 86400) {
+            $lists[] = date('Y-m-d', $i);
         }
 
         $factureChambres = FactureChambre::with('patient')->get();
@@ -98,14 +118,13 @@ class FactureController extends Controller
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
 
-        $start_date = "01-".$month."-".$year;
+        $start_date = "01-" . $month . "-" . $year;
         $start_time = strtotime($start_date);
 
         $end_time = strtotime("+1 month", $start_time);
 
-        for($i=$start_time; $i<$end_time; $i+=86400)
-        {
-           $lists[] = date('Y-m-d', $i);
+        for ($i = $start_time; $i < $end_time; $i += 86400) {
+            $lists[] = date('Y-m-d', $i);
         }
 
         $user = User::where('role_id', '=', 2)->get();
@@ -140,7 +159,7 @@ class FactureController extends Controller
 
         $facture_devis->user_id = Auth::id();
         $facture_devis->patient_id = $request->get('patient_id');
-        $facture_devis->numero_facture = $date.'_'.time();
+        $facture_devis->numero_facture = $date . '_' . time();
         $facture_devis->montant_devis = $request->get('montant_devis');
         $facture_devis->designation_devis = $request->get('designation_devis');
         $facture_devis->avance_devis = $request->get('avance_devis');
@@ -151,14 +170,14 @@ class FactureController extends Controller
 
         if ($facture_devis->assurance) {
             if ($facture_devis->avance_devis) {
-                $facture_devis->part_patient = ((int)$request->get('montant_devis') * (((int)$request->get('taux_assurance')) / 100));
-                $facture_devis->part_assurance = ((int)$request->get('montant_devis')) - ((int)$facture_devis->part_patient);
-                $facture_devis->reste_devis = ((int)$request->get('montant_devis')) - ($facture_devis->part_assurance + $facture_devis->avance_devis);
+                $facture_devis->part_patient = ((int) $request->get('montant_devis') * (((int) $request->get('taux_assurance')) / 100));
+                $facture_devis->part_assurance = ((int) $request->get('montant_devis')) - ((int) $facture_devis->part_patient);
+                $facture_devis->reste_devis = ((int) $request->get('montant_devis')) - ($facture_devis->part_assurance + $facture_devis->avance_devis);
             } else {
                 $facture_devis->reste_devis = 0;
                 $facture_devis->avance_devis = 0;
-                $facture_devis->part_patient = ((int)$request->get('montant_devis') * (((int)$request->get('taux_assurance')) / 100));
-                $facture_devis->part_assurance = ((int)$request->get('montant_devis')) - ((int)$facture_devis->part_patient);
+                $facture_devis->part_patient = ((int) $request->get('montant_devis') * (((int) $request->get('taux_assurance')) / 100));
+                $facture_devis->part_assurance = ((int) $request->get('montant_devis')) - ((int) $facture_devis->part_patient);
             }
         } else {
             if ($facture_devis->avance_devis) {
@@ -217,7 +236,7 @@ class FactureController extends Controller
             'facture_devis' => FactureDevi::with('user', 'patient')->findOrFail($id)
         ]);
 
-//        $pdf->setWatermark('admin/images/logo.jpg', $opacity = 0.6, $top = '30%', $width = '100%', $height = '100%');
+        //        $pdf->setWatermark('admin/images/logo.jpg', $opacity = 0.6, $top = '30%', $width = '100%', $height = '100%');
 
         return $pdf->stream('facture_devis.pdf');
     }
@@ -226,19 +245,20 @@ class FactureController extends Controller
     public function export_bilan_consultation()
     {
 
+        $service = \request('service') == 'Tout'? "" : \request('service');
+        $factures = FactureConsultation::with('patient')->where('motif', 'LIKE', '%'.$service)->where('date_insertion', '=', \request('day'))->get();
 
-        $factures = FactureConsultation::with('patient')->where('date_insertion', '=', \request('day'))->get();
 
-
-        $tautaux = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->sum('montant');
-        $avances = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->sum('avance');
-        $restes = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->sum('reste');
-        $assurances = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->sum('assurancec');
-        $patients = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->sum('assurec');
+        $tautaux = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        $avances = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('avance');
+        $restes = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('reste');
+        $assurances = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurancec');
+        $patients = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurec');
 
 
 
         $pdf = PDF::loadView('admin.etats.bilan_consultation', [
+            'service' => $service==""? "" : '- '.$service,
             'factures' => $factures,
             'tautaux' => $tautaux,
             'avances' => $avances,
@@ -250,7 +270,7 @@ class FactureController extends Controller
         $pdf->setPaper('A4', 'landscape');
 
         return $pdf->stream('bilan_facture_consultation.pdf');
-    }
+     }
 
     public function export_bilan_clientexterne()
     {
@@ -279,5 +299,4 @@ class FactureController extends Controller
 
         return $pdf->stream('bilan_facture_clientexterne.pdf');
     }
-
 }

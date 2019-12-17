@@ -60,7 +60,7 @@
 </div>
 @yield('content')
 
-@yield('script')
+
 
 <script src="{{ mix('js/all.js') }}"></script>
 <script src="{{ mix('js/app.js') }}"></script>
@@ -74,20 +74,34 @@
 
 
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
-{{--<script>--}}
-{{--CKEDITOR.replace( 'summary-ckeditor' );--}}
-{{--CKEDITOR.replace( 'summary-ckeditor1' );--}}
-
-{{--</script>--}}
-
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable({
             scrollY: 300,
-            paging: true,
+            scrollX: true,
             processing: true,
             info: false,
             ordering: false,
+            initComplete: function () {
+                this.api().column('#statut').every( function () {
+                    var column = this;
+                    var select = $('<select><option value="" selected>Tout</option></select>')
+                        .appendTo( $(column.header()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+    
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+    
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            },
             language: {
                 processing:     "Traitement en cours...",
                 search:         "Rechercher&nbsp;:",
@@ -135,6 +149,10 @@
 
 <script>
     $(document).ready(function () {
+        //initialize tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+
+        
         $(".tbtn").click(function () {
             $(this).parents(".custom-table").find(".toggler1").removeClass("toggler1");
             $(this).parents("tbody").find(".toggler").addClass("toggler1");
@@ -143,7 +161,7 @@
         });
     });
 </script>
-
+@yield('script')
 @php
     $licence = \App\Licence::where('client', 'cmcuapp')->first();
 @endphp

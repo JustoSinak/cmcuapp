@@ -49,7 +49,7 @@
                                         <a href="{{ route('examens.create', $patient->id) }}" title="Ajouter examens medicaux" class="btn btn-info btn-xs mr-1"><i class="fas fa-book"></i></a>
                                     @endcan
                                     @can('print', \App\Patient::class)
-                                        <p data-placement="top" data-toggle="tooltip" title="Delete">
+                                        <p data-placement="top" data-toggle="tooltip" title="Générer la facture">
                                             <a class="btn btn-success btn-xs mr-1" title="Générer la facture" href="{{ route('consultation.pdf', $patient->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
                                         </p>
                                     @endcan

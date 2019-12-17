@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\FactureConsultation
@@ -46,7 +47,12 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  */
 class FactureConsultation extends Model
-{
+{   
+
+    use SoftDeletes;
+
+    protected $dates = ['deleted_at'];
+
     protected $guarded = [];
 
 
@@ -60,5 +66,19 @@ class FactureConsultation extends Model
         return $this->belongsTo(User::class);
     }
 
-    
+
+
+    public static function calculReste($assurec, $avance){
+        return $assurec - $avance;
+    }
+
+    public static function calculAssurec( $montant, $prise_en_charge){
+        // $prise_en_charge est le taux de prise en charge des soins par l'assurance
+        return  ((float)$montant * ((100-(float)$prise_en_charge) / 100)); // assurec => part patient
+    }
+
+    public static function calculAssurancec($montant, $prise_en_charge){
+        // $prise_en_charge est le taux de prise en charge des soins par l'assurance
+        return ((float)$montant * (((float)$prise_en_charge) / 100));// assurancec => part assurance}
+    }
 }

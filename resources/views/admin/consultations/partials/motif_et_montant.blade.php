@@ -28,7 +28,7 @@
                 <label for="details_motif" id="label_details_motif" class="col-form-label text-md-right">Détails motif : <span class="text-danger">*</span></label>
             </td>
             <td>
-                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? $patient->details_motif}}" {{ $patient->motif === "Consultation" ? "disabled" : "" }} type="text" placeholder="Précisez le motif">
+                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? $patient->details_motif}}"  type="text" placeholder="Précisez le motif">
             </td>
         </tr>
 
@@ -43,35 +43,65 @@
         </tr>
         <tr>
             <td>
+                <label for="assurance" class="col-form-label text-md-right">Assurance</label>
+            </td>
+            <td>
+                <input name="assurance" class="form-control" value="{{ old('assurance') ?? $patient->assurance }}" type="text" placeholder=" nom de l'assurance si le patient est assuré">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="numero_assurance" class="col-form-label text-md-right">Numéro d'assurance</label>
+            </td>
+            <td>
+                <input name="numero_assurance" class="form-control" value="{{ old('numero_assurance') ?? $patient->numero_assurance }}" type="text" placeholder="Numéro d'assurance si le patient est assuré">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for=" prise_en_charge" class="col-form-label text-md-right"> Taux de Prise en Charge : <span class="text-danger"></span></label>
+            </td>
+            <td>
+                <div class="input-group mb-3">
+                    <select class="form-control" name="prise_en_charge" id="prise_en_charge" required>
+                        @foreach(range(0, 100) as $taux)
+                        <option {{ old('prise_en_charge', $patient->prise_en_charge) ==  $taux ? 'selected' : '' }}>{{$taux}}</option>
+                        @endforeach
+                    </select>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon2"> % </span>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <button type="submit" class="btn btn-primary">Modifier</button>
             </td>
             <td></td>
         </tr>
-        
+
     </form>
 </tbody>
 @section('script')
 <script>
-    function new_ckChange(ckType){
-        
+    function new_ckChange(ckType) {
+
         var motif = document.getElementById('motif');
         var choix = motif[motif.selectedIndex].value;
         if (choix == 'Consultation') {
             document.getElementById("label_details_motif").innerText = 'Détail motif';
             document.getElementById("details_motif").value = "Consultation";
-            document.getElementById("details_motif").disabled = true;
-        } else{
+        } else {
             document.getElementById("details_motif").value = "";
-            document.getElementById("details_motif").disabled = false;
         }
-        if ( choix == 'Acte' || choix == 'Examen') {
-            document.getElementById("label_details_motif").innerText = 'Type '+choix.toLowerCase();
+        if (choix == 'Acte' || choix == 'Examen') {
+            document.getElementById("label_details_motif").innerText = 'Type ' + choix.toLowerCase();
         }
-        if ( choix == 'Autres') {
+        if (choix == 'Autres') {
             document.getElementById("label_details_motif").innerText = 'Détails motif';
         }
-        
+
     }
-        
 </script>
 @endsection

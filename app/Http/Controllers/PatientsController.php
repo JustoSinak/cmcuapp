@@ -55,14 +55,14 @@ class PatientsController extends Controller
             'assurec' => '',
             'motif' => '',
             'details_motif' => 'required',
-            'montant' => '',
-            'avance' => '',
-            'reste' => '',
-            'reste1' => '',
+            'montant' => 'numeric|required',
+            'avance' => 'numeric|required',
+            'reste' => 'numeric',
+            'reste1' => 'numeric',
             'demarcheur' => '',
-            'numero_assurance' => '',
+            'numero_assurance' => 'required_with:assurance',
             'numero_dossier' => '',
-            'prise_en_charge' => '',
+            'prise_en_charge' => 'required_with:assurance|numeric|between:0,100',
             'date_insertion' => '',
         ]);
 
@@ -79,7 +79,11 @@ class PatientsController extends Controller
 
         $patient->numero_assurance = $request->get('numero_assurance');
         $patient->prise_en_charge = $request->get('prise_en_charge');
+        $patient->assurec = FactureConsultation::calculAssurec($request->get('montant'), $request->get('prise_en_charge'));
+        $patient->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $request->get('prise_en_charge'));
+        $patient->reste = FactureConsultation::calculReste($patient->assurec, $request->get('avance'));
 
+        /* 
         $patient->assurancec = ((int)$request->get('montant')) - ((int)$patient->assurec);
         $patient->assurec = ((int)$request->get('montant') * (((int)$request->get('prise_en_charge')) / 100));
         if ($patient->assurance) {
@@ -105,7 +109,7 @@ class PatientsController extends Controller
                 $patient->assurec = 0;
             }
         }
-
+        */
         $patient->demarcheur = $request->get('demarcheur');
         $patient->date_insertion = $request->get('date_insertion');
         $patient->medecin_r = $request->get('medecin_r');
@@ -158,7 +162,7 @@ class PatientsController extends Controller
             'reste' => '',
             'reste1' => '',
             'demarcheur' => '',
-            'prise_en_charge' => '',
+            'prise_en_charge' => 'numeric|between:0,100',
             'date_insertion' => 'date_insertion',
             'medecin_r' => '',
         ]);
@@ -194,7 +198,10 @@ class PatientsController extends Controller
         $request->validate([
             'motif' => 'required',
             'details_motif' => 'required',
-            'montant' => 'required',
+            'montant' => 'required|numeric',
+            'numero_assurance' => 'required',
+            'assurance' => 'required',
+            'prise_en_charge' => 'required|numeric|between:0,100',
         ]);
 
 
@@ -203,6 +210,9 @@ class PatientsController extends Controller
         $patient->montant = $request->get('montant');
         $patient->motif =$request->get('motif');
         $patient->details_motif =$request->get('details_motif');
+        $patient->assurance =$request->get('assurance');
+        $patient->prise_en_charge =$request->get('prise_en_charge');
+        $patient->numero_assurance =$request->get('numero_assurance');
         $patient->user_id = Auth::id();
         $patient->save();
 
@@ -249,6 +259,7 @@ class PatientsController extends Controller
         $this->authorize('update', Patient::class);
         $this->authorize('print', Patient::class);
         $patient = Patient::find($id);
+        $statut_facture = $patient->reste == 0 ? 'Soldée' : 'Non soldée';
         
         // $factureConsultations = FactureConsultation::where('numero', '=', $patient->numero_dossier)->first();
 
@@ -271,6 +282,7 @@ class PatientsController extends Controller
                 'medecin_r' => $patient->medecin_r,
                 'date_insertion' => $patient->date_insertion,
                 'user_id' => auth()->user()->id,
+                'statut' => $statut_facture,
             ]);
         // }
 
