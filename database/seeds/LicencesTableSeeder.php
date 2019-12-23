@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class LicencesTableSeeder extends Seeder
+{
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+
+        \DB::table('licences')->delete();
+        
+        \DB::table('licences')->insert(array (
+            0 => 
+            array (
+                'id' => '1',
+                'license_key' => '',
+                'client' => 'cmcuapp',
+                'create_date' => '2019-10-10',
+                'active_date' => '2019-10-10',
+                'expire_date' => '2020-01-01',
+            ),
+        ));
+        
+        
+    }
+}
