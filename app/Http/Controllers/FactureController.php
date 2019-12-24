@@ -86,6 +86,7 @@ class FactureController extends Controller
         $facture->assurec = FactureConsultation::calculAssurec($request->get('montant'), $facture->patient->prise_en_charge);
         $facture->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $facture->patient->prise_en_charge);
         $facture->reste = FactureConsultation::calculReste($facture->assurec, $request->get('avance'));
+        $facture->statut = $facture->reste == 0 ? 'Soldée' : 'Non soldée';
         $facture->save();
         return redirect()->action('FactureController@FactureConsultation')->with('info', 'La facture n° '.$id.' à bien été mise à jour');
     }

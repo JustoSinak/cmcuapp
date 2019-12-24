@@ -51,6 +51,14 @@
         </tr>
         <tr>
             <td>
+                <label for="avance" class="col-form-label text-md-right">Avance :<span class="text-danger">*</span></label>
+            </td>
+            <td>
+                <input name="avance" class="form-control" value="{{ old('avance') ?? $patient->avance}}" type="number" placeholder="avance">
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label for="numero_assurance" class="col-form-label text-md-right">Numéro d'assurance</label>
             </td>
             <td>

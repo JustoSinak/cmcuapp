@@ -1,5 +1,8 @@
 <html lang="fr">
-<link href="{{ asset('admin/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" /><head>
+
+<head>
+    <title>LETTRE DE CONSULTATION {{ $consultations->patient->name.' '.$consultations->patient->prenom }}</title>
+    <link href="{{ asset('admin/css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all" />
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -50,7 +53,7 @@
 
     <div class="row">
         <div class="col-4">
-            <span>Dr <small>{{ $consultations->user->name }}</small> <small>{{ $consultations->user->prenom }}</small></span><br>
+            <span>Dr <small>{{ $consultations->user->name.' '.$consultations->user->prenom }}</small></span><br>
             <span><small>{{ $consultations->user->specialite }}</small></span><br>
             <span>Onmc: <small>{{ $consultations->user->onmc }}</small></span>
         </div>
@@ -70,7 +73,7 @@
     </div>
     <div class="row col-md-5 offset-3">
         <div class="row">
-            <p>Concernant @if($dossiers->sexe == 'Masculin')Mr @else Me @endif {{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</p>
+            <p>Concernant {{ ($consultations->patient->sexe == 'Masculin' ? 'M. ': 'Mme ').$consultations->patient->name.' '.$consultations->patient->prenom}}</p>
         </div>
     </div>
     <br>
@@ -78,8 +81,8 @@
     <p>Cher confrère, {{ $consultations->medecin }}</p>
     <br>
     <p>
-        Je vois à la consultation d’urologie ce {{ $consultations->created_at->formatLocalized('%d %B %Y') }} @if($dossiers->sexe == 'Masculin')Mr @else Me @endif
-        <b>{{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</b> né le {{ $dossiers->date_naissance }}.
+        Je vois à la consultation d’urologie ce {{ $consultations->created_at->formatLocalized('%d %B %Y') }} {{($consultations->patient->sexe == 'Masculin' ? 'M. ': 'Mme ')}}
+        <b>{{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</b> né le {{ $consultations->patient->date_naissance }}.
     </p>
     @if ($consultations->motif_c)
         <p>

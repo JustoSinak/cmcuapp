@@ -52,7 +52,7 @@
                                     <td>{{$facture->reste }} <b>FCFA</b></td>
                                     <td>{{$facture->medecin_r }}</td>
                                     <td>{{$facture->created_at }}</td>
-                                    <td>{{$facture->statut }}</td>
+                                    <td>{{$facture->reste == 0 ? 'Soldée' : 'Non soldée' }}</td>
                                     <td style="display: inline-flex;">
                                         <a class="btn btn-success btn-xs mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->patient->id) }}"><i class="fas fa-print"></i></a>
                                         @can('update', $facture)
@@ -131,25 +131,6 @@
                             <label for="avance" class="col-form-label text-md-right">avance <span class="text-danger">*</span></label>
                             <input name="avance" id="avance" class="form-control" value="" type="text" placeholder="avance" required>
                         </div>
-                        <!--
-                        <div class="form-group">
-                            <label for=" prise_en_charge" class="col-form-label text-md-right"> Taux de Prise en Charge : <span class="text-danger"></span></label>
-                            <div class="input-group mb-3">
-                                <select class="form-control" name="prise_en_charge" id="prise_en_charge" required>
-                                    @foreach(range(0, 100) as $taux)
-                                    @if ($taux == 0)
-                                    <option selected>0</option>
-                                    @else
-                                    <option>{{$taux}}</option>
-                                    @endif
-                                    @endforeach
-                                </select>
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2"> % </span>
-                                </div>
-                            </div>
-                        </div>
-                        -->
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
@@ -197,7 +178,6 @@
     $('#montant').change(function(event) {
         var PEC = $(this).data('prise_en_charge');
         var montant = $(this).val();
-        alert(PEC);
         $('#part_patient').val(montant * (100 - PEC) / 100)
     });
 </script>

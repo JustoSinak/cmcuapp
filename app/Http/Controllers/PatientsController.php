@@ -201,6 +201,7 @@ class PatientsController extends Controller
             'montant' => 'required|numeric',
             'numero_assurance' => 'required',
             'assurance' => 'required',
+            'avance' => 'required|numeric',
             'prise_en_charge' => 'required|numeric|between:0,100',
         ]);
 
@@ -211,7 +212,11 @@ class PatientsController extends Controller
         $patient->motif =$request->get('motif');
         $patient->details_motif =$request->get('details_motif');
         $patient->assurance =$request->get('assurance');
+        $patient->avance =$request->get('avance');
         $patient->prise_en_charge =$request->get('prise_en_charge');
+        $patient->assurec = FactureConsultation::calculAssurec($request->get('montant'), $patient->prise_en_charge);
+        $patient->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $patient->prise_en_charge);
+        $patient->reste = FactureConsultation::calculReste($patient->assurec, $patient->avance);
         $patient->numero_assurance =$request->get('numero_assurance');
         $patient->user_id = Auth::id();
         $patient->save();
@@ -280,7 +285,7 @@ class PatientsController extends Controller
                 'reste' => $patient->reste,
                 'prenom' => $patient->prenom,
                 'medecin_r' => $patient->medecin_r,
-                'date_insertion' => $patient->date_insertion,
+                'date_insertion' => date('Y-m-d'),
                 'user_id' => auth()->user()->id,
                 'statut' => $statut_facture,
             ]);

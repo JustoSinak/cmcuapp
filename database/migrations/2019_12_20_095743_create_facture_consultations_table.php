@@ -30,9 +30,6 @@ class CreateFactureConsultationsTable extends Migration {
 			$table->string('prenom')->nullable();
 			$table->date('date_insertion')->nullable();
 			$table->string('medecin_r')->nullable();
-			$table->text('details_motif')->nullable();
-			$table->text('statut')->nullable();
-			$table->softDeletes();
 		});
 	}
 

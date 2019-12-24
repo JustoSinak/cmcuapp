@@ -73,7 +73,7 @@
             </li>
             @can('view', \App\User::class)
             <li>
-                <a href="{{ route('clients.index') }}">
+                <a href="{{-- route('clients.index') --}}">
                 <i class="fas fa-list-ul"></i>
                  Clients Externes
                 </a>        
