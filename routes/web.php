@@ -82,7 +82,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::post('examen', 'PatientimageController@store')->name('examens.store');
     Route::get('examens/show/{patient}', 'PatientimageController@show')->name('examens.show');
     Route::get('examensf/{patient}', 'PatientimageController@showall')->name('examens.showall');
-    Route::get('examens/{patient}', 'PatientimageController@destroy')->name('examens.destroy');
+    Route::delete('examens/{id}', 'PatientimageController@destroy')->name('examens.destroy');
 
 
     Route::get('lettre-de-sortie','PatientsController@index_sortie')->name('index.sortie');

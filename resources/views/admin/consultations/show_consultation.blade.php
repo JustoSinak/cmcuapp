@@ -1,4 +1,4 @@
-<tbody>
+<tbody id="show_consultation" style="display: contents;">
 @can('med_inf_anes', \App\Patient::class)
     @can('chirurgien', \App\Patient::class)
         <tr></tr>

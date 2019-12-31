@@ -8,26 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}"/>
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('admin/datatables/css/dataTables.bootstrap4.css') }}"/>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/faviconlogo.ico') }}"/>
+
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    <link rel="stylesheet" href="{{ mix('css/all.css') }}" />
+    <link rel="stylesheet" href="{{ asset('admin/datatables/css/dataTables.bootstrap4.css') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/faviconlogo.ico') }}" />
 
     <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
 
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+    @yield('link')
+    <script>
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
 
 </head>
 <div id="myModal" data-backdrop="static" class="modal fade" role="dialog">
@@ -82,55 +83,55 @@
             processing: true,
             info: false,
             ordering: false,
-            initComplete: function () {
-                this.api().column('#statut').every( function () {
+            initComplete: function() {
+                this.api().column('#statut').every(function() {
                     var column = this;
                     var select = $('<select><option value="" selected>Tout</option></select>')
-                        .appendTo( $(column.header()).empty() )
-                        .on( 'change', function () {
+                        .appendTo($(column.header()).empty())
+                        .on('change', function() {
                             var val = $.fn.dataTable.util.escapeRegex(
                                 $(this).val()
                             );
-    
+
                             column
-                                .search( val ? '^'+val+'$' : '', true, false )
+                                .search(val ? '^' + val + '$' : '', true, false)
                                 .draw();
-                        } );
-    
-                    column.data().unique().sort().each( function ( d, j ) {
-                        select.append( '<option value="'+d+'">'+d+'</option>' )
-                    } );
-                } );
+                        });
+
+                    column.data().unique().sort().each(function(d, j) {
+                        select.append('<option value="' + d + '">' + d + '</option>')
+                    });
+                });
             },
             language: {
-                processing:     "Traitement en cours...",
-                search:         "Rechercher&nbsp;:",
-                lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-                info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-                infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                infoPostFix:    "",
+                processing: "Traitement en cours...",
+                search: "Rechercher&nbsp;:",
+                lengthMenu: "Afficher _MENU_ &eacute;l&eacute;ments",
+                info: "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                infoEmpty: "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+                infoFiltered: "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                infoPostFix: "",
                 loadingRecords: "Chargement en cours...",
-                zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                emptyTable:     "Aucune donnée disponible dans le tableau",
+                zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                emptyTable: "Aucune donnée disponible dans le tableau",
                 paginate: {
-                    first:      "Premier",
-                    previous:   "Pr&eacute;c&eacute;dent",
-                    next:       "Suivant",
-                    last:       "Dernier"
+                    first: "Premier",
+                    previous: "Pr&eacute;c&eacute;dent",
+                    next: "Suivant",
+                    last: "Dernier"
                 },
                 aria: {
-                    sortAscending:  ": activer pour trier la colonne par ordre croissant",
+                    sortAscending: ": activer pour trier la colonne par ordre croissant",
                     sortDescending: ": activer pour trier la colonne par ordre décroissant"
                 }
             }
         });
-        $('.filter-select').change(function () {
-            table.column( $(this).data('column'))
-                .search( $(this).val())
+        $('.filter-select').change(function() {
+            table.column($(this).data('column'))
+                .search($(this).val())
                 .draw();
         });
-    } );
+    });
 </script>
 
 <script type="text/javascript">
@@ -139,8 +140,10 @@
         minLength: 1,
         hint: true,
         highlight: true,
-        source:  function (query, process) {
-            return $.get(path, { query: query }, function (data) {
+        source: function(query, process) {
+            return $.get(path, {
+                query: query
+            }, function(data) {
                 return process(data);
             });
         },
@@ -148,12 +151,12 @@
 </script>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         //initialize tooltips
         $('[data-toggle="tooltip"]').tooltip();
 
-        
-        $(".tbtn").click(function () {
+
+        $(".tbtn").click(function() {
             $(this).parents(".custom-table").find(".toggler1").removeClass("toggler1");
             $(this).parents("tbody").find(".toggler").addClass("toggler1");
             $(this).parents(".custom-table").find(".fa-minus-circle").removeClass("fa-minus-circle");
@@ -161,19 +164,24 @@
         });
     });
 </script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();
+});
+</script>
+
 @yield('script')
 @php
-    $licence = \App\Licence::where('client', 'cmcuapp')->first();
+$licence = \App\Licence::where('client', 'cmcuapp')->first();
 @endphp
 
-@if ($licence->expire_date <= \Carbon\Carbon::now())
-    <script type="text/javascript">
-        $(window).on('load',function(){
-            $('#myModal').modal('show');
-        });
+@if ($licence->expire_date <= \Carbon\Carbon::now()) <script type="text/javascript">
+    $(window).on('load',function(){
+    $('#myModal').modal('show');
+    });
     </script>
-@endif
+    @endif
 
-@include('flashy::message')
+    @include('flashy::message')
 
 </html>

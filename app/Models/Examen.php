@@ -29,8 +29,9 @@ class Examen extends Model
 {
     protected $fillable = [
         
-        'patient_id',
-        'type',
+        'image',
+        'nom',
+        'description',
     ];
 
 

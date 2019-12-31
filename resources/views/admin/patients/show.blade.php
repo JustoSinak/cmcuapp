@@ -7,7 +7,7 @@
         grid-template-columns: auto auto auto;
         padding: 10px;
     }
-    
+
     .grid-item {
         background-color: rgba(255, 255, 255, 0.8);
         border: 1px solid rgba(0, 0, 0, 0.8);
@@ -15,7 +15,7 @@
         font-size: 12px;
         margin-right: 1px;
     }
-    
+
     .table-sortable tbody tr {
         cursor: move;
     }
@@ -51,9 +51,10 @@
                                         <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
                                         </button>
                                         @can('secretaire', \App\Patient::class)
-                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2">Completer le dossier</a>
-                                            <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
-                                         @endcan @can('med_inf_anes', \App\Patient::class)
+                                        <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2">Completer le dossier</a>
+                                        <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
+                                        
+                                        @endcan @can('med_inf_anes', \App\Patient::class)
                                         <a class="btn btn-dark mr-2" href="{{ route('prescription_medicale.index', $patient->id) }}" title="Prescriptions médicales">
                                             <i class="fas fa-book"></i> Prescriptions Medicales
                                         </a>
@@ -61,12 +62,15 @@
                                         <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
                                             <i class="fas fa-book"></i> Fiche De Paramètres
                                         </a>
-                                        @endcan 
+                                        @endcan
+                                        @can('medecin_secretaire', \App\Patient::class)
+                                        <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i></button>
+                                        @endcan
                                         @include('admin.consultations.partials.motif_et_montant')
                                         @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
 
                                     </table>
-
+                                    @include('admin.patients.partials.examens_scannes')
                                 </div>
                             </div>
                             <br>
@@ -100,7 +104,7 @@
                                             </a>
                                             <button type="button" class="btn btn-primary btn-block" title="Fiches d'intervention" data-toggle="modal" data-target="#FicheInterventionAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i>Fiche d'Intervention
-                                                
+
                                             </button>
                                             <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info btn-block mb-2">Completer Le Dossier</a> @if (count($patient->consultations)) @can('medecin', \App\Patient::class)
                                             <a class="btn btn-success btn-block" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $patient->id) }}">
@@ -125,8 +129,12 @@
                         function ShowDetailsPatient() {
                             var x = document.getElementById("myDIV");
                             var y = document.getElementById("editMotifMontform");
+                            var z = document.getElementById("examens_scannes_form");
                             if (y.style.display === "contents") {
                                 y.style.display = "none";
+                            }
+                            if (z.style.display === "contents") {
+                                z.style.display = "none";
                             }
                             if (x.style.display === "none") {
                                 x.style.display = "contents";
@@ -138,8 +146,12 @@
                         function ShoweditMotif_montant() {
                             var x = document.getElementById("editMotifMontform");
                             var y = document.getElementById("myDIV");
+                            var z = document.getElementById("examens_scannes_form");
                             if (y.style.display === "contents") {
                                 y.style.display = "none";
+                            }
+                            if (z.style.display === "contents") {
+                                z.style.display = "none";
                             }
                             if (x.style.display === "none") {
                                 x.style.display = "contents";
@@ -147,7 +159,63 @@
                                 x.style.display = "none";
                             }
                         }
-                        
+
+                        function Showexamen_scannes() {
+                            var x = document.getElementById("editMotifMontform");
+                            var y = document.getElementById("myDIV");
+                            var z = document.getElementById("examens_scannes_form");
+                            var t = document.getElementById("show_consultation");
+                            if (y.style.display === "contents") {
+                                y.style.display = "none";
+                            }
+                            if (x.style.display === "contents") {
+                                x.style.display = "none";
+                            }
+                            if (t.style.display === "contents") {
+                                t.style.display = "none";
+                            }
+                            if (z.style.display === "none") {
+                                z.style.display = "contents";
+                            } else {
+                                z.style.display = "none";
+                                t.style.display = "contents";
+                            }
+                        }
+                    </script>
+                    <script>
+                        // Add the following code if you want the name of the file appear on select
+                        $(".custom-file-input").on("change", function() {
+                            var fileName = $(this).val().split("\\").pop();
+                            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                        });
+                    </script>
+                    <script>
+                        function handleFiles(files) {
+                            var imageType = /^image\//;
+                            for (var i = 0; i < files.length; i++) {
+                                var file = files[i];
+                                if (!imageType.test(file.type)) {
+                                    alert("veuillez sélectionner une image");
+                                } else {
+
+                                    let form_parent = document.getElementById('preview');
+                                    let img1 = document.getElementById("img1");
+                                    let clone_img = img1.cloneNode(false);
+                                    clone_img.file = file;
+                                    clone_img.classList.add("obj");
+                                    form_parent.replaceChild(clone_img, img1);
+                                    var reader = new FileReader();
+                                    reader.onload = (function(aImg) {
+                                        return function(e) {
+                                            aImg.src = e.target.result;
+                                        };
+                                    })(clone_img);
+
+                                    reader.readAsDataURL(file);
+                                }
+
+                            }
+                        }
                     </script>
 
 </body>
