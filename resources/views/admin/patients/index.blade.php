@@ -18,15 +18,13 @@
         </div>
         <hr>
         <div class="container">
+             @include('partials.flash')
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive">
-                        @include('partials.flash')
-                        <table id="myTable" class="table table-bordred table-hover">
+                        <table id="myTable" class="table table-bordered table-hover" width="100%">
                             <thead>
-                            <th>
-                                NUMERO
-                            </th>
+                            <th>NUMERO</th>
                             <th>NOM </th>
                             <th>PRENOM</th>
                             <th>Assurance</th>
@@ -46,7 +44,6 @@
                                     @can('consulter', \App\Patient::class)
                                         <a href="{{ route('patients.show', $patient->id) }}" title="consulter le dossier du patient" class="btn btn-primary btn-xs mr-1"><i class="fas fa-eye"></i></a>
                                         <a href="{{ route('events.create', $patient->id) }}" title="Prendre un rendez-vous" class="btn btn-info btn-xs mr-1"><i class="far fa-calendar-plus"></i></a>
-                                        <a href="{{ route('examens.create', $patient->id) }}" title="Ajouter examens medicaux" class="btn btn-info btn-xs mr-1"><i class="fas fa-book"></i></a>
                                     @endcan
                                     @can('print', \App\Patient::class)
                                         <p data-placement="top" data-toggle="tooltip" title="Générer la facture">
@@ -68,13 +65,14 @@
                             </tbody>
                         </table>
                         <div class="clearfix"></div>
+
                         {{--{{ $patients->links() }}--}}
                     </div>
                 </div>
             </div>
         </div>
         @can('print', \App\Patient::class)
-            <div class="col-md-12 text-center">
+            <div class="text-center table_link_right">
 
                 <a href="{{ route('patients.create') }}" class="btn btn-primary" title="Vous allez jouter un nouveau patient dans le système">Ajouter un patient</a>
 

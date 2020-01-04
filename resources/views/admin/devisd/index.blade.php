@@ -22,7 +22,8 @@
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
-                        <table id="myTable" class="table table-bordred table-striped">
+                        <i class="table_info">Les montants sont exprimés en <b> FCFA</b></i>
+                        <table id="myTable" class="table table-bordered table-hover" width="100%">
                             <thead>
                             <th>DESIGNATION</th>
                             <th>MONTANT</th>
@@ -36,7 +37,7 @@
                             @foreach($devisd as $devi)
                                 <tr>
                                     <td>{{ $devi->devis->nom}}</td>
-                                    <td>{{ $total = array_sum(explode('/', $devi->prix)) }} FCFA</td>
+                                    <td>{{ $total = array_sum(explode('/', $devi->prix)) }} </td>
                                     
                                     <td style="display: inline-flex;">
                                         <p data-placement="top" data-toggle="tooltip" title="Delete">

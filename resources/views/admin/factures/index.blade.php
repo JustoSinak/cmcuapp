@@ -23,7 +23,8 @@
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
-                        <table id="myTable" class="table table-striped table-bordered dt-responsive display nowrap td-responsive" cellspacing="0" width="100%">
+                        <i class="table_info">Les montants sont exprimés en <b> FCFA</b></i>
+                        <table id="myTable" class="table table-hover table-bordered dt-responsive display nowrap td-responsive" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <td>ID</td>
@@ -37,7 +38,7 @@
                                 <tr>
                                     <td>{{$facture->id}}</td>
                                     <td>{{$facture->numero}}</td>
-                                    <td>{{$facture->prix_total }}  <b>FCFA</b></td>
+                                    <td>{{$facture->prix_total }}</td>
                                     <td>{{$facture->created_at }}</td>
                                     <td style="display: inline-flex;">
                                         <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">

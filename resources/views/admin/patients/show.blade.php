@@ -30,15 +30,15 @@
         @include('partials.header') @can('show', \App\User::class) @include('partials.flash')
         <div class="container">
             <div class="row">
-                <div class="col-md-12  toppad  offset-md-0 ">
+                <div class="col-md-12  toppad  offset-md-0 mb-2">
                     @include('admin.patients.partials.menu')
                     <a href="{{ route('patients.index') }}" class="btn btn-success float-right" title="Retour à la liste des patients">
                         <i class="fas fa-arrow-left"></i> Retour à la liste des patients
                     </a>
                 </div>
-                <br>
-                <br> {{-- PRESENTATION DU DOSSIER PATIENT --}} @if(auth()->user()->role_id == 6)
-                <div class="col-md-7  offset-md-0  toppad">
+                {{-- PRESENTATION DU DOSSIER PATIENT --}} @if(auth()->user()->role_id == 6)
+
+                <div class="col-md-12  offset-md-0  toppad">
                     @endif @if(auth()->user()->role_id == 2)
                     <div class="col-md-10  offset-md-0  toppad">
                         @endif @if(auth()->user()->role_id == 4)
@@ -47,25 +47,28 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="card-title text-danger text-center">DOSSIER PATIENT</h2>
-                                    <table class="table table-user-information ">
-                                        <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
-                                        </button>
-                                        @can('secretaire', \App\Patient::class)
-                                        <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2">Completer le dossier</a>
-                                        <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
+                                    <table class="table table-user-information table-hover ">
                                         
-                                        @endcan @can('med_inf_anes', \App\Patient::class)
-                                        <a class="btn btn-dark mr-2" href="{{ route('prescription_medicale.index', $patient->id) }}" title="Prescriptions médicales">
-                                            <i class="fas fa-book"></i> Prescriptions Medicales
-                                        </a>
-                                        @endcan @can('infirmier', \App\Patient::class)
-                                        <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
-                                            <i class="fas fa-book"></i> Fiche De Paramètres
-                                        </a>
-                                        @endcan
-                                        @can('medecin_secretaire', \App\Patient::class)
-                                        <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i></button>
-                                        @endcan
+                                        <div class=" row justify-content-center mb-2">
+                                            <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
+                                            </button>
+                                            @can('secretaire', \App\Patient::class)
+                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2"><i class="fas fa-bars"></i> Completer le dossier</a>
+                                            <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
+                                            
+                                            @endcan @can('med_inf_anes', \App\Patient::class)
+                                            <a class="btn btn-dark mr-2" href="{{ route('prescription_medicale.index', $patient->id) }}" title="Prescriptions médicales">
+                                                <i class="fas fa-book"></i> Prescriptions Medicales
+                                            </a>
+                                            @endcan @can('infirmier', \App\Patient::class)
+                                            <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
+                                                <i class="fas fa-book"></i> Fiche De Paramètres
+                                            </a>
+                                            @endcan
+                                            @can('medecin_secretaire', \App\Patient::class)
+                                            <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
+                                            @endcan
+                                        </div>
                                         @include('admin.consultations.partials.motif_et_montant')
                                         @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
 

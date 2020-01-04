@@ -78,6 +78,7 @@
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable({
+            "dom": '<"top"i <"d-flex justify-content-between"l<"toolbar">f>>rt<"bottom d-flex justify-content-between mt-3"p><"clear">',
             scrollY: 300,
             scrollX: true,
             processing: true,
@@ -126,6 +127,8 @@
                 }
             }
         });
+        $("div.toolbar").html($('.table_info'));
+        $("div.bottom").prepend($('.table_link_right'));
         $('.filter-select').change(function() {
             table.column($(this).data('column'))
                 .search($(this).val())

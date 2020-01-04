@@ -22,7 +22,8 @@
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
-                        <table id="myTable" class="table table-bordred table-striped">
+                        <i class="table_info">Les montants sont exprimés en <b> FCFA</b></i>
+                        <table id="myTable" class="table table-bordered table-hover"  width="100%">
                             <thead>
                             <th>
                                 NOM
@@ -58,7 +59,7 @@
             </div>
         </div>
         @can('create', \App\Patient::class)
-            <div class="col-md-12 text-center">
+            <div class="text-center table_link_right">
 
                 <a href="{{ route('devis.create') }}" class="btn btn-primary" title="Vous allez jouter un nouveau devis ">Ajouter un devis</a>
 

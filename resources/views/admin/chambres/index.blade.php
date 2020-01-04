@@ -28,7 +28,8 @@
             <div class="col-lg-12">
                 <div class="table-responsive">
                     @include('partials.flash')
-                    <table id="myTable" class="table table-bordred table-striped">
+                    <i class="table_info">Les montants sont exprimés en <b> FCFA</b></i>
+                    <table id="myTable" class="table table-bordered table-hover" width="100%">
                         <thead>
                         <tr>
                             <td>
@@ -87,7 +88,7 @@
         </div> </br>
         <div class="col-md-3 offset-md-4 text-center">
             @can('update', \App\User::class)
-            <a href="{{ route('chambres.create') }}" class="btn btn-primary">Ajouter une nouvelle chambre</a>
+            <a href="{{ route('chambres.create') }}" class="btn btn-primary table_link_right">Ajouter une nouvelle chambre</a>
             @endcan
         </div>
        @endcan

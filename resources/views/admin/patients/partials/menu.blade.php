@@ -56,9 +56,11 @@
             <i class="far fa-plus-square"></i>
             Fiche d'Intervention
         </button>
-        <li>
-            <a href="{{ route('examens.create', $patient->id) }}" title="Ajouter examens medicaux" class="btn btn-info btn-xs mb-1"><i class="fas fa-book"></i> Ajout Des Examens</a>
-        </li>
+        <!--
+            <li>
+                <a href="{{ route('examens.create', $patient->id) }}" title="Ajouter examens medicaux" class="btn btn-info btn-xs mb-1"><i class="fas fa-book"></i> Ajout Des Examens</a>
+            </li>
+        -->
         <li>
             <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
                class="btn btn-primary mb-1">

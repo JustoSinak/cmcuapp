@@ -66,7 +66,10 @@ class FactureConsultation extends Model
         return $this->belongsTo(User::class);
     }
 
-
+    public function historiques()
+    {
+        return $this->hasMany(HistoriqueFacture::class);
+    }
 
     public static function calculReste($assurec, $avance){
         return $assurec - $avance;

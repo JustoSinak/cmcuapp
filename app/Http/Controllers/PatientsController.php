@@ -272,7 +272,7 @@ class PatientsController extends Controller
         // if ($factureConsultations) {
         //     return back()->with('error', 'La facture existe déja');
         // } else {
-            FactureConsultation::create([
+            $facture = FactureConsultation::create([
                 'numero' => $patient->numero_dossier,
                 'patient_id' => $patient->id,
                 'assurance' => $patient->assurance,
@@ -293,7 +293,7 @@ class PatientsController extends Controller
         // }
 
 
-        return redirect()->route('factures.consultation')->with('success', 'La facture a bien été généré veuillez consulter votre liste des factures');
+        return redirect()->route('factures.consultation')->with('success', 'Facture n° '.$facture->id.' du patient '.$patient->name.' générée avec succès!');
     }
 
     public function FcheConsommableCreate(FicheConsommable $consommable, Patient $patient)

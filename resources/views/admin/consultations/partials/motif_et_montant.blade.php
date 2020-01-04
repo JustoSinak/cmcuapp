@@ -84,7 +84,7 @@
         </tr>
         <tr>
             <td>
-                <button type="submit" class="btn btn-primary">Modifier</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
             </td>
             <td></td>
         </tr>
@@ -98,16 +98,16 @@
         var motif = document.getElementById('motif');
         var choix = motif[motif.selectedIndex].value;
         if (choix == 'Consultation') {
-            document.getElementById("label_details_motif").innerText = 'Détail motif';
+            document.getElementById("label_details_motif").innerHTML = 'Détail motif <span class="text-danger">*</span>';
             document.getElementById("details_motif").value = "Consultation";
         } else {
             document.getElementById("details_motif").value = "";
         }
         if (choix == 'Acte' || choix == 'Examen') {
-            document.getElementById("label_details_motif").innerText = 'Type ' + choix.toLowerCase();
+            document.getElementById("label_details_motif").innerHTML = 'Type ' + choix.toLowerCase()+ ' <span class="text-danger">*</span>';
         }
         if (choix == 'Autres') {
-            document.getElementById("label_details_motif").innerText = 'Détails motif';
+            document.getElementById("label_details_motif").innerHTML = 'Détails motif <span class="text-danger">*</span>';
         }
 
     }

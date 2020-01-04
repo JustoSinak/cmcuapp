@@ -26,17 +26,12 @@
             </div>
         </div>
         @endforeach
-        <div class="col-md-6 mt-3">
-            <div class="button_container_add border rounded-lg ">
-                <div class="d-flex align-items-center add_button justify-content-center">
-                    <button class="btn btn-outline-dark " data-toggle="modal" data-target="#modal_examens_scannes"><i class="fas fa-plus"></i></button>
-                </div>
-
-            </div>
-
-        </div>
        </div>
+       <div class="pt-3 d-flex justify-content-between">
+       <button class="btn btn-info " data-toggle="modal" data-target="#modal_examens_scannes" title="Ajouter une image"><i class="fas fa-plus"></i></button>
        {{ $examens_scannes->links() }}
+       </div>
+       
 
     <!-- The Modal -->
     <div class="modal fade" id="modal_examens_scannes">

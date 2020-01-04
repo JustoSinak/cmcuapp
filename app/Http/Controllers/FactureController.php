@@ -9,6 +9,7 @@ use App\FactureDevi;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\FactureConsultation;
 use App\FactureClient;
+use App\HistoriqueFacture;
 use App\Patient;
 use App\Produit;
 use App\User;
@@ -74,20 +75,27 @@ class FactureController extends Controller
         $this->authorize('update', new FactureConsultation);
 
         $request->validate([
-            'montant' => 'required',
-            'avance' => 'required',
-            'reste' => '',
-
+            'reste' => 'required|numeric',
+            'percu' => 'required|numeric|lte:reste',
         ]);
 
         $facture = FactureConsultation::findOrFail($id);
+        $historiqueFacture = new HistoriqueFacture([
+                    'reste' => $facture->reste - $request->get('percu'),
+                    'percu' => $request->get('percu'),
+                    'montant' => $facture->montant,
+                    'avance'   => $facture->avance,
+                    'assurec'  => $facture->assurec,
+                ]);
+
         $facture->montant = $request->get('montant');
-        $facture->avance = $request->get('avance');
+        $facture->avance += $request->get('percu');
         $facture->assurec = FactureConsultation::calculAssurec($request->get('montant'), $facture->patient->prise_en_charge);
         $facture->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $facture->patient->prise_en_charge);
-        $facture->reste = FactureConsultation::calculReste($facture->assurec, $request->get('avance'));
+        $facture->reste = FactureConsultation::calculReste($facture->assurec, $facture->avance);
         $facture->statut = $facture->reste == 0 ? 'Soldée' : 'Non soldée';
         $facture->save();
+        $facture->historiques()->save($historiqueFacture);
         return redirect()->action('FactureController@FactureConsultation')->with('info', 'La facture n° '.$id.' à bien été mise à jour');
     }
 
@@ -111,28 +119,28 @@ class FactureController extends Controller
 
         return view('admin.factures.chambre', compact('factureChambres', 'lists'));
     }
+    
+    // public function FactureClient(Patient $patient)
+    // {
+    //     $this->authorize('view', User::class);
 
-    public function FactureClient(Patient $patient)
-    {
-        $this->authorize('view', User::class);
+    //     $month = Carbon::now()->month;
+    //     $year = Carbon::now()->year;
 
-        $month = Carbon::now()->month;
-        $year = Carbon::now()->year;
+    //     $start_date = "01-" . $month . "-" . $year;
+    //     $start_time = strtotime($start_date);
 
-        $start_date = "01-" . $month . "-" . $year;
-        $start_time = strtotime($start_date);
+    //     $end_time = strtotime("+1 month", $start_time);
 
-        $end_time = strtotime("+1 month", $start_time);
+    //     for ($i = $start_time; $i < $end_time; $i += 86400) {
+    //         $lists[] = date('Y-m-d', $i);
+    //     }
 
-        for ($i = $start_time; $i < $end_time; $i += 86400) {
-            $lists[] = date('Y-m-d', $i);
-        }
+    //     $user = User::where('role_id', '=', 2)->get();
+    //     $facturesClients = FactureClient::with('client')->latest()->get();
 
-        $user = User::where('role_id', '=', 2)->get();
-        $facturesClients = FactureClient::with('client')->latest()->get();
-
-        return view('admin.factures.client', compact('facturesClients', 'lists'));
-    }
+    //     return view('admin.factures.client', compact('facturesClients', 'lists'));
+    // }
 
     public function FactureDevis()
     {

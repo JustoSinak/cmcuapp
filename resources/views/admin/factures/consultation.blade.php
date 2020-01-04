@@ -19,18 +19,19 @@
             <div class="col-md-3 offset-md-8 text-center">
             </div>
             <div class="container">
+                @include('partials.flash')
                 <div class="col-lg-12">
                     <div class="table-responsive">
-                        @include('partials.flash')
-                        <table id="myTable" class="table table-hover table-bordered dt-responsive display nowrap td-responsive" cellspacing="0" width="100%">
-                            <thead>
+                        <i class="table_info">Les montants sont exprimés en <b> FCFA</b></i>
+                        <table id="myTable" class="table table-hover table-bordered display" cellspacing="0" width="100%">
+                            <thead >
                                 <th>ID</th>
                                 <th>NUMERO</th>
                                 <th>PATIENT</th>
                                 <th>MOTIF</th>
                                 <th>MONTANT</th>
-                                <th>PART ASSURANCE</th>
-                                <th>PART PATIENT</th>
+                                <th style="white-space: nowrap">PART ASSURANCE</th>
+                                <th style="white-space: nowrap">PART PATIENT</th>
                                 <th>AVANCE</th>
                                 <th>RESTE</th>
                                 <th>MEDECIN</th>
@@ -45,19 +46,19 @@
                                     <td>{{$facture->numero}}</td>
                                     <td>{{$facture->patient->name }}</td>
                                     <td>{{$facture->details_motif ?? 'Consultation' }}</td>
-                                    <td>{{$facture->montant }} <b>FCFA</b></td>
-                                    <td>{{$facture->assurancec }} <b>FCFA</b></td>
-                                    <td>{{$facture->assurec }} <b>FCFA</b></td>
-                                    <td>{{$facture->avance }} <b>FCFA</b></td>
-                                    <td>{{$facture->reste }} <b>FCFA</b></td>
+                                    <td>{{$facture->montant }} </td>
+                                    <td>{{$facture->assurancec }} </td>
+                                    <td>{{$facture->assurec }} </td>
+                                    <td>{{$facture->avance }} </td>
+                                    <td>{{$facture->reste }} </td>
                                     <td>{{$facture->medecin_r }}</td>
-                                    <td>{{$facture->created_at }}</td>
+                                    <td style="white-space: nowrap">{{$facture->created_at }}</td>
                                     <td>{{$facture->reste == 0 ? 'Soldée' : 'Non soldée' }}</td>
                                     <td style="display: inline-flex;">
                                         <a class="btn btn-success btn-xs mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->patient->id) }}"><i class="fas fa-print"></i></a>
                                         @can('update', $facture)
                                         <!-- Trigger the "edit_acture " modal with a button -->
-                                        <button type="button" class="btn btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-avance="{{ $facture->avance }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->avance }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
                                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-just-icon" data-toggle="tooltip" title="Supprimer la facture" onclick="return confirm('Voulez-vous vraiment suprimer cette facture ?')">
@@ -65,7 +66,7 @@
                                             </button>
                                         </form>
                                         @endcan
-                                        
+
 
                                     </td>
                                 </tr>
@@ -73,7 +74,7 @@
                             </tbody>
                         </table>
 
-                        <form class="form-group col-md-6" method="POST" action="{{ route('bilan_consultation.pdf') }}" title="Imprimer le bilan journalier" data-toggle="tooltip">
+                        <form class="form-group table_link_right" method="POST" action="{{ route('bilan_consultation.pdf') }}" title="Imprimer le bilan journalier" data-toggle="tooltip">
                             @csrf
                             <div class="input-group mb-3">
                                 <select name="day" class="form-control col-md-6" required>
@@ -115,21 +116,27 @@
                 <form id="edit_facture_form" action="" method="post">
                     @csrf @method('PUT')
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nom_patient" class="col-form-label text-md-right">Nom du patient</label>
-                            <input name="" id="nom" class="form-control" type="text" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="montant" class="col-form-label text-md-right">Montant <span class="text-danger">*</span></label>
-                            <input name="montant" id="montant" class="form-control" value="" type="number" placeholder="montant" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="part_patient" class="col-form-label text-md-right">Part patient <span class="text-danger">*</span></label>
-                            <input name="part_patient" id="part_patient" class="form-control" type="number" placeholder="0" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="avance" class="col-form-label text-md-right">avance <span class="text-danger">*</span></label>
-                            <input name="avance" id="avance" class="form-control" value="" type="text" placeholder="avance" required>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="montant" class="col-form-label text-md-right">Montant</label>
+                                    <input name="montant" id="montant" class="form-control" value="" type="number" placeholder="montant" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="part_patient" class="col-form-label text-md-right">Part patient </label>
+                                    <input name="part_patient" id="part_patient" class="form-control" type="number" autocomplete="off" min="0" placeholder="0" readonly>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="reste" class="col-form-label text-md-right" title="Somme des précédents versements du client">reste </label>
+                                    <input name="reste" id="reste" class="form-control" value="" type="number" placeholder="reste" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="percu" class="col-form-label text-md-right" title="Montant perçu pour ce versement">montant versé <span class="text-danger">*</span></label>
+                                    <input name="percu" id="percu" class="form-control" value="" type="number" placeholder="0" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -155,13 +162,13 @@
         var button = $(event.relatedTarget);
         var id_facture = button.data('id-facture');
         var montant_facture = button.data('montant');
-        var avance_facture = button.data('avance');
+        var avance_facture = button.data('reste');
         var prise_en_charge = button.data('prise_en_charge');
-        var nom_patient = button.data('nom');
+        var reste = (montant_facture * (100 - prise_en_charge) / 100) - avance_facture;
         var modal = $(this);
-        $('#edit_facture_modallabel').text("Modification de la facture n° " + id_facture);
+        $('#edit_facture_modallabel').text("Nouveau versement");
         $('#montant').val(montant_facture);
-        $('#avance').val(avance_facture);
+        $('#reste').val(reste);
         if (isNaN(prise_en_charge)) {
             $('#montant').attr('data-prise_en_charge', 0);
             $('#part_patient').val(montant_facture)
@@ -169,7 +176,6 @@
             $('#montant').attr('data-prise_en_charge', prise_en_charge);
             $('#part_patient').val(montant_facture * (100 - prise_en_charge) / 100)
         }
-        $('#nom').val(nom_patient);
         $('#edit_facture_form').attr("action", "{{ url('admin/factures-consultation') }}" + "/" + id_facture);
     });
 </script>
