@@ -1,7 +1,6 @@
 @section('link')
 <link rel="stylesheet" href="{{ asset('admin/css/examens_scannes_styles.css') }}">
 @endsection
-@include('partials.flash_form')
 <div id="examens_scannes_form" style="display: none;">
 
     <div class="row ">

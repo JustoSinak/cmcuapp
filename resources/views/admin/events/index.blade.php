@@ -29,7 +29,10 @@
                                     {{ Auth()->user()->name }} {{ Auth()->user()->prenom }}
                                     </strong> la liste de vos rendez-vous en cours</p>
                             @else
-                                <p class="btn btn-info offset-2">Dr <strong>
+                                @if(Auth()->user()->role == 6)
+                                    <p class="btn btn-info offset-2">Dr <strong>
+                                @endif
+                                
                                     {{ Auth()->user()->name }} {{ Auth()->user()->prenom }}
                                 </strong> Vous n'avez pas de rendez-vous disponible <i class="fas fa-exclamation-circle"></i></p>
                             @endif

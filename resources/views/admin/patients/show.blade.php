@@ -27,7 +27,7 @@
         @include('partials.side_bar')
 
         <!-- Page Content Holder -->
-        @include('partials.header') @can('show', \App\User::class) @include('partials.flash')
+        @include('partials.header') @can('show', \App\User::class) 
         <div class="container">
             <div class="row">
                 <div class="col-md-12  toppad  offset-md-0 mb-2">
@@ -47,6 +47,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="card-title text-danger text-center">DOSSIER PATIENT</h2>
+                                    
                                     <table class="table table-user-information table-hover ">
                                         
                                         <div class=" row justify-content-center mb-2">
@@ -69,9 +70,9 @@
                                             <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
                                             @endcan
                                         </div>
-                                        @include('admin.consultations.partials.motif_et_montant')
+                                        @include('partials.flash')
                                         @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
-
+                                        @include('admin.consultations.partials.motif_et_montant')
                                     </table>
                                     @include('admin.patients.partials.examens_scannes')
                                 </div>

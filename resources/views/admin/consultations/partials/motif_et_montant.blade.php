@@ -28,7 +28,7 @@
                 <label for="details_motif" id="label_details_motif" class="col-form-label text-md-right">Détails motif : <span class="text-danger">*</span></label>
             </td>
             <td>
-                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? $patient->details_motif}}"  type="text" placeholder="Précisez le motif">
+                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? $patient->details_motif}}"  type="text" placeholder="Précisez le motif" >
             </td>
         </tr>
 
