@@ -221,9 +221,9 @@ class FactureController extends Controller
     {
         $this->authorize('update', Patient::class);
         $this->authorize('print', Patient::class);
-        $patient = Patient::find($id);
+        $facture = FactureConsultation::find($id);
 
-        $pdf = PDF::loadView('admin.etats.consultation', ['patient' => $patient]);
+        $pdf = PDF::loadView('admin.etats.consultation', ['patient' => $facture->patient, 'facture' => $facture]);
 
         return $pdf->stream('factures.consultation_pdf');
     }
@@ -255,14 +255,14 @@ class FactureController extends Controller
     {
 
         $service = \request('service') == 'Tout'? "" : \request('service');
-        $factures = FactureConsultation::with('patient')->where('motif', 'LIKE', '%'.$service)->where('date_insertion', '=', \request('day'))->get();
+        $factures = FactureConsultation::with('patient')->where('motif', 'LIKE', '%'.$service)->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->get();
 
 
-        $tautaux = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        $avances = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('avance');
-        $restes = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('reste');
-        $assurances = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurancec');
-        $patients = DB::table('facture_consultations')->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurec');
+        $tautaux = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        $avances = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('avance');
+        $restes = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('reste');
+        $assurances = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurancec');
+        $patients = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurec');
 
 
 

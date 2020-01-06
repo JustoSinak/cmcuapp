@@ -93,7 +93,7 @@ class ConsultationsController extends Controller
 
         ]);
 
-        Flashy('La nouvelle consultation a été crée avec succès !!');
+        Flashy('La nouvelle consultation a été créée avec succès !!');
 
         return back();
     }
@@ -168,7 +168,7 @@ class ConsultationsController extends Controller
 
         $ConsultationAnesthesiste->save();
 
-        Flashy('La nouvelle consultation a été crée avec succès !!');
+        Flashy('La nouvelle consultation a été créée avec succès !!');
 
         return back();
     }
@@ -208,7 +208,7 @@ class ConsultationsController extends Controller
 
         $consultationAnesthesiste->update();
 
-        Flashy('La mise à jour a été éffectué avec succès !!');
+        Flashy('La mise à jour a été éffectuée avec succès !!');
 
         return back();
     }

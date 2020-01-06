@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'CMCU | Bilan facure')
 
@@ -55,10 +55,10 @@
                                     <td style="white-space: nowrap">{{$facture->created_at }}</td>
                                     <td>{{$facture->reste == 0 ? 'Soldée' : 'Non soldée' }}</td>
                                     <td style="display: inline-flex;">
-                                        <a class="btn btn-success btn-xs mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->patient->id) }}"><i class="fas fa-print"></i></a>
+                                        <a class="btn btn-success btn-xs mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         @can('update', $facture)
                                         <!-- Trigger the "edit_acture " modal with a button -->
-                                        <button type="button" class="btn btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->avance }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
                                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-just-icon" data-toggle="tooltip" title="Supprimer la facture" onclick="return confirm('Voulez-vous vraiment suprimer cette facture ?')">
@@ -120,7 +120,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="montant" class="col-form-label text-md-right">Montant</label>
-                                    <input name="montant" id="montant" class="form-control" value="" type="number" placeholder="montant" readonly>
+                                    <input name="montant" id="montant" class="form-control" value="" type="number"  readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="part_patient" class="col-form-label text-md-right">Part patient </label>
@@ -130,7 +130,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="reste" class="col-form-label text-md-right" title="Somme des précédents versements du client">reste </label>
-                                    <input name="reste" id="reste" class="form-control" value="" type="number" placeholder="reste" readonly>
+                                    <input name="reste" id="reste" class="form-control" value="" type="number" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="percu" class="col-form-label text-md-right" title="Montant perçu pour ce versement">montant versé <span class="text-danger">*</span></label>
@@ -162,9 +162,8 @@
         var button = $(event.relatedTarget);
         var id_facture = button.data('id-facture');
         var montant_facture = button.data('montant');
-        var avance_facture = button.data('reste');
+        var reste = button.data('reste');
         var prise_en_charge = button.data('prise_en_charge');
-        var reste = (montant_facture * (100 - prise_en_charge) / 100) - avance_facture;
         var modal = $(this);
         $('#edit_facture_modallabel').text("Nouveau versement");
         $('#montant').val(montant_facture);
