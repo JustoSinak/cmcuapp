@@ -94,11 +94,20 @@ class EventsController extends Controller
         return redirect()->route('events.index')->with('success', 'Le rendez-vous a bien été pris avec le médécin');
     }
 
-    public function edit(Request $request, Event $event)
+    public function show(Request $request)
     {
-        $users = User::with('roles')->where('role_id', '=', '2')->get(['name', 'prenom']);
-        return view('admin.events.edit', compact('event', 'users'));
+        //$users = User::with('roles')->where('role_id', '=', '2')->get(['name', 'prenom']);
+        
+        //var_dump(json_encode($events));
+        return view('admin.events.show');
     }
+
+    public function medecinEvents(Request $request,  $medecin_id){
+        $events = Event::where('user_id', '=', $medecin_id)->get(["id","title", "start_time", "end_time",  "patient_id", "user_id"]);
+        response()->json($events);
+    }
+
+
 
     public function update(EventRequest $request, Event $event)
     {
