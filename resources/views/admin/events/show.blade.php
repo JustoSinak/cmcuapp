@@ -49,7 +49,7 @@
                                     <p><span>Patient:</span> <span class="font-weight-bold" id="info_RV_patient"></span>
                                     </p>
                                     <p><span>Objet:</span> <span class="font-weight-bold" id="info_RV_objet"></span></p>
-                                    <!-- Salut! Je suis un gentil petit commentaire. Lisez-moi avec beaucoup d'attention car je peux être très important! -->
+                                    <p><span>Statut:</span> <span class="font-weight-bold" id="info_RV_statut"></span></p>
                                     <p class="border border-info rounded p-3 my-3 text-nowrap"><span class="text-info align-top"><i class="fas fa-exclamation-circle"></i></span>&nbsp<i id="info_RV_description" class="text-wrap"></i></p>
 
                                     <p class="mt-2 mx-0 text-sm-right"><i id="info_RV_dateheure"></i></p>
@@ -142,60 +142,29 @@
                     center: 'title',
                     right: 'listDay,listWeek,listMonth'
                 },
-                events: [{
-                        title: 'Patient N° 1',
-                        resourceId: 'a1', // start out in resource 'b1'
-                        description: 'description for All Day Event',
-                        start: '2020-01-10T10:00:00',
-                        end: '2020-01-10T11:00:00',
-                        url: 'http://google.com/',
-
+                events: [
+                    @foreach($events as $event) {
+                        id : {{$event->id}},
+                        title: '{{$event->title}}',
+                        start: new Date('{{ $event->start}} UTC'),
+                        state: '{{$event->state}}',
+                        statut: '{{$event->statut}}',
+                        end: new Date('{{ $event->end}} UTC'),
+                        objet: '{{ $event->objet}}',
+                        description: '{{ $event->description}}',
+                        backgroundColor: setcolor('{{$event->statut}}'),
+                        borderColor:setcolor('{{$event->statut}}'),
+                        patient:{ id: {{$event->patients->id}}, name:' {{$event->patients->name}} {{$event->patients->prenom}}',},
                     },
-                    {
-                        title: 'Patient N° 2',
-                        resourceId: 'a2', // start out in resource 'a2'
-                        description: 'description du Patient N° 2',
-                        start: '2020-01-11T08:00:00',
-                        end: '2020-01-11T08:45:00',
-                        url: 'http://google.com/',
-
-                    },
-                    {
-                        title: 'Patient N° 3',
-                        resourceId: 'b1', // start out in resource 'b1'
-                        description: 'description du Patient N° 3',
-                        start: '2020-01-11T08:00:00',
-                        end: '2020-01-11T08:30:00',
-                        url: 'http://google.com/',
-
-                    },
-                    {
-                        title: 'Patient N° 5',
-                        resourceId: 'b1', // start out in resource 'b1'
-                        description: 'description du Patient N° 5',
-                        start: '2020-01-10T08:30:00',
-                        end: '2020-01-10T09:00:00',
-                        url: 'http://google.com/',
-
-                    },
-                    {
-                        title: 'Patient N° 4',
-                        resourceId: 'b2', // start out in resource 'b1'
-                        description: 'description du Patient N° 4',
-                        start: '2020-01-12T11:30:00',
-                        end: '2020-01-12T12:00:00',
-                        url: 'http://google.com/',
-
-                    },
+                    @endforeach
                 ],
                 eventClick: function(info) {
                     eventObj = info.event;
                     info.jsEvent.preventDefault();
-                    // $('#info_RV_patient').text(eventObj.title);
-                    $('#info_RV_patient').text(@json($events)[0].patients.name);
+                    $('#info_RV_patient').text(eventObj.extendedProps.patient.name);
                     $('#info_RV_objet').text(eventObj.extendedProps.objet);
-                    //$('#info_RV_objet').text(@json($events)[0].start_time);
-                    // date et heure
+                    $('#info_RV_statut').text(eventObj.extendedProps.statut);
+                    
                     var jour = eventObj.start.toLocaleDateString('fr-FR', {
                         weekday: 'long',
                         year: 'numeric',
@@ -221,12 +190,10 @@
     <script>
         $('#ouvrir_dossier_patient').on('click', function() {
             $('#info_RV').modal('hide');
-            if (eventObj.url) {
-                window.open(eventObj.url);
-                info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
-            } else {
-                alert('Clicked ' + eventObj.title);
-            }
+            let url = '{{ route("patients.show", ":id") }}';
+            url = url.replace(':id', eventObj.extendedProps.patient.id);
+            window.open(url);
+            
 
         });
         $('#supprimer_rv').on('click', function() {
@@ -237,6 +204,30 @@
                 alert('supression éffectuée ! ');
             }
         });
+        function setcolor(statut){
+            switch (statut) {
+                case "a venir":
+                    return 'SteelBlue';
+                    break;
+
+                case "vu":
+                    return 'DarkCyan';
+                    break;
+                case "absence excusé":
+                    return 'Plum';
+                    break;
+                case "absence non excusé":
+                    return 'SlateBlue';
+                    break;
+                case "reporté":
+                    return 'Tomato';
+                    break;
+            
+                default:
+                    return 'SteelBlue';
+                    break;
+            }
+        }
     </script>
     <script>
         function myFunction() {
