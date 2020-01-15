@@ -110,7 +110,7 @@ class ParametresController extends Controller
         
         $patient = Patient::findOrFail($request->patient_id);
         $request->validate([
-            'taille' => 'required|regex:/^[0-2]\.\d{0,2}$|^[0-2]$/',
+            'taille' => ['required', 'regex:/^[0-2]\.\d{0,2}$|^[0-2]$/'],
             'poids' => 'required',
             'date_naissance' => 'required',
         ]);
