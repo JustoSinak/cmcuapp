@@ -188,14 +188,13 @@
 
                     },
                 ],
-                //events: 'https://fullcalendar.io/demo-events.json',
                 eventClick: function(info) {
                     eventObj = info.event;
                     info.jsEvent.preventDefault();
-                    $('#info_RV_patient').text(eventObj.title);
+                    // $('#info_RV_patient').text(eventObj.title);
+                    $('#info_RV_patient').text(@json($events)[0].patients.name);
                     $('#info_RV_objet').text(eventObj.extendedProps.objet);
                     //$('#info_RV_objet').text(@json($events)[0].start_time);
-                    //$('#info_RV_objet').text(events);
                     // date et heure
                     var jour = eventObj.start.toLocaleDateString('fr-FR', {
                         weekday: 'long',

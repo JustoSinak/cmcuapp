@@ -9,10 +9,6 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property int $id
  * @property string $title
- * @property string $date
- * @property string $start_time
- * @property string|null $end_time
- * @property string $color
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $user_id
@@ -36,7 +32,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Event extends Model
 {
-    protected $fillable = ['title', 'date', 'start_time','end_time','color', 'patient_id', 'user_id'];
+    protected $guarded = ['updated_at', 'created_at'];
 
     public function user()
     {

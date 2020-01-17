@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
+<?php setlocale(LC_TIME, 'French') ?>
 <style>
     .cpi-titulo3 {
         font-size: 12px;
@@ -26,7 +27,7 @@
         padding-top: 1px;
         padding-bottom: 15px;
         position:fixed;
-        bottom:5px;
+        bottom:100px;
         width:100%;
     }
 
@@ -73,7 +74,7 @@
     </div>
     <div class="row col-md-5 offset-3">
         <div class="row">
-            <p>Concernant {{ ($consultations->patient->sexe == 'Masculin' ? 'M. ': 'Mme ').$consultations->patient->name.' '.$consultations->patient->prenom}}</p>
+            <p>Concernant {{ ($dossier->sexe == 'Masculin' ? 'M. ': 'Mme ').$consultations->patient->name.' '.$consultations->patient->prenom}}</p>
         </div>
     </div>
     <br>
@@ -81,8 +82,8 @@
     <p>Cher confrère, {{ $consultations->medecin }}</p>
     <br>
     <p>
-        Je vois à la consultation d’urologie ce {{ $consultations->created_at->formatLocalized('%d %B %Y') }} {{($consultations->patient->sexe == 'Masculin' ? 'M. ': 'Mme ')}}
-        <b>{{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</b> né le {{ $consultations->patient->date_naissance }}.
+        Je vois à la consultation d’urologie ce {{$consultations->created_at->formatLocalized('%d %B %Y') }} {{($dossier->sexe == 'Masculin' ? 'M. ': 'Mme ')}}
+        <b>{{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</b> née le {{ $dossier->date_naissance }}.
     </p>
     @if ($consultations->motif_c)
         <p>
@@ -125,7 +126,7 @@
     <p>Bien Confraternellement</p>
     <footer class="footer">
         <p class="offset-8"><b>Dr {{ auth()->user()->name }}</b></p>
-        <div class="text-center col-6 offset-2">
+        <div class="text-center col-6 offset-2 pt-5">
             <small>TEL:(+237) 233 423 389 / 674 068 988 / 698 873 945</small>
             <small>www.cmcu-cm.com</small>
         </div>

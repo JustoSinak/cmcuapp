@@ -2,6 +2,7 @@
 <html lang="fr">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
     <link rel="stylesheet" href="{{ mix('css/all.css') }}" />
     <script src="{{ mix('js/all.js') }}"></script>
@@ -97,10 +98,9 @@
                                         <label for="sel1">Patient:</label>
                                         <select class="form-control" id="patient">
                                             <option></option>
-                                            <option>Patient N° 1</option>
-                                            <option>Patient N° 2</option>
-                                            <option>Patient N° 3</option>
-                                            <option>Patient N° 4</option>
+                                            @foreach($patients as $patient)
+                                            <option value="{{ $patient->id }}"> {{ $patient->name.' '.$patient->prenom}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -217,6 +217,8 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            editedEvents = [];
+            var createdEventId = 1;
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -243,7 +245,7 @@
                     var questionMark = document.createElement('a');
 
                     questionMark.innerText = info.el.innerText;
-                    questionMark.href = "events/medecin/"+info.resource.id;
+                    questionMark.href = "events/medecin/" + info.resource.id;
                     info.el.style.cursor = 'pointer';
                     info.el.querySelector('.fc-cell-text').innerText = '';
                     info.el.querySelector('.fc-cell-text').appendChild(questionMark);
@@ -265,99 +267,133 @@
                 header: {
                     left: 'prev,next',
                     center: 'title',
-                    right: 'today',
+                    right: 'Sauvegarder today',
                 },
-                resources: [{
-                        id: 13,
-                        eventColor: 'Chocolate',
-                        title: 'NJINOU',
-                        url: 'google.com',
-                        businessHours: [{
-                                startTime: '11:00',
-                                endTime: '13:00',
-                                daysOfWeek: [1, 3, 5] // Mon,Wed,Fri
-                            },
-                            {
-                                startTime: '14:00',
-                                endTime: '17:00',
-                                daysOfWeek: [1, 3, 5] // Mon,Wed,Fri
-                            }
-                        ],
-                    }, {
-                        id: 14,
-                        title: 'KAMADJOU Cyril',
-                        eventColor: 'DarkCyan',
+                // resources: [{
+                //         id: 13,
+                //         eventColor: 'Chocolate',
+                //         title: 'NJINOU',
+                //         url: 'google.com',
+                //         businessHours: [{
+                //                 startTime: '11:00',
+                //                 endTime: '13:00',
+                //                 daysOfWeek: [1, 3, 5] // Mon,Wed,Fri
+                //             },
+                //             {
+                //                 startTime: '14:00',
+                //                 endTime: '17:00',
+                //                 daysOfWeek: [1, 3, 5] // Mon,Wed,Fri
+                //             }
+                //         ],
+                //     }, {
+                //         id: 14,
+                //         title: 'KAMADJOU Cyril',
+                //         eventColor: 'DarkCyan',
+                //     },
+                //     {
+                //         id: 16,
+                //         eventColor: 'Plum',
+                //         title: 'KUITCHE Jerry'
+                //     }, {
+                //         id: 29,
+                //         eventColor: 'SteelBlue',
+                //         title: 'EYOMGETA Divine'
+                //     },
+                // ],
+                resources: [
+                    @foreach($ressources as $ressource) {
+                        id : {{$ressource->id}},
+                        title: '{{$ressource->name}} {{$ressource->prenom}}',
                     },
-                    {
-                        id: 16,
-                        eventColor: 'Plum',
-                        title: 'KUITCHE Jerry'
-                    }, {
-                        id: 29,
-                        eventColor: 'SteelBlue',
-                        title: 'EYOMGETA Divine'
-                    },
+                    @endforeach
                 ],
+                
+                events: [
+                    @foreach($events as $event) {
+                        id : {{$event->id}},
+                        title: '{{$event->title}}',
+                        resourceId: {{ $event->user_id }},
+                        start: new Date('{{ $event->start}} UTC'),
+                        state: '{{$event->state}}',
+                        statut: '{{$event->statut}}',
+                        end: new Date('{{ $event->end}} UTC'),
+                        objet: '{{ $event->objet}}',
+                        description: '{{ $event->description}}',
+                    },
+                    @endforeach
+                ],
+                
+                customButtons: {
+                    Sauvegarder: {
+                        text: 'Sauvegarder',
+                        click: function() {
+                            if (editedEvents.length > 0) {
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                $.ajax({
+                                        statusCode: {
+                                            404: function() {
+                                                alert("page introuvable");
+                                            }
+                                        },
+                                        method: "PUT",
+                                        url: "{{ route('events.update')}}",
+                                        data: {
+                                            events: JSON.stringify(editedEvents)
+                                        },
+                                        dataType: "json",
+                                    })
+                                    .done(function(data) {
+                                        alert(data.info);
+                                        editedEvents.length = 0;
+                                        createdEventId = 1;
+                                        window.location.reload();
+                                        //
 
-                events: [{
-                        title: 'Patient N° 1',
-                        resourceId: 13, // start out in resource 16
-                        description: 'description for All Day Event',
-                        start: '2020-01-10T10:00:00',
-                        end: '2020-01-10T11:00:00',
-                        url: 'http://google.com/',
-                        constraint: {
-                            constraint: 'businessHours',
-                            resourceIds: [13, 29] // constrain dragging to these
+                                    })
+                                    .fail(function(data) {
+                                        var message = "";
+                                        $.each(data.responseJSON, function(key, value) {
+                                            message += " " + JSON.stringify(value);
+                                        });
+
+                                        alert(message);
+                                    });
+                            } else {
+                                alert('Vous n\'avez effectué aucun changement !');
+                            }
+
                         }
-                    },
-                    {
-                        title: 'Patient N° 2',
-                        resourceId: 14, // start out in resource 14
-                        description: 'description du Patient N° 2',
-                        start: '2020-01-10T08:00:00',
-                        end: '2020-01-10T08:45:00',
-                        url: 'http://google.com/',
-                        constraint: {
-                            resourceIds: [29, 16] // constrain dragging to these
-                        }
-                    },
-                    {
-                        title: 'Patient N° 3',
-                        resourceId: 16, // start out in resource 16
-                        description: 'description du Patient N° 3',
-                        start: '2020-01-10T08:00:00',
-                        end: '2020-01-10T08:30:00',
-                        url: 'http://google.com/',
-                        constraint: {
-                            resourceIds: [29, 16, 13, 14] // constrain dragging to these
-                        }
-                    },
-                    {
-                        title: 'Patient N° 5',
-                        resourceId: 16, // start out in resource 16
-                        description: 'description du Patient N° 5',
-                        start: '2020-01-10T08:30:00',
-                        end: '2020-01-10T09:00:00',
-                        url: 'http://google.com/',
-                        constraint: {
-                            resourceIds: [29, 16, 13, 14] // constrain dragging to these
-                        }
-                    },
-                    {
-                        title: 'Patient N° 4',
-                        resourceId: 29, // start out in resource 16
-                        description: 'description du Patient N° 4',
-                        start: '2020-01-10T11:30:00',
-                        end: '2020-01-10T12:00:00',
-                        url: 'http://google.com/',
-                        constraint: {
-                            resourceIds: [29, 16, 13, 14] // constrain dragging to these
-                        }
-                    },
-                ],
+                    }
+                },
                 eventDrop: function(info) {
-                    alert(info.event.title + " a été affecté au Dr " + info.newResource.title);
+                    let oldItemIndex = editedEvents.findIndex((item) =>
+                        item.id === info.event.id
+                    );
+                    if (info.event.extendedProps.state == 'aucun') {
+                        info.event.setExtendedProp('state', 'mod');
+                        oldItemIndex = editedEvents.push(eventObjToJSON(info.event)) - 1;
+                    } else {
+                        editedEvents[oldItemIndex] = eventObjToJSON(info.event)
+
+                    }
+                    //alert(editedEvents[oldItemIndex].state + " a été déplacé !"); // + info.newResource.title
+                },
+                eventResize: function(info) {
+                    let oldItemIndex = editedEvents.findIndex((item) =>
+                        item.id === info.event.id
+                    );
+                    if (info.event.extendedProps.state == 'aucun') {
+                        info.event.setExtendedProp('state', 'mod');
+                        oldItemIndex = editedEvents.push(eventObjToJSON(info.event)) - 1;
+                    } else {
+                        editedEvents[oldItemIndex] = eventObjToJSON(info.event)
+
+                    }
+                    //alert(editedEvents[oldItemIndex].state + " a été modifié !"); // + info.newResource.title
                 },
 
                 eventClick: function(info) {
@@ -420,46 +456,86 @@
             });
 
             $('#nouveauRV').on('click', '#enregistrer', function() {
-                var patient = $("#patient option:selected").text();
+                var patient_name = $("#patient option:selected").text();
+                var patient_id = $("#patient option:selected").val();
                 var description = $('#description').val();
                 var objet = $("input[name='objet']:checked").val();
-                newEvent = calendar.addEvent({
-                    //id: Math.random(),
-                    title: patient,
+                newEvent = {
+                    title: patient_name,
                     start: nouveau_rv.start,
                     end: nouveau_rv.end,
-                    resourceId: nouveau_rv.resource.id.toString(),
+                    resourceId: nouveau_rv.resource.id,
                     description: description,
                     objet: objet,
-                });
+                    statut: "A venir",
+                    state: "cre",
+                    patient: {
+                        id: patient_id,
+                    },
+                    id: 'cre_' + createdEventId++,
+                }
+                var parsedEvent = calendar.addEvent(newEvent);
+                parsedEvent.resourceId = newEvent.resourceId;
+                editedEvents.push(eventObjToJSON(parsedEvent));
             });
-
-
 
             calendar.render();
         });
-    </script>
 
-    <script>
         $('#ouvrir_dossier_patient').on('click', function() {
             $('#info_RV').modal('hide');
             if (eventObj.url) {
                 window.open(eventObj.url);
                 info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
             } else {
-                alert('Clicked ' + eventObj.title);
+                //alert('Clicked ' + eventObj.title);
             }
 
         });
+
         $('#supprimer_rv').on('click', function() {
             var supprimer = confirm('Voulez-vous supprimer ce rendez-vous?');
             if (supprimer) {
                 $('#info_RV').modal('hide');
-                eventObj.remove()
-                alert('supression éffectuée ! ');
+                if (eventObj.extendedProps.state === 'cre') {
+                    let oldItemIndex = editedEvents.findIndex((item) =>
+                        item.id === eventObj.id
+                    );
+                    editedEvents.splice(oldItemIndex, 1)[0].state;
+                } else {
+                    if (eventObj.extendedProps.state === 'mod') {
+                        let oldItemIndex = editedEvents.findIndex((item) =>
+                            item.id === eventObj.id
+                        );
+                        editedEvents[oldItemIndex].state = 'sup';
+                        //alert('editedEvents[oldItemIndex].state : '+editedEvents[oldItemIndex].state )
+                    } else {
+                        eventObj.setExtendedProp('state', 'sup');
+                        editedEvents.push(eventObjToJSON(eventObj));
+                        //alert('editedEvents.push : '+ eventObj.extendedProps.state)
+                    }
+                }
+                eventObj.remove();
             }
         });
+
+        function eventObjToJSON(event) {
+            return {
+                id: event.id,
+                title: event.title,
+                start: event.start,
+                end: event.end,
+                resourceId : event.resourceId,
+                description: event.extendedProps.description,
+                objet: event.extendedProps.objet,
+                statut: event.extendedProps.statut,
+                state: event.extendedProps.state,
+                patient: event.extendedProps.patient,
+            }
+
+        }
     </script>
+
     <script>
         function myFunction() {
             if (!confirm("Veuillez confirmer la suppréssion du rendez-vous"))

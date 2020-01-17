@@ -7,118 +7,83 @@ use App\Http\Requests\EventRequest;
 use App\Patient;
 use App\User;
 use Calendar;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class EventsController extends Controller
 {
 
-    public function index(Patient $patient)
+    public function index(Request $request)
     {
+        $events = Event::with('patients')->get();
+        $patients = Patient::latest()->get(['id','name','prenom']);
+        $ressources = User::where('role_id', 2)->get(['id', 'name', 'prenom']);
+        return view('admin.events.index', ['events' =>$events, 'ressources' => $ressources, 'patients' => $patients]);
+    }
 
-        if(\auth()->user()->role_id === '4'){
-            $events = Event::all();
-        }else{
+    public function medecinEvents(Request $request, $id_medecin)
+    {
+        // $events = Event::with('patients')->where('resourceId', '=', $id_medecin)->get();
+        $events = Event::with('patients')->where('user_id', '=', $id_medecin)->get();
+        //var_dump(json_encode(compact('events')));
+        return view('admin.events.show', compact('events'));
+    }
 
-            $events = Event::with('patients', 'user')->where('user_id', '=', \auth()->user()->id)->get();
-        }
+    public function update(Request $request)
+    {
+        if ($request->ajax()) {
 
-        $event = [];
-        if($events->count()) {
-            foreach ($events as $row) {
-                $event[] = Calendar::event(
-                    $row->title,
-//                    $row->medecin,
-                    true,
-                    new \DateTime( $row->date),
-                    new \DateTime( $row->end_time),
-                    $row->id,
-                    // Add color and link on event
-                    [
-                        'color' => $row->color,
-//                        'url' => '',
-                    ]
-                );
+            $events = json_decode($request->get('events'));
+            $result = "";
+            foreach ($events as $event) {
+                switch ($event->state) {
+                    case 'cre':
+                        $eventToBeSaved = Event::create([
+                            'title' => $event->title,//
+                            'start' => Carbon::createFromFormat('Y-m-d\TH:i:s.uP', $event->start),//
+                            'end' => Carbon::createFromFormat('Y-m-d\TH:i:s.uP', $event->end),//
+                            'user_id' => $event->resourceId,//
+                            'description' => $event->description,//
+                            'objet' => $event->objet,
+                            'statut' => $event->statut,//
+                            'state' => 'aucun', //$event->state,//
+                            'patient_id' => $event->patient->id,//
+                        ]);
+                        $eventToBeSaved->save();
+                        $eventToBeSaved->fresh();
+                        $result = $result."Rendez-vous ".$eventToBeSaved->id.' créé ! ';
+                        break;
+                    case 'mod':
+                        $eventToBeUpdated = Event::findOrFail($event->id);
+                        $eventToBeUpdated->update([
+                            'id' => $event->id,
+                            'title' => $event->title,
+                            'start' => Carbon::createFromFormat('Y-m-d\TH:i:s.uP', $event->start),
+                            'end' => Carbon::createFromFormat('Y-m-d\TH:i:s.uP', $event->end),
+                            'user_id' => $event->resourceId,
+                            'description' => $event->description,
+                            'objet' => $event->objet,
+                            'statut' => $event->statut,
+                            'state' => 'aucun', //$event->state,
+                            'patient_id' => $event->id,
+                        ]);
+                        $result = $result."Rendez-vous ".$event->id.' modifié ! ';
+
+                        break;
+                    case 'sup':
+                        Event::destroy($event->id);
+                        $result = $result.'Rendez-vous '.$event->id.' supprimé ! ';
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
             }
+            return response()->json(['info' => $result]);
         }
-
-        $calendar = Calendar::addEvents($event)
-            ->setOptions([
-                'firstDay'=> 1,
-                'editable'=> true,
-                'navLinks'=> true,
-                'selectable'  => true,
-                'durationeditable' => true,
-                'locale' => 'fr',
-            ]);
-
-        return view('admin.events.index', compact('calendar', 'events', 'patient'));
-    }
-
-    public function create(Patient $patient)
-    {
-        $users = User::with('roles')->where('role_id', '=', '2')->get(['name', 'prenom', 'id']);
-
-        return view('admin.events.create', compact('users', 'patient'));
-    }
-
-    public function store(EventRequest $request)
-    {
-//
-        $this->authorize('create', Event::class);
-
-        $patient = Patient::findOrFail($request->patient_id);
-
-        if (!empty($patient)){
-            Event::create([
-                'user_id' => request('user_id'),
-                'patient_id' => $patient->id,
-                'title' => request('title'),
-                'color' => request('color'),
-                'date' => request('date'),
-                'start_time' => request('start_time'),
-                'end_time' => request('end_time'),
-            ]);
-        }else {
-            Event::create([
-                'user_id' => \request('user_id'),
-                'title' => request('title'),
-                'color' => request('color'),
-                'date' => request('date'),
-                'start_time' => request('start_time'),
-                'end_time' => request('end_time'),
-            ]);
-        }
-
-        return redirect()->route('events.index')->with('success', 'Le rendez-vous a bien été pris avec le médécin');
-    }
-
-    public function show(Request $request)
-    {
-        //$users = User::with('roles')->where('role_id', '=', '2')->get(['name', 'prenom']);
-        
-        //var_dump(json_encode($events));
-        return view('admin.events.show');
-    }
-
-    public function medecinEvents(Request $request,  $medecin_id){
-        $events = Event::where('user_id', '=', $medecin_id)->get(["id","title", "start_time", "end_time",  "patient_id", "user_id"]);
-        response()->json($events);
-    }
-
-
-
-    public function update(EventRequest $request, Event $event)
-    {
-        $event->update($request->all());
-        return redirect()->route('events.index')->with('success', 'La mise à jour du rendez-vous à bien été prise en compte');
-    }
-
-    public function destroy(Event $event)
-    {
-        $event->delete();
-
-        return redirect()->route('events.index')->with('info', 'Le rendez-vous a bien été supprimer');
+        abort(404);
     }
 }
