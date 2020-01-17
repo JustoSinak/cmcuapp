@@ -52,13 +52,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::post('produit/save-invoice/{produit}', 'ProduitsController@saveInvoice')->name('produit.invoice');
 
 
+    // Route::get('events', 'EventsController@index')->name('events.index');
+     Route::get('events/create/{patient}', 'EventsController@create')->name('events.create');
+    // //Route::get('events/create', 'EventsController@create')->name('event.create');
+    // Route::post('events', 'EventsController@store')->name('events.store');
+    // Route::get('events/medecin/{medecin_id}', 'EventsController@show')->name('events.show');// Events show page
+    // Route::get('events/medecin/events/{medecin_id}', 'EventsController@show')->name('events.show');//events source for each "médecin" (ressource).
+    // Route::get('events/medecin/events/{medecin_id}/', 'EventsController@show')->name('events.show');//events source for each "médecin" (ressource).
+    // Route::patch('events/{event}', 'EventsController@update')->name('events.update');
+    // Route::delete('events/{event}', 'EventsController@destroy')->name('events.destroy');
+
     Route::get('events', 'EventsController@index')->name('events.index');
-    Route::get('events/create/{patient}', 'EventsController@create')->name('events.create');
-    Route::get('events/create', 'EventsController@create')->name('event.create');
-    Route::post('events', 'EventsController@store')->name('events.store');
-    Route::get('events/{event}/edit', 'EventsController@edit')->name('events.edit');
-    Route::patch('events/{event}', 'EventsController@update')->name('events.update');
-    Route::delete('events/{event}', 'EventsController@destroy')->name('events.destroy');
+    Route::put('events', 'EventsController@update')->name('events.update');
+    Route::get('events/medicin/id', 'EventsController@medecinEvents')->name('events.medecinEvents');
 
 
     Route::get('patients', 'PatientsController@index')->name('patients.index');

@@ -18,8 +18,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-
-            flashy()->primary('Bievenue nous sommes heureux de vous revoir');
+            
+            $titre = Auth()->user()->role_id==2 ? "DR": (in_array(Auth()->user()->sexe, ["Homme", "Maxculin"])? "M." : "Mme");
+            flashy()->primary('Bievenue '.$titre.' '.Auth()->user()->name.' ! Nous sommes heureux de vous revoir !');
             return redirect('/admin/dashboard');
         }
 
