@@ -241,11 +241,12 @@ class PatientsController extends Controller
 
     public function print_sortie(Patient $patient)
     {
+        $dossier = Dossier::where("patient_id" , $patient->id)->first();
 
         $pdf = PDF::loadView('admin.etats.lettre', [
             'patient' => $patient,
             'consultations' => Consultation::where('patient_id', $patient->id)->latest()->first(),
-            'dossiers' => $patient->dossiers()->latest()->first(),
+            'dossier' => $dossier,
         ]);
 
         return $pdf->stream('lettre-sortie.pdf');
