@@ -16,6 +16,37 @@
     <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/list@4.3.0/main.min.css">
     <style>
         /* ... */
+        .btnavenir {
+            border-color: SteelBlue;
+        }
+        .btnvu {
+            border-color: DarkCyan;
+        }
+        .btnae {
+            border-color: Plum;
+        }
+        .btnan {
+            border-color: SlateBlue;
+        }
+        .btnreporte {
+            border-color: Tomato;
+        }
+        .btnavenir:hover {
+            background-color: SteelBlue;
+        }
+        .btnvu:hover {
+            background-color: DarkCyan;
+        }
+        .btnae:hover {
+            background-color: Plum;
+        }
+        .btnan:hover {
+            background-color: SlateBlue;
+        }
+        .btnreporte:hover {
+            background-color: Tomato;
+        }
+
     </style>
 </head>
 
@@ -36,7 +67,7 @@
 
             <!-- The Modal -->
             <div class="modal fade" id="info_RV">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
 
                         <!-- Modal Header -->
@@ -61,9 +92,21 @@
                                     <hr>
                                 </div>
 
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 text-center">
                                     <button class="btn btn-outline-success" id="ouvrir_dossier_patient"><i class="fas fa-folder"></i> Ouvrir le dossier patient</button>
+                                    @can('create', \App\Event::class)
                                     <button class="btn btn-outline-danger" id="supprimer_rv"><i class="fas fa-trash"></i> Supprimer ce rendez-vous</button>
+                                    <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#demo">Statut</button>
+                                    @endcan
+                                </div>
+
+                                <div id="demo" class=" col-sm-12 collapse text-center">
+                                    <hr>
+                                    <button class="btn btnavenir edit_statut_rv" data-statut="a venir">à venir</button>
+                                    <button class="btn btnvu edit_statut_rv" data-statut="vu">vu</button>
+                                    <button class="btn btnae edit_statut_rv" data-statut="absence excusé">absence excusé</button>
+                                    <button class="btn btnan edit_statut_rv" data-statut="absence non excusé">absence non excusé</button>
+                                    <button class="btn btnreporte edit_statut_rv" data-statut="reporté">reporté</button>
                                 </div>
 
                             </div>
@@ -224,105 +267,9 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
                 plugins: ['interaction', 'resourceTimeline'],
+                @can('create', \App\Event::class)
                 selectable: true,
-                selectOverlap: false,
-                eventOverlap: false, //pas de chevauchement
-                slotDuration: '00:15:00', // unité de temps
-                locale: 'fr',
-                //timeZone: 'UTC',
-                scrollTime: '08:00:00',
-                defaultView: 'resourceTimelineDay',
-                aspectRatio: 2,
-                resourceAreaWidth: '15%',
                 editable: true,
-                eventTextColor: 'white',
-                resourceLabelText: 'Médecins',
-                //minTime: '08:00:00', // heure de début (Affichage)
-                //maxTime: '17:00:00',
-                // displayEventTime: true,
-                // displayEventEnd: true,
-                resourceRender: function(info) {
-                    var questionMark = document.createElement('a');
-
-                    questionMark.innerText = info.el.innerText;
-                    questionMark.href = "events/medecin/" + info.resource.id;
-                    info.el.style.cursor = 'pointer';
-                    info.el.querySelector('.fc-cell-text').innerText = '';
-                    info.el.querySelector('.fc-cell-text').appendChild(questionMark);
-
-
-                },
-                businessHours: [{
-                        daysOfWeek: [1, 2, 3, 4, 5], // Mon,Tue,Wed,Thu,Fri
-                        startTime: '08:00',
-                        endTime: '13:00',
-                    },
-                    {
-                        daysOfWeek: [1, 2, 3, 4, 5], // Mon,Tue,Wed,Thu,Fri
-                        startTime: '14:00',
-                        endTime: '17:00',
-                    },
-
-                ],
-                header: {
-                    left: 'prev,next',
-                    center: 'title',
-                    right: 'Sauvegarder today',
-                },
-                // resources: [{
-                //         id: 13,
-                //         eventColor: 'Chocolate',
-                //         title: 'NJINOU',
-                //         url: 'google.com',
-                //         businessHours: [{
-                //                 startTime: '11:00',
-                //                 endTime: '13:00',
-                //                 daysOfWeek: [1, 3, 5] // Mon,Wed,Fri
-                //             },
-                //             {
-                //                 startTime: '14:00',
-                //                 endTime: '17:00',
-                //                 daysOfWeek: [1, 3, 5] // Mon,Wed,Fri
-                //             }
-                //         ],
-                //     }, {
-                //         id: 14,
-                //         title: 'KAMADJOU Cyril',
-                //         eventColor: 'DarkCyan',
-                //     },
-                //     {
-                //         id: 16,
-                //         eventColor: 'Plum',
-                //         title: 'KUITCHE Jerry'
-                //     }, {
-                //         id: 29,
-                //         eventColor: 'SteelBlue',
-                //         title: 'EYOMGETA Divine'
-                //     },
-                // ],
-                resources: [
-                    @foreach($ressources as $ressource) {
-                        id : {{$ressource->id}},
-                        title: '{{$ressource->name}} {{$ressource->prenom}}',
-                    },
-                    @endforeach
-                ],
-                
-                events: [
-                    @foreach($events as $event) {
-                        id : {{$event->id}},
-                        title: '{{$event->title}}',
-                        resourceId: {{ $event->user_id }},
-                        start: new Date('{{ $event->start}} UTC'),
-                        state: '{{$event->state}}',
-                        statut: '{{$event->statut}}',
-                        end: new Date('{{ $event->end}} UTC'),
-                        objet: '{{ $event->objet}}',
-                        description: '{{ $event->description}}',
-                    },
-                    @endforeach
-                ],
-                
                 customButtons: {
                     Sauvegarder: {
                         text: 'Sauvegarder',
@@ -369,10 +316,84 @@
                         }
                     }
                 },
+                @endcan
+                
+                selectOverlap: false,
+                eventOverlap: false, //pas de chevauchement
+                slotDuration: '00:15:00', // unité de temps
+                locale: 'fr',
+                //timeZone: 'UTC',
+                scrollTime: '08:00:00',
+                defaultView: 'resourceTimelineDay',
+                aspectRatio: 2,
+                resourceAreaWidth: '15%',
+                eventTextColor: 'white',
+                resourceLabelText: 'Médecins',
+                //minTime: '08:00:00', // heure de début (Affichage)
+                //maxTime: '17:00:00',
+                // displayEventTime: true,
+                // displayEventEnd: true,
+                resourceRender: function(info) {
+                    var questionMark = document.createElement('a');
+
+                    questionMark.innerText = info.el.innerText;
+                    let url = '{{ route("events.medecinEvents", ":id") }}';
+                    questionMark.href = url.replace(':id', info.resource.id);
+                    //questionMark.href = "events/medecin/" + info.resource.id;
+                    info.el.style.cursor = 'pointer';
+                    info.el.querySelector('.fc-cell-text').innerText = '';
+                    info.el.querySelector('.fc-cell-text').appendChild(questionMark);
+
+
+                },
+                businessHours: [{
+                        daysOfWeek: [1, 2, 3, 4, 5], // Mon,Tue,Wed,Thu,Fri
+                        startTime: '08:00',
+                        endTime: '13:00',
+                    },
+                    {
+                        daysOfWeek: [1, 2, 3, 4, 5], // Mon,Tue,Wed,Thu,Fri
+                        startTime: '14:00',
+                        endTime: '17:00',
+                    },
+
+                ],
+                header: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'Sauvegarder today',
+                },
+                resources: [
+                    @foreach($ressources as $ressource) {
+                        id : {{$ressource->id}},
+                        title: '{{$ressource->name}} {{$ressource->prenom}}',
+                    },
+                    @endforeach
+                ],
+                
+                events: [
+                    @foreach($events as $event) {
+                        id : {{$event->id}},
+                        title: '{{$event->title}}',
+                        resourceId: {{ $event->user_id }},
+                        start: new Date('{{ $event->start}} UTC'),
+                        state: '{{$event->state}}',
+                        statut: '{{$event->statut}}',
+                        end: new Date('{{ $event->end}} UTC'),
+                        objet: '{{ $event->objet}}',
+                        description: '{{ $event->description}}',
+                        backgroundColor: setcolor('{{$event->statut}}'),
+                        borderColor:setcolor('{{$event->statut}}'),
+                        patient:{ id: {{$event->patients->id}},},
+                    },
+                    @endforeach
+                ],
+                
                 eventDrop: function(info) {
                     let oldItemIndex = editedEvents.findIndex((item) =>
                         item.id === info.event.id
                     );
+                    info.event.resourceId = info.event.getResources()[0].id
                     if (info.event.extendedProps.state == 'aucun') {
                         info.event.setExtendedProp('state', 'mod');
                         oldItemIndex = editedEvents.push(eventObjToJSON(info.event)) - 1;
@@ -386,6 +407,7 @@
                     let oldItemIndex = editedEvents.findIndex((item) =>
                         item.id === info.event.id
                     );
+                    info.event.resourceId = info.event.getResources()[0].id
                     if (info.event.extendedProps.state == 'aucun') {
                         info.event.setExtendedProp('state', 'mod');
                         oldItemIndex = editedEvents.push(eventObjToJSON(info.event)) - 1;
@@ -467,7 +489,7 @@
                     resourceId: nouveau_rv.resource.id,
                     description: description,
                     objet: objet,
-                    statut: "A venir",
+                    statut: "a venir",
                     state: "cre",
                     patient: {
                         id: patient_id,
@@ -477,6 +499,8 @@
                 var parsedEvent = calendar.addEvent(newEvent);
                 parsedEvent.resourceId = newEvent.resourceId;
                 editedEvents.push(eventObjToJSON(parsedEvent));
+                $("#patient option:selected").text('');
+                $("#patient option:selected").val();
             });
 
             calendar.render();
@@ -484,15 +508,29 @@
 
         $('#ouvrir_dossier_patient').on('click', function() {
             $('#info_RV').modal('hide');
-            if (eventObj.url) {
-                window.open(eventObj.url);
-                info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+            let url = '{{ route("patients.show", ":id") }}';
+            url = url.replace(':id', eventObj.extendedProps.patient.id);
+            window.open(url);
+            
+
+        });
+        
+        $('.edit_statut_rv').on('click', function() {
+            let new_statut = $(this).data('statut');
+            $('#info_RV').modal('hide');
+            let oldItemIndex = editedEvents.findIndex((item) =>
+                item.id === eventObj.id
+            );
+            eventObj.resourceId = eventObj.getResources()[0].id;
+            eventObj.setExtendedProp('statut', new_statut);
+            if (eventObj.extendedProps.state == 'aucun') {
+                eventObj.setExtendedProp('state', 'mod');
+                oldItemIndex = editedEvents.push(eventObjToJSON(eventObj)) - 1;
             } else {
-                //alert('Clicked ' + eventObj.title);
+                editedEvents[oldItemIndex] = eventObjToJSON(eventObj)
             }
 
         });
-
         $('#supprimer_rv').on('click', function() {
             var supprimer = confirm('Voulez-vous supprimer ce rendez-vous?');
             if (supprimer) {
@@ -518,6 +556,30 @@
                 eventObj.remove();
             }
         });
+        function setcolor(statut){
+            switch (statut) {
+                case "a venir":
+                    return 'SteelBlue';
+                    break;
+
+                case "vu":
+                    return 'DarkCyan';
+                    break;
+                case "absence excusé":
+                    return 'Plum';
+                    break;
+                case "absence non excusé":
+                    return 'SlateBlue';
+                    break;
+                case "reporté":
+                    return 'Tomato';
+                    break;
+            
+                default:
+                    return 'SteelBlue';
+                    break;
+            }
+        }
 
         function eventObjToJSON(event) {
             return {

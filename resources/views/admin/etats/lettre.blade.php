@@ -15,8 +15,8 @@
         width: 100px;
     }
     p {
-        line-height: 140%;
-        text-align: justify;
+        /*line-height: 140%;*/
+        line-height: 43%;
     }
     hr {
         display: block; height: 1px;
@@ -34,15 +34,19 @@
 </style>
 <div class="container-fluid">
 
-    <div class="row">
+<div class="row">
         <div class="col-2">
             <img class="logo img-responsive float-left" src="{{ asset('admin/images/logo.jpg') }}">
         </div>
         <div class="col-7 offset-3">
             <div class="text-center">
                 <p>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</p>
+                <p class="mt-2"><small>ONMC : N° 5531 007/10/D/ONMC</small></p>
+                <p><small> Arrêté N° 3203/A/MINSANTE/SG/DOSTS/SDOS/SFSP </small></p>
                 <p>VALLEE MANGA BELL DOUALA-BALI</p>
-                <small>TEL:(+237) 233 423 389 / 674 068 988 / 698 873 945</small>
+                <p><small>TEL:(+237) 233 423 389 / 674 068 988 / 698 873 945</small></p>
+                <p>Consultation sur RDV </p>
+                <p>Email : <small> info@cmcu-cm.com</small></p>
                 <p><small>www.cmcu-cm.com</small></p>
             </div>
         </div>
@@ -64,7 +68,10 @@
         </div>
     </div>
     <div class="row">
-        Ref: {{ $patient->numero_dossier .'/'. $consultations->id }}
+        <div class="col-12">
+            Ref: {{ $patient->numero_dossier .'/'. $consultations->id }}
+        </div>
+        
     </div>
     <br>
     <div class="row col-md-5 offset-3">
@@ -81,7 +88,7 @@
     <br>
     <p>Cher confrère, {{ $consultations->medecin }}</p>
     <br>
-    <p>
+    <p style="line-height: 140%;">
         Je vois à la consultation d’urologie ce {{$consultations->created_at->formatLocalized('%d %B %Y') }} {{($dossier->sexe == 'Masculin' ? 'M. ': 'Mme ')}}
         <b>{{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</b> née le {{ $dossier->date_naissance }}.
     </p>

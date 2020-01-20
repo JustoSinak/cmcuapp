@@ -9,12 +9,7 @@
                 Prémédications
             </a>
         </li>
-        <li>
-            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres" class="btn btn-primary mb-1">
-                <i class="fas fa-eye"></i>
-                Surveillance Rapprochée
-            </a>
-        </li>
+        
         <li>
             <a href="{{ route('consultations.index', $patient->id) }}" class="btn btn-success mb-1">
                 <i class="fas fa-eye"></i>
@@ -56,24 +51,7 @@
             <i class="far fa-plus-square"></i>
             Fiche d'Intervention
         </button>
-        <!--
-            <li>
-                <a href="{{ route('examens.create', $patient->id) }}" title="Ajouter examens medicaux" class="btn btn-info btn-xs mb-1"><i class="fas fa-book"></i> Ajout Des Examens</a>
-            </li>
-        -->
-        <li>
-            <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
-               class="btn btn-primary mb-1">
-                <i class="fas fa-eye"></i>
-                Consultations Anesthésistes
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres" class="btn btn-success mb-1">
-                <i class="fas fa-eye"></i>
-                Surveillance Rapprochée
-            </a>
-        </li>
+        
         <li>
             <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#SpostAnesth"
                     title="Surveillance post anesthésique" data-whatever="@mdo">
@@ -121,25 +99,14 @@
                 Prémédications
             </a>
         </li>
-        <li>
-            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres" class="btn btn-primary mb-1">
-                <i class="fas fa-eye"></i>
-                Surveillance Rapprochée
-            </a>
-        </li>
+        
         <li>
             <a href="{{ route('consultations.index', $patient->id) }}" class="btn btn-success mb-1">
                 <i class="fas fa-eye"></i>
                 Consultations chirurgicales
             </a>
         </li>
-        <li>
-            <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
-               class="btn btn-primary mb-1">
-                <i class="fas fa-eye"></i>
-                Consultations anesthésistes
-            </a>
-        </li>
+        
         <li>
             <a href="{{ route('surveillance_score.index', $patient->id) }}" class="btn btn-success">
                 <i class="far fa-plus-square"></i>

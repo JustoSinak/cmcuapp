@@ -97,12 +97,60 @@
                                             <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#biologieAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i> Examens Biologiques
                                             </button>
-                                            <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#imagerieAll" data-whatever="@mdo">
+
+                                            @can('anesthesiste', \App\Patient::class)
+
+                                            <a  href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
+                                                    <i class="fas fa-eye"></i>
+                                                    Surveillance Rapprochée
+                                                </a>
+                                            
+                                            @endcan
+                                            @can('chirurgien', \App\Patient::class)
+                                            
+                                            <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
+                                            class="btn btn-primary btn-block mb-2">
+                                                    <i class="fas fa-eye"></i>
+                                                    Consultations Anesthésistes
+                                                </a>
+                                            
+                                            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
+                                                    <i class="fas fa-eye"></i>
+                                                    Surveillance Rapprochée
+                                                </a>
+                                            
+                                            @endcan
+                                            @can('infirmier', \App\Patient::class)
+                                            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
+                                                    <i class="fas fa-eye"></i>
+                                                    Surveillance Rapprochée
+                                                </a>
+                                            
+                                            <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
+                                            class="btn btn-primary btn-block mb-2">
+                                                    <i class="fas fa-eye"></i>
+                                                    Consultations anesthésistes
+                                                </a>
+                                            
+                                            @endcan
+       
+
+
+
+
+
+
+
+
+
+
+
+                                            <!-- <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#imagerieAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i> Examens Imageries
-                                            </button>
-                                            <a href="{{ route('examens.index') }}" class="btn btn-primary btn-block mb-2" title="Détails surveillance post-aneshésiste">
+                                            </button> -->
+                                            <!-- <a href="{{ route('examens.index') }}" class="btn btn-primary btn-block mb-2" title="Détails surveillance post-aneshésiste">
                                                 <i class="fas fa-eye"></i> Résultats d'Examens
-                                            </a>
+                                            </a> -->
                                             <a href="{{ route('surveillance_post_anesthesise.index', $patient->id) }}" class="btn btn-primary btn-block mb-2" title="Détails surveillance post-aneshésiste">
                                                 <i class="fas fa-eye"></i> Surveillance Post-Anesthésique
                                             </a>
