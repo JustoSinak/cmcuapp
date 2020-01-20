@@ -19,7 +19,7 @@ class EventPolicy
         }
     }
 
-    public function view(User $user, Event $event)
+    public function view(User $user)
     {
         return true;
     }
@@ -28,7 +28,7 @@ class EventPolicy
     public function create(User $user)
     {
         return in_array(auth()->user()->role_id, [
-            1,2,4,6
+            6
         ]);
     }
 
@@ -36,7 +36,7 @@ class EventPolicy
     public function update(User $user, Event $event)
     {
         return in_array(auth()->user()->role_id, [
-            1,2
+            6
         ]);
     }
 
@@ -44,7 +44,7 @@ class EventPolicy
     public function delete(User $user, Event $event)
     {
         return in_array(auth()->user()->role_id, [
-            1,2
+            6
         ]);
     }
 

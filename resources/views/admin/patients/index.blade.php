@@ -43,8 +43,13 @@
                                     <td style="display: inline-flex;">
                                     @can('consulter', \App\Patient::class)
                                         <a href="{{ route('patients.show', $patient->id) }}" title="consulter le dossier du patient" class="btn btn-primary btn-xs mr-1"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('events.create', $patient->id) }}" title="Prendre un rendez-vous" class="btn btn-info btn-xs mr-1"><i class="far fa-calendar-plus"></i></a>
+                                        
                                     @endcan
+                                    {{--
+                                    @can('create', \App\Event::class)
+                                    <a href="{{ route('events.index') }}" title="Prendre un rendez-vous" class="btn btn-info btn-xs mr-1"><i class="far fa-calendar-plus"></i></a>
+                                    @endcan
+                                    --}}
                                     @can('print', \App\Patient::class)
                                         <p data-placement="top" data-toggle="tooltip" title="Générer la facture">
                                             <a class="btn btn-success btn-xs mr-1" title="Générer la facture" href="{{ route('consultation.pdf', $patient->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>

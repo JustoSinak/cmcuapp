@@ -34,6 +34,7 @@ class EventsController extends Controller
 
     public function update(Request $request)
     {
+        $this->authorize('create', Event::class);
         if ($request->ajax()) {
 
             $events = json_decode($request->get('events'));
@@ -68,7 +69,7 @@ class EventsController extends Controller
                             'objet' => $event->objet,
                             'statut' => $event->statut,
                             'state' => 'aucun', //$event->state,
-                            'patient_id' => $event->id,
+                            //'patient_id' => $event->patient->id,
                         ]);
                         $result = $result."Rendez-vous ".$event->id.' modifié ! ';
 

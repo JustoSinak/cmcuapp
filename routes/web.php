@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
 
 
     // Route::get('events', 'EventsController@index')->name('events.index');
-     Route::get('events/create/{patient}', 'EventsController@create')->name('events.create');
+    //Route::get('events/create/{patient}', 'EventsController@create')->name('events.create');
     // //Route::get('events/create', 'EventsController@create')->name('event.create');
     // Route::post('events', 'EventsController@store')->name('events.store');
     // Route::get('events/medecin/{medecin_id}', 'EventsController@show')->name('events.show');// Events show page
@@ -64,7 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
 
     Route::get('events', 'EventsController@index')->name('events.index');
     Route::put('events', 'EventsController@update')->name('events.update');
-    Route::get('events/medicin/id', 'EventsController@medecinEvents')->name('events.medecinEvents');
+    Route::get('events/medecin/{id}', 'EventsController@medecinEvents')->name('events.medecinEvents');
 
 
     Route::get('patients', 'PatientsController@index')->name('patients.index');
