@@ -135,7 +135,7 @@
             </a>
         </li>
         @endcan
-        @can('create', \App\Event::class)
+        @can('view', \App\Event::class)
         <li>
             <a href="{{ route('events.index') }}">
                 <i class="far fa-calendar-times"></i>
