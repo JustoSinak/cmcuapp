@@ -62,9 +62,16 @@
                                                 <i class="fas fa-book"></i> Prescriptions Medicales
                                             </a>
                                             @endcan @can('infirmier', \App\Patient::class)
-                                            <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
+                                            @isset($dossiers)
+                                            <a class="btn btn-secondary" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
                                                 <i class="fas fa-book"></i> Fiche De Paramètres
                                             </a>
+                                            @endisset
+                                            @empty($dossiers)
+                                            <a class="btn btn-secondary" href="#" data-placement="top" data-toggle="popover" data-trigger="focus"  data-content="Vous devez-d'abord compléter le dossier patient !" title="Fiche de prise des paramètres">
+                                                <i class="fas fa-book"></i> Fiche De Paramètres
+                                            </a>
+                                            @endempty
                                             @endcan
                                             @can('medecin_secretaire', \App\Patient::class)
                                             <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
