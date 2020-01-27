@@ -28,8 +28,9 @@ class EventsController extends Controller
     {
         // $events = Event::with('patients')->where('resourceId', '=', $id_medecin)->get();
         $events = Event::with('patients')->where('user_id', '=', $id_medecin)->get();
+        $medecin = User::find($id_medecin);
         //var_dump(json_encode(compact('events')));
-        return view('admin.events.show', compact('events'));
+        return view('admin.events.show', compact('events', 'medecin'));
     }
 
     public function update(Request $request)

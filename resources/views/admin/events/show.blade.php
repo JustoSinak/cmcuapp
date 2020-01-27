@@ -19,12 +19,19 @@
 <body>
     <div class="wrapper">
         @include('partials.side_bar')
-        <div class="container">
+        <div class="col-sm-10">
             @include('partials.header')
-            <div class="col-md-12">
+            <div class="row mb-1">
+                    <div class="col-sm-12">
+                        <h1 class="text-center ">AGENDA  - Dr {{ $medecin->name }} {{ $medecin->prenom }}</h1>
+                    </div>
+                </div>
+                <hr>
+            <div class="col-md-10 mx-auto">
+                
                 @include('partials.flash')
-                <div class="row mt-0">
-                    <div class="col-md-12" id="calendar">
+                <div class="row mt-3">
+                    <div style="width: 100%" id="calendar">
 
                     </div>
                 </div>
@@ -76,7 +83,6 @@
         </div>
 
 
-    </div>
     </div>
     <script src="https://unpkg.com/@fullcalendar/core@4.3.1/main.min.js"></script>
     <script src="https://unpkg.com/@fullcalendar/timeline@4.3.0/main.min.js"></script>
@@ -196,14 +202,6 @@
             
 
         });
-        $('#supprimer_rv').on('click', function() {
-            var supprimer = confirm('Voulez-vous supprimer ce rendez-vous?');
-            if (supprimer) {
-                $('#info_RV').modal('hide');
-                eventObj.remove()
-                alert('supression éffectuée ! ');
-            }
-        });
         function setcolor(statut){
             switch (statut) {
                 case "a venir":
@@ -228,23 +226,6 @@
                     break;
             }
         }
-    </script>
-    <script>
-        function myFunction() {
-            if (!confirm("Veuillez confirmer la suppréssion du rendez-vous"))
-                event.preventDefault();
-        }
-        // window.onbeforeunload = function(e) {
-        //     var e = e || window.event;
-
-        //     // For IE and Firefox
-        //     if (e) {
-        //         e.returnValue = 'Quiter cette page ?';
-        //     }
-
-        //     // For Safari
-        //     return 'Quiter cette page ?';
-        // };
     </script>
 </body>
 

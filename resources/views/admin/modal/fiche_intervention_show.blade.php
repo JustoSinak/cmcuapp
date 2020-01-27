@@ -32,7 +32,7 @@
                                         <td>{{ $fiche_intervention->anesthesie }}</td>
                                         <td>{{ $fiche_intervention->date_intervention }}</td>
                                         <td>
-                                            <a class="btn btn-success btn-xs" title="Imprimer la fiche d'intervention" href="{{ route('fiche_intervention.pdf', $fiche_intervention->id) }}">
+                                            <a class="btn btn-success btn-sm" title="Imprimer la fiche d'intervention" href="{{ route('fiche_intervention.pdf', $fiche_intervention->id) }}">
                                                 <i class="fas fa-print"></i>
                                             </a>
                                         </td>

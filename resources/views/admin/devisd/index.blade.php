@@ -17,7 +17,7 @@
             <h1 class="text-center">DEVIS DÉTAILLÉ</h1>
         </div>
         <hr>
-        <div class="container">
+        <div class="container pt-3">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive">
@@ -41,7 +41,7 @@
                                     
                                     <td style="display: inline-flex;">
                                         <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                            <a class="btn btn-success btn-xs mr-1" title="Imprimer le devis" href="{{ route('devisd.pdf', $devi->id) }}"><i class="fas fa-print"></i></a>
+                                            <a class="btn btn-success btn-sm mr-1" title="Imprimer le devis" href="{{ route('devisd.pdf', $devi->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                         @can('create', \App\Patient::class)
                                             <a href="{{ route('devis.edit', $devi->id) }}" class="btn btn-info mr-1" title="Attribuer le divis à un patient"><i class="far fa-edit"></i></a>

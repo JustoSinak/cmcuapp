@@ -30,7 +30,7 @@
                                        
                                     
                                     <td>
-                                        <a class="btn btn-primary btn-xs" title="voir" href="{{ route('consultationsdesuivi.show', $consultationdesuivis->id) }}">
+                                        <a class="btn btn-primary btn-sm" title="voir" href="{{ route('consultationsdesuivi.show', $consultationdesuivis->id) }}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>

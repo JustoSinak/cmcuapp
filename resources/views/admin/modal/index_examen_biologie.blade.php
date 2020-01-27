@@ -35,7 +35,7 @@
                                     </td>
                                     <td>{{ $prescription->created_at->toFormattedDateString() }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-xs" title="Imprimer l'ordonance" href="{{ route('prescription_examens.pdf', $prescription->id) }}">
+                                        <a class="btn btn-success btn-sm" title="Imprimer l'ordonance" href="{{ route('prescription_examens.pdf', $prescription->id) }}">
                                             <i class="fas fa-print"></i>
                                         </a>
                                     </td>

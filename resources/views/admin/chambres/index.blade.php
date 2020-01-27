@@ -58,7 +58,7 @@
                                 <td>{{ $chambre->jour }}</td>
                                  <td>
                                     @can('update', \App\User::class)
-                                    <a href="{{ route('chambres.edit',$chambre->id)}}" class="btn btn-primary" title="Modifier les informations de la chambre"><i class="far fa-edit"></i>
+                                    <a href="{{ route('chambres.edit',$chambre->id)}}" class="btn btn-primary btn-sm" title="Modifier les informations de la chambre"><i class="far fa-edit"></i>
                                     </a>
                                     @endcan
                                     @if($chambre->statut == 'occupé')
@@ -68,12 +68,12 @@
                                             <input type="hidden" name="statut" value="libre">
                                             <input type="hidden" name="jour" value="null">
                                             <p data-placement="top" data-toggle="tooltip" title="Liberer la chambre">
-                                                <button type="submit" class="btn btn-danger btn-xs"><i class="fas fa-minus"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-minus"></i></button>
                                             </p>
                                         </form>
                                     @endif
                                     @if($chambre->statut == 'libre')
-                                        <a href="{{ route('chambres.attribute',$chambre->id)}}" class="btn btn-success" title="Attribuer cette chambre à un patient"><i class="fas fa-plus"></i>
+                                        <a href="{{ route('chambres.attribute',$chambre->id)}}" class="btn btn-success btn-sm" title="Attribuer cette chambre à un patient"><i class="fas fa-plus"></i>
                                         </a>
                                     @endif
                                 </td>

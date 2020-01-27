@@ -79,7 +79,7 @@
     $(document).ready(function() {
         $('#myTable').DataTable({
             "dom": '<"top"i <"d-flex justify-content-between"l<"toolbar">f>>rt<"bottom d-flex justify-content-between mt-3"p><"clear">',
-            scrollY: 300,
+            //scrollY: 300,
             scrollX: true,
             processing: true,
             info: false,

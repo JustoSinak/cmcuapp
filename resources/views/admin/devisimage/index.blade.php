@@ -17,7 +17,7 @@
             <h1 class="text-center">LISTE DES DEVIS DEBITES</h1>
         </div>
         <hr>
-        <div class="container">
+        <div class="container pt-3">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive">
@@ -40,12 +40,12 @@
 
                                     {{-- @can('consulter', \App\Patient::class)--}}
                                     <td style="display: inline-flex;">
-                                        <a href="{{ route('devisimage.show', $devisimage->id) }}" title="consulter les devis du patient" class="btn btn-primary btn-xs mr-1"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('devisimage.show', $devisimage->id) }}" title="consulter les devis du patient" class="btn btn-primary btn-sm mr-1"><i class="fas fa-eye"></i></a>
                                     </td>
                                     {{-- @endcan--}}
                                     {{-- @can('consulter', \App\Patient::class)--}}
                                     <td>
-                                        <a href="{{ route('devisimage.create') }}" title="ajouter un devis" class="btn btn-info btn-xs mr-1"><i class="far fa-calendar-plus"></i></a>
+                                        <a href="{{ route('devisimage.create') }}" title="ajouter un devis" class="btn btn-info btn-sm mr-1"><i class="far fa-calendar-plus"></i></a>
                                     </td>
                                     {{-- @endcan--}}
 

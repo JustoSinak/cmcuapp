@@ -31,7 +31,7 @@
                                     <td>{{ $ordonance->description }}</td>
                                     <td>{{ $ordonance->created_at->toFormattedDateString() }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-xs" title="Imprimer l'ordonance" href="{{ route('ordonance.pdf', $ordonance->id) }}">
+                                        <a class="btn btn-success btn-sm" title="Imprimer l'ordonance" href="{{ route('ordonance.pdf', $ordonance->id) }}">
                                             <i class="fas fa-print"></i>
                                         </a>
                                     </td>

@@ -15,6 +15,10 @@
         <div class="container">
             <h1 class="text-center">RENSEIGNER LE DOSSIER DU PATIENT</h1>
             <hr>
+                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
+                       title="Retour à la liste des patients">
+                        <i class="fas fa-arrow-left"></i> Retour au dossier patient
+                    </a>
             @include('partials.flash_form')
             <form class="form-row mt-4" method="post" action="{{ route('dossiers.store') }}">
                 @csrf

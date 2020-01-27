@@ -21,7 +21,7 @@
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
-                        <table id="myTable" class="table table-bordred table-striped">
+                        <table id="myTable" class="table table-bordered table-striped" width="100%">
                             <thead>
                             <th>
                                 ID
@@ -39,19 +39,19 @@
                                     <td>{{ $role->name }}</td>
                                     <td>
                                         <p data-placement="top" data-toggle="tooltip" title="Edit">
-                                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary btn-xs"><i class="far fa-edit"></i></a>
+                                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary btn-sm"><i class="far fa-edit"></i></a>
                                         </p>
                                     </td>
                                     {{--<td>--}}
                                         {{--<p data-placement="top" data-toggle="tooltip" title="Voir">--}}
-                                            {{--<a href="{{ route('roles.show', $role->id) }}" class="btn btn-primary btn-xs"><i class="fas fa-eye"></i></a>--}}
+                                            {{--<a href="{{ route('roles.show', $role->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>--}}
                                         {{--</p>--}}
                                     {{--</td>--}}
                                     <td>
                                         <form action="{{ route('roles.destroy', $role->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                <button type="submit" class="btn btn-danger btn-xs"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
                                             </p>
                                         </form>
                                     </td>
@@ -63,7 +63,7 @@
                         {{--{{ $roles->links() }}--}}
                     </div>
                     <br>
-                    <div class="col-md-12 text-center">
+                    <div class="table_link_right text-center">
                         <a href="{{ route('roles.create') }}" class="btn btn-primary">Ajouter un role</a>
                     </div>
                 </div>

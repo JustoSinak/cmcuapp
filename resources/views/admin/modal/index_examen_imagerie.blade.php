@@ -32,7 +32,7 @@
                                     </td>
                                     <td>{{ $imagerie->created_at->toFormattedDateString() }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-xs" title="Imprimer l'ordonance" href="{{ route('imageries_examens.pdf', $imagerie->id) }}">
+                                        <a class="btn btn-success btn-sm" title="Imprimer l'ordonance" href="{{ route('imageries_examens.pdf', $imagerie->id) }}">
                                             <i class="fas fa-print"></i>
                                         </a>
                                     </td>

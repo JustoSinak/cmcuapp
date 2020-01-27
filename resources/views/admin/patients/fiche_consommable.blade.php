@@ -43,6 +43,12 @@
 
         @include('partials.header')
         @can('show', \App\User::class)
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                <h1 class="text-center ">FICHES DE CONSOMMABLES </h1>
+            </div>
+        </div>
+        <hr>
             <div class="container">
                 <div class="row">
                     <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
@@ -54,17 +60,16 @@
                         Liste des patients
                     </a>
                 </div>
-                <div><h2 class="text-center">FICHES DE CONSOMMABLES</h2></div>
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
-                            <tr>
-                                <th class="text-center" style="width: 90%">CONSOMMABLES</th>
-                                <th class="text-center" style="width: 10%">P</th>
-                                <th class="text-center" style="width: 10%">G</th>
-                                <th class="text-center" style="width: 10%">DATE</th>
-
+                            <tr >
+                                <th class="text-center" width="60%">CONSOMMABLES</th>
+                                <th class="text-center" width="10%">P</th>
+                                <th class="text-center" width ="10%">G</th>
+                                <th class="text-center border-right-0" width ="20%">DATE</th>
+                                <th class="border-left-0"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -76,10 +81,15 @@
                                     <td>{{ Form::search('consommable', null, ['class' => 'form-control col-md-10 typeahead tt-query', 'spellcheck' => 'false', 'autocomplete' => 'off', 'id' => 'search', 'required' => 'required']) }}</td>
                                     <td>{{ Form::number('jour', null, ['class' => 'form-control', 'min' => 0]) }}</td>
                                     <td>{{ Form::number('nuit', null, ['class' => 'form-control', 'min' => 0]) }}</td>
-                                    <td>{{ Form::date('date', Carbon\Carbon::now()->ToDateString(), ['class' => 'form-control', 'required' => 'required']) }}</td>
+                                    <td class="border-right-0">{{ Form::date('date', Carbon\Carbon::now()->ToDateString(), ['class' => 'form-control', 'required' => 'required']) }}</td>
+                                    <td class="border-left-0"></td>
                                 </tr>
                                 <tr>
-                                    <td>{{ Form::button('Enregistrer', ['type' => 'submit', 'class' => 'btn btn-primary']) }}</td>
+                                    <td class="border-right-0">{{ Form::button('Enregistrer', ['type' => 'submit', 'class' => 'btn btn-primary']) }}</td>
+                                    <td class="border-right-0 border-left-0"></td>
+                                    <td class="border-left-0 border-right-0"></td>
+                                    <td class="border-left-0 border-right-0"></td>
+                                    <td class="border-left-0"></td>
                                 </tr>
                             </form>
                             <tr>

@@ -23,6 +23,12 @@
         @include('partials.side_bar')
 
         @include('partials.header')
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                <h1 class="text-center ">SURVEILLANCE RAPPROCHEE DES PARAMETRES</h1>
+            </div>
+        </div>
+        <hr>
         @can('show', \App\User::class)
             <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" class="btn btn-success float-right  mb-2"
                title="Retour à la liste des patients">

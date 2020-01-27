@@ -42,14 +42,14 @@
                                          @can('consulter', \App\Patient::class)
                                    
                                         <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                            <a class="btn btn-success btn-xs mr-1" title="Générer la facture du client" href="{{ route('clientP.pdf', $client->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
+                                            <a class="btn btn-success btn-sm mr-1" title="Générer la facture du client" href="{{ route('clientP.pdf', $client->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
                                         </p>
                                         @endcan
                                         @can('delete', \App\Patient::class)
                                         <form action="{{ route('clients.destroy', $client->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                <button type="submit" class="btn btn-danger btn-xs mr-1" title="Supprimer le dossier du client"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm mr-1" title="Supprimer le dossier du client"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
                                             </p>
                                         </form>
                                         @endcan

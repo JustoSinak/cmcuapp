@@ -14,7 +14,7 @@
     <!--// top-bar -->
         @can('show', \App\User::class)
             <div class="container">
-                <h1 class="text-center">PRESCRIPTIONS MEDICALES</h1>
+                <h1 class="text-center">PRESCRIPTIONS MEDICALES  - {{ $patient->name }} {{ $patient->prenom }}</h1>
                 <hr>
             </div>
             <div class="col-md-3 offset-md-8 text-center">

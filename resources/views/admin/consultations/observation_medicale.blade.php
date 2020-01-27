@@ -11,21 +11,28 @@
 
         @include('partials.header')
         @can('show', \App\User::class)
+            <div class="container_fluid">
+                <h1 class="text-center">OBSERVATIONS MEDICALES - {{ $patient->name }} {{ $patient->prenom }}</h1>
+                <hr>
+            </div>
             <div class="container">
                 <div class="row">
-                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
+                    <div class="col-sm-12">
+                        <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success"
                        title="Retour à la liste des patients">
                         <i class="fas fa-arrow-left"></i> Retour au dossier patient
                     </a>
-                    <a href="{{ route('patients.index') }}" class="btn btn-primary offset-8" title="Retour vers la liste des patients"><i class="fas fa-list-ul"></i> PATIENTS</a>
+                    <a href="{{ route('patients.index') }}" class="btn btn-primary float-right" title="Retour vers la liste des patients"><i class="fas fa-list-ul"></i> PATIENTS</a>
+                    </div>
                 </div>
-                <div><h2 class="text-center">OBSERVATIONS MEDICALES</h2></div>
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a data-toggle="tab" href="#home" class="btn btn-primary">OBSERVATIONS MEDICALES</a></li>
-                        <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
-                    </ul>
+                    
 
                     <div class="tab-content">
+                        
+                        <ul class="nav nav-tabs mt-5">
+                            <li class="active"><a data-toggle="tab" href="#home" class="btn btn-primary">OBSERVATIONS MEDICALES</a></li>
+                            <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
+                        </ul>
 {{--                        OBSERVATION MEDICALES--}}
                         <div id="home" class="tab-pane fade in active">
                             <br>

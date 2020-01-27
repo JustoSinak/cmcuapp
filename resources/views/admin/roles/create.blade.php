@@ -32,8 +32,8 @@
                 <br>
                 <input name="name" class="form-control col-md-6" type="text" value="{{ old('name') }}" placeholder="Nom du rôle" required><br>
 
-                <button type="submit" class="btn btn-primary btn-xs col-md-2" title="Valider votre enregistrement">Ajouter</button>
-                <a href="{{ route('roles.index') }}" class="btn btn-info btn-xs col-md-2" title="Annuller">Retour</a>
+                <button type="submit" class="btn btn-primary btn-sm col-md-2" title="Valider votre enregistrement">Ajouter</button>
+                <a href="{{ route('roles.index') }}" class="btn btn-info btn-sm col-md-2" title="Annuller">Retour</a>
             </form>
         </div>
 

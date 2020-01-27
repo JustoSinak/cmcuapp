@@ -18,7 +18,7 @@
         <hr>
         <div class="container">
             @can('anesthesiste', \App\Patient::class)
-            <a href="{{ route('pharmaceutique.facturation') }}" title="Proceder à la facturation" class="btn btn-success btn-xs col-md-1 float-right">
+            <a href="{{ route('pharmaceutique.facturation') }}" title="Proceder à la facturation" class="btn btn-success btn-sm col-md-1 float-right">
                 Facture
                 <span class="badge text-dark"><p>{{ Session::has('cart') ? Session::get('cart')->totalQte : 0 }}</p></span>
             </a>
@@ -30,7 +30,7 @@
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
-                        <table id="myTable" class="table table-bordred table-striped">
+                        <table id="myTable" class="table table-bordered table-striped" width="100%">
                             <thead>
                             <tr>
                                 <td>ID</td>

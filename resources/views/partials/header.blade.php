@@ -4,9 +4,15 @@
         <div class="container-fluid">
 
             <div class="navbar-header">
-                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn float-left">
                     <i class="fas fa-bars"></i>
                 </button>
+                
+            </div>
+            <div class="mx-auto">
+                <h4>
+                    
+                </h4>
             </div>
             <ul class="top-icons-agileits-w3layouts float-right">
                 <li class="nav-item dropdown">

@@ -53,11 +53,17 @@
 <body>
     <div class="wrapper">
         @include('partials.side_bar')
-        <div class="container">
+        <div class="container_fluid">
             @include('partials.header')
-            <div class="col-md-12">
+            <div class="row mb-1">
+                    <div class="col-sm-12">
+                        <h1 class="text-center ">AGENDA</h1>
+                    </div>
+                </div>
+                <hr>
+            <div class="col-md-10 mx-auto">
                 @include('partials.flash')
-                <div class="row mt-0">
+                <div class="row  mt-3">
                     <div id="calendar">
 
                     </div>
@@ -214,9 +220,6 @@
                 </div>
             </div>
         </div>
-
-
-    </div>
     </div>
     <script src="https://unpkg.com/@fullcalendar/core@4.3.1/main.min.js"></script>
     <script src="https://unpkg.com/@fullcalendar/timeline@4.3.0/main.min.js"></script>

@@ -12,10 +12,13 @@
         <!-- Page Content Holder -->
         @include('partials.header')
         <!--// top-bar -->
-
+        <div class="row mb-1">
+            <div class="col-sm-12">
+                <h1 class="text-center ">AJOUTER UN DOSSIER PATIENT</h1>
+            </div>
+        </div>
+        <hr>
         <div class="container">
-            <h1 class="text-center">AJOUTER UN DOSSIER PATIENT</h1>
-            <hr>
             @include('partials.flash_form')
 
             <div class="card" style="width: 40rem;">

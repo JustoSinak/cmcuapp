@@ -42,24 +42,24 @@
                                     <td>{{ $patient->date_insertion}}</td>
                                     <td style="display: inline-flex;">
                                     @can('consulter', \App\Patient::class)
-                                        <a href="{{ route('patients.show', $patient->id) }}" title="consulter le dossier du patient" class="btn btn-primary btn-xs mr-1"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('patients.show', $patient->id) }}" title="consulter le dossier du patient" class="btn btn-primary btn-sm mr-1"><i class="fas fa-eye"></i></a>
                                         
                                     @endcan
                                     {{--
                                     @can('create', \App\Event::class)
-                                    <a href="{{ route('events.index') }}" title="Prendre un rendez-vous" class="btn btn-info btn-xs mr-1"><i class="far fa-calendar-plus"></i></a>
+                                    <a href="{{ route('events.index') }}" title="Prendre un rendez-vous" class="btn btn-info btn-sm mr-1"><i class="far fa-calendar-plus"></i></a>
                                     @endcan
                                     --}}
                                     @can('print', \App\Patient::class)
                                         <p data-placement="top" data-toggle="tooltip" title="Générer la facture">
-                                            <a class="btn btn-success btn-xs mr-1" title="Générer la facture" href="{{ route('consultation.pdf', $patient->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
+                                            <a class="btn btn-success btn-sm mr-1" title="Générer la facture" href="{{ route('consultation.pdf', $patient->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
                                         </p>
                                     @endcan
                                     @can('delete', \App\Patient::class)
                                         <form action="{{ route('patients.destroy', $patient->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                                <button type="submit" class="btn btn-danger btn-xs mr-1" title="Supprimer le dossier du patient"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm mr-1" title="Supprimer le dossier du patient"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
                                             </p>
                                         </form>
                                     @endcan

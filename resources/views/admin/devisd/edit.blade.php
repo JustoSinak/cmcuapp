@@ -40,7 +40,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-success btn-xs mr-1" title="Imprimer le devis"><i class="fas fa-print"></i> Imprimer le devis</button>
+                            <button type="submit" class="btn btn-success btn-sm mr-1" title="Imprimer le devis"><i class="fas fa-print"></i> Imprimer le devis</button>
                         </form>
                     </div>
                 </div>

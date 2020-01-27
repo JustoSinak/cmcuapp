@@ -13,13 +13,11 @@
     @include('partials.header')
     <!--// top-bar -->
         @can('view', \App\User::class)
-            <div class="container">
+            <div class="container_fluid">
                 <h1 class="text-center">FACTURES PRODUITS</h1>
                 <hr>
             </div>
-            <div class="col-md-3 offset-md-8 text-center">
-            </div>
-            <div class="container">
+            <div class="container pt-3">
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
@@ -42,13 +40,13 @@
                                     <td>{{$facture->created_at }}</td>
                                     <td style="display: inline-flex;">
                                         <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
-                                            <a href="{{ route('factures.show', $facture->id) }}" class="btn btn-primary btn-xs"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('factures.show', $facture->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                         </p>
                                         @can('update', \App\User::class)
                                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <p data-placement="top" data-toggle="tooltip" title="Supprimer la facture">
-                                                <button type="submit" class="btn btn-danger btn-xs"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
                                             </p>
                                         </form>
                                         @endcan

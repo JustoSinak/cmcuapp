@@ -23,7 +23,7 @@
         <div class="col-lg-12">
             <div class="table-responsive">
                 @include('partials.flash')
-                <table id="myTable" class="table table-bordred table-striped">
+                <table id="myTable" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <td>ID</td>
@@ -58,14 +58,14 @@
                         <td><a href="{{ Route('fiches.edit', $fiches->id)}}" class="btn btn-primary"><i class="far fa-edit"></i></a></td>
                         <td>
                             <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                <a class="btn btn-success btn-xs" title="Imprimer" href="{{ route('fiche.pdf', $fiches->id) }}"><i class="fas fa-print"></i></a>
+                                <a class="btn btn-success btn-sm" title="Imprimer" href="{{ route('fiche.pdf', $fiches->id) }}"><i class="fas fa-print"></i></a>
                             </p>
                         </td>
                         <td>
                             <form action="{{ route('fiches.destroy', $fiches->id)}}" method="post">
                                 @csrf @method('DELETE')
                                 <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                    <button type="submit" class="btn btn-danger btn-xs"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
+                                    <button type="submit" class="btn btn-danger btn-sm"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
                                 </p>
                             </form>
                         </td>
@@ -78,7 +78,7 @@
 
         </div>
     </div> </br>
-    <div class="col-md-3 offset-md-4 text-center">
+    <div class="table_link_right text-center">
         <a href="{{ Route('fiches.create')}}" class="btn btn-primary" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span>&#xA0;AJOUTER UNE NOUVELLE FICHE</a>
     </div>
 </div>

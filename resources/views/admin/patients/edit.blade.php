@@ -1,7 +1,7 @@
 @can('infirmier_secretaire', \App\Patient::class)
 <div class="card">
     <div class="card-body">
-        <h3 class="card-title">Modifier les informations du patients</h3>
+        <h3 class="card-title">Modifier les informations du patient {{ $patient->name }} {{ $patient->prenom }}</h3>
         @include('partials.flash')
         @include('partials.flash_form')
 

@@ -40,12 +40,12 @@
                                          
                                                 @can('consulter', \App\Patient::class)
                                                         <td style="display: inline-flex;">
-                                                            <a href="{{ route('examens.show', $examen->id) }}" title="consulter les examens patient" class="btn btn-primary btn-xs mr-1"><i class="fas fa-eye"></i></a>
+                                                            <a href="{{ route('examens.show', $examen->id) }}" title="consulter les examens patient" class="btn btn-primary btn-sm mr-1"><i class="fas fa-eye"></i></a>
                                                         </td>
                                                 @endcan
                                                     @can('consulter', \App\Patient::class)
                                                         <td>
-                                                            <a href="{{ route('examens.create', $patient->id) }}" title="ajouter un examen" class="btn btn-info btn-xs mr-1"><i class="far fa-calendar-plus"></i></a>
+                                                            <a href="{{ route('examens.create', $patient->id) }}" title="ajouter un examen" class="btn btn-info btn-sm mr-1"><i class="far fa-calendar-plus"></i></a>
                                                         </td>
                                                 @endcan
                                                

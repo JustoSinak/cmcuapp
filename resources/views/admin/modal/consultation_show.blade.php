@@ -28,7 +28,7 @@
                                     
                                     <td>{{ $consultation->created_at->toFormattedDateString() }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-xs" title=" plus de details" href="{{ route('consultations.show', $consultation->id) }}">
+                                        <a class="btn btn-success btn-sm" title=" plus de details" href="{{ route('consultations.show', $consultation->id) }}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>

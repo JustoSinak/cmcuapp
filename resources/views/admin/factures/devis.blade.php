@@ -13,13 +13,11 @@
     @include('partials.header')
     <!--// top-bar -->
         @can('view', \App\User::class)
-            <div class="container">
+            <div class="container_fluid">
                 <h1 class="text-center">FACTURES DEVIS</h1>
                 <hr>
             </div>
-            <div class="col-md-3 offset-md-8 text-center">
-            </div>
-            <div class="container">
+            <div class="container pt-3">
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
@@ -41,7 +39,7 @@
                                     <td>{{$facture_devi->montant_devis }} <b>FCFA</b></td>
                                     <td style="display: inline-flex;">
                                         <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
-                                            <a class="btn btn-success btn-xs mr-1" title="Imprimer la facture de devis" href="{{ route('facture_devis.pdf', $facture_devi->id) }}"><i class="fas fa-print"></i></a>
+                                            <a class="btn btn-success btn-sm mr-1" title="Imprimer la facture de devis" href="{{ route('facture_devis.pdf', $facture_devi->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                     </td>
                                 </tr>
@@ -49,7 +47,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{ route('facture_devis.create') }}" class="btn btn-primary"> Ajouter une facture</a>
+                    <a href="{{ route('facture_devis.create') }}" class="btn btn-primary table_link_right"> Ajouter une facture</a>
                 </div>
             </div>
     </div>

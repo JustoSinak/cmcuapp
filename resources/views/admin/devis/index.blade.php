@@ -17,7 +17,7 @@
             <h1 class="text-center">LISTE DES DEVIS</h1>
         </div>
         <hr>
-        <div class="container">
+        <div class="container pt-3">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="table-responsive">
@@ -45,7 +45,7 @@
                                     <td style="display: inline-flex;">
                                    
                                     @can('create', \App\Patient::class)
-                                        <a href="{{ route('devis.edit', $devi->id) }}" class="btn btn-info mr-1" title="Attribuer le divis à un patient"><i class="far fa-edit"></i></a>
+                                        <a href="{{ route('devis.edit', $devi->id) }}" class="btn btn-sm btn-info mr-1" title="Attribuer le divis à un patient"><i class="far fa-edit"></i></a>
                                     @endcan
                                    
                                     </td>

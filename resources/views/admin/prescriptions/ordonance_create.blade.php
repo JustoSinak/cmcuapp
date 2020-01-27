@@ -27,7 +27,7 @@
                     </div>
                     <div class="container">
                         <br />
-                        <h3 align="center">Ordonnances</h3>
+                        <h3 align="center">ORDONNANCES - {{ $patient->name }} {{ $patient->prenom }}</h3>
                         <br />
                         <div class="table-responsive">
                             <form method="post" id="dynamic_form" action="{{ route('ordonances.store') }}">

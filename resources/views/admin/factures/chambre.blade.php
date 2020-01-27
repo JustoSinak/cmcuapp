@@ -13,13 +13,11 @@
     @include('partials.header')
     <!--// top-bar -->
         @can('view', \App\User::class)
-            <div class="container">
+            <div class="container_fluid">
                 <h1 class="text-center">FACTURES CHAMBRES</h1>
                 <hr>
             </div>
-            <div class="col-md-3 offset-md-8 text-center">
-            </div>
-            <div class="container">
+            <div class="container pt-3">
                 <div class="col-lg-12">
                     <div class="table-responsive">
                         @include('partials.flash')
@@ -47,13 +45,13 @@
                                     <td>{{$facture->tarif }} <b>FCFA</b></td>
                                     <td style="display: inline-flex;">
                                         <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
-                                            <a class="btn btn-success btn-xs mr-1" title="Imprimer la facture de consultation" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
+                                            <a class="btn btn-success btn-sm mr-1" title="Imprimer la facture de consultation" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                         @can('update', \App\User::class)
                                             <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                                 @csrf @method('DELETE')
                                                 <p data-placement="top" data-toggle="tooltip" title="Supprimer la facture">
-                                                    <button type="submit" class="btn btn-danger btn-xs"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>
                                                 </p>
                                             </form>
                                         @endcan
@@ -65,21 +63,21 @@
                         {{--{{ $factures->links() }}--}}
                     </div>
                 </div>
-                <button class="btn btn-primary mb-2 offset-5">Ajouter une facture</button>
-                        <form class="form-group col-md-4" method="POST" action="{{ route('bilan_consultation.pdf') }}">
-                            @csrf
-                          <div class="input-group mb-3">
-                            <select name="day" class="form-control" required>
-                                <option>Bien vouloir choisir une date</option>
-                                @foreach($lists as $list)
-                                    <option value="{{ $list }}">{{ $list }}</option>
-                                @endforeach
-                            </select>
-                            <div class="input-group-append">
-                              <button class="btn btn-primary">Imprimer</button>
-                            </div>
-                          </div>
-                        </form>
+                    <form class="form-group table_link_right mb-0" method="POST" action="{{ route('bilan_consultation.pdf') }}">
+                        @csrf
+                        <div class="input-group mb-0">
+                        <select name="day" class="form-control" required>
+                            <option>Bien vouloir choisir une date</option>
+                            @foreach($lists as $list)
+                                <option value="{{ $list }}">{{ $list }}</option>
+                            @endforeach
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Imprimer</button>
+                        </div>
+                        </div>
+                    </form>
+                    <button class="btn btn-primary table_link_right" >Ajouter une facture</button>
             </div>
     </div>
     </div>

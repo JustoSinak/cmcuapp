@@ -98,7 +98,7 @@
                                 </div>
 
                             </div>
-                            <button type="submit" class="btn btn-success btn-xs" title="Imprimer la facture"><i class="fas fa-print"></i> Enregistrer la facture</button>
+                            <button type="submit" class="btn btn-success btn-sm" title="Imprimer la facture"><i class="fas fa-print"></i> Enregistrer la facture</button>
                         </form>
                     </div>
                 </div>
