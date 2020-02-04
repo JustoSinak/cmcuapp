@@ -19,4 +19,8 @@ class PrescriptionMedicale extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function adminPrescriptionMedicales()
+    {
+        return $this->hasMany(AdminPrescriptionMedicale::class);
+    }
 }

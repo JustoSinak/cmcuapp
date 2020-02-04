@@ -58,7 +58,7 @@
                                             <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
                                             
                                             @endcan @can('med_inf_anes', \App\Patient::class)
-                                            <a class="btn btn-dark mr-2" href="{{ route('prescription_medicale.index', $patient->id) }}" title="Prescriptions médicales">
+                                            <a class="btn btn-dark mr-2" href="{{ route('fiche.prescription_medicale.index', $patient) }}" title="Prescriptions médicales">
                                                 <i class="fas fa-book"></i> Prescriptions Medicales
                                             </a>
                                             @endcan @can('infirmier', \App\Patient::class)

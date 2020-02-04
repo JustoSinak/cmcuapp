@@ -221,8 +221,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::get('surveillance-rapproche-details/{patient}', 'ParametresController@IndexSurveillanceRapprocheParametre')->name('surveillance_rapproche');
     Route::get('parametres-patients/{patient}', 'ParametresController@IndexParametrePatient')->name('fiche_parametre.index');
 
-    Route::get('prescriptions-medicales/{patient}', 'ParametresController@IndexPrescriptionMedicale')->name('prescription_medicale.index');
-    Route::post('prescriptions-medicales', 'ParametresController@PrescriptionMedicaleStore')->name('prescription_medicale.store');
+    Route::get('fiche-prescriptions-medicales/patient/{patient}', 'FichePrescriptionMedicaleController@Index')->name('fiche.prescription_medicale.index');
+    Route::post('fiche-prescriptions-medicales/patient/{patient}', 'FichePrescriptionMedicaleController@Store')->name('fiche.prescription_medicale.store');
+    Route::post('prescriptions-medicales/fiche/{fiche}', 'FichePrescriptionMedicaleController@PrescriptionMedicaleStore')->name('prescription_medicale.store');
+    Route::post('prescriptions-medicales/{id}/Admin-PM', 'FichePrescriptionMedicaleController@AdminPMStore')->name('admin.prescription_medicale.store');
+
 
     Route::get('surveillance-details/{patient}', 'ParametresController@IndexSurveillanceScore')->name('surveillance_score.index');
     Route::post('surveillance-score', 'ParametresController@SurveillanceScoreStore')->name('surveillance_score.store');

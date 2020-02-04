@@ -108,9 +108,9 @@ class Patient extends Model
         return $this->hasMany(FactureDevi::class);
     }
 
-    public function prescription_medicales()
+    public function fiche_prescription_medicale()
     {
-        return $this->hasMany(PrescriptionMedicale::class);
+        return $this->hasOne(FichePrescriptionMedicale::class);
     }
 
     public function visite_preanesthesiques()

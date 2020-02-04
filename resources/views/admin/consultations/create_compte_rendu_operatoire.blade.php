@@ -7,19 +7,22 @@
     @include('partials.side_bar')
     <!-- Page Content Holder -->
         @include('partials.header')
+            <div class="container_fluid">
+              <h1 class="text-center">COMPTE-RENDU OPERATOIRE - {{ $patient->name }} {{ $patient->prenom }} </h1>
+              <hr>
+          </div>
         <div class="container">
             <div class="row">
-                <div class="col-md-12  toppad  offset-md-0 ">
+                <div class="col-md-10  toppad ">
                     <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"><i
                             class="fas fa-arrow-left"></i> Retour au dossier patient</a>
                 </div>
                 <br>
                 <br>
-                <div class="col-md-12  offset-md-0  toppad">
-                    <div class="card col-md-10">
+                <div class="col-md-10  toppad">
+                    <div class="card">
                         <div class="card-body">
                             @include('partials.flash_form')
-                            <h3 class="card-title">COMPTE-RENDU OPERATOIRE</h3>
                             <small class="text-danger"><i><strong><i class="fas fa-exclamation-triangle"></i> Attention
                                         !! espace réservé au médecin</strong></i></small>
                             <table class="table table-user-information ">

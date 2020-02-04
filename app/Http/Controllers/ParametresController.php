@@ -67,43 +67,6 @@ class ParametresController extends Controller
         ]);
     }
 
-    public function IndexPrescriptionMedicale(Patient $patient)
-    {
-
-        return view('admin.consultations.infirmiers.index_prescription_medicale', [
-
-            'patient' => $patient,
-            'prescription_medicales' => PrescriptionMedicale::with('patient', 'user')->where('patient_id', $patient->id)->get()
-        ]);
-    }
-
-    public function PrescriptionMedicaleStore()
-    {
-
-        PrescriptionMedicale::create([
-
-            'user_id' => auth()->id(),
-            'patient_id' => request('patient_id'),
-            'allergie' => request('allergie'),
-            'date' => request('date'),
-            'medicament' => request('medicament'),
-            'posologie' => request('posologie'),
-            'voie' => request('voie'),
-            'heure' => request('heure'),
-            'matin' => request('matin'),
-            'nuit' => request('nuit'),
-            'apre_midi' => request('apre_midi'),
-            'soir' => request('soir'),
-            'regime' => request('regime'),
-            'consultation_specialise' => request('consultation_specialise'),
-            'protocole' => request('protocole'),
-        ]);
-
-        Flashy::info('Bien enregistré');
-
-        return back();
-    }
-
 
     public function fiche_parametre_store(ParametreRequest $request)
     {
