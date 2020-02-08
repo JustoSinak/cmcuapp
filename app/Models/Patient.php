@@ -9,6 +9,7 @@ class Patient extends Model
 {
     protected $fillable = [
         'numero_dossier',
+        'mode_paiement',
         'assurance',
         'assurancec',
         'assurec',

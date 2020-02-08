@@ -14,6 +14,7 @@ use App\Ordonance;
 use App\Produit;
 use App\SoinsInfirmier;
 use App\SurveillancePostAnesthesique;
+use App\HistoriqueFacture;
 use App\User;
 use App\VisitePreanesthesique;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -48,7 +49,8 @@ class PatientsController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'name' => '',
+            'mode_paiement' => 'required',
+            'name' => 'required',
             'prenom' => '',
             'assurance' => '',
             'assurancec' => '',
@@ -75,6 +77,7 @@ class PatientsController extends Controller
         $patient->assurance = $request->get('assurance');
         $patient->avance = $request->get('avance');
         $patient->motif =$request->get('motif');
+        $patient->mode_paiement =$request->get('mode_paiement');
         $patient->details_motif =$request->get('details_motif');
 
         $patient->numero_assurance = $request->get('numero_assurance');
@@ -198,6 +201,7 @@ class PatientsController extends Controller
         $this->authorize('update', Patient::class);
         $request->validate([
             'motif' => 'required',
+            'mode_paiement' => 'required',
             'details_motif' => 'required',
             'montant' => 'required|numeric',
             'numero_assurance' => '',
@@ -210,10 +214,10 @@ class PatientsController extends Controller
         $patient = Patient::findOrFail($id);
 
         $patient->montant = $request->get('montant');
-        $patient->motif =$request->get('motif');
         $patient->details_motif =$request->get('details_motif');
         $patient->assurance =$request->get('assurance');
         $patient->avance =$request->get('avance');
+        $patient->mode_paiement =$request->get('mode_paiement');
         $patient->prise_en_charge =$request->get('prise_en_charge');
         $patient->assurec = FactureConsultation::calculAssurec($request->get('montant'), $patient->prise_en_charge);
         $patient->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $patient->prise_en_charge);
@@ -268,31 +272,33 @@ class PatientsController extends Controller
         $patient = Patient::find($id);
         $statut_facture = $patient->reste == 0 ? 'Soldée' : 'Non soldée';
         
-        // $factureConsultations = FactureConsultation::where('numero', '=', $patient->numero_dossier)->first();
+        $facture = FactureConsultation::create([
+            'numero' => $patient->numero_dossier,
+            'patient_id' => $patient->id,
+            'assurancec' => $patient->assurancec,
+            'assurec' => $patient->assurec,
+            'mode_paiement' => $patient->mode_paiement,
+            'motif' => $patient->motif,
+            'details_motif' => $patient->details_motif,
+            'montant' => $patient->montant,
+            'demarcheur' => $patient->demarcheur,
+            'avance' => $patient->avance,
+            'reste' => $patient->reste,
+            'prenom' => $patient->prenom,
+            'medecin_r' => $patient->medecin_r,
+            'date_insertion' => date('Y-m-d'),
+            'user_id' => auth()->user()->id,
+            'statut' => $statut_facture,
+        ]);
 
-        // if ($factureConsultations) {
-        //     return back()->with('error', 'La facture existe déja');
-        // } else {
-            $facture = FactureConsultation::create([
-                'numero' => $patient->numero_dossier,
-                'patient_id' => $patient->id,
-                'assurance' => $patient->assurance,
-                'assurancec' => $patient->assurancec,
-                'assurec' => $patient->assurec,
-                'motif' => $patient->motif,
-                'details_motif' => $patient->details_motif,
-                'montant' => $patient->montant,
-                'demarcheur' => $patient->demarcheur,
-                'avance' => $patient->avance,
-                'reste' => $patient->reste,
-                'prenom' => $patient->prenom,
-                'medecin_r' => $patient->medecin_r,
-                'date_insertion' => date('Y-m-d'),
-                'user_id' => auth()->user()->id,
-                'statut' => $statut_facture,
-            ]);
-        // }
-
+        $historiqueFacture = new HistoriqueFacture([
+            'reste' => $facture->reste,
+            'montant' => $facture->montant,
+            'percu'   => $facture->avance,
+            'assurec'  => $facture->assurec,
+            'mode_paiement' => $facture->mode_paiement,
+        ]);
+        $facture->historiques()->save($historiqueFacture);
 
         return redirect()->route('factures.consultation')->with('success', 'Facture n° '.$facture->id.' du patient '.$patient->name.' générée avec succès!');
     }

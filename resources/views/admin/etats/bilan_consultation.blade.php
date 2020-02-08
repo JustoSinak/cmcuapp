@@ -3,20 +3,26 @@
     .cpi-titulo3 {
         font-size: 12px;
     }
-    .logo{
+
+    .logo {
         width: 100px;
     }
+
     hr {
-        display: block; height: 1px;
-        border: 0; border-top: 1px solid red;
-        margin: 1em 0; padding: 0;
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid red;
+        margin: 1em 0;
+        padding: 0;
     }
+
     .footer {
         padding-top: 1px;
         padding-bottom: 15px;
-        position:fixed;
-        bottom:5px;
-        width:100%;
+        position: fixed;
+        bottom: 5px;
+        width: 100%;
     }
 </style>
 <div class="container-fluid">
@@ -37,67 +43,93 @@
         <hr class="text-danger">
     </div>
     <h5 class="text-center"><u>FICHE DE SUIVI DES ENCAISSEMENTS JOURNALIERS {{ strtoupper($service)}}</u></h5>
-    <div class="container-fluid">
+    <div class="row">
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>ID</th>
-                <th>PATIENT</th>
-                <th>MONTANT</th>
-                <th>AVANCE</th>
-                <th>RESTE</th>
-                <th>PART PATIENT</th>
-                <th>PART ASSURANCE</th>
-                <th>DMH</th>
-                <th>MEDECIN</th>
-                <th>DATE</th>
-            </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>PATIENT</th>
+                    <th>MONTANT</th>
+                    <th>AVANCE</th>
+                    <th>RESTE</th>
+                    <th>PART PATIENT</th>
+                    <th>PART ASS</th>
+                    <th>DMH</th>
+                    <th>MEDECIN</th>
+                </tr>
             </thead>
             <tbody>
-            @foreach($factures as $facture)
-            <tr>
-                <td>{{ $facture->numero }}</td>
-                <td><small>{{ $facture->patient->name }} {{ $facture->patient->prenom }}</small></td>
-                <td><small>{{ $facture->montant }}</small></td>
-                <td><small>{{ $facture->avance }}</small></td>
-                <td><small>{{ $facture->reste }}</small></td>
-                <td><small>{{ $facture->assurec }}</small></td>
-                <td><small>{{ $facture->assurancec }}</small></td>
-                <td><small>{{ $facture->demarcheur }}</small></td>
-                <td><small>{{ $facture->medecin_r }}</small></td>
-                <td><small>{{ $facture->date_insertion }}</small></td>
-            </tr>
-            @endforeach
-            <tr>
-                <td><h4>TOTAL en Fcfa:</h4></td>
-                <td></td>
-                <td><h5>{{ $tautaux }}</h5></td>
-                <td>{{ $avances }}</td>
-                <td>{{ $restes }}</td>
-                <td>{{ $patients }}</td>
-                <td>{{ $assurances }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+                @foreach($tFactures as $facture)
+                <tr>
+                    <td>{{ $facture['numero'] }}</td>
+                    <td><small>{{ $facture['name'] }}</small></td>
+                    <td><small>{{ $facture['montant'] }}</small></td>
+                    <td><small>{{ $facture['percu'] }}</small></td>
+                    <td><small>{{ $facture['reste'] }}</small></td>
+                    <td><small>{{ $facture['partPatient'] }}</small></td>
+                    <td><small>{{ $facture['partAssurance'] }}</small></td>
+                    <td><small>{{ $facture['demarcheur'] }}</small></td>
+                    <td><small>{{ $facture['medecin'] }}</small></td>
+                </tr>
+                @endforeach
+                <tr>
+                    <th>TOTAL en Fcfa:</th>
+                    <td></td>
+                    <td>
+                        <h5>{{ $totalMontant }}</h5>
+                    </td>
+                    <td>{{ $totalPercu }}</td>
+                    <td>{{ $totalReste }}</td>
+                    <td>{{ $totalPartPatient }}</td>
+                    <td>{{ $totalPartAssurance }}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>MODE DE PAIEMENT:</th>
+                    <td colspan="9" class="px-0">
+                        <table class="table m-0">
+                            <tr>
+                                @if($mode_paiement)
+                                    @foreach($mode_paiement as $mp)
+                                        <td align="center" class="p-0 border-0 font-weight-bold">{{$mp['name']}}</td>
+                                    @endforeach
+                                @else
+                                <td align="center" class="p-0 border-0 font-weight-bold"> </td>
+                                @endif
+                            </tr>
+                            <tr>
+                            @if($mode_paiement)
+                                @foreach($mode_paiement as $mp)
+                                    <td align="center" class="p-0 border-0">{{$mp['val']}}</td>
+                                @endforeach
+                            @else
+                                <td align="center" class="p-0 border-0"> </td>
+                            @endif
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
         </table>
-        <div class="row">
-            <div class="col-md-4 offset-10">
-                <p><u>GESTIONNAIRE</u></p>
-            </div>
-            <div class="col-md-4 offset-5">
-                <p><u>COMPTABLE</u></p>
-            </div>
-            <div class="col-md-4">
-                <p><u>ASSISTANTE</u></p>
-            </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-4 offset-10">
+            <p><u>GESTIONNAIRE</u></p>
+        </div>
+        <div class="col-md-4 offset-5">
+            <p><u>COMPTABLE</u></p>
+        </div>
+        <div class="col-md-4">
+            <p><u>ASSISTANTE</u></p>
         </div>
     </div>
-    <footer class="footer">
-        <div class="text-center col-6 offset-2">
-            <small>TEL:(+237) 233 423 389 / 674 068 988 / 698 873 945</small>
-            <small>www.cmcu-cm.com</small>
-        </div>
-    </footer>
 </div>
-
+<footer class="footer">
+    <div class="text-center col-6 offset-2">
+        <small>TEL:(+237) 233 423 389 / 674 068 988 / 698 873 945</small>
+        <small>www.cmcu-cm.com</small>
+    </div>
+</footer>

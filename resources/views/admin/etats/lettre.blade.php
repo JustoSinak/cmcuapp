@@ -6,17 +6,13 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<?php setlocale(LC_TIME, 'French') ?>
+<?php  \Carbon\Carbon::setUTF8(true); setlocale(LC_TIME, 'French') ?>
 <style>
     .cpi-titulo3 {
         font-size: 12px;
     }
     .logo{
         width: 100px;
-    }
-    p {
-        /*line-height: 140%;*/
-        line-height: 43%;
     }
     hr {
         display: block; height: 1px;
@@ -30,6 +26,9 @@
         bottom:100px;
         width:100%;
     }
+    .entete p {
+        line-height: 50%;
+    }
 
 </style>
 <div class="container-fluid">
@@ -39,7 +38,7 @@
             <img class="logo img-responsive float-left" src="{{ asset('admin/images/logo.jpg') }}">
         </div>
         <div class="col-7 offset-3">
-            <div class="text-center">
+            <div class="entete text-center">
                 <p>CENTRE MEDICO-CHIRURGICAL D'UROLOGIE</p>
                 <p class="mt-2"><small>ONMC : N° 5531 007/10/D/ONMC</small></p>
                 <p><small> Arrêté N° 3203/A/MINSANTE/SG/DOSTS/SDOS/SFSP </small></p>
@@ -63,8 +62,8 @@
             <span>Onmc: <small>{{ $consultations->user->onmc }}</small></span>
         </div>
         <div class="col-5 offset-6">
-{{--            <p><small><u>Date:</u><b> {{ $consultations->created_at->formatLocalized('%d %B %Y') }}</b></small></p>--}}
-            <p>Douala, le {{ \Carbon\Carbon::now()->formatLocalized('%d %B %Y') }}</p>
+            {{--<p><small><u>Date:</u><b> {{ $consultations->created_at->formatLocalized('%d %B %Y') }}</b></small></p>--}}
+            <p>Douala, le {!! \Carbon\Carbon::now()->formatLocalized('%d %B %Y') !!}</p>
         </div>
     </div>
     <div class="row">
@@ -85,28 +84,27 @@
         </div>
     </div>
     <br>
-    <br>
     <p>Cher confrère, {{ $consultations->medecin }}</p>
-    <br>
     <p style="line-height: 140%;">
         Je vois à la consultation d’urologie ce {{$consultations->created_at->formatLocalized('%d %B %Y') }} {{($dossier->sexe == 'Masculin' ? 'M. ': 'Mme ')}}
-        <b>{{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</b> née le {{ $dossier->date_naissance }}.
+        <b>{{ $consultations->patient->name }} {{ $consultations->patient->prenom }}</b> née le {{ \Carbon\Carbon::parse($dossier->date_naissance)->formatLocalized('%d %B %Y') }}.
     </p>
     @if ($consultations->motif_c)
-        <p>
-            <b><u>MOTIF DE CONSULTATION</u> :</b> {{ $consultations->motif_c }}.
-            Signalons également les antécédents suivant : @if($consultations->antecedent_m){{ $consultations->antecedent_m }}@endif
-        </p>
+        <p><b><u>MOTIF DE CONSULTATION</u> :</b> {{ $consultations->motif_c }}.</p>
+            <p>Signalons également les antécédents suivant :<br> @if($consultations->antecedent_m){!! nl2br(e($consultations->antecedent_m)) !!}. </p> @endif
+        
     @endif
     @if ($consultations->examen_c)
-        <p><b><u>EXAMEN(S) COMPLEMENTAIRE(S)</u> :</b></p>
-        {!! nl2br(e($consultations->examen_c)) !!}. <br><br>
+        <p><b><u>EXAMEN(S) COMPLEMENTAIRE(S)</u> :</b><br>
+        {!! nl2br(e($consultations->examen_c)) !!}.</p>
     @endif
     @if ($consultations->proposition_therapeutique)
-        <p><b><u>POPOSITION THERAPEUTIQUE</u> :</b> {{ $consultations->proposition_therapeutique }}.</p>
+        <p><b><u>POPOSITION THERAPEUTIQUE</u> :</b><br>
+        {!! nl2br(e($consultations->proposition_therapeutique)) !!}.</p>
     @endif
     @if ($consultations->diagnostic)
-        <p><b><u>DIAGNOSTIC</u> :</b> {{ $consultations->diagnostic }}.</p>
+        <p><b><u>DIAGNOSTIC</u> :</b><br>
+        {!! nl2br(e($consultations->diagnostic)) !!}.</p>
     @endif
     @if ($consultations->proposition)
         @if ($consultations->proposition == 'Hospitalisation')
@@ -123,7 +121,8 @@
                 geste chirurgical dont les détails sont contenus dans la fiche d'intervention.
         @endif
         @if ($consultations->proposition == 'Actes à réaliser')
-            <p><b><u>ACTES A REALISER</u> :</b> {{ $consultations->acte }}</p>
+            <p><b><u>ACTES A REALISER</u> :</b><br>
+            {!! nl2br(e($consultations->acte)) !!}</p>
         @endif
     @endif
     <br>
