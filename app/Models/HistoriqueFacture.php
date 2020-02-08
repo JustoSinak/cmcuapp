@@ -9,7 +9,7 @@ class HistoriqueFacture extends Model
 {
     protected $guarded = [];
 
-    public function facture()
+    public function facture_consultation()
     {
         return $this->belongsTo(FactureConsultation::class);
     }

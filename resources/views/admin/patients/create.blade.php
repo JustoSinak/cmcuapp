@@ -62,7 +62,7 @@
 
                             <div class="form-group">
                                 <label for="details_motif" id="label_details_motif" class="col-form-label text-md-right">Détails motif</label>
-                                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? 'Consultation'}}"  type="text" placeholder="Précisez le motif">
+                                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? 'Consultation'}}" type="text" placeholder="Précisez le motif">
                             </div>
 
                             <div class="form-group">
@@ -91,7 +91,7 @@
                                     <label for="numero_assurance" class="col-form-label text-md-right">Numéro d'assurance</label>
                                     <input name="numero_assurance" class="form-control" value="{{ old('numero_assurance') }}" type="text" placeholder="Numéro d'assurance si le patient est assuré">
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for=" prise_en_charge" class="col-form-label text-md-right"> Taux de Prise en Charge : <span class="text-danger"></span></label>
                                     <div class="input-group mb-3">
@@ -104,6 +104,24 @@
                                             <span class="input-group-text" id="basic-addon2"> % </span>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mode_paiement">Moyen de paiement</label>
+                                    <select name="mode_paiement" id="mode_paiement" class="form-control">
+
+                                        <optgroup label="Monaie électronique">
+                                            <option value="orange money">Orange Money</option>
+                                            <option value="mtn mobile money">MTN Mobile Money</option>
+                                        </optgroup>
+                                        <optgroup label="Autres moyens">
+                                            <option selected value="espèce">Espèce</option>
+                                            <option value="chèque">Chèque</option>
+                                            <option value="virement">Virement</option>
+                                            <option value="bon de prise en charge">Bon de prise en charge</option>
+                                            <option value="autre">Autre</option>
+                                        </optgroup>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">

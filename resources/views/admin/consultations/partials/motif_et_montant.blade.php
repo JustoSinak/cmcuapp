@@ -28,7 +28,7 @@
                 <label for="details_motif" id="label_details_motif" class="col-form-label text-md-right">Détails motif : <span class="text-danger">*</span></label>
             </td>
             <td>
-                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? $patient->details_motif}}"  type="text" placeholder="Précisez le motif" >
+                <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? $patient->details_motif}}" type="text" placeholder="Précisez le motif">
             </td>
         </tr>
 
@@ -83,6 +83,26 @@
             </td>
         </tr>
         <tr>
+            <td><label for="mode_paiement">Moyen de paiement</label></td>
+            <td>
+                <div class="form-group">
+                    <select name="mode_paiement" id="mode_paiement" class="form-control">
+                        <optgroup label="Monaie électronique">
+                            <option {{ old('mode_paiement', $patient->mode_paiement) ==  'orange money' ? 'selected' : '' }} value="orange money">Orange Money</option>
+                            <option {{ old('mode_paiement', $patient->mode_paiement) ==  'mtn mobile money' ? 'selected' : '' }} value="mtn mobile money">MTN Mobile Money</option>
+                        </optgroup>
+                        <optgroup label="Autres moyens">
+                            <option {{ old('mode_paiement', $patient->mode_paiement) ==  'espèce' ? 'selected' : '' }} value="espèce">Espèce</option>
+                            <option {{ old('mode_paiement', $patient->mode_paiement) ==  'chèque' ? 'selected' : '' }} value="chèque">Chèque</option>
+                            <option {{ old('mode_paiement', $patient->mode_paiement) ==  'virement' ? 'selected' : '' }} value="virement">Virement</option>
+                            <option {{ old('mode_paiement', $patient->mode_paiement) ==  'bon de prise en charge' ? 'selected' : '' }} value="bon de prise en charge">Bon de prise en charge</option>
+                            <option {{ old('mode_paiement', $patient->mode_paiement) ==  'autre' ? 'selected' : '' }} value="autre">Autre</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
             <td>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
             </td>
@@ -104,7 +124,7 @@
             document.getElementById("details_motif").value = "";
         }
         if (choix == 'Acte' || choix == 'Examen') {
-            document.getElementById("label_details_motif").innerHTML = 'Type ' + choix.toLowerCase()+ ' <span class="text-danger">*</span>';
+            document.getElementById("label_details_motif").innerHTML = 'Type ' + choix.toLowerCase() + ' <span class="text-danger">*</span>';
         }
         if (choix == 'Autres') {
             document.getElementById("label_details_motif").innerHTML = 'Détails motif <span class="text-danger">*</span>';

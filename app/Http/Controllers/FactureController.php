@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\FactureConsultation;
 use App\FactureClient;
 use App\HistoriqueFacture;
+use Illuminate\Database\Eloquent\Builder;
 use App\Patient;
 use App\Produit;
 use App\User;
@@ -75,6 +76,7 @@ class FactureController extends Controller
         $this->authorize('update', new FactureConsultation);
 
         $request->validate([
+            'mode_paiement' => 'required',
             'reste' => 'required|numeric',
             'percu' => 'required|numeric|lte:reste',
         ]);
@@ -82,14 +84,15 @@ class FactureController extends Controller
         $facture = FactureConsultation::findOrFail($id);
         $historiqueFacture = new HistoriqueFacture([
                     'reste' => $facture->reste - $request->get('percu'),
-                    'percu' => $request->get('percu'),
                     'montant' => $facture->montant,
-                    'avance'   => $facture->avance,
+                    'percu'   => $request->get('percu'),
                     'assurec'  => $facture->assurec,
+                    'mode_paiement'  => $request->get('mode_paiement'),
                 ]);
 
         $facture->montant = $request->get('montant');
         $facture->avance += $request->get('percu');
+        $facture->mode_paiement = $request->get('mode_paiement');
         $facture->assurec = FactureConsultation::calculAssurec($request->get('montant'), $facture->patient->prise_en_charge);
         $facture->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $facture->patient->prise_en_charge);
         $facture->reste = FactureConsultation::calculReste($facture->assurec, $facture->avance);
@@ -119,28 +122,6 @@ class FactureController extends Controller
 
         return view('admin.factures.chambre', compact('factureChambres', 'lists'));
     }
-    
-    // public function FactureClient(Patient $patient)
-    // {
-    //     $this->authorize('view', User::class);
-
-    //     $month = Carbon::now()->month;
-    //     $year = Carbon::now()->year;
-
-    //     $start_date = "01-" . $month . "-" . $year;
-    //     $start_time = strtotime($start_date);
-
-    //     $end_time = strtotime("+1 month", $start_time);
-
-    //     for ($i = $start_time; $i < $end_time; $i += 86400) {
-    //         $lists[] = date('Y-m-d', $i);
-    //     }
-
-    //     $user = User::where('role_id', '=', 2)->get();
-    //     $facturesClients = FactureClient::with('client')->latest()->get();
-
-    //     return view('admin.factures.client', compact('facturesClients', 'lists'));
-    // }
 
     public function FactureDevis()
     {
@@ -255,25 +236,132 @@ class FactureController extends Controller
     {
 
         $service = \request('service') == 'Tout'? "" : \request('service');
-        $factures = FactureConsultation::with('patient')->where('motif', 'LIKE', '%'.$service)->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->get();
+        // //$factures = FactureConsultation::with('patient','historiques')->where('motif', 'LIKE', '%'.$service)->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->get();
+        // $espece = FactureConsultation::where('mode_paiement', 'espèce')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        // $cheque = FactureConsultation::where('mode_paiement', 'chèque')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        // $om = FactureConsultation::where('mode_paiement', 'orange money')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        // $momo = FactureConsultation::where('mode_paiement', 'mtn mobile money')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        // $virement = FactureConsultation::where('mode_paiement', 'virement')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        // $bondepriseencharge = FactureConsultation::where('mode_paiement', 'bon de prise en charge')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        // $autre = FactureConsultation::where('mode_paiement', 'autre')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+        $factures = HistoriqueFacture::where('created_at', 'LIKE', \request('day').'%')
+                    ->with('facture_consultation.patient')
+                    ->whereHas('facture_consultation', function (Builder $query) use ($service) {
+                        $query->where('motif', 'LIKE', '%'.$service)
+                            ->where('deleted_at', '=', null);
+                        })
+                    ->get()->groupBy('facture_consultation_id');
+        $totalPercu = 0;
+        $totalMontant = 0;
+        $totalReste = 0;
+        $totalPartAssurance = 0;
+        $totalPartPatient = 0;
+        $tFactures=[];
+        $modePaiement = [];
+        foreach ($factures as $key => $historique_factures) {
+            $tFactures[$key]['percu'] = 0;
+            foreach ($historique_factures as $historique_facture) {
+                $tFactures[$key]['numero'] = $historique_facture->facture_consultation->numero;
+                $tFactures[$key]['name'] = $historique_facture->facture_consultation->patient->name;
+                $tFactures[$key]['montant'] = $historique_facture->facture_consultation->montant;
+                $tFactures[$key]['percu'] += $historique_facture->percu;
+                $tFactures[$key]['reste'] = $historique_facture->reste;
+                $tFactures[$key]['partAssurance'] = $historique_facture->facture_consultation->assurancec;
+                $tFactures[$key]['partPatient'] = $historique_facture->facture_consultation->assurec;
+                $tFactures[$key]['medecin'] = $historique_facture->facture_consultation->medecin_r;
+                $tFactures[$key]['demarcheur'] = $historique_facture->facture_consultation->demarcheur;
+                switch ($historique_facture->mode_paiement) {
+                    case 'espèce':
+                        if (array_key_exists('espece',$modePaiement))
+                            $modePaiement['espece']['val'] += $historique_facture->percu;
+                        else{
+                            $modePaiement['espece']['val'] = $historique_facture->percu;
+                            $modePaiement['espece']['name'] = 'espèce';
+                        }
+                        break;
+                    case 'chèque':
+                        if (array_key_exists('cheque',$modePaiement))
+                            $modePaiement['cheque']['val'] += $historique_facture->percu;
+                        else{
+                            $modePaiement['cheque']['val'] = $historique_facture->percu;
+                            $modePaiement['cheque']['name'] = 'chèque';
+                        }
+                        break;
+                    case 'orange money':
+                        if (array_key_exists('om',$modePaiement))
+                            $modePaiement['om']['val'] += $historique_facture->percu;
+                        else
+                           { $modePaiement['om']['val'] = $historique_facture->percu;
+                            $modePaiement['om']['name'] = 'om';
+                        }
+                        break;
+                    case 'mtn mobile money':
+                        if (array_key_exists('momo',$modePaiement))
+                            $modePaiement['momo']['val'] += $historique_facture->percu;
+                        else
+                            {$modePaiement['momo']['val'] = $historique_facture->percu;
+                            $modePaiement['momo']['name'] = 'mtn mobile money';
+                        }
+                        break;
+                    case 'virement':
+                        if (array_key_exists('virement',$modePaiement))
+                            $modePaiement['virement']['val'] += $historique_facture->percu;
+                        else
+                            {$modePaiement['virement']['val'] = $historique_facture->percu;
+                            $modePaiement['virement']['name'] = 'virement';
+                        }
+                        break;
+                    case 'bon de prise en charge':
+                        if (array_key_exists('bondepriseencharge',$modePaiement))
+                            $modePaiement['bondepriseencharge']['val'] += $historique_facture->percu;
+                        else
+                            {$modePaiement['bondepriseencharge']['val'] = $historique_facture->percu;
+                            $modePaiement['bondepriseencharge']['name'] = 'bon de prise en charge';
+                        }
+                        break;
+                    
+                    default:
+                        if (array_key_exists('autre',$modePaiement))
+                            $modePaiement['autre']['val'] += $historique_facture->percu;
+                        else{
+                            $modePaiement['autre']['val'] = $historique_facture->percu;
+                            $modePaiement['autre']['name'] = 'autre';
+                        }
+                        break;
+                }
+
+                $totalPercu += $historique_facture->percu;
+            }
+
+            
+            $totalMontant += $tFactures[$key]['montant'];
+            $totalReste += $tFactures[$key]['reste'];
+            $totalPartAssurance += $tFactures[$key]['partAssurance'];
+            $totalPartPatient += $tFactures[$key]['partPatient'];
+        }
+        // dd([
+        //     'mode_paiement' => $modePaiement,
+        //     'service' => $service==""? "" : '- '.$service,
+        //     'tFactures' => $tFactures,
+        //     'totalPercu' => $totalPercu,
+        //     'totalMontant' => $totalMontant,
+        //     'totalReste' => $totalReste,
+        //     'totalPartAssurance' => $totalPartAssurance,
+        //     'totalPartPatient' => $totalPartPatient,
+        // ]);
+        
 
 
-        $tautaux = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        $avances = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('avance');
-        $restes = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('reste');
-        $assurances = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurancec');
-        $patients = DB::table('facture_consultations')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('assurec');
-
-
-
+        
         $pdf = PDF::loadView('admin.etats.bilan_consultation', [
+            'mode_paiement' => $modePaiement,
             'service' => $service==""? "" : '- '.$service,
-            'factures' => $factures,
-            'tautaux' => $tautaux,
-            'avances' => $avances,
-            'restes' => $restes,
-            'assurances' => $assurances,
-            'patients' => $patients,
+            'tFactures' => $tFactures,
+            'totalPercu' => $totalPercu,
+            'totalMontant' => $totalMontant,
+            'totalReste' => $totalReste,
+            'totalPartAssurance' => $totalPartAssurance,
+            'totalPartPatient' => $totalPartPatient,
         ]);
 
         $pdf->setPaper('A4', 'landscape');
@@ -287,7 +375,7 @@ class FactureController extends Controller
 
         $factures = FactureClient::with('client')->where('date_insertion', '=', \request('day'))->get();
 
-        $tautaux = DB::table('facture_clients')->where('date_insertion', '=', \request('day'))->sum('montant');
+        $totalPercu = DB::table('facture_clients')->where('date_insertion', '=', \request('day'))->sum('montant');
         $avances = DB::table('facture_clients')->where('date_insertion', '=', \request('day'))->sum('avance');
         $restes = DB::table('facture_clients')->where('date_insertion', '=', \request('day'))->sum('reste');
         $assurances = DB::table('facture_clients')->where('date_insertion', '=', \request('day'))->sum('partassurance');
@@ -297,7 +385,7 @@ class FactureController extends Controller
 
         $pdf = PDF::loadView('admin.etats.bilan_clientexterne', [
             'factures' => $factures,
-            'tautaux' => $tautaux,
+            'totalPercu' => $totalPercu,
             'avances' => $avances,
             'restes' => $restes,
             'assurances' => $assurances,

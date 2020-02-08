@@ -22,7 +22,7 @@
                     <div class="table-responsive">
                         <i class="table_info">Les montants sont exprimés en <b> FCFA</b></i>
                         <table id="myTable" class="table table-hover table-bordered display" cellspacing="0" width="100%">
-                            <thead >
+                            <thead>
                                 <th>ID</th>
                                 <th>NUMERO</th>
                                 <th>PATIENT</th>
@@ -32,6 +32,7 @@
                                 <th style="white-space: nowrap">PART PATIENT</th>
                                 <th>AVANCE</th>
                                 <th>RESTE</th>
+                                <th>Mode paiement</th>
                                 <th>MEDECIN</th>
                                 <th>DATE</th>
                                 <th id="statut">STATUT</th>
@@ -49,6 +50,7 @@
                                     <td>{{$facture->assurec }} </td>
                                     <td>{{$facture->avance }} </td>
                                     <td>{{$facture->reste }} </td>
+                                    <td>{{$facture->mode_paiement }} </td>
                                     <td>{{$facture->medecin_r }}</td>
                                     <td style="white-space: nowrap">{{$facture->created_at }}</td>
                                     <td>{{$facture->reste == 0 ? 'Soldée' : 'Non soldée' }}</td>
@@ -56,7 +58,7 @@
                                         <a class="btn btn-success btn-sm mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         @can('update', $facture)
                                         <!-- Trigger the "edit_acture " modal with a button -->
-                                        <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-mode_paiement="{{ $facture->mode_paiement }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
                                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm btn-just-icon" data-toggle="tooltip" title="Supprimer la facture" onclick="return confirm('Voulez-vous vraiment suprimer cette facture ?')">
@@ -118,23 +120,41 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="montant" class="col-form-label text-md-right">Montant</label>
-                                    <input name="montant" id="montant" class="form-control" value="" type="number"  readonly>
+                                    <input name="montant" id="montant" class="form-control" value="" type="number" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="part_patient" class="col-form-label text-md-right">Part patient </label>
                                     <input name="part_patient" id="part_patient" class="form-control" type="number" autocomplete="off" min="0" placeholder="0" readonly>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="reste" class="col-form-label text-md-right" title="Somme des précédents versements du client">reste </label>
                                     <input name="reste" id="reste" class="form-control" value="" type="number" readonly>
                                 </div>
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="percu" class="col-form-label text-md-right" title="Montant perçu pour ce versement">montant versé <span class="text-danger">*</span></label>
                                     <input name="percu" id="percu" class="form-control" value="" type="number" placeholder="0" required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="mode_paiement">Moyen de paiement</label>
+                                    <select name="mode_paiement" id="mode_paiement" class="form-control">
+
+                                        <optgroup label="Monaie électronique">
+                                            <option value="orange money">Orange Money</option>
+                                            <option value="mtn mobile money">MTN Mobile Money</option>
+                                        </optgroup>
+                                        <optgroup label="Autres moyens">
+                                            <option value="espèce">Espèce</option>
+                                            <option value="chèque">Chèque</option>
+                                            <option value="virement">Virement</option>
+                                            <option value="bon de prise en charge">Bon de prise en charge</option>
+                                            <option value="autre">Autre</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -159,12 +179,14 @@
     $('#edit_facture_modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         var id_facture = button.data('id-facture');
+        var mode_paiement =button.data('mode_paiement');
         var montant_facture = button.data('montant');
         var reste = button.data('reste');
         var prise_en_charge = button.data('prise_en_charge');
         var modal = $(this);
         $('#edit_facture_modallabel').text("Nouveau versement");
         $('#montant').val(montant_facture);
+        $("#mode_paiement").val(mode_paiement);
         $('#reste').val(reste);
         if (isNaN(prise_en_charge)) {
             $('#montant').attr('data-prise_en_charge', 0);

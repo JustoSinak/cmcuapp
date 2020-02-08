@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <td><b>ALLERGIES :</b></td>
-                <td>{{ ($consultations->allergie) }}</td>
+                <td> {!! nl2br(e($consultations->allergie)) !!}</td>
             </tr>
             <tr>
                 <td><b>GROUPE SANGUIN :</b></td>
@@ -41,27 +41,27 @@
             </tr>
             <tr>
                 <td><b>ANTECEDENTS MEDICAUX :</b></td>
-                <td>{{ $consultations->antecedent_m }}</td>
+                <td>{!! nl2br(e($consultations->antecedent_m)) !!}</td>
             </tr>
             <tr>
                 <td><b>ANTECEDENTS CHIRURGICAUX :</b></td>
-                <td>{{ $consultations->antecedent_c }}</td>
+                <td>{!! nl2br(e( $consultations->antecedent_c)) !!}</td>
             </tr>
             <tr>
                 <td><b>INTERROGATOIRE :</b></td>
-                <td>{{ ($consultations->interrogatoire) }}</td>
+                <td> {!! nl2br(e($consultations->interrogatoire)) !!}</td>
             </tr>
             <tr>
                 <td><b>DIAGNOSTIC :</b></td>
-                <td>{{ ($consultations->diagnostic) }}</td>
+                <td>{!! nl2br(e($consultations->diagnostic)) !!}</td>
             </tr>
             <tr>
                 <td><b>PROPOSITION THERAPEUTIQUE :</b></td>
-                <td>{{ ($consultations->proposition_therapeutique) }}</td>
+                <td>{!! nl2br(e($consultations->proposition_therapeutique)) !!}</td>
             </tr>
             <tr>
                 <td><b>PROPOSITION DE SUIVI :</b></td>
-                <td>{{ ($consultations->proposition) }}</td>
+                <td>{!! nl2br(e($consultations->proposition)) !!}</td>
             </tr>
         @else
         <tr>
