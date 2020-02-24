@@ -24,6 +24,7 @@
                         <table id="myTable" class="table table-hover table-bordered display" cellspacing="0" width="100%">
                             <thead>
                                 <th>ID</th>
+                                <th>ACTION</th>
                                 <th>NUMERO</th>
                                 <th>PATIENT</th>
                                 <th>MOTIF</th>
@@ -36,26 +37,13 @@
                                 <th>MEDECIN</th>
                                 <th>DATE</th>
                                 <th id="statut">STATUT</th>
-                                <th>ACTION</th>
                             </thead>
                             <tbody>
                                 @foreach($factureConsultations as $facture)
                                 <tr>
                                     <td>{{$facture->id}}</td>
-                                    <td>{{$facture->numero}}</td>
-                                    <td>{{$facture->patient->name }}</td>
-                                    <td>{{$facture->details_motif ?? 'Consultation' }}</td>
-                                    <td>{{$facture->montant }} </td>
-                                    <td>{{$facture->assurancec }} </td>
-                                    <td>{{$facture->assurec }} </td>
-                                    <td>{{$facture->avance }} </td>
-                                    <td>{{$facture->reste }} </td>
-                                    <td>{{$facture->mode_paiement }} </td>
-                                    <td>{{$facture->medecin_r }}</td>
-                                    <td style="white-space: nowrap">{{$facture->created_at }}</td>
-                                    <td>{{$facture->reste == 0 ? 'Soldée' : 'Non soldée' }}</td>
-                                    <td style="display: inline-flex;">
-                                        <a class="btn btn-success btn-sm mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
+                                    <td ><div class="d-inline-flex">
+                                         <a class="btn btn-success btn-sm mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         @can('update', $facture)
                                         <!-- Trigger the "edit_acture " modal with a button -->
                                         <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-mode_paiement="{{ $facture->mode_paiement }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
@@ -67,8 +55,32 @@
                                         </form>
                                         @endcan
 
+                                    </div>
+                                       
 
                                     </td>
+                                    <td>{{$facture->numero}}</td>
+                                    <td>{{$facture->patient->name }}</td>
+                                    <td>{{$facture->details_motif ?? 'Consultation' }}</td>
+                                    <td>{{$facture->montant }} </td>
+                                    <td>{{$facture->assurancec }} </td>
+                                    <td>{{$facture->assurec }} </td>
+                                    <td>{{$facture->avance }} </td>
+                                    <td>{{$facture->reste }} </td>
+                                    <td>{{$facture->mode_paiement === 'bon de prise en charge' ? 'BPC':$facture->mode_paiement }}
+                                            @foreach (preg_split("/[\/]{2} /", $facture->mode_paiement_info_sup,0,PREG_SPLIT_NO_EMPTY) as $info_sup)
+                                            <br>
+                                            <i>
+                                                <small>
+                                                    
+                                                    {{ $info_sup}}
+                                                </small>
+                                            </i>
+                                            @endforeach
+                                         </td>
+                                    <td>{{$facture->medecin_r }}</td>
+                                    <td style="white-space: nowrap">{{$facture->created_at }}</td>
+                                    <td>{{$facture->reste == 0 ? 'Soldée' : 'Non soldée' }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -136,8 +148,8 @@
                                     <label for="percu" class="col-form-label text-md-right" title="Montant perçu pour ce versement">montant versé <span class="text-danger">*</span></label>
                                     <input name="percu" id="percu" class="form-control" value="" type="number" placeholder="0" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="mode_paiement">Moyen de paiement</label>
+                                <div class="form-group m_paiement">
+                                    <label for="mode_paiement">Mode de paiement</label>
                                     <select name="mode_paiement" id="mode_paiement" class="form-control">
 
                                         <optgroup label="Monaie électronique">
@@ -152,7 +164,7 @@
                                             <option value="autre">Autre</option>
                                         </optgroup>
                                     </select>
-                                </div>
+                                </div>                    
                             </div>
 
                         </div>
@@ -174,12 +186,16 @@
 
 @section('script')
 
-
+<script>
+    $( document ).ready(function() {
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+    });
+</script>
 <script type="text/javascript">
     $('#edit_facture_modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
         var id_facture = button.data('id-facture');
-        var mode_paiement =button.data('mode_paiement');
+        var mode_paiement = button.data('mode_paiement');
         var montant_facture = button.data('montant');
         var reste = button.data('reste');
         var prise_en_charge = button.data('prise_en_charge');

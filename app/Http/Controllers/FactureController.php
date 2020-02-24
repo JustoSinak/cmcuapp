@@ -77,22 +77,35 @@ class FactureController extends Controller
 
         $request->validate([
             'mode_paiement' => 'required',
+            'num_cheque' => 'requiredIf:mode_paiement,chèque',
+            'emetteur_cheque' => 'requiredIf:mode_paiement,chèque',
+            'banque_cheque' =>  'requiredIf:mode_paiement,chèque',
+            'emetteur_bpc' =>  'requiredIf:mode_paiement,bon de prise en charge',
             'reste' => 'required|numeric',
             'percu' => 'required|numeric|lte:reste',
         ]);
 
         $facture = FactureConsultation::findOrFail($id);
+        //
+        if ($request->get('mode_paiement') === "chèque") {
+            $mode_paiement_info_sup = $request->get('num_cheque')." // ".$request->get('emetteur_cheque')." // ".$request->get('banque_cheque');
+        } else {
+            $mode_paiement_info_sup = ($request->get('mode_paiement') === "bon de prise en charge") ? $request->get('emetteur_bpc'): "" ;
+        }
+        
         $historiqueFacture = new HistoriqueFacture([
                     'reste' => $facture->reste - $request->get('percu'),
                     'montant' => $facture->montant,
                     'percu'   => $request->get('percu'),
                     'assurec'  => $facture->assurec,
                     'mode_paiement'  => $request->get('mode_paiement'),
+                    'mode_paiement_info_sup' => $mode_paiement_info_sup,//
                 ]);
 
         $facture->montant = $request->get('montant');
         $facture->avance += $request->get('percu');
         $facture->mode_paiement = $request->get('mode_paiement');
+        $facture->mode_paiement_info_sup = $mode_paiement_info_sup;//
         $facture->assurec = FactureConsultation::calculAssurec($request->get('montant'), $facture->patient->prise_en_charge);
         $facture->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $facture->patient->prise_en_charge);
         $facture->reste = FactureConsultation::calculReste($facture->assurec, $facture->avance);
@@ -236,14 +249,7 @@ class FactureController extends Controller
     {
 
         $service = \request('service') == 'Tout'? "" : \request('service');
-        // //$factures = FactureConsultation::with('patient','historiques')->where('motif', 'LIKE', '%'.$service)->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->get();
-        // $espece = FactureConsultation::where('mode_paiement', 'espèce')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        // $cheque = FactureConsultation::where('mode_paiement', 'chèque')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        // $om = FactureConsultation::where('mode_paiement', 'orange money')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        // $momo = FactureConsultation::where('mode_paiement', 'mtn mobile money')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        // $virement = FactureConsultation::where('mode_paiement', 'virement')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        // $bondepriseencharge = FactureConsultation::where('mode_paiement', 'bon de prise en charge')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
-        // $autre = FactureConsultation::where('mode_paiement', 'autre')->where('deleted_at', '=', null)->where('date_insertion', '=', \request('day'))->where('motif', 'LIKE', '%'.$service)->sum('montant');
+
         $factures = HistoriqueFacture::where('created_at', 'LIKE', \request('day').'%')
                     ->with('facture_consultation.patient')
                     ->whereHas('facture_consultation', function (Builder $query) use ($service) {
@@ -339,19 +345,6 @@ class FactureController extends Controller
             $totalPartAssurance += $tFactures[$key]['partAssurance'];
             $totalPartPatient += $tFactures[$key]['partPatient'];
         }
-        // dd([
-        //     'mode_paiement' => $modePaiement,
-        //     'service' => $service==""? "" : '- '.$service,
-        //     'tFactures' => $tFactures,
-        //     'totalPercu' => $totalPercu,
-        //     'totalMontant' => $totalMontant,
-        //     'totalReste' => $totalReste,
-        //     'totalPartAssurance' => $totalPartAssurance,
-        //     'totalPartPatient' => $totalPartPatient,
-        // ]);
-        
-
-
         
         $pdf = PDF::loadView('admin.etats.bilan_consultation', [
             'mode_paiement' => $modePaiement,

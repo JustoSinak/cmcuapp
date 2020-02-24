@@ -35,7 +35,7 @@
                                 <select class="form-control" name="medecin_r" id="medecin_r" required>
                                     <option value="medecin_r"> Nom du médecin</option>
                                     @foreach ($users as $user)
-                                    <option value="{{ $user->name }} {{ $user->prenom }}" {{old("medecin_r") ?: '' ? "selected": ""}}>{{ $user->name }} {{ $user->prenom }}
+                                    <option value="{{ $user->name }} {{ $user->prenom }}" {{(old("medecin_r") ?: '' )? "selected": ""}}>{{ $user->name }} {{ $user->prenom }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group m_paiement">
                                     <label for="mode_paiement">Moyen de paiement</label>
                                     <select name="mode_paiement" id="mode_paiement" class="form-control">
 

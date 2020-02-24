@@ -9,8 +9,8 @@
     <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <script src="{{ asset('admin/js/modernizr.js') }}"></script>
-    <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/core@4.3.1/main.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/@fullcalendar/list@4.3.0/main.min.css">
+    <link rel="stylesheet" href="{{ asset('admin/@fullcalendar/core@4.3.1/main.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/@fullcalendar/list@4.3.0/main.min.css') }}">
     <style>
         /* ... */
     </style>
@@ -84,10 +84,10 @@
 
 
     </div>
-    <script src="https://unpkg.com/@fullcalendar/core@4.3.1/main.min.js"></script>
-    <script src="https://unpkg.com/@fullcalendar/timeline@4.3.0/main.min.js"></script>
-    <script src="https://unpkg.com/@fullcalendar/interaction@4.3.0/main.min.js"></script>
-    <script src="https://unpkg.com/@fullcalendar/list@4.3.0/main.min.js"></script>
+    <script src="{{ asset('admin/@fullcalendar/core@4.3.1/main.min.js') }}"></script>
+    <script src="{{ asset('admin/@fullcalendar/timeline@4.3.0/main.min.js')}}"></script>
+    <script src="{{ asset('admin/@fullcalendar/interaction@4.3.0/main.min.js')}}"></script>
+    <script src="{{ asset('admin/@fullcalendar/list@4.3.0/main.min.js')}}"></script>
 
 
     <script>

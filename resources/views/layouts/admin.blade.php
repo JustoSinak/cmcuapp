@@ -172,6 +172,45 @@ $(document).ready(function(){
   $('[data-toggle="popover"]').popover();
 });
 </script>
+<script>
+    $('#mode_paiement').change(function(event){
+        if($(this).val() == 'chèque' && !$('._cheque').length){
+            $('.m_paiement').after(
+                '<div class="form-group _cheque">'+
+                
+                                    '<label for="num_cheque" class="col-form-label text-md-right" >Numéro du chèque </label>'+
+                                    '<input name="num_cheque" id="num_cheque" class="form-control" value="" type="text"  >'+
+                                '</div>'+
+                                '<div class="form-group _cheque">'+
+                                    '<label for="emetteur_cheque" class="col-form-label text-md-right" >Emetteur du chèque </label>'+
+                                    '<input name="emetteur_cheque" id="emetteur_cheque" class="form-control" value="" type="text" >'+
+                                '</div>'+
+                                '<div class="form-group _cheque">'+
+                                    '<label for="banque_cheque" class="col-form-label text-md-right">Banque </label>'+
+                                    '<input name="banque_cheque" id="banque_cheque" class="form-control" value="" type="text" >'+
+                            '</div>'
+            );
+        }
+        else{
+            if($('._cheque').length){
+                $("._cheque").remove();
+            }
+        }
+        if($(this).val() == 'bon de prise en charge' && !$('._bpc').length){
+            $('.m_paiement').after(
+                '<div class="form-group _bpc">'+
+                                    '<label for="emetteur_bpc" class="col-form-label text-md-right" title="Somme des précédents versements du client">Emetteur </label>'+
+                                    '<input name="emetteur_bpc" id="emetteur_bpc" class="form-control" value="" type="text" >'+
+                                '</div>'
+            );
+        }
+        else{
+            if($('._bpc').length){
+                $("._bpc").remove();
+            }
+        }
+    });
+</script>
 
 @yield('script')
 @php

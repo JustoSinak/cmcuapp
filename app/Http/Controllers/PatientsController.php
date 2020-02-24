@@ -65,8 +65,19 @@ class PatientsController extends Controller
             'numero_assurance' => 'required_with:assurance',
             'numero_dossier' => '',
             'prise_en_charge' => 'required_with:assurance|numeric|between:0,100',
+            'num_cheque' => 'requiredIf:mode_paiement,chèque',
+            'emetteur_cheque' => 'requiredIf:mode_paiement,chèque',
+            'banque_cheque' =>  'requiredIf:mode_paiement,chèque',
+            'emetteur_bpc' =>  'requiredIf:mode_paiement,bon de prise en charge',
             'date_insertion' => '',
         ]);
+        
+        //
+        if ($request->get('mode_paiement') === "chèque") {
+            $mode_paiement_info_sup = $request->get('num_cheque')." // ".$request->get('emetteur_cheque')." // ".$request->get('banque_cheque');
+        } else {
+            $mode_paiement_info_sup = ($request->get('mode_paiement') === "bon de prise en charge") ? $request->get('emetteur_bpc'): "" ;
+        }
 
         $patient = new Patient();
 
@@ -78,6 +89,7 @@ class PatientsController extends Controller
         $patient->avance = $request->get('avance');
         $patient->motif =$request->get('motif');
         $patient->mode_paiement =$request->get('mode_paiement');
+        $patient->mode_paiement_info_sup = $mode_paiement_info_sup;
         $patient->details_motif =$request->get('details_motif');
 
         $patient->numero_assurance = $request->get('numero_assurance');
@@ -86,33 +98,6 @@ class PatientsController extends Controller
         $patient->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $request->get('prise_en_charge'));
         $patient->reste = FactureConsultation::calculReste($patient->assurec, $request->get('avance'));
 
-        /* 
-        $patient->assurancec = ((int)$request->get('montant')) - ((int)$patient->assurec);
-        $patient->assurec = ((int)$request->get('montant') * (((int)$request->get('prise_en_charge')) / 100));
-        if ($patient->assurance) {
-            if ($patient->avance) {
-                $patient->reste = $patient->assurec - $patient->avance;
-                $patient->avance = $patient->avance;
-                $patient->assurancec = ((int)$request->get('montant')) - ((int)$patient->assurec);
-            } else {
-                $patient->reste = 0;
-                $patient->avance = $patient->assurec;
-                $patient->assurec = ((int)$request->get('montant') * (((int)$request->get('prise_en_charge')) / 100));
-                $patient->assurancec = ((int)$request->get('montant')) - ((int)$patient->assurec);
-            }
-        } else {
-            if ($patient->avance) {
-                $patient->reste = $request->get('montant') - $request->get('avance');
-                $patient->assurec = 0;
-                $patient->assurancec = 0;
-            } else {
-                $patient->reste = 0;
-                $patient->avance = $request->get('montant');
-                $patient->assurancec = 0;
-                $patient->assurec = 0;
-            }
-        }
-        */
         $patient->demarcheur = $request->get('demarcheur');
         $patient->date_insertion = $request->get('date_insertion');
         $patient->medecin_r = $request->get('medecin_r');
@@ -202,6 +187,10 @@ class PatientsController extends Controller
         $request->validate([
             'motif' => 'required',
             'mode_paiement' => 'required',
+            'num_cheque' => 'requiredIf:mode_paiement,chèque',
+            'emetteur_cheque' => 'requiredIf:mode_paiement,chèque',
+            'banque_cheque' =>  'requiredIf:mode_paiement,chèque',
+            'emetteur_bpc' =>  'requiredIf:mode_paiement,bon de prise en charge',
             'details_motif' => 'required',
             'montant' => 'required|numeric',
             'numero_assurance' => '',
@@ -212,7 +201,14 @@ class PatientsController extends Controller
 
 
         $patient = Patient::findOrFail($id);
-
+        if ($request->get('mode_paiement') === "chèque") {
+            $mode_paiement_info_sup = $request->get('num_cheque')." // ".$request->get('emetteur_cheque')." // ".$request->get('banque_cheque');
+        } else {
+            $mode_paiement_info_sup = ($request->get('mode_paiement') === "bon de prise en charge") ? $request->get('emetteur_bpc'): "" ;
+        }
+        
+        
+        $patient->mode_paiement_info_sup =$mode_paiement_info_sup;
         $patient->montant = $request->get('montant');
         $patient->details_motif =$request->get('details_motif');
         $patient->assurance =$request->get('assurance');
@@ -278,6 +274,7 @@ class PatientsController extends Controller
             'assurancec' => $patient->assurancec,
             'assurec' => $patient->assurec,
             'mode_paiement' => $patient->mode_paiement,
+            'mode_paiement_info_sup' => $patient->mode_paiement_info_sup,
             'motif' => $patient->motif,
             'details_motif' => $patient->details_motif,
             'montant' => $patient->montant,
