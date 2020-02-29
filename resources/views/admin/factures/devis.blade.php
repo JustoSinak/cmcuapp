@@ -47,7 +47,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{ route('facture_devis.create') }}" class="btn btn-primary table_link_right"> Ajouter une facture</a>
+                    <!-- <a href="{{ route('facture_devis.create') }}" class="btn btn-primary table_link_right"> Ajouter une facture</a> -->
                 </div>
             </div>
     </div>

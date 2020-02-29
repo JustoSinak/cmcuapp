@@ -5,133 +5,154 @@ use App\Http\Requests\DevisRequest;
 use App\Patient;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
-use App\Devis;
+use Illuminate\Http\Request;
+use App\Devi;
+use App\LigneDevi;
 
 class DevisController extends Controller
 {
     public function index()
     {
        
-        $devis = Devis::latest()->get();
-
-        return view('admin.devis.index', compact('devis'));
+        $devis = Devi::latest()->with('ligneDevis:id,element,quantite,prix_u,devi_id')
+                    ->get(["id","code","acces","user_id","nom","nbr_jour_hosp","pu_chambre","pu_visite","pu_ami_jour"]);
+        $patients = Patient::orderBy('name', 'ASC')->get(['id','name', 'prenom']);
+        return view('admin.devis.index', compact('devis','patients'));
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $devi = Devis::findOrFail($id);
-        $patients = Patient::orderBy('name', 'asc')->get();
+        $this->authorize('update', Devi::class);
 
-        return view('admin.devis.edit', compact('devi', 'patients'));
-    }
-
-
-    public function store(DevisRequest $request)
-    {
-
-        $this->authorize('create', Patient::class);
-
-        $devis = new Devis();
-        $devis->nom = $request->get('nom');
-        $devis->qte1 = $request->get('qte1');
-        $devis->qte2 = $request->get('qte2');
-        $devis->qte3 = $request->get('qte3');
-        $devis->qte4 = $request->get('qte4');
-        $devis->qte5= $request->get('qte5');
-        $devis->qte6 = $request->get('qte6');
-        $devis->qte7= $request->get('qte7');
-        $devis->qte8= $request->get('qte8');
-        $devis->qte9= $request->get('qte9');
-        $devis->qte10= $request->get('qte10');
-        $devis->qte11= $request->get('qte11');
-        $devis->qte12= $request->get('qte12');
-        $devis->qte13= $request->get('qte13');
-        $devis->qte14= $request->get('qte14');
-
-        $devis->prix_u = $request->get('prix_u');
-        $devis->prix_u1 = $request->get('prix_u1');
-        $devis->prix_u2 = $request->get('prix_u2');
-        $devis->prix_u3 = $request->get('prix_u3');
-        $devis->prix_u4 = $request->get('prix_u4');
-        $devis->prix_u5 = $request->get('prix_u5');
-        $devis->prix_u6 = $request->get('prix_u6');
-        $devis->prix_u7 = $request->get('prix_u7');
-        $devis->prix_u8 = $request->get('prix_u8');
-        $devis->prix_u9 = $request->get('prix_u9');
-        $devis->prix_u10 = $request->get('prix_u10');
-        $devis->prix_u11 = $request->get('prix_u11');
-        $devis->prix_u12 = $request->get('prix_u12');
-        $devis->prix_u13 = $request->get('prix_u13');
-
-        $devis->montant = ((int)$request->get('qte1') * (int)$request->get('prix_u'));
-        $devis->montant1 = ((int)$request->get('qte2') * (int)$request->get('prix_u1'));
-        $devis->montant2 = ((int)$request->get('qte3')  * (int)$request->get('prix_u2'));
-        $devis->montant3 =( (int)$request->get('qte4') * (int)$request->get('prix_u3'));
-        $devis->montant4 = ((int)$request->get('qte5') * (int)$request->get('prix_u4'));
-        $devis->montant5 = ((int)$request->get('qte6') * (int)$request->get('prix_u5'));
-        $devis->montant6 = ((int)$request->get('qte7') * (int)$request->get('prix_u6'));
-        $devis->montant7 = ((int)$request->get('qte8') * (int)$request->get('prix_u7'));
-        $devis->montant8 = ((int)$request->get('qte9') * (int)$request->get('prix_u8'));
-        $devis->montant9 = ((int)$request->get('qte10') * (int)$request->get('prix_u9'));
-        $devis->montant10 = ((int)$request->get('qte11') * (int)$request->get('prix_u10'));
-        $devis->montant11 = ((int)$request->get('qte12') * (int)$request->get('prix_u11'));
-        $devis->montant12 = ((int)$request->get('qte13') * (int)$request->get('prix_u12'));
-        $devis->montant13 = ((int)$request->get('qte14') * (int)$request->get('prix_u13'));
-        
-        $devis->elements = $request->get('elements');
-        $devis->elements1 = $request->get('elements1');
-        $devis->elements2 = $request->get('elements2');
-        $devis->elements3 = $request->get('elements3');
-        $devis->elements4 = $request->get('elements4');
-        $devis->elements5 = $request->get('elements5');
-        $devis->elements6 = $request->get('elements6');
-        $devis->elements7 = $request->get('elements7');
-        $devis->elements8 = $request->get('elements8');
-        $devis->elements9 = $request->get('elements9');
-        $devis->elements10 = $request->get('elements10');
-        $devis->elements11 = $request->get('elements11');
-        $devis->elements12 = $request->get('elements12');
-        $devis->elements13 = $request->get('elements13');
-        $devis->arreter = $request->get('arreter');
-
-        $devis->total1 = $devis->montant + $devis->montant1 + $devis->montant2 + $devis->montant3 + 
-        $devis->montant4 + $devis->montant5 +  $devis->montant6 + $devis->montant7 + $devis->montant8;
-
-        $devis->total2 =  $devis->montant9 + $devis->montant10 + $devis->montant11 + $devis->montant12 + $devis->montant13;
-        $devis->total3 = $devis->total1 +  $devis->total2;
-
-        $devis->patient_id = $request->patient_id;
-        $devis->user_id = Auth::id();
-         $devis->save();
-
-        return redirect()->route('devis.index')->with('success', 'ajouté avec succès !');
-    }
-
-    public function export_devis($id)
-    {
-        $this->authorize('create', Patient::class);
-
-        $devis = Devis::find($id);
-        $devis->update([
-
-            'patient_id' => \request('patient_id')
+        $request->validate([
+            'code_devis' => '',
+            'nbr_jour_hosp' => 'required|numeric|min:0',
+            'pu_chambre' => 'required|numeric|min:0',
+            'pu_visite' => 'required|numeric|min:0',
+            'pu_ami_jour' => 'required|numeric|min:0',
+            'nom_devis' => 'required',
+            'acces_devis' => 'required',
+            'ligneDevi' => 'array|required',
+            'ligneDevi.*.element' => 'required',
+            'ligneDevi.*.quantite' => 'required|numeric|min:1',
+            'ligneDevi.*.prix_u' => 'required|numeric|min:1',
         ]);
 
+        
+        $devi = Devi::findOrFail($id);
+        $devi->nom = $request->get('nom_devis');
+        $devi->nbr_jour_hosp = $request->get('nbr_jour_hosp');
+        $devi->pu_chambre = $request->get('pu_chambre');
+        $devi->pu_visite = $request->get('pu_visite');
+        $devi->pu_ami_jour = $request->get('pu_ami_jour');
+        $devi->code = $request->get('code_devis') ?? \Carbon\Carbon::now()->toDateString().'/'.substr($request->get('nom_devis'),0,4);
+        $devi->acces =$request->get('acces_devis');
+        $lignedevis = $request->get('ligneDevi');
+        $devi->save();
+        LigneDevi::where('devi_id',$id)->delete();//supprime toutes les lignes
+         foreach ($lignedevis as  $ligneDevi) {
+             $devi->ligneDevis()->save(new LigneDevi([
+                "element" => $ligneDevi["element"],
+                "quantite" => $ligneDevi["quantite"],
+                "prix_u" => $ligneDevi["prix_u"],
+             ]));
+         }
+
+        return redirect()->route('devis.index')->with('success', 'Devis modifié avec succès !');
+    }
 
 
+    public function store(Request $request)
+    {
+        $this->authorize('create', Devi::class);
+
+        $request->validate([
+            'code_devis' => '',
+            'nbr_jour_hosp' => 'required|numeric|min:0',
+            'pu_chambre' => 'required|numeric|min:0',
+            'pu_visite' => 'required|numeric|min:0',
+            'pu_ami_jour' => 'required|numeric|min:0',
+            'nom_devis' => 'required',
+            'acces_devis' => 'required',
+            'ligneDevi' => 'array|required',
+            'ligneDevi.*.element' => 'required',
+            'ligneDevi.*.quantite' => 'required|numeric|min:1',
+            'ligneDevi.*.prix_u' => 'required|numeric|min:1',
+        ]);
+
+        $devis = Devi::create([
+            'nom' => $request->get('nom_devis'),
+            'nbr_jour_hosp' => $request->get('nbr_jour_hosp'),
+            'pu_chambre' => $request->get('pu_chambre'),
+            'pu_visite' => $request->get('pu_visite'),
+            'pu_ami_jour' => $request->get('pu_ami_jour'),
+            'code' => $request->get('code_devis') ?? \Carbon\Carbon::now()->toDateString().'/'.substr($request->get('nom_devis'),0,4),
+            'acces' => $request->get('acces_devis'),
+            'user_id' =>  Auth::id(),
+        ]);
+         $lignedevis = $request->get('ligneDevi');
+         foreach ($lignedevis as  $ligneDevi) {
+             $devis->ligneDevis()->save(new LigneDevi([
+                "element" => $ligneDevi["element"],
+                "quantite" => $ligneDevi["quantite"],
+                "prix_u" => $ligneDevi["prix_u"],
+             ]));
+         }
+
+        return redirect()->route('devis.index')->with('success', 'Devis enregistré avec succès !');
+    }
+
+    public function export_devis (Request $request, $montant_en_lettre)
+    {
+        $this->authorize('print', Patient::class);
+
+        $request->validate([
+            'patient' => 'required',
+            'nbr_jour_hosp' => 'required|numeric|min:0',
+            'pu_chambre' => 'required|numeric|min:0',
+            'pu_visite' => 'required|numeric|min:0',
+            'pu_ami_jour' => 'required|numeric|min:0',
+            'nom_devis' => 'required',
+            'acces_devis' => '',
+            'code_devis' => '',
+            'ligneDevi' => 'array|required',
+            'ligneDevi.*.element' => 'required',
+            'ligneDevi.*.quantite' => 'required|numeric|min:1',
+            'ligneDevi.*.prix_u' => 'required|numeric|min:1',
+        ]);
+        
+        $devis = new Devi([
+            'nbr_jour_hosp' => $request->get('nbr_jour_hosp'),
+            'pu_chambre' => $request->get('pu_chambre'),
+            'pu_visite' => $request->get('pu_visite'),
+            'pu_ami_jour' => $request->get('pu_ami_jour'),
+            'nom' => $request->get('nom_devis'),
+            'code' => $request->get('code_devis') ?? \Carbon\Carbon::now()->toDateString().'/'.substr($request->get('nom_devis'),0,4),
+            'user_id' =>  Auth::id(),
+            'total1' => 0,
+        ]);
+        $nomPatient =$request->get('patient');
+         $ld = $request->get('ligneDevi');
+         $lignedevis=[];
+         $total1 = 0;
+         $devis->total2 = $request->get('nbr_jour_hosp')*($request->get('pu_chambre')+$request->get('pu_ami_jour')+$request->get('pu_visite'));
+         foreach ($ld as  $ligneDevi) {
+            $total1 += $ligneDevi["prix_u"]*$ligneDevi["quantite"];
+            array_push($lignedevis, new LigneDevi([
+                "element" => $ligneDevi["element"],
+                "quantite" => $ligneDevi["quantite"],
+                "prix_u" => $ligneDevi["prix_u"],
+                "prix" => $ligneDevi["prix_u"]*$ligneDevi["quantite"],
+             ]));
+         }
+         $devis->total1 = $total1;
+         $devis->total = $montant_en_lettre;
         $pdf = PDF::loadView('admin.etats.devis', [
-
             'devis' => $devis,
+            'ligneDevis' => $lignedevis,
+            'nomPatient' => $nomPatient,
         ]);
 
         return $pdf->stream('devis.pdf');
     }
-
-    public function create()
-    {
-        $this->authorize('create', Patient::class);
-
-        return view('admin.devis.create');
-    }
-
 }

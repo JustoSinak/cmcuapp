@@ -11,11 +11,13 @@ use App\Policies\ChambrePolicy;
 use App\Policies\EventPolicy;
 use App\Policies\FactureConsultationPolicy;
 use App\Policies\FichePolicy;
+use App\Policies\DevisPolicy;
 use App\Policies\PatientPolicy;
 use App\Policies\ProduitPolicy;
 use App\Policies\Stock_pharmaceutiquePolicy;
 use App\Policies\UserPolicy;
 use App\Produit;
+use App\Devi;
 use App\FactureConsultation;
 use App\User;
 use Illuminate\Support\Facades\Gate;
@@ -31,6 +33,7 @@ class AuthServiceProvider extends ServiceProvider
         chambre::class => ChambrePolicy::class,
         Event::class => EventPolicy::class,
         Fiche::class => FichePolicy::class,
+        Devi::class => DevisPolicy::class,
         Patient::class => PatientPolicy::class,
         FactureConsultation::class => FactureConsultationPolicy::class,
 

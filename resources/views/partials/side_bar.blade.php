@@ -206,21 +206,6 @@
                     </a>
                 </li>
 
-
-                <li>
-                    <a href="{{ route('devisd.index') }}">
-                        <i class="fas fa-list-ul"></i>
-                        Devis détaillé(s)
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ route('devisimage.index') }}">
-                        <i class="fas fa-lock"></i>
-                        Devis Personalisé(s)
-                    </a>
-                </li>
-
             </ul>
         </li>
         @endcan

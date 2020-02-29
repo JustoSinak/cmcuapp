@@ -173,33 +173,33 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::resource('/fiches', 'FichesController');
     Route::get('fiche/{id}','FichesController@export_pdf')->name('fiche.pdf');
 
-    Route::get('devis/create', 'DevisController@create')->name('devis.create');
-    Route::get('devis/edit/{id}', 'DevisController@edit')->name('devis.edit');
+    //Route::get('devis/create', 'DevisController@create')->name('devis.create');
+    Route::post('devis/edit/{id}', 'DevisController@edit')->name('devis.edit');
     Route::post('devis', 'DevisController@store')->name('devis.store');
     Route::get('devis', 'DevisController@index')->name('devis.index');
-    Route::post('devis/{id}','DevisController@export_devis')->name('devis.pdf');
+    Route::post('devis/export/{montant}','DevisController@export_devis')->name('devis.pdf');
 
-    Route::get('devisimage/', 'DevisImageController@index')->name('devisimage.index');
-    Route::get('devisimage/create', 'DevisImageController@create')->name('devisimage.create');
-    Route::post('devisimage', 'DevisImageController@store')->name('devisimage.store');
-    Route::get('devisimage/show/{patient}', 'DevisImageController@show')->name('devisimage.show');
-    Route::get('devisimagef/{patient}', 'DevisImageController@showall')->name('devisimage.showall');
+    // Route::get('devisimage/', 'DevisImageController@index')->name('devisimage.index');
+    // Route::get('devisimage/create', 'DevisImageController@create')->name('devisimage.create');
+    // Route::post('devisimage', 'DevisImageController@store')->name('devisimage.store');
+    // Route::get('devisimage/show/{patient}', 'DevisImageController@show')->name('devisimage.show');
+    // Route::get('devisimagef/{patient}', 'DevisImageController@showall')->name('devisimage.showall');
 
-    Route::get('devisd/create', 'DevisdController@create')->name('devisd.create');
-    Route::post('devisd', 'DevisdController@store')->name('devisd.store');
-    Route::get('devisd', 'DevisdController@index')->name('devisd.index');
-    Route::get('devis-print/{id}','DevisdController@export_devisd')->name('devisd.pdf');
+    // Route::get('devisd/create', 'DevisdController@create')->name('devisd.create');
+    // Route::post('devisd', 'DevisdController@store')->name('devisd.store');
+    // Route::get('devisd', 'DevisdController@index')->name('devisd.index');
+    // Route::get('devis-print/{id}','DevisdController@export_devisd')->name('devisd.pdf');
    
 
-    Route::get('clients', 'ClientController@index')->name('clients.index');
-    Route::get('clients/create', 'ClientController@create')->name('clients.create');
-    Route::post('clients', 'ClientController@store')->name('clients.store');
-    Route::patch('clients/{client}', 'ClientController@update')->name('clients.update');
-    Route::delete('clients/{client}', 'ClientController@destroy')->name('clients.destroy');
+    // Route::get('clients', 'ClientController@index')->name('clients.index');
+    // Route::get('clients/create', 'ClientController@create')->name('clients.create');
+    // Route::post('clients', 'ClientController@store')->name('clients.store');
+    // Route::patch('clients/{client}', 'ClientController@update')->name('clients.update');
+    // Route::delete('clients/{client}', 'ClientController@destroy')->name('clients.destroy');
 
-    Route::get('client/{id}','ClientController@generate_client')->name('clientP.pdf');
-    //Route::get('clients/{id}','ClientController@export_client')->name('clientP.pdf');
-    Route::post('bilan-clientexterne','FactureController@export_bilan_clientexterne')->name('bilan_clientexterne.pdf');
+    // Route::get('client/{id}','ClientController@generate_client')->name('clientP.pdf');
+    // //Route::get('clients/{id}','ClientController@export_client')->name('clientP.pdf');
+    // Route::post('bilan-clientexterne','FactureController@export_bilan_clientexterne')->name('bilan_clientexterne.pdf');
 
 
 

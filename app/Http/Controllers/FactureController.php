@@ -150,7 +150,7 @@ class FactureController extends Controller
     {
 
         return view('admin.factures.facture_devis_create', [
-            'devis' => Devis::all(),
+            'devis' => Devi::all(),
             'patients' => Patient::orderBy('name', 'asc')->get()
         ]);
     }

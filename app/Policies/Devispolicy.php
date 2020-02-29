@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\User;
+use App\Devi;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class Devispolicy
@@ -22,16 +23,10 @@ class Devispolicy
         }
     }
 
-
-    public function view(User $user, Devis $devis)
-    {
-        return true;
-    }
-
     public function create(User $user)
     {
         return in_array(auth()->user()->role_id, [
-            1,2,6,5
+            1,3
         ]);
     }
 
@@ -39,22 +34,14 @@ class Devispolicy
     public function update(User $user)
     {
         return in_array(auth()->user()->role_id, [
-            1,2,6,5
+            1,3
         ]);
     }
 
     public function print(User $user)
     {
         return in_array(auth()->user()->role_id, [
-            1,2,6,5
-        ]);
-
-    }
-
-    public function print_devis(User $user)
-    {
-        return in_array(auth()->user()->role_id, [
-            1,2,6,5
+            1,3,6
         ]);
 
     }
@@ -67,11 +54,4 @@ class Devispolicy
 
     }
 
-    public function consulter()
-    {
-        return in_array(auth()->user()->role_id, [
-            1,2,6,5
-        ]);
-
-    }
 }
