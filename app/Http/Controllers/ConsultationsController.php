@@ -6,7 +6,6 @@ use App\Consultation;
 use App\ConsultationAnesthesiste;
 use App\Parametre;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\Devis;
 use App\Http\Requests\ConsultationRequest;
 use App\Patient;
 use App\User;
@@ -41,7 +40,6 @@ class ConsultationsController extends Controller
 
         return view('admin.consultations.create', [
             'patient' => $patient,
-            'devis' => Devis::all(),
             'users' => User::where('role_id', '=', 2)->with('patients')->get(),
             'consultation' => $consultation,
             'parametre' => $parametre,
@@ -55,7 +53,6 @@ class ConsultationsController extends Controller
 
         return view('admin.consultations.edit', [
             'patient' => $patient,
-            'devis' => Devis::all(),
             'users' => User::where('role_id', '=', 2)->with('patients')->get(),
             'consultation' => Consultation::where('patient_id', $patient->id)->latest()->first(),
             'consultation_anesthesiste' => ConsultationAnesthesiste::where('patient_id', $patient->id)->latest()->first(),
@@ -81,7 +78,6 @@ class ConsultationsController extends Controller
             'proposition'=> implode(",", $request->proposition),
             'examen_c'=> request('examen_c'),
             'examen_p'=> request('examen_p'),
-            'devis_id'=> request('devis_id'),
             'motif_c'=> request('motif_c'),
             'acte'=> implode(",", $request->acte ?? []),
             'type_intervention' => request('type_intervention'),
@@ -109,7 +105,6 @@ class ConsultationsController extends Controller
         $consultation->groupe = request('groupe');
         $consultation->examen_c = request('examen_c');
         $consultation->examen_p = request('examen_p');
-        $consultation->devis_id = request('devis_id');
         $consultation->motif_c = request('motif_c');
         $consultation->type_intervention = request('type_intervention');
         $consultation->date_intervention = request('date_intervention');

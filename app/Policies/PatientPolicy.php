@@ -48,13 +48,13 @@ class PatientPolicy
 
     }
 
-    public function print_devis(User $user)
-    {
-        return in_array(auth()->user()->role_id, [
-            1,6,2
-        ]);
+    // public function print_devis(User $user)
+    // {
+    //     return in_array(auth()->user()->role_id, [
+    //         1,6,2
+    //     ]);
 
-    }
+    // }
 
     public function delete(User $user)
     {
@@ -75,7 +75,7 @@ class PatientPolicy
     public function infirmier()
     {
         return in_array(auth()->user()->role_id, [
-            4
+            1,4
         ]);
 
     }
@@ -83,7 +83,7 @@ class PatientPolicy
     public function infirmier_secretaire()
     {
         return in_array(auth()->user()->role_id, [
-            4,6
+            1,4,6
         ]);
 
     }
@@ -91,7 +91,7 @@ class PatientPolicy
     public function medecin_secretaire()
     {
         return in_array(auth()->user()->role_id, [
-            2,6
+            1,2,6
         ]);
 
     }
@@ -99,7 +99,7 @@ class PatientPolicy
     public function infirmier_chirurgien()
     {
         return in_array(auth()->user()->role_id, [
-            4,2
+            1,4,2
         ]);
 
     }
@@ -107,7 +107,7 @@ class PatientPolicy
     public function secretaire()
     {
         return in_array(auth()->user()->role_id, [
-            6
+            1,6
         ]);
 
     }
@@ -115,7 +115,7 @@ class PatientPolicy
     public function medecin()
     {
         return in_array(auth()->user()->role_id, [
-            2
+            1,2
         ]);
 
     }
@@ -123,7 +123,7 @@ class PatientPolicy
     public function med_inf_anes()
     {
         return in_array(auth()->user()->role_id, [
-            2,4
+            1,2,4
         ]);
 
     }
@@ -131,7 +131,7 @@ class PatientPolicy
     public function anesthesiste()
     {
         return in_array(auth()->user()->id, [
-            15,28
+            1,15,28
         ]);
 
     }

@@ -34,7 +34,7 @@ class ConsultationRequest extends FormRequest
             'proposition'=> 'required',
             'examen_c'=> 'required',
             'examen_p'=> 'required',
-            'devis_p'=> '',
+            //'devis_p'=> '',
             'motif_c'=> 'required',
             'medecin_r'=> 'required',
             'acte'=> '',

@@ -3,10 +3,30 @@
         @csrf @method('PUT')
         <tr>
             <td>
-                <label for="name" class="col-form-label text-md-right">Nom du patient :</label>
+                <label for="name" class="col-form-label text-md-right">Nom & prénom du patient :</label>
             </td>
             <td>
-                <b>{{ $patient->name }}</b>
+                <div class="input-group">
+                    <input name="name" class="form-control" value="{{ old('name') ?? $patient->name}}" type="text" placeholder="name">
+                    <input name="prenom" class="form-control" value="{{ old('prenom') ?? $patient->prenom}}" type="text" placeholder="prenom">
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Médecin :</b> <span class="text-danger">*</span>
+
+
+            </td>
+            <td>
+                <select class="form-control" name="medecin_r" id="medecin_r" required>
+                    <option value="medecin_r"> Nom du médecin</option>
+                    @foreach ($medecin as $user)
+                    <option value="{{ $user->name }} {{ $user->prenom }}" {{ old('medecin_r', $patient->medecin_r) ==   $user->name.' '.$user->prenom ? 'selected' : '' }}>{{ $user->name }} {{ $user->prenom }}
+                    </option>
+                    @endforeach
+                </select>
             </td>
         </tr>
         <tr>

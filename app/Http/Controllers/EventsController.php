@@ -19,7 +19,7 @@ class EventsController extends Controller
     public function index(Request $request)
     {
         $events = Event::with('patients')->get();
-        $patients = Patient::latest()->get(['id','name','prenom']);
+        $patients = Patient::orderBy('name', 'ASC')->get(['id','name', 'prenom']);
         $ressources = User::where('role_id', 2)->get(['id', 'name', 'prenom']);
         return view('admin.events.index', ['events' =>$events, 'ressources' => $ressources, 'patients' => $patients]);
     }

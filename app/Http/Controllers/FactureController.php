@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Devis;
 use App\Facture;
 use App\FactureChambre;
 use App\FactureDevi;
@@ -136,80 +135,80 @@ class FactureController extends Controller
         return view('admin.factures.chambre', compact('factureChambres', 'lists'));
     }
 
-    public function FactureDevis()
-    {
+    // public function FactureDevis()
+    // {
 
-        return view('admin.factures.devis', [
+    //     return view('admin.factures.devis', [
 
-            'facture_devis' => FactureDevi::all(),
-            'patients' => Patient::orderBy('name', 'asc')->get()
-        ]);
-    }
+    //         'facture_devis' => FactureDevi::all(),
+    //         'patients' => Patient::orderBy('name', 'asc')->get()
+    //     ]);
+    // }
 
-    public function FactureDevisCreate()
-    {
+    // public function FactureDevisCreate()
+    // {
 
-        return view('admin.factures.facture_devis_create', [
-            'devis' => Devi::all(),
-            'patients' => Patient::orderBy('name', 'asc')->get()
-        ]);
-    }
+    //     return view('admin.factures.facture_devis_create', [
+    //         'devis' => Devi::all(),
+    //         'patients' => Patient::orderBy('name', 'asc')->get()
+    //     ]);
+    // }
 
-    public function FactureDevisStore(Request $request)
-    {
-        $date = Carbon::now()->toDateString();
-        $facture_devis = new FactureDevi();
+    // public function FactureDevisStore(Request $request)
+    // {
+    //     $date = Carbon::now()->toDateString();
+    //     $facture_devis = new FactureDevi();
 
-        $facture_devis->user_id = Auth::id();
-        $facture_devis->patient_id = $request->get('patient_id');
-        $facture_devis->numero_facture = $date . '_' . time();
-        $facture_devis->montant_devis = $request->get('montant_devis');
-        $facture_devis->designation_devis = $request->get('designation_devis');
-        $facture_devis->avance_devis = $request->get('avance_devis');
-        $facture_devis->numero_assurance = $request->get('numero_assurance');
-        $facture_devis->assurance = $request->get('assurance');
-        $facture_devis->taux_assurance = $request->get('taux_assurance');
-        $facture_devis->date_creation = $request->get('date_creation');
+    //     $facture_devis->user_id = Auth::id();
+    //     $facture_devis->patient_id = $request->get('patient_id');
+    //     $facture_devis->numero_facture = $date . '_' . time();
+    //     $facture_devis->montant_devis = $request->get('montant_devis');
+    //     $facture_devis->designation_devis = $request->get('designation_devis');
+    //     $facture_devis->avance_devis = $request->get('avance_devis');
+    //     $facture_devis->numero_assurance = $request->get('numero_assurance');
+    //     $facture_devis->assurance = $request->get('assurance');
+    //     $facture_devis->taux_assurance = $request->get('taux_assurance');
+    //     $facture_devis->date_creation = $request->get('date_creation');
 
-        if ($facture_devis->assurance) {
-            if ($facture_devis->avance_devis) {
-                $facture_devis->part_patient = ((int) $request->get('montant_devis') * (((int) $request->get('taux_assurance')) / 100));
-                $facture_devis->part_assurance = ((int) $request->get('montant_devis')) - ((int) $facture_devis->part_patient);
-                $facture_devis->reste_devis = ((int) $request->get('montant_devis')) - ($facture_devis->part_assurance + $facture_devis->avance_devis);
-            } else {
-                $facture_devis->reste_devis = 0;
-                $facture_devis->avance_devis = 0;
-                $facture_devis->part_patient = ((int) $request->get('montant_devis') * (((int) $request->get('taux_assurance')) / 100));
-                $facture_devis->part_assurance = ((int) $request->get('montant_devis')) - ((int) $facture_devis->part_patient);
-            }
-        } else {
-            if ($facture_devis->avance_devis) {
-                $facture_devis->reste_devis = $request->get('montant_devis') - $request->get('avance_devis');
-                $facture_devis->part_patient = $request->get('montant_devis');
-                $facture_devis->part_assurance = 0;
-            } else {
-                $facture_devis->reste_devis = 0;
-                $facture_devis->avance_devis = 0;
-                $facture_devis->part_assurance = 0;
-                $facture_devis->part_patient = $request->get('montant_devis');
-            }
-        }
+    //     if ($facture_devis->assurance) {
+    //         if ($facture_devis->avance_devis) {
+    //             $facture_devis->part_patient = ((int) $request->get('montant_devis') * (((int) $request->get('taux_assurance')) / 100));
+    //             $facture_devis->part_assurance = ((int) $request->get('montant_devis')) - ((int) $facture_devis->part_patient);
+    //             $facture_devis->reste_devis = ((int) $request->get('montant_devis')) - ($facture_devis->part_assurance + $facture_devis->avance_devis);
+    //         } else {
+    //             $facture_devis->reste_devis = 0;
+    //             $facture_devis->avance_devis = 0;
+    //             $facture_devis->part_patient = ((int) $request->get('montant_devis') * (((int) $request->get('taux_assurance')) / 100));
+    //             $facture_devis->part_assurance = ((int) $request->get('montant_devis')) - ((int) $facture_devis->part_patient);
+    //         }
+    //     } else {
+    //         if ($facture_devis->avance_devis) {
+    //             $facture_devis->reste_devis = $request->get('montant_devis') - $request->get('avance_devis');
+    //             $facture_devis->part_patient = $request->get('montant_devis');
+    //             $facture_devis->part_assurance = 0;
+    //         } else {
+    //             $facture_devis->reste_devis = 0;
+    //             $facture_devis->avance_devis = 0;
+    //             $facture_devis->part_assurance = 0;
+    //             $facture_devis->part_patient = $request->get('montant_devis');
+    //         }
+    //     }
 
-        $facture_devis->type_paiement = $request->get('type_paiement');
-        $facture_devis->numero_cheque = $request->get('numero_cheque');
-        $facture_devis->tireur_cheque = $request->get('tireur_cheque');
-        $facture_devis->banque_emission = $request->get('banque_emission');
-        $facture_devis->date_emission = $request->get('date_emission');
-        $facture_devis->attestation_virement = $request->get('attestation_virement');
-        $facture_devis->numero_compte = $request->get('numero_compte');
-        $facture_devis->montant_virement = $request->get('montant_virement');
-        $facture_devis->banque_virement = $request->get('banque_virement');
-        $facture_devis->date_virement = $request->get('date_virement');
+    //     $facture_devis->type_paiement = $request->get('type_paiement');
+    //     $facture_devis->numero_cheque = $request->get('numero_cheque');
+    //     $facture_devis->tireur_cheque = $request->get('tireur_cheque');
+    //     $facture_devis->banque_emission = $request->get('banque_emission');
+    //     $facture_devis->date_emission = $request->get('date_emission');
+    //     $facture_devis->attestation_virement = $request->get('attestation_virement');
+    //     $facture_devis->numero_compte = $request->get('numero_compte');
+    //     $facture_devis->montant_virement = $request->get('montant_virement');
+    //     $facture_devis->banque_virement = $request->get('banque_virement');
+    //     $facture_devis->date_virement = $request->get('date_virement');
 
-        $facture_devis->save();
+    //     $facture_devis->save();
 
-        return redirect()->route('facture_devis.index')->with('info', 'La facture a bien été enregistrée');
-    }
+    //     return redirect()->route('facture_devis.index')->with('info', 'La facture a bien été enregistrée');
+    // }
 
     public function export_consultation($id)
     {
@@ -232,17 +231,17 @@ class FactureController extends Controller
         return $pdf->stream('factures.client_pdf');
     }
 
-    public function export_facture_devis($id)
-    {
+    // public function export_facture_devis($id)
+    // {
 
-        $pdf = PDF::loadView('admin.etats.facture_devis', [
-            'facture_devis' => FactureDevi::with('user', 'patient')->findOrFail($id)
-        ]);
+    //     $pdf = PDF::loadView('admin.etats.facture_devis', [
+    //         'facture_devis' => FactureDevi::with('user', 'patient')->findOrFail($id)
+    //     ]);
 
-        //        $pdf->setWatermark('admin/images/logo.jpg', $opacity = 0.6, $top = '30%', $width = '100%', $height = '100%');
+    //     //        $pdf->setWatermark('admin/images/logo.jpg', $opacity = 0.6, $top = '30%', $width = '100%', $height = '100%');
 
-        return $pdf->stream('facture_devis.pdf');
-    }
+    //     return $pdf->stream('facture_devis.pdf');
+    // }
 
 
     public function export_bilan_consultation()

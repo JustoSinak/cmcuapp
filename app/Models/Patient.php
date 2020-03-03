@@ -31,10 +31,10 @@ class Patient extends Model
 
     ] ;
 
-    public function devisimage()
-    {
-        return $this->hasMany(DevisImage::class);
-    }
+    // public function devisimage()
+    // {
+    //     return $this->hasMany(DevisImage::class);
+    // }
     public function facture_consultations()
     {
         return $this->hasMany(FactureConsultation::class);
@@ -45,14 +45,14 @@ class Patient extends Model
         return $this->hasMany(FactureConsultation::class);
     }
 
-    public function devis()
-    {
-        return $this->hasMany(Devis::class);
-    }
-    public function devisd()
-    {
-        return $this->hasMany(Devisd::class, 'patient_id');
-    }
+    // public function devis()
+    // {
+    //     return $this->hasMany(Devis::class);
+    // }
+    // public function devisd()
+    // {
+    //     return $this->hasMany(Devisd::class, 'patient_id');
+    // }
 
     public function soins()
     {
@@ -104,10 +104,10 @@ class Patient extends Model
         return $this->hasMany(FicheIntervention::class);
     }
 
-    public function facture_devis()
-    {
-        return $this->hasMany(FactureDevi::class);
-    }
+    // public function facture_devis()
+    // {
+    //     return $this->hasMany(FactureDevi::class);
+    // }
 
     public function fiche_prescription_medicale()
     {

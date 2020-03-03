@@ -112,11 +112,10 @@ class PatientsController extends Controller
     public function show(Patient $patient, Consultation $consultation)
     {
         $this->authorize('update', Patient::class);
-
         return view('admin.patients.show', [
             'patient' => $patient,
             'examens_scannes'  => $patient->examens()->paginate(4),
-            'medecin' => User::where('role_id', '=', 2)->get(),
+            'medecin' => User::where('role_id', '=', 2)->orderby('name')->get(),
             'consultations' => Consultation::with('patient', 'user')->where('patient_id', '=', $patient->id)->latest()->first(),
             'consultation_anesthesistes' => ConsultationAnesthesiste::with('patient', 'user')->latest()->first(),
             'visite_anesthesistes' => VisitePreanesthesique::with('patient', 'user')->latest()->first(),
@@ -186,6 +185,9 @@ class PatientsController extends Controller
         $this->authorize('update', Patient::class);
         $request->validate([
             'motif' => 'required',
+            'name' => 'required',
+            'prenom' => 'required',
+            'medecin_r' => 'required',
             'mode_paiement' => 'required',
             'num_cheque' => 'requiredIf:mode_paiement,chèque',
             'emetteur_cheque' => 'requiredIf:mode_paiement,chèque',
@@ -208,6 +210,9 @@ class PatientsController extends Controller
         }
         
         
+        $patient->name = $request->get('name');
+        $patient->prenom = $request->get('prenom');
+        $patient->medecin_r = $request->get('medecin_r');
         $patient->mode_paiement_info_sup =$mode_paiement_info_sup;
         $patient->montant = $request->get('montant');
         $patient->details_motif =$request->get('details_motif');

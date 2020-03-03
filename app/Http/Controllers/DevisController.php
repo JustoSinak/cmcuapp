@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\DevisRequest;
 use App\Patient;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -104,7 +103,7 @@ class DevisController extends Controller
 
     public function export_devis (Request $request, $montant_en_lettre)
     {
-        $this->authorize('print', Patient::class);
+        $this->authorize('print', Devi::class);
 
         $request->validate([
             'patient' => 'required',

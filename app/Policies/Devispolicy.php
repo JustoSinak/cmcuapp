@@ -45,6 +45,13 @@ class Devispolicy
         ]);
 
     }
+    public function view(User $user)
+    {
+        return in_array(auth()->user()->role_id, [
+            1,3,6
+        ]);
+
+    }
 
     public function delete(User $user)
     {

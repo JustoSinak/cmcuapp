@@ -48,14 +48,14 @@
                                 <div class="card-body">
                                     <h2 class="card-title text-danger text-center">DOSSIER PATIENT</h2>
                                     
-                                    <table class="table table-user-information table-hover ">
+                                    <table class="table table-user-information table-hover mt-3">
                                         
                                         <div class=" row justify-content-center mb-2">
                                             <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
                                             </button>
                                             @can('secretaire', \App\Patient::class)
                                             <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2"><i class="fas fa-bars"></i> Completer le dossier</a>
-                                            <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Motif &amp; Montant</button>
+                                            <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Editer</button>
                                             
                                             @endcan @can('med_inf_anes', \App\Patient::class)
                                             <a class="btn btn-dark mr-2" href="{{ route('fiche.prescription_medicale.index', $patient) }}" title="Prescriptions médicales">

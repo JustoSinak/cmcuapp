@@ -175,10 +175,10 @@
                             Factures clients externes
                             </a>
                     -->
-                    <a href="{{ route('facture_devis.index') }}">
+                    <!-- <a href="{{ route('facture_devis.index') }}">
                         <i class="far fa-money-bill-alt"></i>
                         Factures devis
-                    </a>
+                    </a> -->
                     <a href="{{ route('factures.consultation') }}">
                         <i class="far fa-money-bill-alt"></i>
                         Autres factures
@@ -189,8 +189,7 @@
         </li>
         @endcan
 
-        @can('create', \App\Patient::class)
-        @can('devis', \App\User::class)
+        @can('view', \App\Devi::class)
         <li>
             <a href="#devisSubmenu" data-toggle="collapse" aria-expanded="false">
                 <i class="fas fa-book"></i>
@@ -208,7 +207,6 @@
 
             </ul>
         </li>
-        @endcan
         @endcan
         <br>
         <br>

@@ -141,18 +141,6 @@
         </div>
     </td>
 </tr>
-<tr>
-    <td><b>Devis prévisionnel :</b></td>
-    <td>
-        <select class="form-control" name="devis_id">
-            <option value=""> Sélectionnez un devis</option>
-            @foreach ($devis as $devi)
-                <option value="{{ $devi->id }}" {{old('devis_id', $devi->id) == ($devi->id) ? 'selected' : ''}}>{{ $devi->nom }} ({{ $devi->total3 }} FCFA )</option>
-            @endforeach
-        </select>
-
-    </td>
-</tr>
 <tr id="anesthesiste" style='display:none;'>
     <td><b>Date consultation anesthésiste :</b></td>
     <td>{{ Form::date('date_consultation_anesthesiste', null, ['class' => 'form-control col-md-6']) }}</td>

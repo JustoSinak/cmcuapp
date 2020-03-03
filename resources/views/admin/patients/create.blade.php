@@ -70,7 +70,7 @@
                                 <input name="montant" class="form-control" value="{{ old('montant') }}" type="number" placeholder="montant">
                             </div>
                             <div class="form-group">
-                                <label for="avance" class="col-form-label text-md-right">avance</label>
+                                <label for="avance" class="col-form-label text-md-right">avance <span class="text-danger">*</span></label>
                                 <input name="avance" class="form-control" value="{{ old('avance') }}" type="text" placeholder="avance">
                             </div>
                             <div class="form-group">
@@ -107,7 +107,7 @@
                                 </div>
 
                                 <div class="form-group m_paiement">
-                                    <label for="mode_paiement">Moyen de paiement</label>
+                                    <label for="mode_paiement">Moyen de paiement <span class="text-danger">*</span></label>
                                     <select name="mode_paiement" id="mode_paiement" class="form-control">
 
                                         <optgroup label="Monaie électronique">
@@ -125,7 +125,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="assurance" class="col-form-label text-md-right">Date Création</label>
+                                    <label for="assurance" class="col-form-label text-md-right">Date Création <span class="text-danger">*</span></label>
                                     <input type="date" name="date_insertion" class="form-control" value="{{ old('date_insertion') }}" placeholder=" date de création du dossier au cmcu" required>
                                 </div>
 

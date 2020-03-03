@@ -34,10 +34,10 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role', 'role_id');
     }
 
-    public function devisimage()
-    {
-        return $this->hasMany(DevisImage::class);
-    }
+    // public function devisimage()
+    // {
+    //     return $this->hasMany(DevisImage::class);
+    // }
     public function events()
     {
         return $this->hasMany(Event::class);
@@ -87,15 +87,15 @@ class User extends Authenticatable
         return $this->hasMany(AdaptationTraitement::class);
     }
 
-    public function devis()
-    {
-        return $this->hasMany(Devis::class);
-    }
+    // public function devis()
+    // {
+    //     return $this->hasMany(Devis::class);
+    // }
 
-    public function devisd()
-    {
-        return $this->hasMany(Devisd::class);
-    }
+    // public function devisd()
+    // {
+    //     return $this->hasMany(Devisd::class);
+    // }
 
     public function consultations()
     {
@@ -152,10 +152,10 @@ class User extends Authenticatable
         return $this->hasMany(Prescription::class);
     }
 
-    public function facture_devis()
-    {
-        return $this->hasMany(FactureDevi::class);
-    }
+    // public function facture_devis()
+    // {
+    //     return $this->hasMany(FactureDevi::class);
+    // }
 
     public function prescription_medicales()
     {
