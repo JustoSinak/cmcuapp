@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 @endcan
-                @can('create', \App\Produit::class)
+                <!-- @can('create', \App\Produit::class)
                 <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-success">
                     <div class="s-l">
                         <h5>PRODUITS EN STOCK</h5>
@@ -72,7 +72,7 @@
                         </h6>
                     </div>
                 </div>
-                @endcan
+                @endcan -->
                 {{--------------------------------MARGE IC-------------------------------------}}
                 @can('create', \App\Patient::class)
                     @can('show', \App\User::class)
@@ -83,7 +83,7 @@
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Rendez-vous</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($events) }}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $events }}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>

@@ -33,7 +33,7 @@
                                     <td>{{ $devi->nom}}</td>
                                     <td>
                                         @can('print', \App\Devi::class)
-                                        <button type="button" data-devi='@json($devi)' data-champ_patient="" data-toggle="modal" data-title="Impression devis ..." data-texte="Vous pouvez effectuez des modifications si nécessaire." data-target="#imprimer_devis" class="btn btn-sm btn-info mr-1" title="Attribuer le divis à un patient"><i class="fas fa-print"></i></button>
+                                        <button type="button" data-devi='@json($devi)' data-champ_patient="" data-toggle="modal" data-title="Impression devis ..." data-texte="Vous pouvez effectuez des modifications si nécessaire." data-target="#imprimer_devis" class="btn btn-sm btn-info mr-1" title="Attribuer le divis à un patient"><i class="fas fa-eye"></i></button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -72,9 +72,9 @@
                                 <div class="col-sm-4 champ_patient">
                                     <label for="patient">Nom du patient :</label>
                                     <select class="form-control" id="patient" name="patient">
-                                    @foreach($patients as $patient)
+                                        @foreach($patients as $patient)
                                         <option>{{ $patient->name.' '.$patient->prenom }}</option>
-                                    @endforeach
+                                        @endforeach
                                     </select>
                                     <input type="text" class="form-control d-none" id="">
                                     <br>
@@ -114,43 +114,7 @@
                                 </div>
                                 @endcan
                             </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label class="text-primary form-check-label ml-4">
-                                        <input type="checkbox" class="form-check-input " id="hospitalisation" value="">Hospitalisation
-                                    </label>
-                                </div>
-                            </div>
                             <div class="container">
-                                <div class="row hospitalisation d-none border py-2 my-3 border-primary rounded">
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="nbr_jour_hosp">Jour hospitalisation :</label>
-                                            <input type="number" name="nbr_jour_hosp" class="form-control" id="nbr_jour_hosp" value=0 required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="pu_chambre">Chambre :</label>
-                                            <input type="text" name="pu_chambre" class="form-control" id="pu_chambre" value=30000 required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="pu_visite">Visite :</label>
-                                            <input type="text" name="pu_visite" class="form-control" id="pu_visite" value=10000 required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <div class="form-group">
-                                            <label for="pu_ami_jour"> AMI-JOUR (750*12) :</label>
-                                            <input type="text" name="pu_ami_jour" class="form-control" id="pu_ami_jour" value=9000 required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 d-flex align-items-center justify-content-end">
-                                        <p class=" float-right total1 text-danger">Total 1: <strong>0</strong> FCFA</p>
-                                    </div>
-                                </div>
                                 <div class="row my-2">
                                     <div class="col-sm-1 text-center" style="background-color:lavender;">
                                         <small>#</small>
@@ -176,10 +140,83 @@
                                         <button type="button" class="btn text-primary btn-outline-info float-left">
                                             <i class="fa fa-plus-circle"></i>
                                         </button>
-                                        <p class=" float-right total2 text-danger">Total 2: <strong>0</strong> FCFA</p>
+                                        <p class=" float-right total1 text-danger">Total 1: <strong>0</strong> FCFA</p>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-12 pl-0 mt-2">
+                                        <label class="text-primary form-check-label ml-4">
+                                            <input type="checkbox" class="form-check-input " id="hospitalisation" value="">Hospitalisation
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row my-2 hospitalisation d-none">
+                                    <div class="col-sm-1 justify-content-center d-flex align-items-center" style="background-color:lavender;">
+                                        <small>1</small>
+                                    </div>
+                                    <div class="col-sm-4" style="background-color:lavenderblush;">
+                                        <input type="text" name="" class="form-control element" value="Chambre" readonly>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavender;">
+                                        <input type="number" name="nbr_chambre" id="nbr_chambre" class="form-control" value=0>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavenderblush;">
+                                        <input type="number" name="pu_chambre" class="form-control" id="pu_chambre" value=30000 required>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavender;">
+                                        <input type="number" id="chambre" name="chambre" value=0 class="form-control ">
+                                    </div>
+                                    <div class="col-sm-1 p-0 d-flex align-items-center" style="background-color:lavenderblush;">
+                                       
+                                    </div>
+                                </div>
+                                <div class="row hospitalisation d-none my-2">
+                                    <div class="col-sm-1 justify-content-center d-flex align-items-center" style="background-color:lavender;">
+                                        <small>2</small>
+                                    </div>
+                                    <div class="col-sm-4" style="background-color:lavenderblush;">
+                                        <input type="text" name="" class="form-control element" readonly value="Visite">
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavender;">
+                                        <input type="number"id="nbr_visite"  name="nbr_visite" class="form-control" value=0>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavenderblush;">
+                                        <input type="number" name="pu_visite" class="form-control" id="pu_visite" value=10000 required>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavender;">
+                                        <input type="number" name="visite" id="visite" value=0 class="form-control">
+                                    </div>
+                                    <div class="col-sm-1 p-0 d-flex align-items-center" style="background-color:lavenderblush;">
+                                       
+                                    </div>
+                                </div>
+                                <div class="row hospitalisation d-none my-2">
+                                    <div class="col-sm-1 justify-content-center d-flex align-items-center" style="background-color:lavender;">
+                                        <small>3</small>
+                                    </div>
+                                    <div class="col-sm-4" style="background-color:lavenderblush;">
+                                        <input type="text" name="" class="form-control element" value="AMI-JOUR (750*12)" readonly>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavender;">
+                                        <input type="number" id="nbr_ami_jour"  name="nbr_ami_jour" class="form-control" value=0>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavenderblush;">
+                                        <input type="number" name="pu_ami_jour" class="form-control" id="pu_ami_jour" value=9000 required>
+                                    </div>
+                                    <div class="col-sm-2" style="background-color:lavender;">
+                                        <input type="number" id="ami_jour" name="ami_jour" value=0 class="form-control">
+                                    </div>
+                                    <div class="col-sm-1 p-0 d-flex align-items-center" style="background-color:lavenderblush;">
+                                        
+                                    </div>
+                                </div>
+                                <div class="row hospitalisation d-none my-2">
+                                    <div class="col-sm-12 d-flex align-items-center justify-content-end">
+                                        <p class=" float-right total2 text-danger">Total 2: <strong>0</strong> FCFA</p>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
                                     <div class="col-12">
                                         <p class="float-right total">Total : <strong>0</strong> FCFA</p>
                                     </div>
@@ -241,7 +278,7 @@
                     ro = false;
                 }
 
-                //Chargement les éléments du dévis selectionné dans le formulaire du modal
+                //Chargement des éléments du dévis selectionné dans le formulaire du modal
                 devi.ligne_devis.forEach(ligneDevi => {
                     $(".ajouter_ligne").before('<div class="row ligne my-2">' +
                         ' <div class="col-sm-1 justify-content-center d-flex align-items-center" style="background-color:lavender;">' +
@@ -269,25 +306,29 @@
                 $('#nom_devis').val(devi.nom); //rempli le champ devis de...
                 $('#acces_devis').val(devi.acces); //rempli le champ devis de...
                 $('#code_devis').val(devi.code); //rempli le champ devis de...
-                $('#nbr_jour_hosp').val(devi.nbr_jour_hosp); //rempli le champ devis de...
+                $('#nbr_chambre').val(devi.nbr_chambre); //rempli le champ devis de...
+                $('#nbr_visite').val(devi.nbr_visite); //rempli le champ devis de...
+                $('#nbr_ami_jour').val(devi.nbr_ami_jour); //rempli le champ devis de...
                 $('#pu_chambre').val(devi.pu_chambre); //rempli le champ devis de...
                 $('#pu_ami_jour').val(devi.pu_ami_jour); //rempli le champ devis de...
                 $('#pu_visite').val(devi.pu_visite); //rempli le champ devis de...
                 $('.hospitalisation').find('input').attr("readonly", ro);
-                $(".total>strong").text(parseInt($('.total1>strong').text()) + parseInt($(".total2>strong").text())); //rempli le champ devis de...
-                if (devi.nbr_jour_hosp > 0) {
-                    $('#hospitalisation').attr('checked',true);
+                $(".total>strong").text(parseInt($('.total2>strong').text()) + parseInt($(".total1>strong").text())); //rempli le champ devis de...
+                if (devi.nbr_chambre > 0) {
+                    $('#hospitalisation').prop('checked', true);
                     $('.hospitalisation').removeClass('d-none');
-                }else{
-                    $('#hospitalisation').attr('checked',false);
+                } else {
+                    $('#hospitalisation').prop('checked', false);
                     $('.hospitalisation').addClass('d-none');
                 }
-                $('#nbr_jour_hosp').val(devi.nbr_jour_hosp); //rempli le champ devis de...
-                $('#pu_chambre').val(devi.pu_chambre); //rempli le champ devis de...
-                $('#pu_ami_jour').val(devi.pu_ami_jour); //rempli le champ devis de...
-                $('#pu_visite').val(devi.pu_visite); //rempli le champ devis de...
-                $('.total1>strong').text(parseInt($("#nbr_jour_hosp").val()) * ( parseInt($("#pu_visite").val())+ parseInt($("#pu_chambre").val()) + parseInt($("#pu_ami_jour").val())));
-                $(".total>strong").text(parseInt($('.total1>strong').text()) + parseInt($(".total2>strong").text())); //rempli le champ devis de...
+                //$('#nbr_chambre').val(devi.nbr_chambre); //rempli le champ devis de...
+                //$('#pu_chambre').val(devi.pu_chambre); //rempli le champ devis de...
+                //$('#pu_ami_jour').val(devi.pu_ami_jour); //rempli le champ devis de...
+                //$('#pu_visite').val(devi.pu_visite); //rempli le champ devis de...
+
+                //calcul total 2
+                $('.total2>strong').text(total2($("#nbr_chambre").val(), $("#pu_chambre").val(), $("#nbr_visite").val(), $("#pu_visite").val(), $("#nbr_ami_jour").val(), $("#pu_ami_jour").val()));
+                $(".total>strong").text(parseInt($('.total2>strong').text()) + parseInt($(".total1>strong").text())); //rempli le champ devis de...
                 $('#nom_devis').attr("readonly", ro); //rend ce dernier readonly ou non
                 $('#code_devis').attr("readonly", ro); //rend ce dernier readonly ou non
                 $('.ligne').find('input').attr("readonly", ro); // rend les champs du formulaire modifiable ou pas en fonction des droit recupérés plus haut
@@ -303,14 +344,19 @@
                 $('.devis_export').addClass('d-none'); //rend le bouton imprimer devis invisible
                 $('#nom_devis').val(''); //reinitialise le champ devis de...
                 $('#code_devis').val(''); //reinitialise le champ devis de...
-                $('#nbr_jour_hosp').val(0); //reinitialise le champ devis de...
+                $('#nbr_visite').val(0); //reinitialise le champ devis de...
+                $('#nbr_ami_jour').val(0); //reinitialise le champ devis de...
+                $('#nbr_chambre').val(0); //reinitialise le champ devis de...
+                $('#visite').val(0); //reinitialise le champ devis de...
+                $('#ami_jour').val(0); //reinitialise le champ devis de...
+                $('#chambre').val(0); //reinitialise le champ devis de...
                 $('#pu_chambre').val(30000); //reinitialise le champ devis de...
                 $('#pu_ami_jour').val(9000); //reinitialise le champ devis de...
                 $('#pu_visite').val(10000); //reinitialise le champ devis de...
-                $(".total1>strong").text('0'); //remet total1 à 0 ...
                 $(".total2>strong").text('0'); //remet total2 à 0 ...
+                $(".total1>strong").text('0'); //remet total1 à 0 ...
                 $(".total>strong").text('0'); //remet total à 0 ...
-                $('#hospitalisation').attr('checked',false);
+                $('#hospitalisation').prop('checked', false);
                 $('.hospitalisation').addClass('d-none');
             }
 
@@ -340,7 +386,7 @@
         $(".ligne").each(function(index) {
             total += parseInt($(this).find('div>.prix').val());
         });
-        $('#imprimer_devis').find('.total2>strong').text(total);
+        $('#imprimer_devis').find('.total1>strong').text(total);
     }
 
     $(document).ready(numeroLigne());
@@ -425,7 +471,7 @@
     //soumission - impression
     $(".devis_export").on("click", function(e) {
         e.preventDefault();
-        $('#devis_form').attr('action', "{{asset('admin/devis/export/')}}/"+NumberToLetter(parseInt($('.total>strong').text()))).submit();
+        $('#devis_form').attr('action', "{{asset('admin/devis/export/')}}/" + NumberToLetter(parseInt($('.total>strong').text()))).submit();
     });
     $("body")
 
@@ -438,41 +484,29 @@
         }
 
     });
-    $("body").on('change', "#nbr_jour_hosp", function() {
-        let nbr_jour_hosp = parseInt($(this).val());
-        let pu_chambre = parseInt($("#pu_chambre").val());
-        let pu_visite = parseInt($("#pu_visite").val());
-        let pu_ami_jour = parseInt($("#pu_ami_jour").val());
-        $('.total1>strong').text(nbr_jour_hosp * (pu_chambre + pu_visite + pu_ami_jour));
+    $("body").on('change', "#nbr_chambre, #nbr_visite, #nbr_ami_jour, #pu_chambre , #pu_visite, #pu_ami_jour", function() {
+        let nbr_chambre = $('#nbr_chambre').val();
+        let nbr_visite = $('#nbr_visite').val();
+        let nbr_ami_jour = $('#nbr_ami_jour').val();
+        let pu_chambre = $('#pu_chambre').val();
+        let pu_visite = $("#pu_visite").val();
+        let pu_ami_jour = $("#pu_ami_jour").val();
+        $('.total2>strong').text(total2(nbr_chambre,pu_chambre,nbr_visite,pu_visite,nbr_ami_jour,pu_ami_jour));
         totaux();
     })
-    $("body").on('change', "#pu_chambre", function() {
-        let nbr_jour_hosp = parseInt($('#nbr_jour_hosp').val());
-        let pu_chambre = parseInt($(this).val());
-        let pu_visite = parseInt($("#pu_visite").val());
-        let pu_ami_jour = parseInt($("#pu_ami_jour").val());
-        $('.total1>strong').text(nbr_jour_hosp * (pu_chambre + pu_visite + pu_ami_jour));
-        totaux();
-    })
-    $("body").on('change', "#pu_visite", function() {
-        let nbr_jour_hosp = parseInt($("#nbr_jour_hosp").val());
-        let pu_chambre = parseInt($("#pu_chambre").val());
-        let pu_visite = parseInt($(this).val());
-        let pu_ami_jour = parseInt($("#pu_ami_jour").val());
-        $('.total1>strong').text(nbr_jour_hosp * (pu_chambre + pu_visite + pu_ami_jour));
-        totaux();
-    })
-    $("body").on('change', "#pu_ami_jour", function() {
-        let nbr_jour_hosp = parseInt($("#nbr_jour_hosp").val());
-        let pu_chambre = parseInt($("#pu_chambre").val());
-        let pu_visite = parseInt($("#pu_visite").val());
-        let pu_ami_jour = parseInt($(this).val());
-        $('.total1>strong').text(nbr_jour_hosp * (pu_chambre + pu_visite + pu_ami_jour));
-        totaux();
-    });
+
+    function total2(nbr_chambre, pu_chambre, nbr_visite, pu_visite, nbr_ami_jour, pu_ami_jour){
+        prix_chambre= parseInt(nbr_chambre) * parseInt(pu_chambre);
+        prix_visite = parseInt(nbr_visite) * parseInt(pu_visite);
+        prix_ami_jour = parseInt(nbr_ami_jour) * parseInt(pu_ami_jour);
+        $('#chambre').val(prix_chambre);
+        $('#visite').val(prix_visite);
+        $('#ami_jour').val(prix_ami_jour);
+        return prix_chambre + prix_visite + prix_ami_jour;
+    }
 
     function totaux() {
-        $(".total>strong").text(parseInt($('.total1>strong').text()) + parseInt($(".total2>strong").text()));
+        $(".total>strong").text(parseInt($('.total2>strong').text()) + parseInt($(".total1>strong").text()));
     }
 </script>
 @stop

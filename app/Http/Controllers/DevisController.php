@@ -14,7 +14,7 @@ class DevisController extends Controller
     {
        
         $devis = Devi::latest()->with('ligneDevis:id,element,quantite,prix_u,devi_id')
-                    ->get(["id","code","acces","user_id","nom","nbr_jour_hosp","pu_chambre","pu_visite","pu_ami_jour"]);
+                    ->get(["id","code","acces","user_id","nom","nbr_chambre","nbr_visite","nbr_ami_jour","pu_chambre","pu_visite","pu_ami_jour"]);
         $patients = Patient::orderBy('name', 'ASC')->get(['id','name', 'prenom']);
         return view('admin.devis.index', compact('devis','patients'));
     }
@@ -25,7 +25,9 @@ class DevisController extends Controller
 
         $request->validate([
             'code_devis' => '',
-            'nbr_jour_hosp' => 'required|numeric|min:0',
+            'nbr_chambre' => 'required|numeric|min:0',
+            'nbr_visite' => 'required|numeric|min:0',
+            'nbr_ami_jour' => 'required|numeric|min:0',
             'pu_chambre' => 'required|numeric|min:0',
             'pu_visite' => 'required|numeric|min:0',
             'pu_ami_jour' => 'required|numeric|min:0',
@@ -40,7 +42,9 @@ class DevisController extends Controller
         
         $devi = Devi::findOrFail($id);
         $devi->nom = $request->get('nom_devis');
-        $devi->nbr_jour_hosp = $request->get('nbr_jour_hosp');
+        $devi->nbr_chambre = $request->get('nbr_chambre');
+        $devi->nbr_visite = $request->get('nbr_visite');
+        $devi->nbr_ami_jour = $request->get('nbr_ami_jour');
         $devi->pu_chambre = $request->get('pu_chambre');
         $devi->pu_visite = $request->get('pu_visite');
         $devi->pu_ami_jour = $request->get('pu_ami_jour');
@@ -67,7 +71,9 @@ class DevisController extends Controller
 
         $request->validate([
             'code_devis' => '',
-            'nbr_jour_hosp' => 'required|numeric|min:0',
+            'nbr_chambre' => 'required|numeric|min:0',
+            'nbr_visite' => 'required|numeric|min:0',
+            'nbr_ami_jour' => 'required|numeric|min:0',
             'pu_chambre' => 'required|numeric|min:0',
             'pu_visite' => 'required|numeric|min:0',
             'pu_ami_jour' => 'required|numeric|min:0',
@@ -81,7 +87,9 @@ class DevisController extends Controller
 
         $devis = Devi::create([
             'nom' => $request->get('nom_devis'),
-            'nbr_jour_hosp' => $request->get('nbr_jour_hosp'),
+            'nbr_chambre' => $request->get('nbr_chambre'),
+            'nbr_visite' => $request->get('nbr_visite'),
+            'nbr_ami_jour' => $request->get('nbr_ami_jour'),
             'pu_chambre' => $request->get('pu_chambre'),
             'pu_visite' => $request->get('pu_visite'),
             'pu_ami_jour' => $request->get('pu_ami_jour'),
@@ -107,7 +115,9 @@ class DevisController extends Controller
 
         $request->validate([
             'patient' => 'required',
-            'nbr_jour_hosp' => 'required|numeric|min:0',
+            'nbr_chambre' => 'required|numeric|min:0',
+            'nbr_visite' => 'required|numeric|min:0',
+            'nbr_ami_jour' => 'required|numeric|min:0',
             'pu_chambre' => 'required|numeric|min:0',
             'pu_visite' => 'required|numeric|min:0',
             'pu_ami_jour' => 'required|numeric|min:0',
@@ -121,7 +131,9 @@ class DevisController extends Controller
         ]);
         
         $devis = new Devi([
-            'nbr_jour_hosp' => $request->get('nbr_jour_hosp'),
+            'nbr_chambre' => $request->get('nbr_chambre'),
+            'nbr_visite' => $request->get('nbr_visite'),
+            'nbr_ami_jour' => $request->get('nbr_ami_jour'),
             'pu_chambre' => $request->get('pu_chambre'),
             'pu_visite' => $request->get('pu_visite'),
             'pu_ami_jour' => $request->get('pu_ami_jour'),
@@ -134,7 +146,10 @@ class DevisController extends Controller
          $ld = $request->get('ligneDevi');
          $lignedevis=[];
          $total1 = 0;
-         $devis->total2 = $request->get('nbr_jour_hosp')*($request->get('pu_chambre')+$request->get('pu_ami_jour')+$request->get('pu_visite'));
+         $prix_chambre = $request->get('nbr_chambre') * $request->get('pu_chambre');
+         $prix_visite = $request->get('nbr_visite') * $request->get('pu_visite');
+         $prix_ami_jour = $request->get('nbr_ami_jour') * $request->get('pu_ami_jour');
+         $devis->total2 = $prix_chambre + $prix_visite + $prix_ami_jour;
          foreach ($ld as  $ligneDevi) {
             $total1 += $ligneDevi["prix_u"]*$ligneDevi["quantite"];
             array_push($lignedevis, new LigneDevi([

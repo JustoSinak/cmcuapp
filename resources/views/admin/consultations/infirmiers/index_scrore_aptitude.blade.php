@@ -34,7 +34,7 @@
                             <i class="fas fa-user-secret"></i>
                         </button>
                     @endcan
-                    <table class="table table-bordered table-striped col-md-2">
+                    <table class="table table-bordered table-striped col-md-12">
                         @can('med_inf_anes', \App\Patient::class)
                             <tr>
                                 <th colspan="0">HORAIRES</th>

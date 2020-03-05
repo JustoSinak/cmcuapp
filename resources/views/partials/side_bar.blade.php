@@ -19,7 +19,7 @@
         <li>
             <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false">
                 <i class="fas fa-users"></i>
-                Gestion des utilisateurs
+                Utilisateurs
                 <i class="fas fa-angle-down fa-pull-right"></i>
             </a>
             <ul class="collapse list-unstyled" id="usersSubmenu">
@@ -43,7 +43,7 @@
         <li>
             <a href="#patientsSubmenu" data-toggle="collapse" aria-expanded="false">
                 <i class="fas fa-users"></i>
-                Gestion des patients
+                Patients
                 <i class="fas fa-angle-down fa-pull-right"></i>
             </a>
             <ul class="collapse list-unstyled" id="patientsSubmenu">
@@ -86,7 +86,7 @@
 
 
         @endcan
-        @can('create', \App\Produit::class)
+        <!-- @can('create', \App\Produit::class)
         <li>
             <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false">
                 @can('print', \App\Produit::class)
@@ -126,7 +126,7 @@
                 </li>
             </ul>
         </li>
-        @endcan
+        @endcan -->
         @can('create', \App\chambre::class)
         <li>
             <a href="{{ route('chambres.index') }}">
@@ -153,59 +153,19 @@
         @endcan
         @can('view', \App\User::class)
         <li>
-            <a href="#factureSubmenu" data-toggle="collapse" aria-expanded="false">
-                <i class="fas fa-chart-line"></i>
-                Factures
-                <i class="fas fa-angle-down fa-pull-right"></i>
+            <a href="{{ route('factures.consultation') }}">
+                <i class="fas fa-list-ul"></i>
+                Facture
             </a>
-            <ul class="collapse list-unstyled" id="factureSubmenu">
-                <li>
-                    <a href="{{ route('factures.index') }}">
-                        <i class="far fa-money-bill-alt"></i>
-                        Factures produits
-                    </a>
-
-                    <a href="{{ route('factures.chambre') }}">
-                        <i class="far fa-money-bill-alt"></i>
-                        Factures chambres
-                    </a>
-                    <!--
-                            <a href="{{ route('factures.client') }}">
-                            <i class="far fa-money-bill-alt"></i>
-                            Factures clients externes
-                            </a>
-                    -->
-                    <!-- <a href="{{ route('facture_devis.index') }}">
-                        <i class="far fa-money-bill-alt"></i>
-                        Factures devis
-                    </a> -->
-                    <a href="{{ route('factures.consultation') }}">
-                        <i class="far fa-money-bill-alt"></i>
-                        Autres factures
-                    </a>
-                </li>
-            </ul>
-
         </li>
         @endcan
 
         @can('view', \App\Devi::class)
         <li>
-            <a href="#devisSubmenu" data-toggle="collapse" aria-expanded="false">
+            <a href="{{ route('devis.index') }}">
                 <i class="fas fa-book"></i>
-                Gestion des Devis
-                <i class="fas fa-angle-down fa-pull-right"></i>
+                Devis
             </a>
-            <ul class="collapse list-unstyled" id="devisSubmenu">
-
-                <li>
-                    <a href="{{ route('devis.index') }}">
-                        <i class="fas fa-list-ul"></i>
-                        Liste des devis
-                    </a>
-                </li>
-
-            </ul>
         </li>
         @endcan
         <br>

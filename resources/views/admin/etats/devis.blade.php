@@ -93,25 +93,25 @@
         </tr>
 
         <tr>
-            <td colspan=4><b>HOSPITALISATION {{ $devis->nbr_jour_hosp }} JOUR(S)</b></td>
+            <td colspan=4><b>HOSPITALISATION {{ $devis->nbr_chambre }} JOUR(S)</b></td>
         </tr>
         <tr>
             <td>CHAMBRE</td>
-            <td class="text-right">{{ $devis->nbr_jour_hosp }}</td>
+            <td class="text-right">{{ $devis->nbr_chambre }}</td>
             <td class="text-right">{{ $devis->pu_chambre }}</td>
-            <td class="text-right">{{ $devis->nbr_jour_hosp * $devis->pu_chambre }}</td>
+            <td class="text-right">{{ $devis->nbr_chambre * $devis->pu_chambre }}</td>
         </tr>
         <tr>
             <td>AMI-JOUR (750x12)</td>
-            <td class="text-right">{{ $devis->nbr_jour_hosp }}</td>
+            <td class="text-right">{{ $devis->nbr_ami_jour }}</td>
             <td class="text-right">{{ $devis->pu_ami_jour }}</td>
-            <td class="text-right">{{ $devis->nbr_jour_hosp * $devis->pu_ami_jour }}</td>
+            <td class="text-right">{{ $devis->nbr_ami_jour * $devis->pu_ami_jour }}</td>
         </tr>
         <tr>
             <td>VISITE</td>
-            <td class="text-right">{{ $devis->nbr_jour_hosp }}</td>
+            <td class="text-right">{{ $devis->nbr_visite }}</td>
             <td class="text-right">{{ $devis->pu_visite  }}</td>
-            <td class="text-right">{{ $devis->nbr_jour_hosp * $devis->pu_visite }}</td>
+            <td class="text-right">{{ $devis->nbr_visite * $devis->pu_visite }}</td>
         </tr>
         <tr>
             <td class="text-center" colspan="3"><b>TOTAL 2</b></td>

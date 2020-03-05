@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::post('users', 'UsersController@store')->name('users.store');
     Route::get('users/{user}/edit', 'UsersController@edit')->name('users.edit');
     Route::patch('users/{user}', 'UsersController@update')->name('users.update');
+    Route::get('users/{user}/profile', 'UsersController@profile')->name('users.profile');
+    Route::patch('users/{user}/changePassword', 'UsersController@changePassword')->name('users.changePassword');
     Route::delete('users/{user}', 'UsersController@destroy')->name('users.destroy');
 
 

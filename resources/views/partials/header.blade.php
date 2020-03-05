@@ -30,7 +30,7 @@
                                 <a href="mailto:info@example.com">{{ Auth::user()->login}}</a>
                             </div>
                         </div>
-                        <a href="#" class="dropdown-item mt-3">
+                        <a href="{{ route('users.profile', Auth::user()->id) }}" class="dropdown-item mt-3">
                             <h4>
                                 <i class="far fa-user mr-3"></i>Mon profile</h4>
                         </a>

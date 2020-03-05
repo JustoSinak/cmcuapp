@@ -35,7 +35,7 @@ class UsersController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'lieu_naissance' => ['required', 'string', 'max:15'],
             'date_naissance' => ['date:"dd/mm/yyyy"'],
-            'prenom' => ['required', 'string', 'min:6', 'max:20'],
+            'prenom' => ['required', 'string', 'min:4', 'max:20'],
             'telephone' => ['required', 'unique:users', 'numeric', 'digits:9'],
             'sexe' => ['required'],
             'login' => ['required', 'string', 'min:6', 'max:255', 'unique:users'],
@@ -77,7 +77,7 @@ class UsersController extends Controller
     {
         $this->authorize('update', User::class);
 
-        $this->validateWith([
+        $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'lieu_naissance' => ['required', 'string', 'max:255'],
             'date_naissance' => ['date:"dd/mm/yyyy"'],
@@ -87,10 +87,10 @@ class UsersController extends Controller
             'login' => ['required', 'string', 'min:6', 'max:255'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
-
         $mdpuser = $request->input('password');
-        $verifypass = password_verify($mdpuser, $user->password);
+        //$verifypass = password_verify($mdpuser, $user->password);
 
+        //dd($verifypass);
             $user->name = $request->name;
             $user->lieu_naissance = $request->lieu_naissance;
             $user->date_naissance = $request->date_naissance;
@@ -99,14 +99,14 @@ class UsersController extends Controller
             $user->sexe = $request->sexe;
             $user->login = $request->login;
             $user->role_id = $request->roles;
-        if ($verifypass == true)
-        {
+        // if ($verifypass)
+        // {
             $user->password = Hash::make($request->password);
 
             $user->save();
-        }else{
-            return redirect()->route('users.edit', $user->id)->with('error', "L'ancien mot de passe est invalide");
-        }
+        // }else{
+        //     return redirect()->route('users.edit', $user->id)->with('error', "L'ancien mot de passe est invalide");
+        // }
 
         return redirect()->route('users.index')->with('success',"L'utilisateur a bien été modifier");
     }
@@ -119,5 +119,35 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect()->route('users.index')->with('success', "L'utilisateur a bien été supprimé");
+    }
+
+    public function changePassword(Request $request, User $user)
+    {
+        $this->authorize('changePassword', User::class);
+
+        $request->validate([
+            'old_pass' =>['required', 'string', 'min:6'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
+        ]);
+        $old_pass = $request->input('old_pass');
+        $verifypass = password_verify($old_pass, $user->password);
+
+        //dd($verifypass);
+        if ($verifypass)
+        {
+            $user->password = Hash::make($request->password);
+
+            $user->save();
+        }else{
+            return redirect()->route('users.profile', $user->id)->with('error', "L'ancien mot de passe est invalide");
+        }
+
+        return redirect()->route('users.profile',$user->id)->with('success',"Mot de passe mis à jour avec succès");
+    }
+    
+    public function profile(Request $request, $id){
+        $user = User::with('roles')->find($id);
+
+        return view("admin.users.profile")->withUser($user);
     }
 }
