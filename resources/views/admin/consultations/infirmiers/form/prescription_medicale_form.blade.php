@@ -20,7 +20,7 @@
                                             <tr>
                                                 <td colspan="2">
                                                     <label> <b>Allergie :</b></label>
-                                                    <input type="text" name="allergie" class="form-control">
+                                                    <input type="text" name="allergie" class="form-control" required>
                                                 </td>
                                                 
                                             </tr>
@@ -28,11 +28,11 @@
                                             <tr>
                                                 <td >
                                                     <label> <b>Regime :</b></label>
-                                                    <textarea name="regime" class="form-control" rows="3"></textarea>
+                                                    <textarea name="regime" class="form-control" rows="3" required></textarea>
                                                 </td>
                                                 <td >
                                                     <label> <b>Consultations spécialisées :</b></label>
-                                                    <textarea name="consultation_specialise" class="form-control" rows="3"></textarea>
+                                                    <textarea name="consultation_specialise" class="form-control" rows="3" required></textarea>
                                                 </td>
                                             </tr>
 

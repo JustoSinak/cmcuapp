@@ -22,17 +22,17 @@ class LicencesTableSeeder extends Seeder
                 'id' => '1',
                 'license_key' => '',
                 'client' => 'cmcuapp',
-                'create_date' => '2019-10-10',
-                'active_date' => '2019-10-10',
-                'expire_date' => '2020-01-01',
+                'create_date' => '2020-10-07',
+                'active_date' => '2020-10-07',
+                'expire_date' => '2021-01-01',
             ),
             0 => 
             array (
                 'id' => '1',
                 'license_key' => '',
                 'client' => 'cmcuapp',
-                'create_date' => '2019-01-02',
-                'active_date' => '2019-01-02',
+                'create_date' => '2020-01-02',
+                'active_date' => '2020-10-07',
                 'expire_date' => '2021-01-01',
             ),
         ));
