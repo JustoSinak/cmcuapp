@@ -40,7 +40,7 @@ class AdminController extends Controller
         $licence->update([
 
             'license_key' => request('license_key'),
-            'expire_date' => Carbon::parse('+1 month'),
+            'expire_date' => Carbon::parse('+1 month')
         ]);
 
 
@@ -50,14 +50,14 @@ class AdminController extends Controller
         return back();
     }
 
-    public function index()
+   public function index()
     {
         return redirect()->route('admin.dashboard');
     }
 
-    function phpans_license(){
+   /*function phpans_license(){
         $license = rand(1000,9999) . '-' . rand(1000,9999) . '-' . rand(1000,9999) . '-' . rand(1000,9999) . '-' . rand(1000,9999);
         return $license;
-    }
+    }*/
 
 }

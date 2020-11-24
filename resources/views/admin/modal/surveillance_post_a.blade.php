@@ -21,35 +21,35 @@
                                         <tr>
                                             <td><b>Surveillance :</b> <span class="text-danger">*</span></td>
                                             <td>
-                                                <textarea name="surveillance" class="form-control" cols="55" rows="3"></textarea>
+                                                <textarea name="surveillance" class="form-control" cols="55" rows="3" required></textarea>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><b>Traitement(s) :</b> </td>
                                             <td>
-                                                <textarea name="traitement" class="form-control" cols="55" rows="3"></textarea>
+                                                <textarea name="traitement" class="form-control" cols="55" rows="3" required></textarea>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><b>Examen(s) paraclinique(s) post opératoire :</b> </td>
                                             <td>
-                                                <textarea name="examen_paraclinique" class="form-control" cols="55" rows="3"></textarea>
+                                                <textarea name="examen_paraclinique" class="form-control" cols="55" rows="3" required></textarea>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><b>Observation(s) :</b> <span class="text-danger">*</span></td>
                                             <td>
-                                                <textarea name="observation" class="form-control" cols="55" rows="3"></textarea>
+                                                <textarea name="observation" class="form-control" cols="55" rows="3" required></textarea>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <label for=""><b>Date de sortie :</b></label>
-                                                <input type="date" class="form-control" name="date_sortie">
+                                                <input type="date" class="form-control" name="date_sortie" required>
                                             </td>
                                             <td>
                                                 <label for=""><b>Heure de sortie :</b></label>
-                                                <input type="time" class="form-control col-md-5" name="heur_sortie">
+                                                <input type="time" class="form-control col-md-5" name="heur_sortie" required>
                                             </td>
                                         </tr>
                                         </tbody>

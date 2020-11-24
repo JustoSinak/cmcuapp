@@ -13,12 +13,19 @@
         @include('partials.header')
         <!--// top-bar -->
         @can('show', \App\User::class)
+        <div class="col-md-12  toppad  offset-md-0 ">
+            <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right">
+                <i class="fas fa-arrow-left"></i>  Retour au dossier patient
+            </a>
+        </div>
         <div class="container px-0">
             <h1 class="text-center">PRESCRIPTIONS MEDICALES</h1>
+            
             <hr>
         </div>
         <div class="container">
             <div class="row">
+                
                 <div class="col-12 px-0">
                     @if ($errors->any())
                     <div class="alert alert-danger">

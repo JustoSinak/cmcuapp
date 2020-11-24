@@ -57,7 +57,7 @@
                         <td><a href="{{ Route('fiches.show', $fiches->id)}}" class="btn btn-primary"><i class="fas fa-eye"></i></a></td>
                         <td><a href="{{ Route('fiches.edit', $fiches->id)}}" class="btn btn-primary"><i class="far fa-edit"></i></a></td>
                         <td>
-                            <p data-placement="top" data-toggle="tooltip" title="Delete">
+                            <p data-placement="top" data-toggle="tooltip" title="Imprimer">
                                 <a class="btn btn-success btn-sm" title="Imprimer" href="{{ route('fiche.pdf', $fiches->id) }}"><i class="fas fa-print"></i></a>
                             </p>
                         </td>

@@ -21,11 +21,17 @@
         @include('partials.side_bar')
         <div class="col-sm-10">
             @include('partials.header')
-            <div class="row mb-1">
-                    <div class="col-sm-12">
-                        <h1 class="text-center ">AGENDA  - Dr {{ $medecin->name }} {{ $medecin->prenom }}</h1>
+            <div class="col-md-12  toppad  offset-md-0 ">
+                        <a href="{{ route('events.index') }}" class="btn btn-success float-right">
+                            <i class="fas fa-arrow-left"></i>  Retour à l'agenda
+                        </a>
                     </div>
+            <div class="row mb-1">
+                <div class="col-sm-12">
+                    <h1 class="text-center ">AGENDA  - Dr {{ $medecin->name }} {{ $medecin->prenom }}</h1>
                 </div>
+            </div>
+            
                 <hr>
             <div class="col-md-10 mx-auto">
                 

@@ -42,6 +42,6 @@ class ActiveLicenceOneMonth extends Command
 
         Licence::ActiveLicenceOneMonth();
 
-        $this->info('Bravo!! un nouveau moi de validité pour l\'utilisation de l\'application');
+        $this->info('Bravo!! un nouveau mois de validité pour l\'utilisation de l\'application');
     }
 }
