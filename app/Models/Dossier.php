@@ -49,7 +49,22 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Dossier extends Model
 {
-    protected $guarded = [];
+    protected $fillable = [
+        'patient_id',
+        'sexe',
+        'personne_confiaance',
+        'tel_personne_confiance',
+        'portables_1',
+        'portable_2',
+        'personne_contact',
+        'tel_personne_contact',
+        'profession',
+        'email',
+        'fax',
+        'adresse',
+        'lieu_naissance',
+        'date_naissance'
+    ];
 
     public function patients()
     {
