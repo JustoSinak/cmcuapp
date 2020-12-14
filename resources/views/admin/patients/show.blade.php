@@ -29,6 +29,7 @@
         <!-- Page Content Holder -->
         @include('partials.header') @can('show', \App\User::class) 
         <div class="container">
+        @include('partials.flash')
             <div class="row">
                 <div class="col-md-12  toppad  offset-md-0 mb-2">
                     @include('admin.patients.partials.menu')
@@ -46,7 +47,7 @@
                             @endif
                             <div class="card">
                                 <div class="card-body">
-                                    <h2 class="card-title text-danger text-center">DOSSIER PATIENT {{ $patient->name}}</h2>
+                                    <h2 class="card-title text-danger text-center">DOSSIER PATIENT {{ $patient->name}} {{$patient->prenom}}</h2>
                                     
                                     <table class="table table-user-information table-hover mt-3">
                                         
@@ -79,7 +80,6 @@
                                             <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
                                             @endcan
                                         </div>
-                                        @include('partials.flash')
                                         @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
                                         @include('admin.consultations.partials.motif_et_montant')
                                     </table>

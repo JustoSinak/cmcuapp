@@ -102,9 +102,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::post('examens', 'PrescriptionController@store')->name('prescriptions.store');
     Route::get('prescription_examens/{id}','PrescriptionController@export_prescription')->name('prescription_examens.pdf');
 
+    
     Route::get('dossiers/create', 'DossiersController@create')->name('dossiers.create');
     Route::get('dossiers/create/{patient}', 'DossiersController@create')->name('dossiers.create');
     Route::post('dossiers', 'DossiersController@store')->name('dossiers.store');
+    Route::patch('dossiers/{dossier}', 'DossiersController@update')->name('dossiers.update');
 
 
     Route::get('consultations/create/{patient}', 'ConsultationsController@create')->name('consultations.create');
