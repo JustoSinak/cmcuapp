@@ -20,7 +20,7 @@
                     <div class="card">
                         <div class="card-body">
                             @include('partials.flash_form')
-                            <h3 class="card-title">Informations relatives au dossier patient</h3>
+                            <h3 class="card-title">Informations relatives au dossier du patient {{ $patient->name }} {{$patient->prenom}}</h3>
                             <small class="text-danger"><i><strong><i class="fas fa-exclamation-triangle"></i> Attention
                                         !! espace réservé au médecin</strong></i>
                             </small>
@@ -42,7 +42,7 @@
                     <div class="col-md-6  offset-md-0  toppad">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title text-uppercase text-primary"><b>Prise des paramètres du patient</b>
+                                <div class="card-title text-uppercase text-primary"><b>Prise des paramètres du patient {{ $patient->name }} {{$patient->prenom}}</b>
                                     <small><strong></strong></small>
                                 </div>
                                 <small class="text-info" title="La prise des paramètres du patient doit être quotidienne"><i

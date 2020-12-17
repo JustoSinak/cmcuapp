@@ -12,15 +12,9 @@
 </tr>
 <tr>
     <td><b>Médecin de référence :</b> <span class="text-danger">*</span></td>
+
     <td>
-        <select class="form-control col-md-6" name="medecin_r" id="medecin_r" required>
-            <option value=""> Nom du médecin</option>
-            @foreach ($users as $user)
-                <option
-                    value="{{ $user->name }} {{ $user->prenom }}" {{old('medecin_r', $consultation->medecin_r) == ($user->name . ' ' . $user->prenom) ? 'selected' : ''}}>{{ $user->name }} {{ $user->prenom }}
-                </option>
-            @endforeach
-        </select>
+        <input type="text" class="form-control splitLines" name="medecin_r" id="medecin_r" value="{{ Auth::user()->name }} {{ Auth::user()->prenom }}" {{old('medecin_r', $consultation->medecin_r) == (Auth::user()->name . ' ' . Auth::user()->prenom)}}>
     </td>
 </tr>
 <tr>

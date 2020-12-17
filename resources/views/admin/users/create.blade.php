@@ -13,11 +13,9 @@
             <h1 class="text-center">AJOUTER UN UTILISATEUR</h1>
             <hr>
 
-            <div class="card" style="width: 50rem;">
+            <div class="card" style="width: 50rem; margin-left: 150px;">
                 <div class="card-body">
-                    <h5 class="card-title">Ajout d'un nouvel utilisateur</h5>
                     <small class="text-info" title="Les champs marqués par une étoile rouge sont obligatoire"><i class="fas fa-info-circle"></i></small>
-                    <hr>
                     @include('partials.flash_form')
                     <form class="form-group" action="{{ route('users.store') }}" method="POST">
                         @csrf
@@ -35,11 +33,11 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-5">
-                                    <label for="lieu_naissance" class="col-form-label text-md-right">Lieu de naissance <span class="text-danger">*</span></label>
+                                    <label for="lieu_naissance" class="col-form-label text-md-right">Lieu De Naissance <span class="text-danger">*</span></label>
                                     <input name="lieu_naissance" value="{{ old('lieu_naissance') }}" class="form-control" placeholder="Lieu de naissance" required>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <label for="date_naissance" class="col-form-label text-md-right">Date de naissance <span class="text-danger">*</span></label>
+                                    <label for="date_naissance" class="col-form-label text-md-right">Date De Naissance <span class="text-danger">*</span></label>
                                     <input name="date_naissance" type="date" value="{{ old('date_naissance') }}" class="form-control" placeholder="Date de naissance" required>
                                 </div>
                             </div>
@@ -94,18 +92,18 @@
 
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="password" class="col-form-label text-md-right">Nouveau mot de passe <span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label text-md-right">Mot De Passe <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="password" class="col-form-label text-md-right">Confirmer le mot de passe <span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label text-md-right">Confirmer Mot De Passe <span class="text-danger">*</span></label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-5">
-                                    <input name="password" type="password" class="form-control" id="password" placeholder="Ancien mot de passe" required>
+                                    <input name="password" type="password" class="form-control" id="password" placeholder="Mot De Passe" required>
                                 </div>
                                 <div class="form-group col-md-5">
-                                    <input id="confirm_password" type="password" class="form-control" name="password_confirmation" placeholder="Mot de passe de confimation" required>
+                                    <input id="confirm_password" type="password" class="form-control" name="password_confirmation" placeholder="Confirmer Mot De Passe" required>
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn btn-default" type="button" onclick="show_password()"><i id="show_pass" class="fas fa-eye"></i></button>

@@ -74,9 +74,9 @@
             function dynamic_field(number)
             {
                 html = '<tr>';
-                html += '<td><input id="1" type="text" name="medicament[]" class="form-control" /></td>';
-                html += '<td><input id="2" type="text" name="quantite[]" class="form-control" /></td>';
-                html += '<td><textarea id="3" name="description[]" class="form-control" cols="30" rows="3"></textarea></td>';
+                html += '<td><input id="1" type="text" name="medicament[]" class="form-control" required /></td>';
+                html += '<td><input id="2" type="text" name="quantite[]" class="form-control" required /></td>';
+                html += '<td><textarea id="3" name="description[]" class="form-control" cols="30" rows="3" required></textarea></td>';
                 if(number > 1)
                 {
                     html += '<td><button type="button" name="remove" id="" class="btn btn-danger remove"><i class="fas fa-minus"></i></button></td></tr>';

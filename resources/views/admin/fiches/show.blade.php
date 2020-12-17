@@ -13,19 +13,19 @@
                 <div class="card bg-light card-body mb-3 card bg-faded p-1 mb-3">
                     <div class="row">
                         <div class="col-md-6 col-lg-8">
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->nom }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->prenom }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->chambre_numero }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->age }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->service }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->infirmier_charge }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->accueil }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->restauration }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->chambre }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->soins }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->notes }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->quizz }}</p><br>
-                            <p> <i class="glyphicon glyphicon-envelope"></i>{{ $fiche->remarque_suggestion }}</p><br>
+                            <p> Nom: {{ $fiche->nom }}</p><br>
+                            <p> Prénom: {{ $fiche->prenom }}</p><br>
+                            <p> Numéro de chambre: {{ $fiche->chambre_numero }}</p><br>
+                            <p> Age: {{ $fiche->age }}</p><br>
+                            <p> Service: {{ $fiche->service }}</p><br>
+                            <p> Infirmier en charge: {{ $fiche->infirmier_charge }}</p><br>
+                            <p> Accueil: {{ $fiche->accueil }}</p><br>
+                            <p> Restauration: {{ $fiche->restauration }}</p><br>
+                            <p> Chambre: {{ $fiche->chambre }}</p><br>
+                            <p> Soins: {{ $fiche->soins }}</p><br>
+                            <p> Note: {{ $fiche->notes }}</p><br>
+                            <p> Recommandation: {{ $fiche->quizz }}</p><br>
+                            <p> Remarques/Suggestions: {{ $fiche->remarque_suggestion }}</p><br>
                         </div>
                     </div>
                 </div>

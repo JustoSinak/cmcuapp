@@ -30,8 +30,13 @@
                     <div class="tab-content">
                         
                         <ul class="nav nav-tabs mt-5">
+                        @can('chirurgien', \App\Patient::class)
                             <li class="active"><a data-toggle="tab" href="#home" class="btn btn-primary">OBSERVATIONS MEDICALES</a></li>
                             <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
+                        @endcan
+                        @can('infirmier', \App\Patient::class)
+                            <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
+                        @endcan
                         </ul>
 {{--                        OBSERVATION MEDICALES--}}
                         <div id="home" class="tab-pane fade in active">
@@ -81,12 +86,6 @@
                                         <td class="table-active"><b>MEDECIN</b></td>
                                         <td class="table-active">
                                             <b>OBSERVATIONS</b>
-                                            @can('infirmier', \App\Patient::class)
-                                                <button type="button" class="btn btn-success float-right"
-                                                        title="Administrer des soins" data-toggle="modal" data-target="#SoinsInfirmier">
-                                                    <i class="fas fa-heartbeat"></i>
-                                                </button>
-                                            @endcan
                                         </td>
                                     </tr>
                                     @foreach ($observation_medicales as $observation_medicale)
@@ -114,6 +113,11 @@
                                         <td class="table-active"><b>MEDECIN</b></td>
                                         <td class="table-active">
                                             <b>OBSERVATIONS</b>
+                                            @can('infirmier', \App\Patient::class)
+                                                <button type="button" class="btn btn-success float-right" title="Administrer des soins" data-toggle="modal" data-target="#SoinsInfirmier">
+                                                    <i class="fas fa-heartbeat"></i>
+                                                </button>
+                                            @endcan
                                         </td>
                                     </tr>
                                     @foreach ($soins_infirmiers as $soins_infirmier)

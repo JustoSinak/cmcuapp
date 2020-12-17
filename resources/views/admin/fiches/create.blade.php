@@ -98,7 +98,7 @@
                 <div class="form-group">
                     <label for="quantity">REMARQUE ET SUGGESTION:</label>
                     <div >
-                        <TEXTAREA name="remarque_suggestion" rows=4 cols=40>Valeur par défaut</TEXTAREA>
+                        <TEXTAREA name="remarque_suggestion" rows=4 cols=40 placeholder="Valeur par défaut"></TEXTAREA>
                     </div>
                 </div>
                 <div class="row">

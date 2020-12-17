@@ -29,6 +29,7 @@
         <!-- Page Content Holder -->
         @include('partials.header') @can('show', \App\User::class) 
         <div class="container">
+        @include('partials.flash')
             <div class="row">
                 <div class="col-md-12  toppad  offset-md-0 mb-2">
                     @include('admin.patients.partials.menu')
@@ -46,15 +47,17 @@
                             @endif
                             <div class="card">
                                 <div class="card-body">
-                                    <h2 class="card-title text-danger text-center">DOSSIER PATIENT</h2>
+                                    <h2 class="card-title text-danger text-center">DOSSIER PATIENT {{ $patient->name}} {{$patient->prenom}}</h2>
                                     
                                     <table class="table table-user-information table-hover mt-3">
                                         
                                         <div class=" row justify-content-center mb-2">
                                             <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
                                             </button>
-                                            @can('secretaire', \App\Patient::class)
+                                            @can('infirmier_secretaire', \App\Patient::class)
                                             <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2"><i class="fas fa-bars"></i> Completer le dossier</a>
+                                            @endcan
+                                            @can('secretaire', \App\Patient::class)
                                             <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Editer</button>
                                             
                                             @endcan @can('med_inf_anes', \App\Patient::class)
@@ -77,7 +80,6 @@
                                             <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
                                             @endcan
                                         </div>
-                                        @include('partials.flash')
                                         @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
                                         @include('admin.consultations.partials.motif_et_montant')
                                     </table>

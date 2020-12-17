@@ -13,13 +13,13 @@
         @include('partials.header')
 
         <div class="container">
-            <form action="{{ route('roles.store') }}" method="POST">
+            <form action="{{ route('roles.update', $role->id) }}" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         @include('partials.flash_form')
                     </div>
                 </div>
-                @csrf
+                {{method_field('PATCH')}} @csrf
                 <h4 class="">Modification du rôle</h4>
                 <small class="text-info" title="Le champs rôle est obligatoire et un rôle ne peut être enregistrer plusieurs fois"><i class="fas fa-info-circle"></i></small>
                 <div class="row">
