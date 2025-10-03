@@ -54,6 +54,10 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
+            // For optimizing prepared statements and performance
+            'options' => [
+                PDO::ATTR_EMULATE_PREPARES => true,
+    ]
         ],
 
         'pgsql' => [

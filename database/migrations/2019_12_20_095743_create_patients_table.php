@@ -33,6 +33,13 @@ class CreatePatientsTable extends Migration {
 			$table->integer('avance')->nullable();
 			$table->integer('medecin_r')->nullable();
 			$table->text('details_motif')->nullable()->default('Consultation');
+
+			// Newly added indexes for performance optimization
+			// Indexes 
+			$table->index('user_id'); // Foreign key index
+            $table->index(['name', 'prenom']); // Composite index for search queries
+            $table->index('date_insertion'); // For date-based queries
+            $table->index('medecin_r'); // Frequently filtered column
 		});
 	}
 

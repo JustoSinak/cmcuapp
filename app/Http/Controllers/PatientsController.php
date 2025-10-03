@@ -20,7 +20,11 @@ use App\Models\VisitePreanesthesique;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use MercurySeries\Flashy\Flashy;
+// for DB queries optimization
+use Illuminate\Support\Facades\DB;
+
 
 
 class PatientsController extends Controller
@@ -30,8 +34,15 @@ class PatientsController extends Controller
     {
         $this->authorize('update', Patient::class);
         $name = $request->input('name');
-        $patients = Patient::where('nom', 'like', "%{$name}%")->get();
-        return view('admin.patients.index');
+
+        // performance optimization with caching and pagination
+        $cacheKey = 'patients_' . md5($name);
+        $patients = Cache::remember($cacheKey, 3600, function () use ($name) {
+            return Patient::with('user')->where('name', 'like', "%{$name}%")->paginate(10);
+        });
+        // End of performance optimization with caching
+
+        return view('admin.patients.index', compact('patients', 'name'));
 
     }
 
@@ -71,39 +82,41 @@ class PatientsController extends Controller
             'emetteur_bpc' =>  'requiredIf:mode_paiement,bon de prise en charge',
             'date_insertion' => '',
         ]);
-        
-        //
-        if ($request->get('mode_paiement') === "chèque") {
-            $mode_paiement_info_sup = $request->get('num_cheque')." // ".$request->get('emetteur_cheque')." // ".$request->get('banque_cheque');
-        } else {
-            $mode_paiement_info_sup = ($request->get('mode_paiement') === "bon de prise en charge") ? $request->get('emetteur_bpc'): "" ;
-        }
 
-        $patient = new Patient();
+        DB::transaction(function () use ($request) {
+            //
+            if ($request->get('mode_paiement') === "chèque") {
+                $mode_paiement_info_sup = $request->get('num_cheque')." // ".$request->get('emetteur_cheque')." // ".$request->get('banque_cheque');
+            } else {
+                $mode_paiement_info_sup = ($request->get('mode_paiement') === "bon de prise en charge") ? $request->get('emetteur_bpc'): "" ;
+            }
 
-        $patient->numero_dossier = mt_rand(1000000, 9999999) - 1;
-        $patient->name = $request->get('name');
-        $patient->prenom = $request->get('prenom');
-        $patient->montant = $request->get('montant');
-        $patient->assurance = $request->get('assurance');
-        $patient->avance = $request->get('avance');
-        $patient->motif =$request->get('motif');
-        $patient->mode_paiement =$request->get('mode_paiement');
-        $patient->mode_paiement_info_sup = $mode_paiement_info_sup;
-        $patient->details_motif =$request->get('details_motif');
+            $patient = new Patient();
 
-        $patient->numero_assurance = $request->get('numero_assurance');
-        $patient->prise_en_charge = $request->get('prise_en_charge');
-        $patient->assurec = FactureConsultation::calculAssurec($request->get('montant'), $request->get('prise_en_charge'));
-        $patient->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $request->get('prise_en_charge'));
-        $patient->reste = FactureConsultation::calculReste($patient->assurec, $request->get('avance'));
+            $patient->numero_dossier = mt_rand(1000000, 9999999) - 1;
+            $patient->name = $request->get('name');
+            $patient->prenom = $request->get('prenom');
+            $patient->montant = $request->get('montant');
+            $patient->assurance = $request->get('assurance');
+            $patient->avance = $request->get('avance');
+            $patient->motif =$request->get('motif');
+            $patient->mode_paiement =$request->get('mode_paiement');
+            $patient->mode_paiement_info_sup = $mode_paiement_info_sup;
+            $patient->details_motif =$request->get('details_motif');
 
-        $patient->demarcheur = $request->get('demarcheur');
-        $patient->date_insertion = $request->get('date_insertion');
-        $patient->medecin_r = $request->get('medecin_r');
-        $patient->user_id = Auth::id();
+            $patient->numero_assurance = $request->get('numero_assurance');
+            $patient->prise_en_charge = $request->get('prise_en_charge');
+            $patient->assurec = FactureConsultation::calculAssurec($request->get('montant'), $request->get('prise_en_charge'));
+            $patient->assurancec = FactureConsultation::calculAssuranceC($request->get('montant'), $request->get('prise_en_charge'));
+            $patient->reste = FactureConsultation::calculReste($patient->assurec, $request->get('avance'));
 
-        $patient->save();
+            $patient->demarcheur = $request->get('demarcheur');
+            $patient->date_insertion = $request->get('date_insertion');
+            $patient->medecin_r = $request->get('medecin_r');
+            $patient->user_id = Auth::id();
+
+            $patient->save();
+        });
 
         return redirect()->route('patients.index')->with('success', 'Le patient a été ajouté avec succès !');
     }
@@ -393,9 +406,24 @@ class PatientsController extends Controller
     public function search(Request $request){
         $this->authorize('update', Patient::class);
         $name = $request->input('name');
-        $patients = Patient::where('prenom', 'like', "%{$name}%")
-        ->orWhere('name', 'like', "%{$name}%")
-        ->get();
+
+         // $cacheKey = 'patients_search_' . md5($name);
+        // $patients = Cache::remember($cacheKey, 3600, function () use ($name) {
+        //     return Patient::with('user')->where('prenom', 'like', "%{$name}%")
+        //     ->orWhere('name', 'like', "%{$name}%")
+        //     ->get();
+        // });
+        // return view('admin.patients.index',compact('patients','name'));
+
+        // performance optimization with caching and pagination
+        $cacheKey = 'patients_search_' . md5($name);
+        $patients = Cache::remember($cacheKey, 3600, function () use ($name) {
+            return Patient::with('user')->where('prenom', 'like', "%{$name}%")
+            ->orWhere('name', 'like', "%{$name}%")
+            ->paginate(10); //->get();
+
+        });
+        // End of performance optimization with caching
         return view('admin.patients.index',compact('patients','name'));
 
     }
