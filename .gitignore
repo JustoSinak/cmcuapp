@@ -2,6 +2,7 @@
 /public/hot
 /public/images
 /public/storage
+/public/web.config
 /storage/*.key
 /vendor
 /database/database.sqlite
