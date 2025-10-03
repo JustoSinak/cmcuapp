@@ -12,7 +12,7 @@
         <!-- Page Content Holder -->
         @include('partials.header')
         <!--// top-bar -->
-        @can('create', \App\Patient::class)
+        @can('create', \App\Models\Patient::class)
         <div class="container">
             <h1 class="text-center">LISTE DES DEVIS</h1>
         </div>
@@ -32,7 +32,7 @@
                                 <tr>
                                     <td>{{ $devi->nom}}</td>
                                     <td>
-                                        @can('print', \App\Devi::class)
+                                        @can('print', \App\Models\Devi::class)
                                         <button type="button" data-devi='@json($devi)' data-champ_patient="" data-toggle="modal" data-title="Impression devis ..." data-texte="Vous pouvez effectuez des modifications si nécessaire." data-target="#imprimer_devis" class="btn btn-sm btn-info mr-1" title="Attribuer le divis à un patient"><i class="fas fa-eye"></i></button>
                                         @endcan
                                     </td>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        @can('create', \App\Devi::class)
+        @can('create', \App\Models\Devi::class)
         <div class="text-center table_link_right">
             <button type="button" data-toggle="modal" data-title="Nouveau devis ..." data-texte="" data-target="#imprimer_devis" class="btn  btn-primary mr-1" title="Vous allez jouter un nouveau devis " data-champ_patient="d-none">Nouveau</button>
         </div>
@@ -87,7 +87,7 @@
                                 <div class="col-sm-4"></div>
                             </div>
                             <div class="row nom_devis">
-                                @can('update', \App\Devi::class)
+                                @can('update', \App\Models\Devi::class)
                                 <div class="col-4 form-group">
                                     <label for="nom_devis">Devis de :</label>
                                     <input type="text" name="nom_devis" class="form-control" id="nom_devis" required>
@@ -103,7 +103,7 @@
                                         <option value="bloc">Bloc</option>
                                     </select>
                                 </div>
-                                @elsecan('print', \App\Devi::class)
+                                @elsecan('print', \App\Models\Devi::class)
                                 <div class="col-8 form-group">
                                     <label for="nom_devis">Devis de :</label>
                                     <input type="text" name="nom_devis" class="form-control" id="nom_devis" required>
@@ -229,7 +229,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer px-0">
                     <div class="col-12">
-                        @can('update', \App\Devi::class)
+                        @can('update', \App\Models\Devi::class)
                         <button type="submit" class="btn btn-info devis_save" data-dismiss="modal">Enregistrer</button>
                         @endcan
                         <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Annuler</button>
@@ -263,7 +263,7 @@
             let dnone = " d-none ";
             let ro = true;
             //Le gestionnaire et l'admin modifient tous les devis
-            @can('update', \App\ Devi::class)
+            @can('update', \App\Models\Devi::class)
             dnone = "";
             ro = false;
             @endcan

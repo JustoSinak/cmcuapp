@@ -12,7 +12,7 @@
     <!-- Page Content Holder -->
     @include('partials.header')
     <!--// top-bar -->
-        @can('view', \App\User::class)
+        @can('view', \App\Models\User::class)
             <div class="container_fluid">
                 <h1 class="text-center">FACTURES PRODUITS</h1>
                 <hr>
@@ -42,7 +42,7 @@
                                         <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
                                             <a href="{{ route('factures.show', $facture->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                         </p>
-                                        @can('update', \App\User::class)
+                                        @can('update', \App\Models\User::class)
                                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <p data-placement="top" data-toggle="tooltip" title="Supprimer la facture">

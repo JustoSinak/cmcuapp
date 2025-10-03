@@ -3,9 +3,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Dossier;
+use App\Models\Dossier;
 use App\Http\Requests\DossierRequest;
-use App\Patient;
+use App\Models\Patient;
 
 class DossiersController extends Controller
 {

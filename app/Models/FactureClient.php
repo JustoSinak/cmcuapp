@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,21 +18,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $motif
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Client $client
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereAvance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereClientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereMontant($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereMotif($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereNom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient wherePrenom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereReste($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureClient whereUserId($value)
+ * @property-read \App\Models\Client $client
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereAvance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereMontant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereMotif($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereNom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient wherePrenom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereReste($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureClient whereUserId($value)
  * @mixin \Eloquent
  */
 class FactureClient extends Model
@@ -41,12 +41,12 @@ class FactureClient extends Model
   
     public function client()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(\App\Models\Client::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
    

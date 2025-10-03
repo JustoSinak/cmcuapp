@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Consultation;
-use App\Event;
+use App\Models\Consultation;
+use App\Models\Event;
 use App\Http\Requests\LicenceActiveRequest;
-use App\Licence;
-use App\Patient;
-use App\Produit;
-use App\User;
+use App\Models\Licence;
+use App\Models\Patient;
+use App\Models\Produit;
+use App\Models\User;
 use Carbon\Carbon;
 use MercurySeries\Flashy\Flashy;
 

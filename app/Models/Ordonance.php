@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,19 +15,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $quantite
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient $patient
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance whereMedicament($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance whereQuantite($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Ordonance whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance whereMedicament($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance whereQuantite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Ordonance whereUserId($value)
  * @mixin \Eloquent
  */
 class Ordonance extends Model
@@ -37,11 +37,11 @@ class Ordonance extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 }

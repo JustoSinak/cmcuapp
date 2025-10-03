@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\FicheIntervention;
+use App\Models\FicheIntervention;
 use App\Http\Requests\ParametreRequest;
-use App\Parametre;
-use App\Patient;
-use App\PrescriptionMedicale;
-use App\SurveillanceRapprocheParametre;
-use App\SurveillanceScore;
+use App\Models\Parametre;
+use App\Models\Patient;
+use App\Models\PrescriptionMedicale;
+use App\Models\SurveillanceRapprocheParametre;
+use App\Models\SurveillanceScore;
 use Carbon\Carbon;
 use MercurySeries\Flashy\Flashy;
 

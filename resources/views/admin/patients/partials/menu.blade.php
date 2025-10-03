@@ -1,4 +1,4 @@
-@can('anesthesiste', \App\Patient::class)
+@can('anesthesiste', \App\Models\Patient::class)
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         Menu
         <span class="caret"></span></button>
@@ -40,7 +40,7 @@
 {{--        FICHES DE CONSOMMABLES--}}
 {{--    </a>--}}
 @endcan
-@can('chirurgien', \App\Patient::class)
+@can('chirurgien', \App\Models\Patient::class)
     <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
         Menu
         <span class="caret"></span></button>
@@ -88,7 +88,7 @@
 {{--    FIN DE LA LISTE DES ELEMENTS HORS MENU --}}
 @endcan
 
-@can('infirmier', \App\Patient::class)
+@can('infirmier', \App\Models\Patient::class)
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
         Menu
         <span class="caret"></span></button>

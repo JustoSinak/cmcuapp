@@ -8,7 +8,7 @@
     <!-- Page Content Holder -->
     @include('partials.header')
     <!--// top-bar -->
-        @can('create', \App\chambre::class)
+        @can('create', \App\Models\chambre::class)
         <div class="container">
             <h1 class="text-center">LISTE DES CHAMBRES</h1>
         </div>
@@ -57,7 +57,7 @@
                                 @endif
                                 <td>{{ $chambre->jour }}</td>
                                  <td>
-                                    @can('update', \App\User::class)
+                                    @can('update', \App\Models\User::class)
                                     <a href="{{ route('chambres.edit',$chambre->id)}}" class="btn btn-primary btn-sm" title="Modifier les informations de la chambre"><i class="far fa-edit"></i>
                                     </a>
                                     @endcan
@@ -87,7 +87,7 @@
             </div>
         </div> </br>
         <div class="col-md-3 offset-md-4 text-center">
-            @can('update', \App\User::class)
+            @can('update', \App\Models\User::class)
             <a href="{{ route('chambres.create') }}" class="btn btn-primary table_link_right">Ajouter une nouvelle chambre</a>
             @endcan
         </div>

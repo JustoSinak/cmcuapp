@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
-use App\FactureClient;
-use App\Patient;
+use App\Models\Client;
+use App\Models\FactureClient;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\image;
-use App\User;
+use App\Models\image;
+use App\Models\User;
 
 
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 
 use Illuminate\Support\Facades\DB;
+use App\Models\Produit;
 
 class Cart
 {

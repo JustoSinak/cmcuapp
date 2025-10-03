@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Fiche;
+use App\Models\Fiche;
 use Barryvdh\DomPDF\Facade as PDF;
 
 

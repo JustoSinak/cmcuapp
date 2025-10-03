@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
-use App\Facture;
+use App\Models\Cart;
+use App\Models\Facture;
 use App\Http\Requests\ProduitRequest;
-use App\Patient;
-use App\Produit;
+use App\Models\Patient;
+use App\Models\Produit;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

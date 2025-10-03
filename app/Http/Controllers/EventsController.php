@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
+use App\Models\Event;
 use App\Http\Requests\EventRequest;
-use App\Patient;
-use App\User;
+use App\Models\Patient;
+use App\Models\User;
 use Calendar;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;

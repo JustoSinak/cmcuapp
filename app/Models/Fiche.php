@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,27 +24,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $user_id
- * @property-read \App\User $users
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereAccueil($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereAge($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereChambre($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereChambreNumero($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereInfirmierCharge($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereNom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche wherePrenom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereQuizz($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereRemarqueSuggestion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereRestauration($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereService($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereSoins($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Fiche whereUserId($value)
+ * @property-read \App\Models\User $users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereAccueil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereAge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereChambre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereChambreNumero($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereInfirmierCharge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereNom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche wherePrenom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereQuizz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereRemarqueSuggestion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereRestauration($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereService($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereSoins($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Fiche whereUserId($value)
  * @mixin \Eloquent
  */
 class Fiche extends Model
@@ -67,6 +67,6 @@ class Fiche extends Model
 
     public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 }

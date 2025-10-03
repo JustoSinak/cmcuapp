@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Facture;
-use App\FactureChambre;
-use App\FactureDevi;
+use App\Models\Facture;
+use App\Models\FactureChambre;
+use App\Models\FactureDevi;
 use Barryvdh\DomPDF\Facade as PDF;
-use App\FactureConsultation;
-use App\FactureClient;
-use App\HistoriqueFacture;
+use App\Models\FactureConsultation;
+use App\Models\FactureClient;
+use App\Models\HistoriqueFacture;
 use Illuminate\Database\Eloquent\Builder;
-use App\Patient;
-use App\Produit;
-use App\User;
+use App\Models\Patient;
+use App\Models\Produit;
+use App\Models\User;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
@@ -48,30 +48,45 @@ class FactureController extends Controller
         ]);
     }
 
-    public function FactureConsultation(Patient $patient, User $user)
+    public function FactureConsultation(Patient $patient, User $user,Request $request)
     {
         $this->authorize('view', User::class);
+
+ // Validate the request
+
+
         $month = Carbon::now()->month;
         $year = Carbon::now()->year;
 
         $start_date = "01-" . $month . "-" . $year;
         $start_time = strtotime($start_date);
 
+        $startDate= $request->input('start-date');
+        $startDate1 = Carbon::parse($startDate)->startOfDay();
+        $endDate= $request->input('end-date');
+        $endDate1 = Carbon::parse($endDate)->endOfDay();
+
         $end_time = strtotime("+1 month", $start_time);
+        $oneMonthAgo = Carbon::now()->subMonth(8);
 
         for ($i = $start_time; $i < $end_time; $i += 86400) {
             $lists[] = date('Y-m-d', $i);
         }
 
         $user = User::where('role_id', '=', 2)->get();
-        $factureConsultations = FactureConsultation::with('patient', 'user')->latest()->get();
+        $factureConsultations = FactureConsultation::with('patient', 'user')
+        ->whereBetween('created_at', [$startDate1, $endDate1])
+        ->latest()
+        ->paginate(100);
 
 
-        return view('admin.factures.consultation', compact('factureConsultations', 'lists'));
+
+
+        return view('admin.factures.consultation', compact('factureConsultations', 'lists','startDate','endDate'));
     }
 
     public function FactureConsultationUpdate( Request $request, $id){
-        
+
         $this->authorize('update', new FactureConsultation);
 
         $request->validate([
@@ -91,7 +106,7 @@ class FactureController extends Controller
         } else {
             $mode_paiement_info_sup = ($request->get('mode_paiement') === "bon de prise en charge") ? $request->get('emetteur_bpc'): "" ;
         }
-        
+
         $historiqueFacture = new HistoriqueFacture([
                     'reste' => $facture->reste - $request->get('percu'),
                     'montant' => $facture->montant,
@@ -212,13 +227,28 @@ class FactureController extends Controller
 
     public function export_consultation($id)
     {
-        $this->authorize('update', Patient::class);
-        $this->authorize('print', Patient::class);
-        $facture = FactureConsultation::find($id);
+        ini_set('max_execution_time', 300); // 300 secondes = 5 minutes
+        ini_set('memory_limit', '512M');    // Augmenter la mémoire
 
-        $pdf = PDF::loadView('admin.etats.consultation', ['patient' => $facture->patient, 'facture' => $facture]);
+         // Authorization
+         $this->authorize('update', Patient::class);
+         $this->authorize('print', Patient::class);
 
+         // Optimize the query by eager loading the patient relationship
+         $facture = FactureConsultation::with('patient')->findOrFail($id);
+         $facturepatient = FactureConsultation::where('id', $id)->pluck('patient_id')->first();
+         $patient = Patient::find($facturepatient);
+         // Load the PDF view with necessary data only
+        //  dd($facturepatient,$patient);
+         $pdf = PDF::loadView('admin.etats.consultation', [
+             'patient' => $patient,
+             'facture' => $facture
+         ]);
+
+
+        // Stream the PDF
         return $pdf->stream('factures.consultation_pdf');
+        //  return view('admin.factures.consultation', compact('factureConsultations', 'lists'));
     }
 
     public function export_client($id)
@@ -324,7 +354,7 @@ class FactureController extends Controller
                             $modePaiement['bondepriseencharge']['name'] = 'bon de prise en charge';
                         }
                         break;
-                    
+
                     default:
                         if (array_key_exists('autre',$modePaiement))
                             $modePaiement['autre']['val'] += $historique_facture->percu;
@@ -338,13 +368,13 @@ class FactureController extends Controller
                 $totalPercu += $historique_facture->percu;
             }
 
-            
+
             $totalMontant += $tFactures[$key]['montant'];
             $totalReste += $tFactures[$key]['reste'];
             $totalPartAssurance += $tFactures[$key]['partAssurance'];
             $totalPartPatient += $tFactures[$key]['partPatient'];
         }
-        
+
         $pdf = PDF::loadView('admin.etats.bilan_consultation', [
             'mode_paiement' => $modePaiement,
             'service' => $service==""? "" : '- '.$service,

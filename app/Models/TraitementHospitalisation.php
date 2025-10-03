@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,29 +25,29 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $s1
  * @property string|null $n1
  * @property string $date
- * @property-read \App\Patient $patient
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereDuree($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereJ($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereJ0($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereJ1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereJ2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereM($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereM1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereMedicamentPosologieDosage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereMi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereMi1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereN($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereN1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereS($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereS1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\TraitementHospitalisation whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereDuree($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereJ($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereJ0($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereJ1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereJ2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereM($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereM1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereMedicamentPosologieDosage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereMi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereMi1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereN($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereN1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereS($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereS1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\TraitementHospitalisation whereUserId($value)
  * @mixin \Eloquent
  */
 class TraitementHospitalisation extends Model
@@ -57,11 +57,11 @@ class TraitementHospitalisation extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 }

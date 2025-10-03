@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Patient;
+use App\Models\Patient;
 use App\Http\Requests\ImagRequest;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use App\Examen;
+use App\Models\Examen;
 
 class PatientimageController extends Controller
 {

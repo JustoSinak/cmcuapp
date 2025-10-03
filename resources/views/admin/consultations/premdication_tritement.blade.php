@@ -42,14 +42,14 @@
         @include('partials.side_bar')
 
         @include('partials.header')
-        @can('show', \App\User::class)
+        @can('show', \App\Models\User::class)
             <div class="col-md-12  toppad  offset-md-0 ">
-                @can('infirmier', App\Patient::class)
+                @can('infirmier', App\Models\Patient::class)
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#DetailPremedication" title="Détails prémédication / préparation" data-whatever="@mdo">
                     <i class="fas fa-eye"></i> Consignes IDE / Préparations
                 </button>
                 @endcan
-                @can('anesthesiste', App\Patient::class)
+                @can('anesthesiste', App\Models\Patient::class)
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#DetailPremedication" title="Détails prémédication / préparation" data-whatever="@mdo">
                             <i class="fas fa-eye"></i> Détails
                         </button>
@@ -59,7 +59,7 @@
                 </a>
             </div>
             <div class="container">
-                @can('anesthesiste', \App\Patient::class)
+                @can('anesthesiste', \App\Models\Patient::class)
                 <div class="row col-md-12">
                     <div class="container">
                         <h3 align="center">PREMEDICATION</h3>
@@ -104,7 +104,7 @@
                     <br>
                     <hr>
                     <h1 class="text-center">Traitement à l'hospitalistion</h1>
-                    @can('med_inf_anes', \App\Patient::class)
+                    @can('med_inf_anes', \App\Models\Patient::class)
                         <div class="row">
                             <div class="container">
                                 <div class="table-responsive">
@@ -207,7 +207,7 @@
                     <br>
                     <hr class="pb-3 pt-3">
                     <h1 class="text-center">Adaptation du traitemen personnel</h1>
-                    @can('med_inf_anes', \App\Patient::class)
+                    @can('med_inf_anes', \App\Models\Patient::class)
                     <div class="table-responsive">
                         <form method="post" action="{{ route('adaptation_traitement.store') }}">
                             @csrf

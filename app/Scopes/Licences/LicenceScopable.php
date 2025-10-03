@@ -2,7 +2,7 @@
 
 namespace App\Scopes\Licences;
 
-use App\Licence;
+use App\Models\Licence;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 

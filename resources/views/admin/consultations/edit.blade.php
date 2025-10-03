@@ -15,7 +15,7 @@
                 </div>
                 <br>
                 <br>
-                @can('medecin', \App\Patient::class)
+                @can('medecin', \App\Models\Patient::class)
                 <div class="col-md-10  offset-md-0  toppad">
                     <div class="card">
                         <div class="card-body">
@@ -26,10 +26,10 @@
                             </small>
                             <table class="table table-user-information ">
                                 <tbody>
-                                    @can('chirurgien', \App\Patient::class)
+                                    @can('chirurgien', \App\Models\Patient::class)
                                         @include('admin.consultations.chirurgiens.form.consultation_chirurgien_form')
                                     @endcan
-                                    @can('anesthesiste', \App\Patient::class)
+                                    @can('anesthesiste', \App\Models\Patient::class)
                                         @include('admin.consultations.anesthesistes.form.consultation_anesthesiste_form')
                                     @endcan
                                 </tbody>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 @endcan
-                @can('infirmier', \App\Patient::class)
+                @can('infirmier', \App\Models\Patient::class)
                     <div class="col-md-6  offset-md-0  toppad">
                         <div class="card">
                             <div class="card-body">

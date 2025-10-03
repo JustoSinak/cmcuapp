@@ -1,15 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * App\Lettre
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Lettre newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Lettre newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Lettre query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\\Lettre newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\\Lettre newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\\Lettre query()
  * @mixin \Eloquent
  */
 class Lettre extends Model

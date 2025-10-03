@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\ConsultationSuivi;
+use App\Models\ConsultationSuivi;
 use Illuminate\Http\Request;
-use App\Patient;
-use App\User;
+use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade as PDF;
 

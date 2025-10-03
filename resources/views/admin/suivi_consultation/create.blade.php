@@ -8,7 +8,7 @@
     @include('partials.side_bar')
     <!-- Page Content Holder -->
         @include('partials.header')
-        @can('chirurgien', \App\Patient::class)
+        @can('chirurgien', \App\Models\Patient::class)
         <div class="container_fluid">
               <h1 class="text-center">CONSULTATION DE SUIVI - {{ $patient->name }} {{ $patient->prenom }} </h1>
               <hr>

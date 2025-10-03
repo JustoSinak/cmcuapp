@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\AdaptationTraitement
+ * App\Models\AdaptationTraitement
  *
  * @property int $id
  * @property int $user_id
@@ -27,31 +27,31 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $s1
  * @property string|null $n1
  * @property string $date
- * @property-read \App\Patient $patient
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereArret($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereContinuer($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereJ($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereJ0($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereJ1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereJ2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereM($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereM1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereMedicamentPosologieDosage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereMi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereMi1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereN($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereN1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement wherePoursuivre($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereS($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereS1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\AdaptationTraitement whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereArret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereContinuer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereJ($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereJ0($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereJ1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereJ2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereM($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereM1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereMedicamentPosologieDosage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereMi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereMi1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereN($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereN1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement wherePoursuivre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereS($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereS1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\AdaptationTraitement whereUserId($value)
  * @mixin \Eloquent
  */
 class AdaptationTraitement extends Model

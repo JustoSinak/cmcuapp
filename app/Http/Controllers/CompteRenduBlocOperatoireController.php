@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\CompteRenduBlocOperatoire;
-use App\FicheIntervention;
+use App\Models\CompteRenduBlocOperatoire;
+use App\Models\FicheIntervention;
 use App\Http\Requests\CompteRenduBlocOperatoireRequest;
-use App\Patient;
-use App\User;
+use App\Models\Patient;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;

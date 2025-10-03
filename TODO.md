@@ -1,0 +1,4 @@
+- [x] Fix app/Http/Requests/PrescriptionRequest.php: namespace to App\Http\Requests, class to PrescriptionRequest, use to Http
+- [ ] Fix app/Models/DateBilan.php: namespace to App\Models, class to DateBilan, update docblocks
+- [ ] Update all other model files: namespace to App\Models, update docblocks (* App\ to * App\Models\, @property-read \App\ to \App\Models\, @method |\App\ to |\App\Models\)
+- [ ] Run composer dump-autoload to verify fixes

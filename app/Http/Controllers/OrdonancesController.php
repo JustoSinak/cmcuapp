@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Ordonance;
-use App\Patient;
+use App\Models\Ordonance;
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 

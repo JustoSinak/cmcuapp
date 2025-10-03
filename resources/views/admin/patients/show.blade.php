@@ -27,7 +27,7 @@
         @include('partials.side_bar')
 
         <!-- Page Content Holder -->
-        @include('partials.header') @can('show', \App\User::class) 
+        @include('partials.header') @can('show', \App\Models\User::class) 
         <div class="container">
         @include('partials.flash')
             <div class="row">
@@ -54,17 +54,17 @@
                                         <div class=" row justify-content-center mb-2">
                                             <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
                                             </button>
-                                            @can('infirmier_secretaire', \App\Patient::class)
+                                            @can('infirmier_secretaire', \App\Models\Patient::class)
                                             <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2"><i class="fas fa-bars"></i> Completer le dossier</a>
                                             @endcan
-                                            @can('secretaire', \App\Patient::class)
+                                            @can('secretaire', \App\Models\Patient::class)
                                             <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Editer</button>
                                             
-                                            @endcan @can('med_inf_anes', \App\Patient::class)
+                                            @endcan @can('med_inf_anes', \App\Models\Patient::class)
                                             <a class="btn btn-dark mr-2" href="{{ route('fiche.prescription_medicale.index', $patient) }}" title="Prescriptions médicales">
                                                 <i class="fas fa-book"></i> Prescriptions Medicales
                                             </a>
-                                            @endcan @can('infirmier', \App\Patient::class)
+                                            @endcan @can('infirmier', \App\Models\Patient::class)
                                             @isset($dossiers)
                                             <a class="btn btn-secondary" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient pour la prise des paramètres">
                                                 <i class="fas fa-book"></i> Fiche De Paramètres
@@ -76,7 +76,7 @@
                                             </a>
                                             @endempty
                                             @endcan
-                                            @can('medecin_secretaire', \App\Patient::class)
+                                            @can('medecin_secretaire', \App\Models\Patient::class)
                                             <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
                                             @endcan
                                         </div>
@@ -94,7 +94,7 @@
                             <div class="col-md-2  offset-md-0  toppad">
                                 @endif @if(auth()->user()->role_id == 4)
                                 <div class="col-md-2  offset-md-0  toppad">
-                                    @endif @can('med_inf_anes', \App\Patient::class)
+                                    @endif @can('med_inf_anes', \App\Models\Patient::class)
                                     <div class="card">
                                         <div class="card-header mb-2">
                                             <small>DETAILS ACTION</small>
@@ -107,7 +107,7 @@
                                                 <i class="fas fa-eye"></i> Examens Biologiques
                                             </button>
 
-                                            @can('anesthesiste', \App\Patient::class)
+                                            @can('anesthesiste', \App\Models\Patient::class)
 
                                             <a  href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
                                                     <i class="fas fa-eye"></i>
@@ -115,7 +115,7 @@
                                                 </a>
                                             
                                             @endcan
-                                            @can('chirurgien', \App\Patient::class)
+                                            @can('chirurgien', \App\Models\Patient::class)
                                             
                                             <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
                                             class="btn btn-primary btn-block mb-2">
@@ -129,7 +129,7 @@
                                                 </a>
                                             
                                             @endcan
-                                            @can('infirmier', \App\Patient::class)
+                                            @can('infirmier', \App\Models\Patient::class)
                                             <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
                                                     <i class="fas fa-eye"></i>
                                                     Surveillance Rapprochée
@@ -167,7 +167,7 @@
                                                 <i class="fas fa-eye"></i>Fiche d'Intervention
 
                                             </button>
-                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info btn-block mb-2">Completer Le Dossier</a> @if (count($patient->consultations)) @can('medecin', \App\Patient::class)
+                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info btn-block mb-2">Completer Le Dossier</a> @if (count($patient->consultations)) @can('medecin', \App\Models\Patient::class)
                                             <a class="btn btn-success btn-block" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $patient->id) }}">
                                                 <i class="fas fa-print"></i> Lettre De Consultation
                                             </a>

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Patient;
+use App\Models\Patient;
 use Illuminate\Http\Request;
-use App\Chambre;
+use App\Models\Chambre;
 use Illuminate\Support\Facades\Auth;
 
 class ChambresController extends Controller

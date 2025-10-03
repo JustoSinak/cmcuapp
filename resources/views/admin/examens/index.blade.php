@@ -12,7 +12,7 @@
     <!-- Page Content Holder -->
     @include('partials.header')
     <!--// top-bar -->
-        @can('create', \App\Patient::class)
+        @can('create', \App\Models\Patient::class)
         <div class="container">
             <h1 class="text-center">LISTE DES EXAMENS</h1>
         </div>
@@ -24,7 +24,7 @@
                         @include('partials.flash')
                         <table id="myTable" class="table table-bordred table-striped">
                             <thead>
-                            @can('print', \App\Patient::class)
+                            @can('print', \App\Models\Patient::class)
                             <th>NOM DU PATIENT</th>
                             <th>TYPE D'EXAMEN</th>
                             <th>CONSULTER</th>
@@ -38,12 +38,12 @@
                                  <td> {{ $patient->name }}</td>
                                  <td>{{ $examen->type }}</td>
                                          
-                                                @can('consulter', \App\Patient::class)
+                                                @can('consulter', \App\Models\Patient::class)
                                                         <td style="display: inline-flex;">
                                                             <a href="{{ route('examens.show', $examen->id) }}" title="consulter les examens patient" class="btn btn-primary btn-sm mr-1"><i class="fas fa-eye"></i></a>
                                                         </td>
                                                 @endcan
-                                                    @can('consulter', \App\Patient::class)
+                                                    @can('consulter', \App\Models\Patient::class)
                                                         <td>
                                                             <a href="{{ route('examens.create', $patient->id) }}" title="ajouter un examen" class="btn btn-info btn-sm mr-1"><i class="far fa-calendar-plus"></i></a>
                                                         </td>

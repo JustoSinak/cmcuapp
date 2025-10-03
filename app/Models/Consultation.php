@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Consultation
+ * App\Models\Consultation
  *
  * @property int $id
  * @property int $patient_id
@@ -29,34 +29,34 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $type_intervention
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Chambre $chambres
- * @property-read \App\Patient $patient
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereActe($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereAllergie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereAntecedentC($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereAntecedentM($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereDateConsultation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereDateConsultationAnesthesiste($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereDateIntervention($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereDiagnostic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereExamenC($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereExamenP($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereGroupe($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereInterrogatoire($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereMedecinR($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereMotifC($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereProposition($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation wherePropositionTherapeutique($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereTypeIntervention($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Consultation whereUserId($value)
+ * @property-read \App\Models\Chambre $chambres
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereActe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereAllergie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereAntecedentC($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereAntecedentM($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereDateConsultation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereDateConsultationAnesthesiste($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereDateIntervention($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereDiagnostic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereExamenC($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereExamenP($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereGroupe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereInterrogatoire($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereMedecinR($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereMotifC($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereProposition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation wherePropositionTherapeutique($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereTypeIntervention($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Consultation whereUserId($value)
  * @mixin \Eloquent
  */
 class Consultation extends Model
@@ -66,17 +66,17 @@ class Consultation extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 
     public function chambres()
     {
-        return $this->belongsTo(Chambre::class);
+        return $this->belongsTo(\App\Models\Chambre::class);
     }
 
     // public function devis()

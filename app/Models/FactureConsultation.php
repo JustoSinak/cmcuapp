@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,26 +24,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $demarcheur
  * @property string|null $prenom
  * @property string|null $date_insertion
- * @property-read \App\Patient $patient
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereAssurance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereAssurancec($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereAssurec($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereAvance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereDateInsertion($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereDemarcheur($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereMontant($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereMotif($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereNumero($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation wherePrenom($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereReste($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureConsultation whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereAssurance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereAssurancec($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereAssurec($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereAvance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereDateInsertion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereDemarcheur($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereMontant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereMotif($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereNumero($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation wherePrenom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereReste($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureConsultation whereUserId($value)
  * @mixin \Eloquent
  */
 class FactureConsultation extends Model
@@ -58,12 +58,12 @@ class FactureConsultation extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     public function historiques()

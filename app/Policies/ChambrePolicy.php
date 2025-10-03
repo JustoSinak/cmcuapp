@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Chambre;
+use App\Models\User;
+use App\Models\Chambre;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ChambrePolicy

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Consultation;
-use App\ConsultationAnesthesiste;
-use App\Parametre;
+use App\Models\Consultation;
+use App\Models\ConsultationAnesthesiste;
+use App\Models\Parametre;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\Http\Requests\ConsultationRequest;
-use App\Patient;
-use App\User;
+use App\Models\Patient;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 

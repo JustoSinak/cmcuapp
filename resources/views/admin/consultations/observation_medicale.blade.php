@@ -10,7 +10,7 @@
     @include('partials.side_bar')
 
         @include('partials.header')
-        @can('show', \App\User::class)
+        @can('show', \App\Models\User::class)
             <div class="container_fluid">
                 <h1 class="text-center">OBSERVATIONS MEDICALES - {{ $patient->name }} {{ $patient->prenom }}</h1>
                 <hr>
@@ -30,11 +30,11 @@
                     <div class="tab-content">
                         
                         <ul class="nav nav-tabs mt-5">
-                        @can('chirurgien', \App\Patient::class)
+                        @can('chirurgien', \App\Models\Patient::class)
                             <li class="active"><a data-toggle="tab" href="#home" class="btn btn-primary">OBSERVATIONS MEDICALES</a></li>
                             <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
                         @endcan
-                        @can('infirmier', \App\Patient::class)
+                        @can('infirmier', \App\Models\Patient::class)
                             <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
                         @endcan
                         </ul>
@@ -43,7 +43,7 @@
                             <br>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
-                                    @can('chirurgien', \App\Patient::class)
+                                    @can('chirurgien', \App\Models\Patient::class)
                                         <thead>
                                         <tr>
                                             <th class="text-center" style="width: 5%">DATE</th>
@@ -54,7 +54,7 @@
                                         </thead>
                                     @endcan
                                     <tbody>
-                                    @can('chirurgien', \App\Patient::class)
+                                    @can('chirurgien', \App\Models\Patient::class)
                                         @include('partials.flash')
                                         <form action="{{ route('observations_medicales.store') }}" method="post">
                                             @csrf
@@ -113,7 +113,7 @@
                                         <td class="table-active"><b>MEDECIN</b></td>
                                         <td class="table-active">
                                             <b>OBSERVATIONS</b>
-                                            @can('infirmier', \App\Patient::class)
+                                            @can('infirmier', \App\Models\Patient::class)
                                                 <button type="button" class="btn btn-success float-right" title="Administrer des soins" data-toggle="modal" data-target="#SoinsInfirmier">
                                                     <i class="fas fa-heartbeat"></i>
                                                 </button>

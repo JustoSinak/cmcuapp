@@ -1,4 +1,4 @@
-@can('infirmier_secretaire', \App\Patient::class)
+@can('infirmier_secretaire', \App\Models\Patient::class)
 <div class="card">
     <div class="card-body">
         <h3 class="card-title">Modifier les informations du patient {{ $patient->name }} {{ $patient->prenom }}</h3>

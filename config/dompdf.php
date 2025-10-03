@@ -239,6 +239,11 @@ return array(
          */
         "enable_html5_parser" => false,
     ),
+    'options' => [
+    'isRemoteEnabled' => true,   // autorise les images externes
+    'isHtml5ParserEnabled' => true,
+    'isPhpEnabled' => true,
+],
 
 
 );

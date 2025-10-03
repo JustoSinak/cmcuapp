@@ -12,7 +12,7 @@
     <!-- Page Content Holder -->
     @include('partials.header')
     <!--// top-bar -->
-        @can('create', \App\Patient::class)
+        @can('create', \App\Models\Patient::class)
             <div class="container">
                 <h1 class="text-center">EDITION DU DEVIS POUR PATIENT</h1>
                 <hr>

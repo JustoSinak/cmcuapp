@@ -7,7 +7,7 @@
     @include('partials.side_bar')
     <!-- Page Content Holder -->
         @include('partials.header')
-        @can('chirurgien', \App\Patient::class)
+        @can('chirurgien', \App\Models\Patient::class)
         <div id="products" class="row view-group">
                 <div class="item col-xs-4 col-lg-4">
                     <div class="thumbnail card">

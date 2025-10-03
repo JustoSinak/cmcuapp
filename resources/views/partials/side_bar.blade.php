@@ -14,7 +14,7 @@
                 Tableau de bord
             </a>
         </li>
-        @can('update', \App\User::class)
+        @can('update', \App\Models\User::class)
         {{--@can('changeOwner')--}}
         <li>
             <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false">
@@ -39,7 +39,7 @@
         </li>
         {{--@endcan--}}
         @endcan
-        @can('update', \App\Patient::class)
+        @can('update', \App\Models\Patient::class)
         <li>
             <a href="#patientsSubmenu" data-toggle="collapse" aria-expanded="false">
                 <i class="fas fa-users"></i>
@@ -53,8 +53,8 @@
                         Liste des patients
                     </a>
                 </li>
-                <!-- 
-                    @can('show', \App\User::class)
+                <!--
+                    @can('show', \App\Models\User::class)
                     <li>
                         <a href="{{ route('examens.index') }}">
                             <i class="fas fa-search"></i>
@@ -63,7 +63,7 @@
                     </li>
                     @endcan
                 -->
-                @can('anesthesiste', \App\Patient::class)
+                @can('anesthesiste', \App\Models\Patient::class)
                 <li>
                     <a href="{{ route('produits.anesthesiste') }}">
                         <i class="fas fa-list-ul"></i>
@@ -74,7 +74,7 @@
             </ul>
         </li>
         <!--
-            @can('view', \App\User::class)
+            @can('view', \App\Models\User::class)
             <li>
                 <a href="{{-- route('clients.index') --}}">
                     <i class="fas fa-list-ul"></i>
@@ -127,7 +127,7 @@
             </ul>
         </li>
         @endcan -->
-        @can('create', \App\chambre::class)
+        @can('create', \App\Models\chambre::class)
         <li>
             <a href="{{ route('chambres.index') }}">
                 <i class="fas fa-bed"></i>
@@ -135,7 +135,7 @@
             </a>
         </li>
         @endcan
-        @can('view', \App\Event::class)
+        @can('view', \App\Models\Event::class)
         <li>
             <a href="{{ route('events.index') }}">
                 <i class="far fa-calendar-times"></i>
@@ -143,7 +143,7 @@
             </a>
         </li>
         @endcan
-        @can('create', \App\Fiche::class)
+        @can('create', \App\Models\Fiche::class)
         <li>
             <a href="{{ route('fiches.index') }}">
                 <i class="fas fa-list-ul"></i>
@@ -151,7 +151,7 @@
             </a>
         </li>
         @endcan
-        @can('view', \App\User::class)
+        @can('view', \App\Models\User::class)
         <li>
             <a href="{{ route('factures.consultation') }}">
                 <i class="fas fa-list-ul"></i>
@@ -160,7 +160,7 @@
         </li>
         @endcan
 
-        @can('view', \App\Devi::class)
+        @can('view', \App\Models\Devi::class)
         <li>
             <a href="{{ route('devis.index') }}">
                 <i class="fas fa-book"></i>

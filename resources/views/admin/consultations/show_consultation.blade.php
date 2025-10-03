@@ -1,6 +1,6 @@
 <tbody id="show_consultation" style="display: contents;">
-@can('med_inf_anes', \App\Patient::class)
-    @can('chirurgien', \App\Patient::class)
+@can('med_inf_anes', \App\Models\Patient::class)
+    @can('chirurgien', \App\Models\Patient::class)
         <tr></tr>
         <tr>
             <td>
@@ -73,7 +73,7 @@
         @endif
     @endcan
 
-    @can('anesthesiste', \App\Patient::class)
+    @can('anesthesiste', \App\Models\Patient::class)
         <tr>
             <td>
                 <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}">
@@ -287,7 +287,7 @@
 
         <tr>
             <td class="table-active"><b>DATE :</b></td>
-            <td class="table-active"><b>{{ $parametres->created_at->toFormattedDateString() }}</b> @can('infirmier', \App\Patient::class)<a href="{{ route('consultations.edit', $patient->id) }}" class="btn btn-primary float-right"><i class="fas fa-eye"></i> Editer</a>@endcan</td>
+            <td class="table-active"><b>{{ $parametres->created_at->toFormattedDateString() }}</b> @can('infirmier', \App\Models\Patient::class)<a href="{{ route('consultations.edit', $patient->id) }}" class="btn btn-primary float-right"><i class="fas fa-eye"></i> Editer</a>@endcan</td>
         </tr>
         <tr>
             <td><b>DATE DE NAISSANCE :</b></td>
@@ -349,14 +349,14 @@
 
     <tr>
         <td>
-            @can('medecin', \App\Patient::class)
+            @can('medecin', \App\Models\Patient::class)
             <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}" title="Nouvelle consultation du patient">
                 <i class="fas fa-book"></i> Nouvelle consultation
             </a>
             @endcan
         </td>
         @if (count($patient->consultations))
-            @can('chirurgien', \App\Patient::class)
+            @can('chirurgien', \App\Models\Patient::class)
                 <td>
                     <a class="btn btn-success" title="Consultation de suivi" href="{{ route('consultationsdesuivi.create', $patient->id) }}">
                         <i class="fas fa-book"></i> Consultation de suivi
@@ -367,7 +367,7 @@
         <td></td>
     </tr>
 
-    @can('chirurgien', \App\Patient::class)
+    @can('chirurgien', \App\Models\Patient::class)
         <tr>
             <td>
                 <a href="{{ route('compte_rendu_bloc.index', $patient->id) }}">
@@ -448,7 +448,7 @@
         @endif
     @else
 
-        @can('chirurgien', \App\Patient::class)
+        @can('chirurgien', \App\Models\Patient::class)
             <tr>
                 <td>
                     <a class="btn btn-danger" href="{{ route('consultations.create', $patient->id) }}"

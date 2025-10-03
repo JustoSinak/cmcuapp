@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,27 +24,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $date_naissance
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient $patients
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereAdresse($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereDateNaissance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereFax($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereLieuNaissance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier wherePersonneConfiance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier wherePersonneContact($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier wherePortable1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier wherePortable2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereProfession($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereSexe($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereTelPersonneConfiance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereTelPersonneContact($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Dossier whereUpdatedAt($value)
+ * @property-read \App\Models\Patient $patients
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereAdresse($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereDateNaissance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereFax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereLieuNaissance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier wherePersonneConfiance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier wherePersonneContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier wherePortable1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier wherePortable2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereProfession($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereSexe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereTelPersonneConfiance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereTelPersonneContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Dossier whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Dossier extends Model
@@ -68,6 +68,6 @@ class Dossier extends Model
 
     public function patients()
     {
-        return $this->belongsTo('App\Patient', 'patient_id');
+        return $this->belongsTo('App\Models\Patient', 'patient_id');
     }
 }

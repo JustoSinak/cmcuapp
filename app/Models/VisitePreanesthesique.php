@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,18 +14,18 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $element_nouveaux
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient $patient
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique whereDateVisite($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique whereElementNouveaux($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\VisitePreanesthesique whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique whereDateVisite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique whereElementNouveaux($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\VisitePreanesthesique whereUserId($value)
  * @mixin \Eloquent
  */
 class VisitePreanesthesique extends Model
@@ -34,11 +34,11 @@ class VisitePreanesthesique extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 }

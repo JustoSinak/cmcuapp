@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\eloquent\model;
 
@@ -22,26 +22,26 @@ use Illuminate\Database\eloquent\model;
  * @property string|null $examen
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient|null $patient
- * @property-read \App\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereBacteriologie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereBiochimie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereExamen($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereHematologie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereHemostase($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereHormonologie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereMarqueurs($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereSerologie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereSpermiologie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereUrines($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Prescription whereUserId($value)
+ * @property-read \App\Models\Patient|null $patient
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereBacteriologie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereBiochimie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereExamen($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereHematologie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereHemostase($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereHormonologie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereMarqueurs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereSerologie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereSpermiologie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereUrines($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Prescription whereUserId($value)
  * @mixin \Eloquent
  */
 class Prescription extends model
@@ -65,11 +65,11 @@ class Prescription extends model
    
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 }

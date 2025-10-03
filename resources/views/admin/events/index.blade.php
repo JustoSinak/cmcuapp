@@ -100,7 +100,7 @@
 
                                 <div class="col-sm-12 text-center">
                                     <button class="btn btn-outline-success" id="ouvrir_dossier_patient"><i class="fas fa-folder"></i> Ouvrir le dossier patient</button>
-                                    @can('create', \App\Event::class)
+                                    @can('create', \App\Models\Event::class)
                                     <button class="btn btn-outline-danger" id="supprimer_rv"><i class="fas fa-trash"></i> Supprimer ce rendez-vous</button>
                                     <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#demo">Statut</button>
                                     @endcan
@@ -270,7 +270,7 @@
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
                 plugins: ['interaction', 'resourceTimeline'],
-                @can('create', \App\Event::class)
+                @can('create', \App\Models\Event::class)
                 selectable: true,
                 editable: true,
                 customButtons: {

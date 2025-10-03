@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Patient;
+use App\Models\Patient;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Devi;
-use App\LigneDevi;
+use App\Models\Devi;
+use App\Models\LigneDevi;
 
 class DevisController extends Controller
 {

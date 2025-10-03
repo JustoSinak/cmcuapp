@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\chambre;
-use App\Event;
-use App\Fiche;
-use App\Patient;
+use App\Models\chambre;
+use App\Models\Event;
+use App\Models\Fiche;
+use App\Models\Patient;
 use App\Policies\CaissePolicy;
 use App\Policies\ChambrePolicy;
 use App\Policies\EventPolicy;
@@ -16,10 +16,10 @@ use App\Policies\PatientPolicy;
 use App\Policies\ProduitPolicy;
 use App\Policies\Stock_pharmaceutiquePolicy;
 use App\Policies\UserPolicy;
-use App\Produit;
-use App\Devi;
-use App\FactureConsultation;
-use App\User;
+use App\Models\Produit;
+use App\Models\Devi;
+use App\Models\FactureConsultation;
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 

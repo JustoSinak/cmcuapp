@@ -16,7 +16,7 @@
             </div>
         </div>
         <hr>
-        @can('show', \App\User::class)
+        @can('show', \App\Models\User::class)
             <div class="container">
                 <div class="row">
                     <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
@@ -28,14 +28,14 @@
 
                 <br>
                 <div class="table-responsive">
-                    @can('infirmier', \App\Patient::class)
+                    @can('infirmier', \App\Models\Patient::class)
                         <button type="button" class="btn btn-success float-right"
                                 title="Administrer des soins" data-toggle="modal" data-target="#SurveillanceAptitude">
                             <i class="fas fa-user-secret"></i>
                         </button>
                     @endcan
                     <table class="table table-bordered table-striped col-md-12">
-                        @can('med_inf_anes', \App\Patient::class)
+                        @can('med_inf_anes', \App\Models\Patient::class)
                             <tr>
                                 <th colspan="0">HORAIRES</th>
                                 @foreach($surveillance_scores as $surveillance_score)

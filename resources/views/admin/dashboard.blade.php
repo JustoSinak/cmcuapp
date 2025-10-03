@@ -9,7 +9,7 @@
         <div class="row">
             <!-- Stats -->
             <div class="outer-w3-agile col-xl">
-                @can('update', \App\User::class)
+                @can('update', \App\Models\User::class)
                     <div class="stat-grid p-3 d-flex align-items-center justify-content-between bg-primary">
                         <div class="s-l">
                             <h5>UTILISATEURS</h5>
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 @endcan
-                @can('create', \App\Patient::class)
+                @can('create', \App\Models\Patient::class)
                     <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-success">
                         <div class="s-l">
                             <h5>PATIENTS</h5>
@@ -33,19 +33,19 @@
                         </div>
                     </div>
                 @endcan
-                @can('create', \App\chambre::class)
+                @can('create', \App\Models\chambre::class)
                     <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-danger">
                         <div class="s-l">
                             <h5>LITS</h5>
                         </div>
                         <div class="s-r">
-                            <h6>{{ count(\App\Chambre::all()) }}
+                            <h6>{{ count(\App\Models\Chambre::all()) }}
                                 <i class="fas fa-tasks"></i>
                             </h6>
                         </div>
                     </div>
                 @endcan
-                @can('update', \App\Produit::class)
+                @can('update', \App\Models\Produit::class)
                 <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-success">
                     <div class="s-l">
                         <h5>FICHES DE SATISFACTIONS</h5>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="s-r">
                         <h6>
-                            {{ count(\App\Fiche::all()) }}
+                            {{ count(\App\Models\Fiche::all()) }}
                             <i class="fas fa-tasks"></i>
                         </h6>
                     </div>
@@ -74,8 +74,8 @@
                 </div>
                 @endcan -->
                 {{--------------------------------MARGE IC-------------------------------------}}
-                @can('create', \App\Patient::class)
-                    @can('show', \App\User::class)
+                @can('create', \App\Models\Patient::class)
+                    @can('show', \App\Models\User::class)
                         <div class="row mt-2">
                             <div class="col-xl-3 col-md-6 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">

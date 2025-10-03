@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Patient;
-use App\User;
+use App\Models\Patient;
+use App\Models\User;
 use MercurySeries\Flashy\Flashy;
-use App\PrescriptionMedicale;
-use App\FichePrescriptionMedicale;
-use App\AdminPrescriptionMedicale;
+use App\Models\PrescriptionMedicale;
+use App\Models\FichePrescriptionMedicale;
+use App\Models\AdminPrescriptionMedicale;
 
 class FichePrescriptionMedicaleController extends Controller
 {

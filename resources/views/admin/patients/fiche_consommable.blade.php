@@ -42,7 +42,7 @@
         @include('partials.side_bar')
 
         @include('partials.header')
-        @can('show', \App\User::class)
+        @can('show', \App\Models\User::class)
         <div class="row mb-1">
             <div class="col-sm-12">
                 <h1 class="text-center ">FICHES DE CONSOMMABLES </h1>

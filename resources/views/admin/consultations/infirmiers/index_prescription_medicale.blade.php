@@ -12,7 +12,7 @@
         <!-- Page Content Holder -->
         @include('partials.header')
         <!--// top-bar -->
-        @can('show', \App\User::class)
+        @can('show', \App\Models\User::class)
         <div class="col-md-12  toppad  offset-md-0 ">
             <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right">
                 <i class="fas fa-arrow-left"></i>  Retour au dossier patient
@@ -58,7 +58,7 @@
                                     <td>{{ $prescription_medicale->voie }}</td>
                                     <td>
                                         <button title="Afficher la liste des soins administrés" class="btn btn_admin_prescription_medicale" data-toggle="modal" data-admin_list="{{ $prescription_medicale->adminPrescriptionMedicales}}" data-target="#admin_prescription_medicale">Détails...</button>
-                                        @can('infirmier', \App\Patient::class)
+                                        @can('infirmier', \App\Models\Patient::class)
                                         <button title="Saisir un nouveau soin" class="btn btn-primary btn-sm rounded-circle btn_admin_prescription_medicale_form" data-toggle="modal" data-prescription_medicale_id="{{ $prescription_medicale->id }}" data-target="#admin_prescription_medicale_form"><i class="fas fa-plus"></i></button>
                                         @endcan
                                     </td>
@@ -67,7 +67,7 @@
                             </tbody>
                         </table>
                     </div>
-                    @can('medecin', \App\Patient::class)
+                    @can('medecin', \App\Models\Patient::class)
                     <button type="button" class="btn btn-primary table_link_right" data-toggle="modal" data-target="#PrescriptionMedicale" data-whatever="@mdo">
                         <i class="fas fa-plus"></i>
                         Nouveau enregistrement
@@ -80,7 +80,7 @@
                     <img src="{{ asset('admin/images/important.png') }}" alt="Important!!!" width="100%">
                 </div>
                 <div class="col-10 text-center pt-4">
-                    @can('medecin', \App\Patient::class)
+                    @can('medecin', \App\Models\Patient::class)
                     <div class="float-right">
                         <button title="Modifier" class="btn btn-secondary rounded-circle float-right" data-toggle="modal" data-target="#prescription_medicale_form"><i class="fas fa-edit"></i></button>
                     </div>

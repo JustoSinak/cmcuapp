@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Devi;
+use App\Models\User;
+use App\Models\Devi;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class Devispolicy

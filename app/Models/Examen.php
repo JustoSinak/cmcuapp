@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,16 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $image
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient $patient
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Examen whereUpdatedAt($value)
+ * @property-read \App\Models\Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Examen whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Examen extends Model
@@ -37,6 +37,6 @@ class Examen extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 }

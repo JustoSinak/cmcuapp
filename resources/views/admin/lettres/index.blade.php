@@ -12,7 +12,7 @@
     <!-- Page Content Holder -->
     @include('partials.header')
     <!--// top-bar -->
-        @can('create', \App\Patient::class)
+        @can('create', \App\Models\Patient::class)
         <div class="container">
             <h1 class="text-center">LETTRES DE SORTIE</h1>
         </div>
@@ -37,7 +37,7 @@
                                     <td>{{ $lettre->medecin }}</td>
                                     <td>{{ $lettre->objet }}</td>
                                     <td style="display: inline-flex;">
-                                    @can('print', \App\Patient::class)
+                                    @can('print', \App\Models\Patient::class)
                                         <p data-placement="top" data-toggle="tooltip" title="Delete">
                                             <a class="btn btn-success btn-sm mr-1" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $lettre->id) }}"><i class="fas fa-print"></i></a>
                                         </p>

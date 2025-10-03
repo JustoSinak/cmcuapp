@@ -12,7 +12,7 @@
     <!-- Page Content Holder -->
     @include('partials.header')
     <!--// top-bar -->
-        @can('create', \App\Produit::class)
+        @can('create', \App\Models\Produit::class)
         <div class="container">
             <h1 class="text-center">LISTE DES PRODUITS PHARMACEUTIQUES</h1>
         </div>

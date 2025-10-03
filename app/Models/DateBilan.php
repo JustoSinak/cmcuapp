@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-class DAteBilan 
+class DateBilan
 {
 
 }

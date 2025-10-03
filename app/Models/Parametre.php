@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,27 +24,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $glycemie
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient $patient
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereAge($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereBrasDroit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereBrasGauche($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereDateNaissance($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereFc($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereFr($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereGlycemie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereIncBmi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre wherePoids($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereSpo2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereTaille($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereTemperature($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Parametre whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereAge($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereBrasDroit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereBrasGauche($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereDateNaissance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereFc($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereFr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereGlycemie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereIncBmi($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre wherePoids($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereSpo2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereTaille($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereTemperature($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Parametre whereUserId($value)
  * @mixin \Eloquent
  */
 class Parametre extends Model
@@ -55,6 +55,6 @@ class Parametre extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 }

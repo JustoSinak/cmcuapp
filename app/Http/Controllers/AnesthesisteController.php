@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\AdaptationTraitement;
-use App\Patient;
-use App\Premedication;
-use App\SurveillancePostAnesthesique;
-use App\TraitementHospitalisation;
-use App\VisitePreanesthesique;
+use App\Models\Patient;
+use App\Models\Premedication;
+use App\Models\SurveillancePostAnesthesique;
+use App\Models\TraitementHospitalisation;
+use App\Models\VisitePreanesthesique;
 use MercurySeries\Flashy\Flashy;
 
 class AnesthesisteController extends Controller

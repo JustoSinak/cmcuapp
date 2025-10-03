@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,7 +31,7 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsTo('App\Role', 'role_id');
+        return $this->belongsTo('App\Models\Role', 'role_id');
     }
 
     // public function devisimage()
@@ -45,17 +45,17 @@ class User extends Authenticatable
 
     public function produits()
     {
-        return $this->belongsTo('App\Produit');
+        return $this->belongsTo('App\Models\Produit');
     }
 
     public function role()
     {
-        return $this->belongsTo('App\Role');
+        return $this->belongsTo('App\Models\Role');
     }
 
     public function fiches()
     {
-        return $this->hasMany('App\Fiche');
+        return $this->hasMany('App\Models\Fiche');
     }
 
     public function patients()

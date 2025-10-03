@@ -16,14 +16,14 @@
             </div>
         </div>
         <hr>
-        @can('show', \App\User::class)
+        @can('show', \App\Models\User::class)
             <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
                title="Retour à la liste des patients">
                 <i class="fas fa-arrow-left"></i> Retour au dossier patient
             </a>
             <div class="container">
                 <div class="row">
-                    @can('infirmier', \App\Patient::class)
+                    @can('infirmier', \App\Models\Patient::class)
                         <button type="button" class="btn btn-primary mb-2 mr-2" title="Surveillance pré-opératoire" data-toggle="modal" data-target="#SurveillancePre" data-whatever="@mdo">
                             <i class="far fa-plus-square"></i>
                             PRISE DE PARAMETRES

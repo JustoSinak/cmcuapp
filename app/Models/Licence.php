@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\Scopes\Licences\LicenceScopable;
 use App\Scopes\Licences\PeriodLicenceAvaillableScopable;

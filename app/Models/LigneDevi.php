@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class LigneDevi extends Model
 
     public function devi()
     {
-        return $this->belongsTo(Devi::class);
+        return $this->belongsTo(\App\Models\Devi::class);
     }
 }

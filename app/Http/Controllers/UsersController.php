@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\User;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -149,5 +149,10 @@ class UsersController extends Controller
         $user = User::with('roles')->find($id);
 
         return view("admin.users.profile")->withUser($user);
+    }
+
+    public function user(Request $request)
+    {
+        return $request->user();
     }
 }

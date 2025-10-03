@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
 /**
- * App\Chambre
+ * App\Models\Chambre
  *
  * @property int $id
  * @property int $user_id
@@ -18,21 +18,21 @@ use Laravel\Scout\Searchable;
  * @property string $statut
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Consultation $consultations
- * @property-read \App\User $users
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereCategorie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereJour($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereNumero($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre wherePatient($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre wherePrix($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereStatut($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Chambre whereUserId($value)
+ * @property-read \App\Models\Consultation $consultations
+ * @property-read \App\Models\User $users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereCategorie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereJour($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereNumero($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre wherePatient($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre wherePrix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereStatut($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Chambre whereUserId($value)
  * @mixin \Eloquent
  */
 class Chambre extends Model
@@ -50,7 +50,7 @@ class Chambre extends Model
 
     public function users()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Models\User');
     }
 
     public function consultations()

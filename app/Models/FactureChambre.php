@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,20 +17,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $tarif
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient $patient
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereDateEntre($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereDateSortie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereJour($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereNumero($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereTarif($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\FactureChambre whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereDateEntre($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereDateSortie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereJour($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereNumero($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereTarif($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FactureChambre whereUserId($value)
  * @mixin \Eloquent
  */
 class FactureChambre extends Model
@@ -39,6 +39,6 @@ class FactureChambre extends Model
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 }

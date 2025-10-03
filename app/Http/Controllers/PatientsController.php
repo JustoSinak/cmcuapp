@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Consultation;
-use App\ConsultationAnesthesiste;
-use App\Dossier;
-use App\FactureConsultation;
-use App\FicheConsommable;
-use App\FicheIntervention;
-use App\Lettre;
-use App\Patient;
-use App\Ordonance;
-use App\Produit;
-use App\SoinsInfirmier;
-use App\SurveillancePostAnesthesique;
-use App\HistoriqueFacture;
-use App\User;
-use App\VisitePreanesthesique;
+use App\Models\Consultation;
+use App\Models\ConsultationAnesthesiste;
+use App\Models\Dossier;
+use App\Models\FactureConsultation;
+use App\Models\FicheConsommable;
+use App\Models\FicheIntervention;
+use App\Models\Lettre;
+use App\Models\Patient;
+use App\Models\Ordonance;
+use App\Models\Produit;
+use App\Models\SoinsInfirmier;
+use App\Models\SurveillancePostAnesthesique;
+use App\Models\HistoriqueFacture;
+use App\Models\User;
+use App\Models\VisitePreanesthesique;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,14 +26,14 @@ use MercurySeries\Flashy\Flashy;
 class PatientsController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $this->authorize('update', Patient::class);
-        $patients = Patient::with('user')->latest()->get();
-        return view('admin.patients.index', compact('patients'));
+        $name = $request->input('name');
+        $patients = Patient::where('nom', 'like', "%{$name}%")->get();
+        return view('admin.patients.index');
 
     }
-
 
     public function create(User $user)
     {
@@ -388,6 +388,16 @@ class PatientsController extends Controller
         ]);
 
         return $pdf->stream('ordonance.pdf');
+    }
+
+    public function search(Request $request){
+        $this->authorize('update', Patient::class);
+        $name = $request->input('name');
+        $patients = Patient::where('prenom', 'like', "%{$name}%")
+        ->orWhere('name', 'like', "%{$name}%")
+        ->get();
+        return view('admin.patients.index',compact('patients','name'));
+
     }
 
 

@@ -17,7 +17,7 @@
         </div>
         <hr>
         <div class="container">
-            @can('anesthesiste', \App\Patient::class)
+            @can('anesthesiste', \App\Models\Patient::class)
             <a href="{{ route('pharmaceutique.facturation') }}" title="Proceder à la facturation" class="btn btn-success btn-sm col-md-1 float-right">
                 Facture
                 <span class="badge text-dark"><p>{{ Session::has('cart') ? Session::get('cart')->totalQte : 0 }}</p></span>
@@ -38,10 +38,10 @@
                                 <td>QUANTITE STOCK</td>
                                 <td>QUANTITE ALERTE</td>
                                 <td>PRIX UNITAIRE</td>
-                                @can('anesthesiste', \App\Patient::class)
+                                @can('anesthesiste', \App\Models\Patient::class)
                                 <td>AJOUTER A LA FACTURE</td>
                                 @endcan
-                                @can('update', \App\Produit::class)
+                                @can('update', \App\Models\Produit::class)
                                 <td>EDITER</td>
                                 <td>SUPPRIMER</td>
                                 @endcan
@@ -54,10 +54,10 @@
                                     <td>{{$produit->qte_stock}}</td>
                                     <td>{{$produit->qte_alerte}}</td>
                                     <td>{{$produit->prix_unitaire}}</td>
-                                    @can('anesthesiste', \App\Patient::class)
+                                    @can('anesthesiste', \App\Models\Patient::class)
                                     <td><a href="{{ route('pharmaceutique.cart', $produit->id) }}" class="btn btn-success" title="Ajouter à la facture"><i class="fas fa-plus-square"></i></a></td>
                                     @endcan
-                                    @can('update', \App\Produit::class)
+                                    @can('update', \App\Models\Produit::class)
                                     <td><a href="{{ route('produits.edit',$produit->id)}}" title="Enregistrer une nouvelle entré en stock" class="btn btn-primary"><i class="far fa-edit"></i></a></td>
                                     <td>
                                         <form action="{{ route('produits.destroy', $produit->id)}}" method="post">

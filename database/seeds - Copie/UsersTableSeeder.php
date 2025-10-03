@@ -1,18 +1,19 @@
 <?php
 use Illuminate\Database\Seeder;
+use App\Models\User;
 class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     *\
      * @return void
      */
     public function run()
     {
-        $user1 = \App\User::create([
+        $user1 = \App\Models\User::create([
             'role_id' => '1',
             'name' => 'KOUAMO',
-            'login' => 'sysadmin',
+            'login' => 'Administrateur',
             'telephone' => mt_rand(10000000, 99999999),
             'sexe' => 'homme',
             'prenom' => 'Stephane',
@@ -211,9 +212,9 @@ class UsersTableSeeder extends Seeder
 
         $user14 = \App\User::create([
             'role_id' => '2',
-            'name' => 'DJOUFANG',
-            'prenom' => 'Rodrigue',
-            'login' => 'DJOUFANG',
+            'name' => 'NGAPNA',
+            'prenom' => 'Yves',
+            'login' => 'NGAPNA',
             'telephone' => mt_rand(10000000, 99999999),
             'sexe' => 'Masculin',
             'lieu_naissance' => 'Douala',
@@ -426,6 +427,8 @@ class UsersTableSeeder extends Seeder
             'date_naissance' => \Carbon\Carbon::createFromDate(1980,12,15)->toDateTimeString(),
             'password' => bcrypt('Compta@2019')
         ]);
+
+  
 
 
 

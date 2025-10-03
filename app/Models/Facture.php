@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Facture
+ * App\Models\Facture
  *
  * @property int $id
  * @property string|null $patient
@@ -15,19 +15,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $prix_total
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Produit[] $produits
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Produit[] $produits
  * @property-read int|null $produits_count
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture whereNumero($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture wherePatient($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture wherePrixTotal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture whereQuantiteTotal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Facture whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture whereNumero($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture wherePatient($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture wherePrixTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture whereQuantiteTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Facture whereUserId($value)
  * @mixin \Eloquent
  */
 class Facture extends Model

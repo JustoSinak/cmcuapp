@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,21 +13,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $user_id
  * @property int|null $patient_id
- * @property-read \App\Patient|null $patients
- * @property-read \App\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereEndTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereStartTime($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Event whereUserId($value)
+ * @property-read \App\Models\Patient|null $patients
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereColor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereEndTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereStartTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Event whereUserId($value)
  * @mixin \Eloquent
  */
 class Event extends Model
@@ -36,11 +36,11 @@ class Event extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     public function patients()
     {
-        return $this->belongsTo(Patient::class, 'patient_id');
+        return $this->belongsTo(\App\Models\Patient::class, 'patient_id');
     }
 }

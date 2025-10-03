@@ -12,7 +12,7 @@
     <!-- Page Content Holder -->
     @include('partials.header')
     <!--// top-bar -->
-    @can('create', \App\Patient::class)
+    @can('create', \App\Models\Patient::class)
         <div class="container">
             <h1 class="text-center">LISTE DES CLIENTS</h1>
         </div>
@@ -39,13 +39,13 @@
                                     <td>{{ $client->prenom }}</td>
                                     <td>{{ $client->created_at->toFormattedDateString() }}</td>
                                     <td style="display: inline-flex;">
-                                         @can('consulter', \App\Patient::class)
+                                         @can('consulter', \App\Models\Patient::class)
                                    
                                         <p data-placement="top" data-toggle="tooltip" title="Delete">
                                             <a class="btn btn-success btn-sm mr-1" title="Générer la facture du client" href="{{ route('clientP.pdf', $client->id) }}" onClick='if(this.disabled){ return false; } else { this.disabled = true; }'><i class="far fa-plus-square"></i></a>
                                         </p>
                                         @endcan
-                                        @can('delete', \App\Patient::class)
+                                        @can('delete', \App\Models\Patient::class)
                                         <form action="{{ route('clients.destroy', $client->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <p data-placement="top" data-toggle="tooltip" title="Delete">

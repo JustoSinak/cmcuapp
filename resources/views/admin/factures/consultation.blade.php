@@ -1,4 +1,22 @@
-﻿@extends('layouts.admin')
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        label{
+            font-size: 24px;
+        }
+        .end-date{
+            margin-left: 100px;
+            margin-right: 200px;
+            
+        }
+       
+    </style>
+</head>
+
+@extends('layouts.admin')
 
 @section('title', 'CMCU | Bilan facure')
 
@@ -12,13 +30,38 @@
         <!-- Page Content Holder -->
         @include('partials.header')
         <!--// top-bar -->
-        @can('view', \App\User::class)
+        @can('view', \App\Models\User::class)
         <div class="container_fluid">
             <h1 class="text-center">FACTURES</h1>
             <hr>
             <div class="container pt-3">
                 @include('partials.flash')
+                <div class="row">
+                    <form action="{{ route('search.date') }}" method="post" class="row">
+                        @csrf
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="start-date">
+                            <label>Start Date</label>
+                            <input type="date" id="start-date" name="start-date" pattern="\d{4}-\d{2}-\d{2}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="end-date">
+                            <label for="">End Date</label>
+                            <input type="date" id="end-date1" name="end-date" pattern="\d{4}-\d{2}-\d{2}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                            <!-- Error message display -->
+                                @if($errors->any())
+                                    <div class="alert alert-danger">
+                                        @foreach($errors->all() as $error)
+                                            <p>{{ $error }}</p>
+                                        @endforeach
+                                    </div>
+                                @endif
+                        </div>
+                    </form>
+                </div><br><br><br><br>
+                @if (isset($factureConsultations))
                 <div class="col-lg-12">
+                <p>Factures Du <strong>{{$startDate}} </strong>&nbsp;&nbsp;au&nbsp;&nbsp;<strong>{{$endDate}}</strong> </p><br>
                     <div class="table-responsive">
                         <i class="table_info">Les montants sont exprimés en <b> FCFA</b></i>
                         <table id="myTable" class="table table-hover table-bordered display" cellspacing="0" width="100%">
@@ -46,7 +89,7 @@
                                          <a class="btn btn-success btn-sm mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         @can('update', $facture)
                                         <!-- Trigger the "edit_acture " modal with a button -->
-                                        <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient->name }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-mode_paiement="{{ $facture->mode_paiement }}" data-prise_en_charge="{{ $facture->patient->prise_en_charge }}"> <i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient['name'] }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-mode_paiement="{{ $facture->mode_paiement }}" data-prise_en_charge="{{ $facture->patient['prise_en_charge'] }}"> <i class="fas fa-edit"></i></button>
                                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm btn-just-icon" data-toggle="tooltip" title="Supprimer la facture" onclick="return confirm('Voulez-vous vraiment suprimer cette facture ?')">
@@ -60,7 +103,7 @@
 
                                     </td>
                                     <td>{{$facture->numero}}</td>
-                                    <td>{{$facture->patient->name }}</td>
+                                    <td>{{$facture->patient['name'] }}</td>
                                     <td>{{$facture->details_motif ?? 'Consultation' }}</td>
                                     <td>{{$facture->montant }} </td>
                                     <td>{{$facture->assurancec }} </td>
@@ -110,6 +153,7 @@
                         {{--{{ $factures->links() }}--}}
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>
@@ -222,4 +266,28 @@
         $('#part_patient').val(montant * (100 - PEC) / 100)
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const startDateInput = document.getElementById('start-date');
+        const endDateInput = document.getElementById('end-date');
+        const errorMessage = document.createElement('div');
+        errorMessage.style.color = 'red';
+        form.appendChild(errorMessage);
+
+        form.addEventListener('submit', function(event) {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (startDate >= endDate) {
+                errorMessage.textContent = 'Start date must be before end date.';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                errorMessage.textContent = ''; // Clear error message if valid
+            }
+        });
+    });
+</script>
+
 @endsection
+</html>

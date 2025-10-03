@@ -214,7 +214,7 @@ $(document).ready(function(){
 
 @yield('script')
 @php
-$licence = \App\Licence::where('client', 'cmcuapp')->first();
+$licence = \App\Models\Licence::where('client', 'cmcuapp')->first();
 @endphp
 
 @if ($licence->expire_date <= \Carbon\Carbon::now()) <script type="text/javascript">

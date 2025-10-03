@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Fiche;
+use App\Models\User;
+use App\Models\Fiche;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class FichePolicy

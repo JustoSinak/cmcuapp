@@ -85,12 +85,12 @@
                                     @endforeach
                                 </select>
                             </td>
-                            @can('update', \App\Produit::class)
+                            @can('update', \App\Models\Produit::class)
                             <td>
                                 <a href="{{ route('produits.pharmaceutique') }}" title="Retour à la liste des produits" class="btn btn-secondary"> <i class="fas fa-arrow-left"></i> Ajouter des produits</a>
                             </td>
                             @endcan
-                            @can('anesthesiste', \App\Produit::class)
+                            @can('anesthesiste', \App\Models\Produit::class)
                             <td>
                                 <a href="{{ route('produits.anesthesiste') }}" title="Retour à la liste des produits" class="btn btn-secondary"> <i class="fas fa-arrow-left"></i> Ajouter des produits</a>
                             </td>

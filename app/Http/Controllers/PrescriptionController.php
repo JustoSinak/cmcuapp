@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\http\Request;
-use App\Prescription;
-use App\Patient;
+use App\Models\Prescription;
+use App\Models\Patient;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 

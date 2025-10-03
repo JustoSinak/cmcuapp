@@ -52,8 +52,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::get('supprimer/{id}', 'ProduitsController@getRemoveItem')->name('facturation.supprimer');
     Route::get('reduire/{id}', 'ProduitsController@getReduceByOne')->name('facturation.reduire');
     Route::post('produit/save-invoice/{produit}', 'ProduitsController@saveInvoice')->name('produit.invoice');
-
-
+// new route
+    Route::post('patients', 'PatientsController@search')->name('search.results');
     // Route::get('events', 'EventsController@index')->name('events.index');
     //Route::get('events/create/{patient}', 'EventsController@create')->name('events.create');
     // //Route::get('events/create', 'EventsController@create')->name('event.create');
@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
 
     Route::get('patients', 'PatientsController@index')->name('patients.index');
     Route::get('patients/create', 'PatientsController@create')->name('patients.create');
-    Route::post('patients', 'PatientsController@store')->name('patients.store');
+    Route::post('patients1', 'PatientsController@store')->name('patients.store');
     Route::get('patients/{patient}', 'PatientsController@show')->name('patients.show');
     Route::patch('patients/{patient}', 'PatientsController@update')->name('patients.update');
     Route::put('patients/{patient}', 'PatientsController@motifMontantUpdate')->name('patients.motif_montant.update');
@@ -165,6 +165,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::delete('facture', 'FactureController@destroy')->name('factures.destroy');
     Route::delete('facture/{id}', 'FactureController@destroy')->name('factures.destroy');
     Route::get('factures-consultation', 'FactureController@FactureConsultation')->name('factures.consultation');
+    Route::post('factures-consultation', 'FactureController@FactureConsultation')->name('search.date');
     Route::put('factures-consultation/{id}', 'FactureController@FactureConsultationUpdate')->name('factures.consultation.update');
     Route::get('factures-chambre', 'FactureController@FactureChambre')->name('factures.chambre');
     Route::get('patient-facture/{id}','FactureController@export_consultation')->name('factures.consultation_pdf');

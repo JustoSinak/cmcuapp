@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\ConsultationAnesthesiste
+ * App\Models\ConsultationAnesthesiste
  *
  * @property int $id
  * @property int $user_id
@@ -43,47 +43,47 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $mobilite_servicale
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Patient $patient
- * @property-read \App\User $user
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereAdaptationTraitement($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereAllergie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereAnesthesiSalle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereAntecedentTraitement($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereAntibiotique($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereAutre1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereBeneficeRisque($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereClasseAsa($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereDateHospitalisation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereDateIntervention($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereDistanceInterincisive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereDistanceThyromentoniere($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereExamenClinique($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereExamenParaclinique($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereIntubation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereJeunePreop($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereLiquide($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereMallampati($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereMedecinTraitant($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereMemo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereMobiliteServicale($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereMotifAdmission($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereOperateur($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste wherePatientId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereRisque($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereService($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereSolide($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereSpecialite($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereSynthesePreop($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereTechniqueAnesthesie($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereTechniqueAnesthesie1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereTraitementEnCours($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\ConsultationAnesthesiste whereUserId($value)
+ * @property-read \App\Models\Patient $patient
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereAdaptationTraitement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereAllergie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereAnesthesiSalle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereAntecedentTraitement($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereAntibiotique($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereAutre1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereBeneficeRisque($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereClasseAsa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereDateHospitalisation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereDateIntervention($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereDistanceInterincisive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereDistanceThyromentoniere($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereExamenClinique($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereExamenParaclinique($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereIntubation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereJeunePreop($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereLiquide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereMallampati($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereMedecinTraitant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereMemo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereMobiliteServicale($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereMotifAdmission($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereOperateur($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste wherePatientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereRisque($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereService($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereSolide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereSpecialite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereSynthesePreop($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereTechniqueAnesthesie($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereTechniqueAnesthesie1($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereTraitementEnCours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ConsultationAnesthesiste whereUserId($value)
  * @mixin \Eloquent
  */
 class ConsultationAnesthesiste extends Model
@@ -92,11 +92,11 @@ class ConsultationAnesthesiste extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\App\Models\User::class);
     }
 
     public function patient()
     {
-        return $this->belongsTo(Patient::class);
+        return $this->belongsTo(\App\Models\Patient::class);
     }
 }

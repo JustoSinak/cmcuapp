@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Imagerie;
+use App\Models\Imagerie;
 use Illuminate\Http\Request;
-use App\Patient;
+use App\Models\Patient;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 

@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
                 'id' => '1',
                 'name' => 'KOUAMO',
                 'prenom' => 'Stephane',
-                'login' => 'sysadmin',
+                'login' => 'Administrateur',
                 'telephone' => '24597903',
                 'sexe' => 'homme',
                 'lieu_naissance' => 'Mbouda',
@@ -308,9 +308,9 @@ class UsersTableSeeder extends Seeder
             16 => 
             array (
                 'id' => '17',
-                'name' => 'DJOUFANG',
-                'prenom' => 'Rodrigue',
-                'login' => 'DJOUFANG',
+                'name' => 'NGAPNA',
+                'prenom' => 'Yves',
+                'login' => 'NGAPNA',
                 'telephone' => '41016656',
                 'sexe' => 'Masculin',
                 'lieu_naissance' => 'Douala',
@@ -593,6 +593,25 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2019-10-28 16:45:09',
                 'role_id' => '2',
             ),
+             32 => 
+            array (
+                'id' => '34',
+                'name' => 'KOUAMO',
+                'prenom' => 'STEPHANE',
+                'login' => 'root',
+                'telephone' => '2022',
+                'sexe' => 'Masculin',
+                'lieu_naissance' => 'Douala',
+                'date_naissance' => '1980-12-15 16:48:47',
+                'specialite' => NULL,
+                'onmc' => NULL,
+                'password' => '$2y$10$jVDQpXH/sypiDkQQA4lmBOJkur6MMW/n0GCSUaedASvhEsBWG1VIC',
+                'remember_token' => 'X3HtU5hywbwBJwlrZUOrzMgYMSVzY2qtgiEdzPPmXA6Aj2UYXW363xhY7VpY',
+                'created_at' => '2019-09-26 16:48:47',
+                'updated_at' => '2019-09-26 16:48:47',
+                'role_id' => '1',
+            ),
+          
         ));
         
         

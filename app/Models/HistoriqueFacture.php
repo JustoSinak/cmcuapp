@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use App\FactureConsultation;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ class HistoriqueFacture extends Model
 
     public function facture_consultation()
     {
-        return $this->belongsTo(FactureConsultation::class);
+        return $this->belongsTo(\App\Models\FactureConsultation::class);
     }
 
     

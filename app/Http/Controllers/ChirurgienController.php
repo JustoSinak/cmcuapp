@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Client;
-use App\ObservationMedicale;
-use App\Patient;
-use App\SoinsInfirmier;
-use App\User;
+use App\Models\Client;
+use App\Models\ObservationMedicale;
+use App\Models\Patient;
+use App\Models\SoinsInfirmier;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ChirurgienController extends Controller
