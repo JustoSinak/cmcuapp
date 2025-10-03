@@ -1,23 +1,17 @@
-# Database Optimization Plan
+# Laravel Upgrade to 8.x TODO
 
-## 1. Add Missing Indexes
-- [x] Add index on `user_id` in patients table migration
-- [x] Check and add indexes on foreign keys in other migrations (consultations, factures, etc.)
-- [x] Add composite index on `name` and `prenom` in patients for search
-
-## 2. Optimize Queries in Controllers
-- [x] Update PatientsController::search() to use eager loading
-- [x] Update PatientsController::index() to use eager loading if needed
-- [x] Add select() for specific columns where appropriate
-
-## 3. Pagination and Transactions
-- [x] Add pagination to PatientsController::index() (10 per page)
-- [x] Add pagination to PatientsController::search() (10 per page)
-- [x] Pass $patients to index view in PatientsController::index()
-- [x] Wrap PatientsController::store() in DB::transaction()
-
-## 4. Database Tuning
-- [x] Review config/database.php for optimizations
-
-## 5. Testing
-- [ ] Test performance improvements after changes
+- [ ] Backup database and codebase (git commit current state)
+- [ ] Check/upgrade PHP to 7.4 or 8.0
+- [ ] Update composer.json to Laravel 5.8.*, run composer update
+- [ ] Update code for Laravel 5.8 compatibility
+- [ ] Test app, run migrations for 5.8
+- [ ] Update composer.json to Laravel 6.0.*, run composer update
+- [ ] Update code for Laravel 6.0 compatibility
+- [ ] Test app, run migrations for 6.0
+- [ ] Update composer.json to Laravel 7.0.*, run composer update
+- [ ] Update code for Laravel 7.0 compatibility
+- [ ] Test app, run migrations for 7.0
+- [ ] Update composer.json to Laravel 8.0.*, run composer update
+- [ ] Update code for Laravel 8.0 compatibility
+- [ ] Test app, run migrations for 8.0
+- [ ] Final verification and cleanup
