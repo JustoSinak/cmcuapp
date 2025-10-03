@@ -28,7 +28,7 @@
         "wbraganca/yii2-dynamicform": "^2.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.2",
+        "barryvdh/laravel-debugbar": "^3.4",
         "barryvdh/laravel-ide-helper": "^2.6",
         "beyondcode/laravel-dump-server": "^1.0",
         "filp/whoops": "^2.0",
