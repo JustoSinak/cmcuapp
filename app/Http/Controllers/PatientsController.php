@@ -21,7 +21,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use MercurySeries\Flashy\Flashy;
+use Laracasts\Flash\Flash;
 // for DB queries optimization
 use Illuminate\Support\Facades\DB;
 
@@ -370,7 +370,7 @@ class PatientsController extends Controller
             }
         }
 
-        \Flashy::info('La liste des consommables a été mis à jour');
+        flash('La liste des consommables a été mis à jour')->info();
         return back();
     }
 
@@ -385,7 +385,7 @@ class PatientsController extends Controller
             "patient_externe" => \request('patient_externe'),
         ]);
 
-        Flashy::info('Votre enregistrement a bien été pris en compte');
+        flash('Votre enregistrement a bien été pris en compte')->info();
 
         return back();
     }

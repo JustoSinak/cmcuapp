@@ -1,0 +1,63 @@
+    * {
+        box-sizing: border-box;
+    }
+
+    .container_ {
+        position: relative;
+        width: 100%;
+    }
+
+    .image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .overlay {
+        background: rgba(0, 0, 0, 0.5);
+        /* Black see-through */
+        color: #f1f1f1;
+        transition: .5s ease;
+        opacity: 0;
+        color: white;
+        text-align: center;
+    }
+
+    .description {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .button_container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .button_container_add {
+        position: relative;
+        width: 100%;
+        padding-top: 100%;
+        /* 1:1 Aspect Ratio */
+        text-align: center;
+    }
+
+    .add_button {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .image {
+        max-height:100%;
+    }
+
+    .container_:hover .overlay {
+        opacity: 1;
+    }

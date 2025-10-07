@@ -9,8 +9,14 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}" />
+    @unless(env('DISABLE_STYLES'))
+    @php
+        $viteCss = class_exists('App\\Support\\Vite') ? \App\Support\Vite::css('resources/assets/js/app.js') : [];
+    @endphp
+    @foreach($viteCss as $css)
+        <link rel="stylesheet" href="{{ $css }}" />
+    @endforeach
+    <link rel="stylesheet" href="{{ asset('css/all.css') }}" />
     <link rel="stylesheet" href="{{ asset('admin/datatables/css/dataTables.bootstrap4.css') }}" />
     <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/faviconlogo.ico') }}" />
 
@@ -19,6 +25,7 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+    @endunless
     @yield('link')
     <script>
         addEventListener("load", function() {
@@ -31,6 +38,7 @@
     </script>
 
 </head>
+@unless(env('BYPASS_LICENSE'))
 <div id="myModal" data-backdrop="static" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -59,13 +67,15 @@
 
     </div>
 </div>
+@endunless
 @yield('content')
 
 
 
-<script src="{{ mix('js/all.js') }}"></script>
-<script src="{{ mix('js/app.js') }}"></script>
-<script src="{{ mix('js/typehead.js') }}"></script>
+@php($viteJs = class_exists('App\\Support\\Vite') ? \App\Support\Vite::asset('resources/assets/js/app.js') : asset('js/app.js'))
+<script type="module" src="{{ $viteJs }}"></script>
+<script src="{{ asset('js/all.js') }}"></script>
+<script src="{{ asset('js/typehead.js') }}"></script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>--}}
 <script src="{{ asset('admin/datatables/js/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('admin/datatables/js/dataTables.bootstrap4.js') }}"></script>
@@ -217,13 +227,16 @@ $(document).ready(function(){
 $licence = \App\Models\Licence::where('client', 'cmcuapp')->first();
 @endphp
 
-@if ($licence->expire_date <= \Carbon\Carbon::now()) <script type="text/javascript">
-    $(window).on('load',function(){
-    $('#myModal').modal('show');
-    });
+@unless(env('BYPASS_LICENSE'))
+    @if ($licence && $licence->expire_date <= \Carbon\Carbon::now())
+    <script type="text/javascript">
+        $(window).on('load',function(){
+            $('#myModal').modal('show');
+        });
     </script>
     @endif
+@endunless
 
-    @include('flashy::message')
+    @include('flash::message')
 
 </html>

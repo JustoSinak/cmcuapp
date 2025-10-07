@@ -179,13 +179,11 @@ return [
          * Package Service Providers...
          */
 
-        MaddHatter\LaravelFullcalendar\ServiceProvider::class,
+        // MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        MercurySeries\Flashy\FlashyServiceProvider::class,
-        Unisharp\Ckeditor\ServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Spatie\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -248,10 +246,8 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Flashy' => MercurySeries\Flashy\Flashy::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
+        'Html' => Spatie\Html\Facades\Html::class,
 
     ],
 

@@ -161,7 +161,7 @@ class ProduitsController extends Controller
 
         $request->session()->put('cart', $cart);
 
-        flashy()->success("La facture vient d'être mise à jour");
+        flash("La facture vient d'être mise à jour")->success();
 
         return redirect()->route('pharmaceutique.facturation');
     }
@@ -201,7 +201,7 @@ class ProduitsController extends Controller
             Session::forget('cart');
         }
 
-        flashy()->success("La facture vient d'être mise à jour");
+        flash("La facture vient d'être mise à jour")->success();
 
         return redirect()->route('pharmaceutique.facturation');
     }
@@ -220,7 +220,7 @@ class ProduitsController extends Controller
             Session::forget('cart');
         }
 
-        flashy()->info("La produit à bien été supprimer de la facture");
+        flash("La produit à bien été supprimer de la facture")->info();
 
         return redirect()->route('pharmaceutique.facturation');
     }

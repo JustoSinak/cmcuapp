@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 @endcan
-                <!-- @can('create', \App\Produit::class)
+                {{-- @can('create', \App\Produit::class)
                 <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-success">
                     <div class="s-l">
                         <h5>PRODUITS EN STOCK</h5>
@@ -72,7 +72,7 @@
                         </h6>
                     </div>
                 </div>
-                @endcan -->
+                @endcan --}}
                 {{--------------------------------MARGE IC-------------------------------------}}
                 @can('create', \App\Models\Patient::class)
                     @can('show', \App\Models\User::class)

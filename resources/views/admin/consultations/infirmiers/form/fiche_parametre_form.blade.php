@@ -1,9 +1,11 @@
 @if($parametre->id)
-    {{ Form::model($parametre, ['route' => ['fiche_parametres.update', $parametre->id], 'method' => 'put', 'class'=>'form-horizontal form-label-left']) }}
+    <form method="post" action="{{ route('fiche_parametres.update', $parametre->id) }}" class="form-horizontal form-label-left">
+        @method('put')
+        @csrf
 @else
-    {{ Form::open(['route' => 'fiche_parametres.store', 'method' => 'post', 'class'=>'form-horizontal form-label-left']) }}
+    <form method="post" action="{{ route('fiche_parametres.store') }}" class="form-horizontal form-label-left">
+        @csrf
 @endif
-@csrf
 
     @include('partials.flash_form')
     <table class="table">
@@ -12,47 +14,47 @@
             <td>
                 <b>Date de naissance : <span class="text-danger">*</span></b>
             </td>
-            <td>{{ Form::date('date_naissance', null, ['class' => 'form-control', 'required' => 'required']) }}</td>
+            <td><input type="date" name="date_naissance" value="{{ old('date_naissance', $parametre->date_naissance ?? '') }}" class="form-control" required></td>
         </tr>
         <tr>
             <td><b>TA :</b> <span class="text-danger">*</span></td>
             <td>
-                {{ Form::label('Bras gauche :') }}
-                {{ Form::text('bras_gauche', null, ['class' => 'form-control', 'placeholder' => ' mmHg', 'required' => 'required']) }}
-                {{ Form::label('Bras droit :') }}
-                {{ Form::text('bras_droit', null, ['class' => 'form-control', 'placeholder' => ' mmHg', 'required' => 'required']) }}
+                <label for="bras_gauche">Bras gauche :</label>
+                <input type="text" name="bras_gauche" id="bras_gauche" value="{{ old('bras_gauche', $parametre->bras_gauche ?? '') }}" class="form-control" placeholder=" mmHg" required>
+                <label for="bras_droit">Bras droit :</label>
+                <input type="text" name="bras_droit" id="bras_droit" value="{{ old('bras_droit', $parametre->bras_droit ?? '') }}" class="form-control" placeholder=" mmHg" required>
             </td>
         </tr>
         <tr>
             <td><b>Température :</b> <span class="text-danger">*</span></td>
-            <td>{{ Form::number('temperature', null, ['class' => 'form-control col-md-5', 'placeholder' => ' °C', 'required' => 'required', 'step' => 'any']) }}</td>
+            <td><input type="number" name="temperature" value="{{ old('temperature', $parametre->temperature ?? '') }}" class="form-control col-md-5" placeholder=" °C" step="any" required></td>
         </tr>
-                {{ Form::hidden('patient_id', $patient->id, []) }}
+                <input type="hidden" name="patient_id" value="{{ $patient->id }}">
         <tr>
             <td><b>FR :</b> <span class="text-danger">*</span></td>
-            <td>{{ Form::text('fr', null, ['class' => 'form-control', 'placeholder' => '  Mvts/min', 'required' => 'required']) }}</td>
+            <td><input type="text" name="fr" value="{{ old('fr', $parametre->fr ?? '') }}" class="form-control" placeholder="  Mvts/min" required></td>
         </tr>
         <tr>
             <td><b>FC :</b> <span class="text-danger">*</span></td>
-            <td>{{ Form::text('fc', null, ['class' => 'form-control', 'placeholder' => '  Pls/min', 'required' => 'required']) }}</td>
+            <td><input type="text" name="fc" value="{{ old('fc', $parametre->fc ?? '') }}" class="form-control" placeholder="  Pls/min" required></td>
         </tr>
         <tr>
             <td><b>Gly :</b> </td>
-            <td>{{ Form::text('glycemie', null, ['class' => 'form-control', 'placeholder' => '  g/l']) }}</td>
+            <td><input type="text" name="glycemie" value="{{ old('glycemie', $parametre->glycemie ?? '') }}" class="form-control" placeholder="  g/l"></td>
         </tr>
         <tr>
             <td><b>SPO2 :</b><span class="text-danger">*</span></td>
-            <td>{{ Form::text('spo2', null, ['class' => 'form-control', 'placeholder' => '  %']) }}</td>
+            <td><input type="text" name="spo2" value="{{ old('spo2', $parametre->spo2 ?? '') }}" class="form-control" placeholder="  %"></td>
         </tr>
         <tr>
             <td><b>Poids :</b> <span class="text-danger">*</span></td>
-            <td>{{ Form::number('poids', null, ['class' => 'form-control col-md-5', 'placeholder' => '  Kgs', 'required' => 'required', 'step' => 'any']) }}</td>
+            <td><input type="number" name="poids" value="{{ old('poids', $parametre->poids ?? '') }}" class="form-control col-md-5" placeholder="  Kgs" step="any" required></td>
         </tr>
         <tr>
             <td><b>Taille (en metre):</b> <span class="text-danger">*</span></td>
-            <td>{{ Form::number('taille', null, ['class' => 'form-control col-md-5', 'placeholder' => '0.00', 'required' => 'required', 'step' => 'any']) }}</td>
+            <td><input type="number" name="taille" value="{{ old('taille', $parametre->taille ?? '') }}" class="form-control col-md-5" placeholder="0.00" step="any" required></td>
         </tr>
         </tbody>
     </table>
     <button type="submit" class="btn btn-primary">Ajouter au dossier</button>
-{{ Form::close() }}
+</form>
