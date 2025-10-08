@@ -104,7 +104,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
 
     
     Route::get('dossiers/create', 'DossiersController@create')->name('dossiers.create');
-    Route::get('dossiers/create/{patient}', 'DossiersController@create')->name('dossiers.create');
+    Route::get('dossiers/create/{patient}', 'DossiersController@create')->name('dossiers.create.patient');
     Route::post('dossiers', 'DossiersController@store')->name('dossiers.store');
     Route::patch('dossiers/{dossier}', 'DossiersController@update')->name('dossiers.update');
 
@@ -120,7 +120,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::put('consultation-anesthesiste/{consultationAnesthesiste}', 'ConsultationsController@update_consultation_anesthesiste')->name('consultation_anesthesiste.update');
     Route::post('consultation-chirurgien', 'ConsultationsController@store_consultation_chirurgien')->name('consultation_chirurgien.store');
     Route::post('consultation-anesthesiste', 'ConsultationsController@store_consultation_anesthesiste')->name('consultation_anesthesiste.store');
-    Route::post('consultation-anesthesiste', 'ConsultationsController@Astore')->name('consultation_anesthesiste.store');
+    Route::post('consultation-anesthesiste-alt', 'ConsultationsController@Astore')->name('consultation_anesthesiste.store_alt');
 
 
     Route::get('consentement-eclaire/{patient}', 'ConsultationsController@Export_consentement_eclaire')->name('consentement_eclaire.pdf');
@@ -163,7 +163,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'] ], function () {
     Route::get('factures-devis/{id}', 'FactureController@export_facture_devis')->name('facture_devis.pdf');
     Route::get('factures/{facture}', 'FactureController@show')->name('factures.show');
     Route::delete('facture', 'FactureController@destroy')->name('factures.destroy');
-    Route::delete('facture/{id}', 'FactureController@destroy')->name('factures.destroy');
+    Route::delete('facture/{id}', 'FactureController@destroy')->name('factures.destroy.by_id');
     Route::get('factures-consultation', 'FactureController@FactureConsultation')->name('factures.consultation');
     Route::post('factures-consultation', 'FactureController@FactureConsultation')->name('search.date');
     Route::put('factures-consultation/{id}', 'FactureController@FactureConsultationUpdate')->name('factures.consultation.update');

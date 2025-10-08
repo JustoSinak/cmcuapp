@@ -17,19 +17,23 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        $produits = Produit::count();
-        $users = User::count();
+        // Cache dashboard data for 5 minutes to improve performance
+        $dashboardData = \Cache::remember('dashboard_data_' . auth()->id(), 300, function () {
+            return [
+                'produits' => Produit::count(),
+                'users' => User::count(),
+                'patients' => Patient::count(),
+                'events' => Event::where('user_id', auth()->id())->count(),
+                'consultation' => Consultation::select(['id', 'patient_id', 'user_id', 'created_at'])
+                    ->with(['user:id,name', 'patient:id,nom,prenom'])
+                    ->where('user_id', auth()->id())
+                    ->latest()
+                    ->limit(10) // Limit to recent consultations for performance
+                    ->get(),
+            ];
+        });
 
-        $patients = Patient::count();
-        $consultation = Consultation::with('user')->where('user_id', '=', \auth()->id())->get();
-        $events = Event::where('user_id', \auth()->id())->count();
-        $license = rand(1000,9999) . '-' . rand(1000,9999) . '-' . rand(1000,9999) . '-' . rand(1000,9999) . '-' . rand(1000,9999);
-        
-        // for ($i=0; $i < 1000000; $i++) { 
-           
-        // }
-
-        return view('admin.dashboard', compact('produits', 'users', 'patients', 'events', 'consultation'));
+        return view('admin.dashboard', $dashboardData);
     }
 
     public function ActiveLicence(LicenceActiveRequest $request)

@@ -40,4 +40,40 @@ return [
         ],
     ],
 
+    // CDN Configuration
+    'cdn' => [
+        'enabled' => env('CDN_ENABLED', false),
+        'url' => env('CDN_URL'),
+        'zones' => [
+            'images' => ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'],
+            'assets' => ['css', 'js', 'woff', 'woff2', 'ttf'],
+            'documents' => ['pdf', 'doc', 'docx', 'xls', 'xlsx'],
+        ],
+    ],
+
+    // Elasticsearch Configuration
+    'elasticsearch' => [
+        'host' => env('ELASTICSEARCH_HOST', 'localhost:9200'),
+        'username' => env('ELASTICSEARCH_USERNAME'),
+        'password' => env('ELASTICSEARCH_PASSWORD'),
+        'index_prefix' => env('ELASTICSEARCH_INDEX_PREFIX', 'cmcu_'),
+    ],
+
+    // WebSocket/Pusher Configuration
+    'pusher' => [
+        'app_id' => env('PUSHER_APP_ID'),
+        'app_key' => env('PUSHER_APP_KEY'),
+        'app_secret' => env('PUSHER_APP_SECRET'),
+        'app_cluster' => env('PUSHER_APP_CLUSTER', 'mt1'),
+        'encrypted' => true,
+    ],
+
+    // Backup Configuration
+    'backup' => [
+        'remote_disk' => env('BACKUP_REMOTE_DISK', 's3'),
+        'retention_days' => env('BACKUP_RETENTION_DAYS', 30),
+        'compress' => env('BACKUP_COMPRESS', true),
+        'encrypt' => env('BACKUP_ENCRYPT', false),
+    ],
+
 ];

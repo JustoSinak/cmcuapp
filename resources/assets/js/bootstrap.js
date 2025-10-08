@@ -1,28 +1,65 @@
 
-window._ = require('lodash');
+import _ from 'lodash';
+window._ = _;
 
 /**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
+ * Optimized Bootstrap and jQuery loading with modern imports
  */
 
 try {
-    window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
-
-    require('bootstrap');
-} catch (e) {}
+    // Use modern Popper.js
+    import('@popperjs/core').then(({ createPopper }) => {
+        window.Popper = { createPopper };
+    });
+    
+    // Import jQuery and Bootstrap
+    import('jquery').then((jQuery) => {
+        window.$ = window.jQuery = jQuery.default;
+        
+        // Load Bootstrap after jQuery is available
+        import('bootstrap').then(() => {
+            console.log('Bootstrap loaded successfully');
+        });
+    });
+} catch (e) {
+    console.error('Error loading Bootstrap dependencies:', e);
+}
 
 /**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
+ * Optimized Axios configuration with performance improvements
  */
 
-window.axios = require('axios');
+import axios from 'axios';
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// Configure axios with optimizations
+axios.defaults.timeout = 10000; // 10 second timeout
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+// Add request interceptor for performance monitoring
+axios.interceptors.request.use((config) => {
+    config.metadata = { startTime: new Date() };
+    return config;
+});
+
+// Add response interceptor for performance logging
+axios.interceptors.response.use(
+    (response) => {
+        const endTime = new Date();
+        const duration = endTime - response.config.metadata.startTime;
+        
+        if (duration > 2000) { // Log slow requests
+            console.warn(`Slow API request: ${response.config.url} took ${duration}ms`);
+        }
+        
+        return response;
+    },
+    (error) => {
+        console.error('API request failed:', error);
+        return Promise.reject(error);
+    }
+);
+
+window.axios = axios;
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that

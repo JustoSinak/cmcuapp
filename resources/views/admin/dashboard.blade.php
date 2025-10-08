@@ -9,7 +9,7 @@
         <div class="row">
             <!-- Stats -->
             <div class="outer-w3-agile col-xl">
-                @can('update', \App\Models\User::class)
+                {{-- @can('update', \App\Models\User::class) --}}
                     <div class="stat-grid p-3 d-flex align-items-center justify-content-between bg-primary">
                         <div class="s-l">
                             <h5>UTILISATEURS</h5>
@@ -20,8 +20,8 @@
                             </h6>
                         </div>
                     </div>
-                @endcan
-                @can('create', \App\Models\Patient::class)
+                {{-- @endcan --}}
+                {{-- @can('create', \App\Models\Patient::class) --}}
                     <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-success">
                         <div class="s-l">
                             <h5>PATIENTS</h5>
@@ -32,8 +32,8 @@
                             </h6>
                         </div>
                     </div>
-                @endcan
-                @can('create', \App\Models\chambre::class)
+                {{-- @endcan --}}
+                {{-- @can('create', \App\Models\chambre::class) --}}
                     <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-danger">
                         <div class="s-l">
                             <h5>LITS</h5>
@@ -44,8 +44,8 @@
                             </h6>
                         </div>
                     </div>
-                @endcan
-                @can('update', \App\Models\Produit::class)
+                {{-- @endcan --}}
+                {{-- @can('update', \App\Models\Produit::class) --}}
                 <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-success">
                     <div class="s-l">
                         <h5>FICHES DE SATISFACTIONS</h5>
@@ -58,7 +58,7 @@
                         </h6>
                     </div>
                 </div>
-                @endcan
+                {{-- @endcan --}}
                 {{-- @can('create', \App\Produit::class)
                 <div class="stat-grid p-3 mt-3 d-flex align-items-center justify-content-between bg-success">
                     <div class="s-l">

@@ -54,10 +54,13 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            // For optimizing prepared statements and performance
             'options' => [
-                PDO::ATTR_EMULATE_PREPARES => true,
-    ]
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_PERSISTENT => true,
+                PDO::ATTR_TIMEOUT => 30,
+                PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET sql_mode='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'",
+            ],
         ],
 
         'pgsql' => [

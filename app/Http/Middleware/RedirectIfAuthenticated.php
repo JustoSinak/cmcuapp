@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Flash;
 
 class RedirectIfAuthenticated
 {
@@ -20,7 +21,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             
             $titre = Auth()->user()->role_id==2 ? "DR": (in_array(Auth()->user()->sexe, ["Homme", "Maxculin"])? "M." : "Mme");
-            flashy()->primary('Bievenue '.$titre.' '.Auth()->user()->name.' ! Nous sommes heureux de vous revoir !');
+            Flash::message('Bievenue '.$titre.' '.Auth()->user()->name.' ! Nous sommes heureux de vous revoir !', 'primary');
             return redirect('/admin/dashboard');
         }
 

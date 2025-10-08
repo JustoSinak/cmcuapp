@@ -1,27 +1,41 @@
 
 /**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
+ * Optimized application entry point with performance improvements
  */
 
-require('./bootstrap');
+// Import core dependencies
+import './bootstrap';
+import Vue from 'vue';
 
+// Lazy load InstantSearch only when needed
+const loadInstantSearch = () => import('vue-instantsearch');
 
-window.Vue = require('vue');
+// Global Vue configuration for performance
+Vue.config.performance = process.env.NODE_ENV !== 'production';
+Vue.config.devtools = process.env.NODE_ENV !== 'production';
 
+// Register components asynchronously for better performance
+Vue.component('example-component', () => import('./components/ExampleComponent.vue'));
 
-// import InstantSearch from 'vue-instantsearch';
-// Vue.use(InstantSearch);
+// Lazy load admin scripts only when needed
+const loadAdminScripts = async () => {
+    if (document.querySelector('.admin-panel')) {
+        const { default: adminModule } = await import('./admin/main.js');
+        return adminModule;
+    }
+};
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+// Initialize Vue application with performance optimizations
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    async mounted() {
+        // Load admin scripts if needed
+        await loadAdminScripts();
+        
+        // Initialize search if search elements exist
+        if (document.querySelector('.search-container')) {
+            const InstantSearch = await loadInstantSearch();
+            Vue.use(InstantSearch.default);
+        }
+    }
 });
