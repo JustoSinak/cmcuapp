@@ -10,13 +10,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @unless(env('DISABLE_STYLES'))
-    @php
-        $viteCss = class_exists('App\\Support\\Vite') ? \App\Support\Vite::css('resources/assets/js/app.js') : [];
-    @endphp
-    @foreach($viteCss as $css)
-        <link rel="stylesheet" href="{{ $css }}" />
-    @endforeach
-    <link rel="stylesheet" href="{{ asset('css/all.css') }}" />
+    @vite('resources/assets/css/all.scss')
+    @vite('resources/assets/js/app.js')
     <link rel="stylesheet" href="{{ asset('admin/datatables/css/dataTables.bootstrap4.css') }}" />
     <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/faviconlogo.ico') }}" />
 
@@ -72,10 +67,8 @@
 
 
 
-@php($viteJs = class_exists('App\\Support\\Vite') ? \App\Support\Vite::asset('resources/assets/js/app.js') : asset('js/app.js'))
-<script type="module" src="{{ $viteJs }}"></script>
-<script src="{{ asset('js/all.js') }}"></script>
-<script src="{{ asset('js/typehead.js') }}"></script>
+@vite('resources/assets/js/all.js')
+@vite('resources/assets/js/typehead.js')
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>--}}
 <script src="{{ asset('admin/datatables/js/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('admin/datatables/js/dataTables.bootstrap4.js') }}"></script>

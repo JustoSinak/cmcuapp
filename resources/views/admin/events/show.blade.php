@@ -2,10 +2,10 @@
 <html lang="fr">
 
 <head>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
-    <link rel="stylesheet" href="{{ mix('css/all.css') }}" />
-    <script src="{{ mix('js/all.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
+    @vite('resources/assets/sass/app.scss')
+    @vite('resources/assets/css/all.scss')
+    @vite('resources/assets/js/all.js')
+    @vite('resources/assets/js/app.js')
     <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <script src="{{ asset('admin/js/modernizr.js') }}"></script>
