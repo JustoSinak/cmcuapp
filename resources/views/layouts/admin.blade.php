@@ -10,16 +10,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @unless(env('DISABLE_STYLES'))
-    @vite('resources/assets/css/all.scss')
-    @vite('resources/assets/js/app.js')
+    @vite(['resources/assets/sass/app.scss', 'resources/assets/css/all.scss'])
+    @vite(['resources/assets/js/app.js', 'resources/assets/js/all.js', 'resources/assets/js/typehead.js'])
     <link rel="stylesheet" href="{{ asset('admin/datatables/css/dataTables.bootstrap4.css') }}" />
     <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/faviconlogo.ico') }}" />
 
-    <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Poiret+One:wght@400&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css">
+    
     @endunless
     @yield('link')
     <script>
@@ -73,9 +74,12 @@
 <script src="{{ asset('admin/datatables/js/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('admin/datatables/js/dataTables.bootstrap4.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+<script src="{{ asset('resources/assets/js/admin/jquery-2.2.3.min.js') }}"></script>
+<script src="{{ asset('resources/assets/js/admin/bootstrap.min.js') }}"></script>
 
-
-
+<script src="{{ asset('resources/assets/js/admin/moment.min.js') }}"></script>
+<script src="{{ asset('resources/assets/js/admin/parsley.min.js') }}"></script>
+<script src="{{ asset('resources/assets/js/admin/jquery.charts.js') }}"></script>
 
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
 <script>

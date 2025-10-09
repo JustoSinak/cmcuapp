@@ -1,14 +1,26 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
+// Import custom variables first
 @import 'variables';
 
-// Bootstrap
+// Import Bootstrap 5 (this will import all necessary components)
 @import 'bootstrap/scss/bootstrap';
-@import '@fortawesome/fontawesome-free/css/all.css';
 
+// Fonts - Updated to use Google Fonts API v2
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+// FontAwesome 6 - Updated imports
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+
+// Custom styles
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+// Bootstrap 5 compatibility helpers
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+.float-left { float: left !important; }
+.float-right { float: right !important; }

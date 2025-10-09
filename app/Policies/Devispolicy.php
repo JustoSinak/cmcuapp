@@ -17,7 +17,7 @@ class Devispolicy
      */
     public function before(User $user, $ability)
     {
-        if ($user->isAdmin() && $user->isCaisse() && $user->isMedecin() && $user->isLogistique()) {
+        if ($user->isAdmin() || $user->isCaisse() || $user->isMedecin() || $user->isLogistique()) {
 
             return true;
         }

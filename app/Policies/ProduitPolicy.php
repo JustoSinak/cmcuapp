@@ -13,7 +13,7 @@ class ProduitPolicy
 
     public function before(User $user, $ability)
     {
-        if ($user->isAdmin() && $user->isGestionnaire()) {
+        if ($user->isAdmin() || $user->isGestionnaire()) {
 
             return true;
         }

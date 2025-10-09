@@ -197,6 +197,12 @@ class User extends Authenticatable
 
     }
 
+    public function isMedecin()
+    {
+        return Auth::user()->role_id === 2;
+
+    }
+
     public function facture_consultations()
     {
         return $this->hasMany(FactureConsultation::class);
@@ -211,6 +217,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(ConsultationSuivi::class);
     }
-
-
 }

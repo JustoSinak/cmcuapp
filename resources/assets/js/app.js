@@ -1,41 +1,55 @@
-
 /**
- * Optimized application entry point with performance improvements
+ * Modern Vue 3 application entry point with Bootstrap 5 and FontAwesome 6
  */
 
 // Import core dependencies
 import './bootstrap';
-import Vue from 'vue';
+import { createApp } from 'vue';
 
-// Lazy load InstantSearch only when needed
-const loadInstantSearch = () => import('vue-instantsearch');
-
-// Global Vue configuration for performance
-Vue.config.performance = process.env.NODE_ENV !== 'production';
-Vue.config.devtools = process.env.NODE_ENV !== 'production';
-
-// Register components asynchronously for better performance
-Vue.component('example-component', () => import('./components/ExampleComponent.vue'));
-
-// Lazy load admin scripts only when needed
-const loadAdminScripts = async () => {
-    if (document.querySelector('.admin-panel')) {
-        const { default: adminModule } = await import('./admin/main.js');
-        return adminModule;
-    }
-};
-
-// Initialize Vue application with performance optimizations
-const app = new Vue({
-    el: '#app',
+// Create Vue 3 application
+const app = createApp({
     async mounted() {
+        // Configure Vue 3 compatibility mode for gradual migration
+        try {
+            const { configureCompat } = await import('@vue/compat');
+            configureCompat({
+                MODE: 2, // Vue 2 compatibility mode
+                GLOBAL_MOUNT: false,
+                GLOBAL_EXTEND: false,
+                GLOBAL_PROTOTYPE: false,
+                GLOBAL_SET: false,
+                GLOBAL_DELETE: false,
+                GLOBAL_OBSERVABLE: false,
+                CONFIG_OPTION_MERGE_STRATS: false,
+                CONFIG_WHITESPACE: false,
+            });
+        } catch (e) {
+            console.warn('Vue compat mode not available:', e);
+        }
+
         // Load admin scripts if needed
-        await loadAdminScripts();
+        if (document.querySelector('.admin-panel')) {
+            try {
+                const { default: adminModule } = await import('./admin/main.js');
+            } catch (e) {
+                console.warn('Admin module not found:', e);
+            }
+        }
         
         // Initialize search if search elements exist
         if (document.querySelector('.search-container')) {
-            const InstantSearch = await loadInstantSearch();
-            Vue.use(InstantSearch.default);
+            try {
+                const InstantSearch = await import('vue-instantsearch');
+                app.use(InstantSearch.default);
+            } catch (e) {
+                console.warn('InstantSearch not available:', e);
+            }
         }
     }
 });
+
+// Register components asynchronously for better performance
+app.component('example-component', () => import('./components/ExampleComponent.vue'));
+
+// Mount the application
+app.mount('#app');

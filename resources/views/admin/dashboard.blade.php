@@ -1,5 +1,4 @@
-@extends('layouts.admin') @section('title', 'Accueil | admin') @section('content')
-    <body>
+@section('content')
     <div class="se-pre-con"></div>
     <div class="wrapper">
     @include('partials.side_bar')
@@ -115,6 +114,4 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('admin/js/main.js') }}"></script>
-    </body>
-@stop
+    <!-- <script src="{{ asset('admin/js/main.js') }}"></script> -->

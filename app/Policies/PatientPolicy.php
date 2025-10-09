@@ -13,7 +13,7 @@ class PatientPolicy
 
     public function before(User $user, $ability)
     {
-        if ($user->isAdmin() && $user->isCaisse() && $user->isMedecin()) {
+        if ($user->isAdmin() || $user->isCaisse() || $user->isMedecin()) {
 
             return true;
         }

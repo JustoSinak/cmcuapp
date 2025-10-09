@@ -1,28 +1,40 @@
-
 import _ from 'lodash';
 window._ = _;
 
 /**
- * Optimized Bootstrap and jQuery loading with modern imports
+ * Bootstrap 5 and modern dependencies loading
  */
 
 try {
-    // Use modern Popper.js
-    import('@popperjs/core').then(({ createPopper }) => {
-        window.Popper = { createPopper };
+    // Import Popper.js for Bootstrap 5
+    import('@popperjs/core').then(({ createPopper, detectOverflow, popperGenerator }) => {
+        window.Popper = { createPopper, detectOverflow, popperGenerator };
     });
     
-    // Import jQuery and Bootstrap
+    // Import jQuery (still needed for legacy code)
     import('jquery').then((jQuery) => {
         window.$ = window.jQuery = jQuery.default;
         
-        // Load Bootstrap after jQuery is available
-        import('bootstrap').then(() => {
-            console.log('Bootstrap loaded successfully');
+        // Load Bootstrap 5 after jQuery is available
+        import('bootstrap').then((bootstrap) => {
+            // Make Bootstrap available globally for legacy code
+            window.bootstrap = bootstrap;
+            console.log('Bootstrap 5 loaded successfully');
+            
+            // Initialize Bootstrap tooltips and popovers globally
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+            
+            const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+            popoverTriggerList.map(function (popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl);
+            });
         });
     });
 } catch (e) {
-    console.error('Error loading Bootstrap dependencies:', e);
+    console.error('Error loading Bootstrap 5 dependencies:', e);
 }
 
 /**
@@ -62,9 +74,7 @@ axios.interceptors.response.use(
 window.axios = axios;
 
 /**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience so we don't have to attach every token manually.
+ * CSRF Token configuration for Laravel
  */
 
 let token = document.head.querySelector('meta[name="csrf-token"]');
@@ -76,15 +86,11 @@ if (token) {
 }
 
 /**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
+ * Echo configuration (commented out - uncomment if needed)
  */
 
 // import Echo from 'laravel-echo'
-
 // window.Pusher = require('pusher-js');
-
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
 //     key: process.env.MIX_PUSHER_APP_KEY,

@@ -1,0 +1,76 @@
+{
+  "_bootstrap-C_fhlRLP.js": {
+    "file": "assets/bootstrap-C_fhlRLP.js",
+    "name": "bootstrap",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-Cp6zLMpC.js"
+    ]
+  },
+  "_vendor-Cp6zLMpC.js": {
+    "file": "assets/vendor-Cp6zLMpC.js",
+    "name": "vendor",
+    "isDynamicEntry": true
+  },
+  "node_modules/vue-instantsearch/vue2/es/index.js": {
+    "file": "assets/index-BH4EqxSP.js",
+    "name": "index",
+    "src": "node_modules/vue-instantsearch/vue2/es/index.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-Cp6zLMpC.js"
+    ]
+  },
+  "resources/assets/css/all.scss": {
+    "file": "assets/all-DbD7TAo_.css",
+    "src": "resources/assets/css/all.scss",
+    "isEntry": true
+  },
+  "resources/assets/js/all.js": {
+    "file": "assets/all-DJCcwpqb.js",
+    "name": "all",
+    "src": "resources/assets/js/all.js",
+    "isEntry": true,
+    "imports": [
+      "_bootstrap-C_fhlRLP.js",
+      "_vendor-Cp6zLMpC.js"
+    ]
+  },
+  "resources/assets/js/app.js": {
+    "file": "assets/app-v9xCxAMD.js",
+    "name": "app",
+    "src": "resources/assets/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-Cp6zLMpC.js"
+    ],
+    "dynamicImports": [
+      "_bootstrap-C_fhlRLP.js",
+      "_bootstrap-C_fhlRLP.js",
+      "_bootstrap-C_fhlRLP.js",
+      "_vendor-Cp6zLMpC.js",
+      "node_modules/vue-instantsearch/vue2/es/index.js",
+      "resources/assets/js/components/ExampleComponent.vue"
+    ]
+  },
+  "resources/assets/js/components/ExampleComponent.vue": {
+    "file": "assets/ExampleComponent-DNBkUv4j.js",
+    "name": "ExampleComponent",
+    "src": "resources/assets/js/components/ExampleComponent.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-Cp6zLMpC.js"
+    ]
+  },
+  "resources/assets/js/typehead.js": {
+    "file": "assets/typehead-DTizoXgW.js",
+    "name": "typehead",
+    "src": "resources/assets/js/typehead.js",
+    "isEntry": true
+  },
+  "resources/assets/sass/app.scss": {
+    "file": "assets/app-XSEYWZqc.css",
+    "src": "resources/assets/sass/app.scss",
+    "isEntry": true
+  }
+}
