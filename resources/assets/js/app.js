@@ -8,6 +8,7 @@ import { createApp } from 'vue';
 
 // Create Vue 3 application
 const app = createApp({
+    template: '<div></div>', // Empty template to prevent warning
     async mounted() {
         // Configure Vue 3 compatibility mode for gradual migration
         try {
@@ -51,5 +52,10 @@ const app = createApp({
 // Register components asynchronously for better performance
 app.component('example-component', () => import('./components/ExampleComponent.vue'));
 
-// Mount the application
-app.mount('#app');
+// Mount the application only if #app element exists
+const appElement = document.querySelector('#app');
+if (appElement) {
+    app.mount('#app');
+} else {
+    console.warn('Vue mount target #app not found. Vue app not mounted.');
+}

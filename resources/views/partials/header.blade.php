@@ -1,10 +1,10 @@
 <div id="content">
     <!-- top-bar -->
-    <nav class="navbar navbar-default mb-xl-5 mb-4">
+    <nav class="navbar navbar-light bg-light mb-xl-5 mb-4">
         <div class="container-fluid">
 
             <div class="navbar-header">
-                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn float-left">
+                <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn float-start">
                     <i class="fas fa-bars"></i>
                 </button>
                 
@@ -14,7 +14,7 @@
                     
                 </h4>
             </div>
-            <ul class="top-icons-agileits-w3layouts float-right">
+            <ul class="top-icons-agileits-w3layouts float-end">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">

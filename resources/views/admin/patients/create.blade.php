@@ -134,7 +134,7 @@
                             </br>
 
                             <button type="submit" class="btn btn-primary btn-lg col-md-5" title="En cliquant sur ce bouton vous enregistrer un nouveau patient">Ajouter</button>
-                            <a href="{{ route('patients.index') }}" class="btn btn-warning btn-lg col-md-5 offset-md-1" title="Retour à la liste des patients">Annuler</a>
+                            <a href="{{ route('patients.index') }}" class="btn btn-warning btn-lg col-md-5 ms-2" title="Retour à la liste des patients">Annuler</a>
                         </div>
                     </form>
                 </div>

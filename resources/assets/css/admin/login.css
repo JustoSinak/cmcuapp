@@ -306,7 +306,7 @@ ul {
 
 body {
     /* position: relative;*/
-    background-image: url(../images/home.jpg);
+    background-image: url('/admin/images/home.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

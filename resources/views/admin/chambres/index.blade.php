@@ -20,7 +20,7 @@
                         <a href="{{ url('/admin/chambres/?categorie=VIP') }}" class="btn btn-success">VIP</a>
                         <a href="{{ url('/admin/chambres/?categorie=CLASSIQUE') }}" class="btn btn-primary">CLASSIQUE</a>
                         <a href="{{ url('/admin/chambres/?categorie=BLOC OPERATOIRE') }}" class="btn btn-info">BLOC</a>
-                        <a href="{{ url('/admin/chambres') }}" class="btn btn-info"><i class="fas fa-sync-alt"></i></a>
+                        <a href="{{ url('/admin/chambres') }}" class="btn btn-info"><i class="fas fa-rotate"></i></a>
                     </div>
                 </div>
             </div>
@@ -97,3 +97,4 @@
     </body>
 
 @endsection
+

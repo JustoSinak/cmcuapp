@@ -7,7 +7,7 @@
 // Fonts - Updated to use Google Fonts API v2
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
 
-// FontAwesome 6 - Updated imports
+// FontAwesome 6 - Using CDN instead of local files to avoid 404 errors
 @import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/solid';
 @import '@fortawesome/fontawesome-free/scss/regular';

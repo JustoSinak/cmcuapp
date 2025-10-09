@@ -11,10 +11,20 @@
 
     @unless(env('DISABLE_STYLES'))
     @vite(['resources/assets/sass/app.scss', 'resources/assets/css/all.scss'])
-    @vite(['resources/assets/js/app.js', 'resources/assets/js/all.js', 'resources/assets/js/typehead.js'])
-    <link rel="stylesheet" href="{{ asset('admin/datatables/css/dataTables.bootstrap4.css') }}" />
+    <!-- @vite(['resources/assets/js/app.js', 'resources/assets/js/all.js', 'resources/assets/js/typehead.js']) -->
+
+    @vite(['resources/assets/js/app.js'])
+    @vite(['resources/assets/js/all.js'])
+
+    <!-- Legacy scripts will be loaded dynamically after jQuery -->
+
+    <!-- DataTables Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
     <link rel="shortcut icon" type="image/png" href="{{ asset('admin/images/faviconlogo.ico') }}" />
 
+    <!-- FontAwesome 6.7.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <link href="//fonts.googleapis.com/css2?family=Poiret+One:wght@400&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -61,28 +71,58 @@
 
         </div>
 
-    </div>
 </div>
 @endunless
+
 @yield('content')
 
-
-
-@vite('resources/assets/js/all.js')
-@vite('resources/assets/js/typehead.js')
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>--}}
-<script src="{{ asset('admin/datatables/js/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('admin/datatables/js/dataTables.bootstrap4.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
-<script src="{{ asset('resources/assets/js/admin/jquery-2.2.3.min.js') }}"></script>
-<script src="{{ asset('resources/assets/js/admin/bootstrap.min.js') }}"></script>
 
-<script src="{{ asset('resources/assets/js/admin/moment.min.js') }}"></script>
+<!-- <script src="{{ asset('resources/assets/js/admin/moment.min.js') }}"></script>
 <script src="{{ asset('resources/assets/js/admin/parsley.min.js') }}"></script>
-<script src="{{ asset('resources/assets/js/admin/jquery.charts.js') }}"></script>
-
+<script src="{{ asset('resources/assets/js/admin/jquery.charts.js') }}"></script> -->
 <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+
+<div id="app"></div>
 <script>
+    // Wait for jQuery to be loaded by Vite
+    function waitForjQuery(callback) {
+        if (typeof $ !== 'undefined') {
+            callback();
+        } else {
+            setTimeout(() => waitForjQuery(callback), 100);
+        }
+    }
+
+    // Load DataTables and other jQuery-dependent scripts after jQuery is available
+    waitForjQuery(function() {
+        // Load DataTables scripts dynamically
+        const loadScript = (src) => {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        };
+
+        // Load DataTables scripts in sequence
+        loadScript('https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js')
+            .then(() => loadScript('https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js'))
+            .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js'))
+            .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js'))
+            .then(() => loadScript('{{ asset("admin/js/modernizr.js") }}'))
+            .then(() => loadScript('{{ asset("admin/js/parsley.min.js") }}'))
+            .then(() => {
+                console.log('All jQuery-dependent scripts loaded successfully');
+            })
+            .catch(error => {
+                console.error('Error loading scripts:', error);
+            });
+    });
+// Initialize DataTables and other jQuery-dependent code
+    waitForjQuery(function() {
     $(document).ready(function() {
         $('#myTable').DataTable({
             "dom": '<"top"i <"d-flex justify-content-between"l<"toolbar">f>>rt<"bottom d-flex justify-content-between mt-3"p><"clear">',
@@ -134,6 +174,10 @@
                 }
             }
         });
+
+        // Bootstrap 5 tooltips are initialized automatically in bootstrap.js
+        // $('[data-bs-toggle="tooltip"]').tooltip(); // Removed - handled by Bootstrap 5
+
         $("div.toolbar").html($('.table_info'));
         $("div.bottom").prepend($('.table_link_right'));
         $('.filter-select').change(function() {
@@ -142,44 +186,44 @@
                 .draw();
         });
     });
-</script>
+});
+    </script>
 
 <script type="text/javascript">
-    var path = "{{ route('autocomplete') }}";
-    $('#search').typeahead({
-        minLength: 1,
-        hint: true,
-        highlight: true,
-        source: function(query, process) {
-            return $.get(path, {
-                query: query
-            }, function(data) {
-                return process(data);
-            });
-        },
+    waitForjQuery(function() {
+        var path = "{{ route('autocomplete') }}";
+        $('#search').typeahead({
+            minLength: 1,
+            hint: true,
+            highlight: true,
+            source: function(query, process) {
+                return $.get(path, {
+                    query: query
+                }, function(data) {
+                    return process(data);
+                });
+            },
+        });
     });
 </script>
 
 <script>
-    $(document).ready(function() {
-        //initialize tooltips
-        $('[data-toggle="tooltip"]').tooltip();
+    waitForjQuery(function() {
+        $(document).ready(function() {
+            // Bootstrap 5 tooltips and popovers are initialized automatically in bootstrap.js
+            // $('[data-bs-toggle="tooltip"]').tooltip(); // Removed - handled by Bootstrap 5
 
-
-        $(".tbtn").click(function() {
-            $(this).parents(".custom-table").find(".toggler1").removeClass("toggler1");
-            $(this).parents("tbody").find(".toggler").addClass("toggler1");
-            $(this).parents(".custom-table").find(".fa-minus-circle").removeClass("fa-minus-circle");
-            $(this).parents("tbody").find(".fa-plus-circle").addClass("fa-minus-circle");
+            $(".tbtn").click(function() {
+                $(this).parents(".custom-table").find(".toggler1").removeClass("toggler1");
+                $(this).parents("tbody").find(".toggler").addClass("toggler1");
+                $(this).parents(".custom-table").find(".fa-minus-circle").removeClass("fa-minus-circle");
+                $(this).parents("tbody").find(".fa-plus-circle").addClass("fa-minus-circle");
+            });
         });
     });
 </script>
 <script>
-$(document).ready(function(){
-  $('[data-toggle="popover"]').popover();
-});
-</script>
-<script>
+waitForjQuery(function() {
     $('#mode_paiement').change(function(event){
         if($(this).val() == 'chèque' && !$('._cheque').length){
             $('.m_paiement').after(
@@ -217,6 +261,7 @@ $(document).ready(function(){
             }
         }
     });
+});
 </script>
 
 @yield('script')
@@ -227,8 +272,10 @@ $licence = \App\Models\Licence::where('client', 'cmcuapp')->first();
 @unless(env('BYPASS_LICENSE'))
     @if ($licence && $licence->expire_date <= \Carbon\Carbon::now())
     <script type="text/javascript">
-        $(window).on('load',function(){
-            $('#myModal').modal('show');
+        waitForjQuery(function() {
+            $(window).on('load',function(){
+                $('#myModal').modal('show');
+            });
         });
     </script>
     @endif

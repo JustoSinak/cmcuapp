@@ -1,8 +1,7 @@
 {
-  "_bootstrap-C_fhlRLP.js": {
-    "file": "assets/bootstrap-C_fhlRLP.js",
+  "_bootstrap--do0dWss.js": {
+    "file": "assets/bootstrap--do0dWss.js",
     "name": "bootstrap",
-    "isDynamicEntry": true,
     "imports": [
       "_vendor-Cp6zLMpC.js"
     ]
@@ -22,32 +21,30 @@
     ]
   },
   "resources/assets/css/all.scss": {
-    "file": "assets/all-DbD7TAo_.css",
+    "file": "assets/all-D6efK75s.css",
     "src": "resources/assets/css/all.scss",
     "isEntry": true
   },
   "resources/assets/js/all.js": {
-    "file": "assets/all-DJCcwpqb.js",
+    "file": "assets/all-BIT30N5F.js",
     "name": "all",
     "src": "resources/assets/js/all.js",
     "isEntry": true,
     "imports": [
-      "_bootstrap-C_fhlRLP.js",
+      "_bootstrap--do0dWss.js",
       "_vendor-Cp6zLMpC.js"
     ]
   },
   "resources/assets/js/app.js": {
-    "file": "assets/app-v9xCxAMD.js",
+    "file": "assets/app-C_9V6CBi.js",
     "name": "app",
     "src": "resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vendor-Cp6zLMpC.js"
+      "_vendor-Cp6zLMpC.js",
+      "_bootstrap--do0dWss.js"
     ],
     "dynamicImports": [
-      "_bootstrap-C_fhlRLP.js",
-      "_bootstrap-C_fhlRLP.js",
-      "_bootstrap-C_fhlRLP.js",
       "_vendor-Cp6zLMpC.js",
       "node_modules/vue-instantsearch/vue2/es/index.js",
       "resources/assets/js/components/ExampleComponent.vue"
@@ -69,8 +66,24 @@
     "isEntry": true
   },
   "resources/assets/sass/app.scss": {
-    "file": "assets/app-XSEYWZqc.css",
+    "file": "assets/app-DCWCJFSK.css",
     "src": "resources/assets/sass/app.scss",
     "isEntry": true
+  },
+  "resources/assets/webfonts/fa-regular-400.ttf": {
+    "file": "assets/fa-regular-400-DZaxPHgR.ttf",
+    "src": "resources/assets/webfonts/fa-regular-400.ttf"
+  },
+  "resources/assets/webfonts/fa-regular-400.woff2": {
+    "file": "assets/fa-regular-400-BjRzuEpd.woff2",
+    "src": "resources/assets/webfonts/fa-regular-400.woff2"
+  },
+  "resources/assets/webfonts/fa-solid-900.ttf": {
+    "file": "assets/fa-solid-900-D0aA9rwL.ttf",
+    "src": "resources/assets/webfonts/fa-solid-900.ttf"
+  },
+  "resources/assets/webfonts/fa-solid-900.woff2": {
+    "file": "assets/fa-solid-900-CTAAxXor.woff2",
+    "src": "resources/assets/webfonts/fa-solid-900.woff2"
   }
 }
