@@ -19,7 +19,7 @@
         @can('show', \App\Models\User::class)
             <div class="container">
                 <div class="row">
-                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
+                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end"
                        title="Retour à la liste des patients">
                         <i class="fas fa-arrow-left"></i> Retour au dossier patient
                     </a>
@@ -29,7 +29,7 @@
                 <br>
                 <div class="table-responsive">
                     @can('infirmier', \App\Models\Patient::class)
-                        <button type="button" class="btn btn-success float-right"
+                        <button type="button" class="btn btn-success float-end"
                                 title="Administrer des soins" data-toggle="modal" data-target="#SurveillanceAptitude">
                             <i class="fas fa-user-secret"></i>
                         </button>

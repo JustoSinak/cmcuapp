@@ -54,7 +54,7 @@
                     }
 
                     .invoice .invoice-to {
-                        text-align: left
+                        text-align: start
                     }
 
                     .invoice .invoice-to .to {
@@ -83,8 +83,8 @@
                     }
 
                     .invoice main .notices {
-                        padding-left: 6px;
-                        border-left: 6px solid #3989c6
+                        padding-start: 6px;
+                        border-start: 6px solid #3989c6
                     }
 
                     .invoice main .notices .notice {
@@ -218,25 +218,25 @@
                                 <table border="0" cellspacing="0" cellpadding="0">
                                     <thead>
                                     <tr>
-                                        <th class="text-left">DESIGNATION</th>
-                                        <th class="text-left">QUANTITE</th>
-                                        <th class="text-left">PRIX UNITAIRE</th>
-                                        <th class="text-left">TOTAL</th>
+                                        <th class="text-start">DESIGNATION</th>
+                                        <th class="text-start">QUANTITE</th>
+                                        <th class="text-start">PRIX UNITAIRE</th>
+                                        <th class="text-start">TOTAL</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     @foreach ($produits as $produit)
                                         <tr>
-                                            <td class="text-left"><h3> {{ $produit['item']['designation'] }}</h3></td>
-                                            <td class="text-left"><h3> {{ $produit['quantite'] }}</h3></td>
-                                            <td class="text-left"><h3> {{ $produit['prix_unitaire'] }}</h3></td>
+                                            <td class="text-start"><h3> {{ $produit['item']['designation'] }}</h3></td>
+                                            <td class="text-start"><h3> {{ $produit['quantite'] }}</h3></td>
+                                            <td class="text-start"><h3> {{ $produit['prix_unitaire'] }}</h3></td>
                                         </tr>
                                     @endforeach
                                     <tr>
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td class="text-left"><h3> {{ $totalPrix }} XAF</h3></td>
+                                        <td class="text-start"><h3> {{ $totalPrix }} XAF</h3></td>
                                     </tr>
                                     <tr>
                                         @if(auth()->user()->role_id === '5')

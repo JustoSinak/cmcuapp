@@ -16,24 +16,30 @@
                 <form method="post" action="{{ route('chambres.update', $chambre->id) }}">
                     @method('PATCH')
                     @csrf
-                    <div class="form-group">
-                        <label for="name">numero:</label>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">numero:</label>
                         <input type="text" class="form-control" name="numero" value={{ $chambre->numero }} required/>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="exampleFormControlSelect1">CATEGORIE</label>
                         <select class="form-control" name="categorie"  id="exampleFormControlSelect1" required>
-                            <option >classique</option>
+                            <!-- <option >classique</option>
                             <option>mvp</option>
-                            <option>vip</option>
+                            <option>vip</option> -->
+                            <option value="classique" {{ $chambre->categorie == 'classique' ? 'selected' : '' }}>classique</option>
+                            <option value="mvp" {{ $chambre->categorie == 'mvp' ? 'selected' : '' }}>mvp</option>
+                            <option value="vip" {{ $chambre->categorie == 'vip' ? 'selected' : '' }}>vip</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <div class="mb-3">
                         <label for="exampleFormControlSelect1">PRIX</label>
                         <select class="form-control" name="prix"  id="exampleFormControlSelect1" value="{{ $chambre->prix }}" required>
-                            <option >2500</option>
+                            <!-- <option >2500</option>
                             <option>5000</option>
-                            <option>10000</option>
+                            <option>10000</option> -->
+                            <option value="2500" {{ $chambre->prix == '2500' ? 'selected' : '' }}>2500</option>
+                            <option value="5000" {{ $chambre->prix == '5000' ? 'selected' : '' }}>5000</option>
+                            <option value="10000" {{ $chambre->prix == '10000' ? 'selected' : '' }}>10000</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">MODIFIER</button>
@@ -43,3 +49,4 @@
     </div>
     </body>
 @endsection
+

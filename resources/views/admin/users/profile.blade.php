@@ -49,33 +49,33 @@
                     <hr>
                     <div class="col-md-12 collapse" id="form_mdp">
 
-                        <form class="form-group" action="{{ route('users.changePassword', $user->id) }}" method="POST">
+                        <form class="mb-3" action="{{ route('users.changePassword', $user->id) }}" method="POST">
                             <div class="row">
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <label for="old_pass" class="col-form-label">Ancien mot de passe <span class="text-danger">*</span></label>
                                     <input name="old_pass" id="old_pass" class="form-control" type="password" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="password" class="col-form-label text-md-right">Nouveau mot de passe <span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label text-md-end">Nouveau mot de passe <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="password" class="col-form-label text-md-right">Confirmer le mot de passe <span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label text-md-end">Confirmer le mot de passe <span class="text-danger">*</span></label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <input name="password" type="password" class="form-control" id="password" placeholder="Ancien mot de passe" required>
                                 </div>
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <input id="confirm_password" type="password" class="form-control" name="password_confirmation" placeholder="Mot de passe de confimation" required>
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn btn-default" type="button" onclick="show_password()"><i id="show_pass" class="fas fa-eye"></i></button>
                                 </div>
                                 <div class="col-md-1">
-                                    <span id='message' class="ml-1 align-text-bottom"></span>
+                                    <span id='message' class="ms-1 align-text-bottom"></span>
                                 </div>
                             </div>
 

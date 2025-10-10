@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-10  toppad ">
-                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"><i
+                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end"><i
                             class="fas fa-arrow-left"></i> Retour au dossier patient</a>
                 </div>
                 <br>

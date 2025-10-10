@@ -17,8 +17,8 @@
                     <h5 class="card-title">Ajouter un examen</h5>
                     <small class="text-info" title="Les champs marqués par une étoile rouge sont obligatoire"><i class="fas fa-info-circle"></i></small>
                     <hr>
-                    <form class="form-group col-md-10" method="post" action="{{ route('examens.store') }}" enctype="multipart/form-data">
-                        <div class="form-group">
+                    <form class="mb-3 col-md-10" method="post" action="{{ route('examens.store') }}" enctype="multipart/form-data">
+                        <div class="mb-3">
                             @csrf
                             <label for="type">Type d'examens <span class="text-danger"></span></label>
                             <input type="text" class="form-control" name="type" value="{{ old('type') }}" required/>

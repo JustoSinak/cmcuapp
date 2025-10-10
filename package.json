@@ -36,9 +36,11 @@
     },
     "dependencies": {
         "algoliasearch": "^5.40.0",
+        "datatables.net": "^2.3.4",
         "datatables.net-bs5": "^2.3.4",
         "datatables.net-dt": "^2.3.4",
         "froala-editor": "^4.6.2",
+        "typeahead.js": "^0.11.1",
         "vue-instantsearch": "^4.21.3"
     }
 }

@@ -40,12 +40,12 @@
                                          
                                                 @can('consulter', \App\Models\Patient::class)
                                                         <td style="display: inline-flex;">
-                                                            <a href="{{ route('examens.show', $examen->id) }}" title="consulter les examens patient" class="btn btn-primary btn-sm mr-1"><i class="fas fa-eye"></i></a>
+                                                            <a href="{{ route('examens.show', $examen->id) }}" title="consulter les examens patient" class="btn btn-primary btn-sm me-1"><i class="fas fa-eye"></i></a>
                                                         </td>
                                                 @endcan
                                                     @can('consulter', \App\Models\Patient::class)
                                                         <td>
-                                                            <a href="{{ route('examens.create', $patient->id) }}" title="ajouter un examen" class="btn btn-info btn-sm mr-1"><i class="far fa-calendar-plus"></i></a>
+                                                            <a href="{{ route('examens.create', $patient->id) }}" title="ajouter un examen" class="btn btn-info btn-sm me-1"><i class="far fa-calendar-plus"></i></a>
                                                         </td>
                                                 @endcan
                                                
@@ -58,7 +58,7 @@
                         <br>
                         <div class="col-md-12 text-center">
 
-                        <a href="{{ route('patients.index') }}" class="btn btn-success float-right"><i class="fas fa-arrow-left"></i>  Retour à la liste des patients</a>
+                        <a href="{{ route('patients.index') }}" class="btn btn-success float-end"><i class="fas fa-arrow-left"></i>  Retour à la liste des patients</a>
 </div>
                         <div class="clearfix"></div>
                         {{--{{ $patients->links() }}--}}

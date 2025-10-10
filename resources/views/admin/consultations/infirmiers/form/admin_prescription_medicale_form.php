@@ -13,8 +13,8 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="date"><b>Date:</b></label>
+                            <div class="mb-3">
+                                <label for="date" class="form-label"><b>Date:</b></label>
                                 <input type="date" class="form-control" name="date" id="date">
                             </div>
 

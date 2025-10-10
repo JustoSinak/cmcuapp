@@ -33,7 +33,7 @@
                                     <td>{{ $devi->nom}}</td>
                                     <td>
                                         @can('print', \App\Models\Devi::class)
-                                        <button type="button" data-devi='@json($devi)' data-champ_patient="" data-toggle="modal" data-title="Impression devis ..." data-texte="Vous pouvez effectuez des modifications si nécessaire." data-target="#imprimer_devis" class="btn btn-sm btn-info mr-1" title="Attribuer le divis à un patient"><i class="fas fa-eye"></i></button>
+                                        <button type="button" data-devi='@json($devi)' data-champ_patient="" data-toggle="modal" data-title="Impression devis ..." data-texte="Vous pouvez effectuez des modifications si nécessaire." data-target="#imprimer_devis" class="btn btn-sm btn-info me-1" title="Attribuer le divis à un patient"><i class="fas fa-eye"></i></button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -46,7 +46,7 @@
         </div>
         @can('create', \App\Models\Devi::class)
         <div class="text-center table_link_right">
-            <button type="button" data-toggle="modal" data-title="Nouveau devis ..." data-texte="" data-target="#imprimer_devis" class="btn  btn-primary mr-1" title="Vous allez jouter un nouveau devis " data-champ_patient="d-none">Nouveau</button>
+            <button type="button" data-toggle="modal" data-title="Nouveau devis ..." data-texte="" data-target="#imprimer_devis" class="btn  btn-primary me-1" title="Vous allez jouter un nouveau devis " data-champ_patient="d-none">Nouveau</button>
         </div>
         @endcan
 
@@ -80,7 +80,7 @@
                                     <br>
                                 </div>
                                 <div class="col-sm-4 d-flex align-items-center  ">
-                                    <label class="form-check-label ml-4">
+                                    <label class="form-check-label mr-2">
                                         <input type="checkbox" class="form-check-input" id="saisir_nom" value="">Saisir le nom
                                     </label>
                                 </div>
@@ -88,15 +88,15 @@
                             </div>
                             <div class="row nom_devis">
                                 @can('update', \App\Models\Devi::class)
-                                <div class="col-4 form-group">
+                                <div class="col-4 mb-3">
                                     <label for="nom_devis">Devis de :</label>
                                     <input type="text" name="nom_devis" class="form-control" id="nom_devis" required>
                                 </div>
-                                <div class="col-4 form-group">
+                                <div class="col-4 mb-3">
                                     <label for="code_devis">Code :</label>
                                     <input type="text" name="code_devis" class="form-control" id="code_devis" required>
                                 </div>
-                                <div class="col-4 form-group">
+                                <div class="col-4 mb-3">
                                     <label for="acces_devis">Type :</label>
                                     <select class="form-control" id="acces_devis" name="acces_devis">
                                         <option value="acte">Acte</option>
@@ -104,11 +104,11 @@
                                     </select>
                                 </div>
                                 @elsecan('print', \App\Models\Devi::class)
-                                <div class="col-8 form-group">
+                                <div class="col-8 mb-3">
                                     <label for="nom_devis">Devis de :</label>
                                     <input type="text" name="nom_devis" class="form-control" id="nom_devis" required>
                                 </div>
-                                <div class="col-4 form-group">
+                                <div class="col-4 mb-3">
                                     <label for="code_devis">Code :</label>
                                     <input type="text" name="code_devis" class="form-control" id="code_devis" required>
                                 </div>
@@ -137,15 +137,15 @@
                                 </div>
                                 <div class="row my-2 ajouter_ligne">
                                     <div class="col-sm-12 text-center">
-                                        <button type="button" class="btn text-primary btn-outline-info float-left">
+                                        <button type="button" class="btn text-primary btn-outline-info float-start">
                                             <i class="fa fa-plus-circle"></i>
                                         </button>
-                                        <p class=" float-right total1 text-danger">Total 1: <strong>0</strong> FCFA</p>
+                                        <p class=" float-end total1 text-danger">Total 1: <strong>0</strong> FCFA</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12 pl-0 mt-2">
-                                        <label class="text-primary form-check-label ml-4">
+                                        <label class="text-primary form-check-label mr-2">
                                             <input type="checkbox" class="form-check-input " id="hospitalisation" value="">Hospitalisation
                                         </label>
                                     </div>
@@ -213,12 +213,12 @@
                                 </div>
                                 <div class="row hospitalisation d-none my-2">
                                     <div class="col-sm-12 d-flex align-items-center justify-content-end">
-                                        <p class=" float-right total2 text-danger">Total 2: <strong>0</strong> FCFA</p>
+                                        <p class=" float-end total2 text-danger">Total 2: <strong>0</strong> FCFA</p>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-12">
-                                        <p class="float-right total">Total : <strong>0</strong> FCFA</p>
+                                        <p class="float-end total">Total : <strong>0</strong> FCFA</p>
                                     </div>
                                 </div>
                             </div>
@@ -232,8 +232,8 @@
                         @can('update', \App\Models\Devi::class)
                         <button type="submit" class="btn btn-info devis_save" data-dismiss="modal">Enregistrer</button>
                         @endcan
-                        <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-primary float-right mx-3 devis_export" data-dismiss="modal">Exporter</button>
+                        <button type="button" class="btn btn-danger float-end" data-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary float-end mx-3 devis_export" data-dismiss="modal">Exporter</button>
 
                     </div>
 

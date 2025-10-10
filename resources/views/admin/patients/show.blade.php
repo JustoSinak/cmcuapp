@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-md-12  toppad  offset-md-0 mb-2">
                     @include('admin.patients.partials.menu')
-                    <a href="{{ route('patients.index') }}" class="btn btn-success float-right" title="Retour à la liste des patients">
+                    <a href="{{ route('patients.index') }}" class="btn btn-success float-end" title="Retour à la liste des patients">
                         <i class="fas fa-arrow-left"></i> Retour à la liste des patients
                     </a>
                 </div>
@@ -52,16 +52,16 @@
                                     <table class="table table-user-information table-hover mt-3">
                                         
                                         <div class=" row justify-content-center mb-2">
-                                            <button class="btn btn-secondary mr-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
+                                            <button class="btn btn-secondary me-2" title="Cacher / Afficher les données personelles du patient" onclick="ShowDetailsPatient()"><i class="fas fa-eye"></i> Détails Personnels
                                             </button>
                                             @can('infirmier_secretaire', \App\Models\Patient::class)
-                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mr-2"><i class="fas fa-bars"></i> Completer le dossier</a>
+                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info me-2"><i class="fas fa-bars"></i> Completer le dossier</a>
                                             @endcan
                                             @can('secretaire', \App\Models\Patient::class)
-                                            <button class="btn btn-secondary mr-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Editer</button>
-                                            
+                                            <button class="btn btn-secondary me-2" title="Modifier le motif et le montant" onclick="ShoweditMotif_montant()"><i class="fas fa-edit"></i> Editer</button>
+
                                             @endcan @can('med_inf_anes', \App\Models\Patient::class)
-                                            <a class="btn btn-dark mr-2" href="{{ route('fiche.prescription_medicale.index', $patient) }}" title="Prescriptions médicales">
+                                            <a class="btn btn-dark me-2" href="{{ route('fiche.prescription_medicale.index', $patient) }}" title="Prescriptions médicales">
                                                 <i class="fas fa-book"></i> Prescriptions Medicales
                                             </a>
                                             @endcan @can('infirmier', \App\Models\Patient::class)
@@ -77,7 +77,7 @@
                                             @endempty
                                             @endcan
                                             @can('medecin_secretaire', \App\Models\Patient::class)
-                                            <button class="btn btn-secondary mr-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
+                                            <button class="btn btn-secondary me-2" title="Gerer les images scannés des examens" onclick="Showexamen_scannes()"><i class="fas fa-image"></i> Images Scannées</button>
                                             @endcan
                                         </div>
                                         @include('admin.consultations.partials.detail_patient') @include('admin.consultations.show_consultation')
@@ -99,79 +99,70 @@
                                         <div class="card-header mb-2">
                                             <small>DETAILS ACTION</small>
                                         </div>
-                                        <div class="card-content">
-                                            <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des ordonnances pour ce patient" data-toggle="modal" data-target="#ordonanceAll" data-whatever="@mdo">
+                                        <div class="card-content d-grid">
+                                            <button type="button" class="btn btn-primary mb-2" title="Liste des ordonnances pour ce patient" data-toggle="modal" data-target="#ordonanceAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i> Ordonances
                                             </button>
-                                            <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#biologieAll" data-whatever="@mdo">
+                                            <button type="button" class="btn btn-primary mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#biologieAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i> Examens Biologiques
                                             </button>
 
                                             @can('anesthesiste', \App\Models\Patient::class)
 
-                                            <a  href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
+                                            <a  href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary mb-2">
                                                     <i class="fas fa-eye"></i>
                                                     Surveillance Rapprochée
                                                 </a>
-                                            
+
                                             @endcan
                                             @can('chirurgien', \App\Models\Patient::class)
-                                            
+
                                             <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
-                                            class="btn btn-primary btn-block mb-2">
+                                            class="btn btn-primary mb-2">
                                                     <i class="fas fa-eye"></i>
                                                     Consultations Anesthésistes
                                                 </a>
-                                            
-                                            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
+
+                                            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary mb-2">
                                                     <i class="fas fa-eye"></i>
                                                     Surveillance Rapprochée
                                                 </a>
-                                            
+
                                             @endcan
                                             @can('infirmier', \App\Models\Patient::class)
-                                            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary btn-block mb-2">
+                                            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" title="Surveillance rapprochée des paramètres"  class="btn btn-primary mb-2">
                                                     <i class="fas fa-eye"></i>
                                                     Surveillance Rapprochée
                                                 </a>
-                                            
+
                                             <a href="{{ route('consultations.index_anesthesiste', $patient->id) }}"
-                                            class="btn btn-primary btn-block mb-2">
+                                            class="btn btn-primary mb-2">
                                                     <i class="fas fa-eye"></i>
                                                     Consultations anesthésistes
                                                 </a>
-                                            
+
                                             @endcan
-       
 
 
 
-
-
-
-
-
-
-
-
-                                            <!-- <button type="button" class="btn btn-primary btn-block mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#imagerieAll" data-whatever="@mdo">
+                                            <!-- <button type="button" class="btn btn-primary mb-2" title="Liste des examens pour ce patient" data-toggle="modal" data-target="#imagerieAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i> Examens Imageries
                                             </button> -->
-                                            <!-- <a href="{{ route('examens.index') }}" class="btn btn-primary btn-block mb-2" title="Détails surveillance post-aneshésiste">
+                                            <!-- <a href="{{ route('examens.index') }}" class="btn btn-primary mb-2" title="Détails surveillance post-aneshésiste">
                                                 <i class="fas fa-eye"></i> Résultats d'Examens
                                             </a> -->
-                                            <a href="{{ route('surveillance_post_anesthesise.index', $patient->id) }}" class="btn btn-primary btn-block mb-2" title="Détails surveillance post-aneshésiste">
+                                            <a href="{{ route('surveillance_post_anesthesise.index', $patient->id) }}" class="btn btn-primary mb-2" title="Détails surveillance post-aneshésiste">
                                                 <i class="fas fa-eye"></i> Surveillance Post-Anesthésique
                                             </a>
-                                            <button type="button" class="btn btn-primary btn-block" title="Fiches d'intervention" data-toggle="modal" data-target="#FicheInterventionAll" data-whatever="@mdo">
+                                            <button type="button" class="btn btn-primary" title="Fiches d'intervention" data-toggle="modal" data-target="#FicheInterventionAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i>Fiche d'Intervention
 
                                             </button>
-                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info btn-block mb-2">Completer Le Dossier</a> @if (count($patient->consultations)) @can('medecin', \App\Models\Patient::class)
-                                            <a class="btn btn-success btn-block" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $patient->id) }}">
+                                            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info mb-2">Completer Le Dossier</a> @if (count($patient->consultations)) @can('medecin', \App\Models\Patient::class)
+                                            <a class="btn btn-success" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $patient->id) }}">
                                                 <i class="fas fa-print"></i> Lettre De Consultation
                                             </a>
-                                            <button type="button" class="btn btn-primary btn-block mb-2" title="Liste de fiches pour ce patient" data-toggle="modal" data-target="#ficheSuiviAll" data-whatever="@mdo">
+                                            <button type="button" class="btn btn-primary mb-2" title="Liste de fiches pour ce patient" data-toggle="modal" data-target="#ficheSuiviAll" data-whatever="@mdo">
                                                 <i class="fas fa-eye"></i> Fiche De Suivi
                                             </button>
                                             @endcan @endif
@@ -245,9 +236,9 @@
                     </script>
                     <script>
                         // Add the following code if you want the name of the file appear on select
-                        $(".custom-file-input").on("change", function() {
+                        $(".form-control").on("change", function() {
                             var fileName = $(this).val().split("\\").pop();
-                            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                            $(this).siblings(".form-label").addClass("selected").html(fileName);
                         });
                     </script>
                     <script>

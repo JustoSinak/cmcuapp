@@ -9,6 +9,11 @@
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('admin/js/jquery.charts.js') }}"></script>
+    <script src="{{ asset('admin/js/parsley.min.js') }}"></script>
+
     @unless(env('DISABLE_STYLES'))
     @vite(['resources/assets/sass/app.scss', 'resources/assets/css/all.scss'])
     <!-- @vite(['resources/assets/js/app.js', 'resources/assets/js/all.js', 'resources/assets/js/typehead.js']) -->
@@ -96,30 +101,26 @@
 
     // Load DataTables and other jQuery-dependent scripts after jQuery is available
     waitForjQuery(function() {
-        // Load DataTables scripts dynamically
-        const loadScript = (src) => {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = src;
-                script.onload = resolve;
-                script.onerror = reject;
-                document.head.appendChild(script);
-            });
-        };
+    // Load remaining scripts dynamically
+    const loadScript = (src) => {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    };
 
-        // Load DataTables scripts in sequence
-        loadScript('https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js')
-            .then(() => loadScript('https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js'))
-            .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js'))
-            .then(() => loadScript('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js'))
-            .then(() => loadScript('{{ asset("admin/js/modernizr.js") }}'))
-            .then(() => loadScript('{{ asset("admin/js/parsley.min.js") }}'))
-            .then(() => {
-                console.log('All jQuery-dependent scripts loaded successfully');
-            })
-            .catch(error => {
-                console.error('Error loading scripts:', error);
-            });
+    // Load remaining scripts (DataTables, typeahead now bundled in all.js)
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js')
+        .then(() => loadScript('{{ asset("admin/js/modernizr.js") }}'))
+        .then(() => {
+            console.log('All jQuery-dependent scripts loaded successfully');
+        })
+        .catch(error => {
+            console.error('Error loading scripts:', error);
+        });
     });
 // Initialize DataTables and other jQuery-dependent code
     waitForjQuery(function() {
@@ -191,19 +192,35 @@
 
 <script type="text/javascript">
     waitForjQuery(function() {
-        var path = "{{ route('autocomplete') }}";
-        $('#search').typeahead({
-            minLength: 1,
-            hint: true,
-            highlight: true,
-            source: function(query, process) {
-                return $.get(path, {
-                    query: query
-                }, function(data) {
-                    return process(data);
+        const loadTypeahead = (src) => {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        };
+
+        loadTypeahead('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js')
+            .then(() => {
+                var path = "{{ route('autocomplete') }}";
+                $('#search').typeahead({
+                    minLength: 1,
+                    hint: true,
+                    highlight: true,
+                    source: function(query, process) {
+                        return $.get(path, {
+                            query: query
+                        }, function(data) {
+                            return process(data);
+                        });
+                    },
                 });
-            },
-        });
+            })
+            .catch(error => {
+                console.error('Error loading typeahead:', error);
+            });
     });
 </script>
 

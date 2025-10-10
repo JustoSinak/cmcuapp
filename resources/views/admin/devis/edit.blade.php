@@ -18,7 +18,7 @@
                 <hr>
                 @include('partials.flash_form')
 
-                <a href="{{ route('devis.index') }}" class="btn btn-success float-right mb-2"
+                <a href="{{ route('devis.index') }}" class="btn btn-success float-end mb-2"
                    title="Retour à la liste des patients">
                     <i class="fas fa-arrow-left"></i> Retour à la liste des devis
                 </a>
@@ -28,10 +28,10 @@
                         <small class="text-info" title="Les champs marqués par une étoile rouge sont obligatoire"><i
                                 class="fas fa-info-circle"></i></small>
                         <hr>
-                        <form class="form-group col-md-6" action="{{ route('devis.pdf', $devi->id) }}" method="POST">
+                        <form class="mb-3 col-md-6" action="{{ route('devis.pdf', $devi->id) }}" method="POST">
                             @csrf
 
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label for="nom" class="col-form-label text-md-right"><b>NOM DU PATIENT</b> <span class="text-danger">*</span></label>
                                 <select name="patient_id" id="patient_id" class="form-control" required>
                                     <option value="">Nom du patient</option>

@@ -32,7 +32,7 @@
                         </div>
                         <a href="{{ route('users.profile', Auth::user()->id) }}" class="dropdown-item mt-3">
                             <h4>
-                                <i class="far fa-user mr-3"></i>Mon profile</h4>
+                                <i class="far fa-user me-3"></i>Mon profile</h4>
                         </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}"

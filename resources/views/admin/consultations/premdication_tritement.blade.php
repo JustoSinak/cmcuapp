@@ -54,7 +54,7 @@
                             <i class="fas fa-eye"></i> Détails
                         </button>
                 @endcan
-                <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right">
+                <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end">
                     <i class="fas fa-arrow-left"></i>  Retour au dossier patient
                 </a>
             </div>
@@ -153,7 +153,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <input type="submit" class="btn btn-primary mb-2 float-right" value="Enregistrer" />
+                                        <input type="submit" class="btn btn-primary mb-2 float-end" value="Enregistrer" />
                                         <input name="patient_id" value="{{ $patient->id }}" type="hidden">
                                     </form>
                                 </div>
@@ -257,7 +257,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <input type="submit" class="btn btn-primary mb-2 float-right" value="Enregistrer" />
+                            <input type="submit" class="btn btn-primary mb-2 float-end" value="Enregistrer" />
                             <input name="patient_id" value="{{ $patient->id }}" type="hidden">
                         </form>
                     </div>

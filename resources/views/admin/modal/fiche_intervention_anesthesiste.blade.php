@@ -98,7 +98,7 @@
                                                     <div class="form-check">
                                                         <input type="radio" name="position_patient[]" value="Lithotomie" class="form-check-input"> Lithotomie
                                                     </div>
-                                                    <div class="form-check ml-3">
+                                                    <div class="form-check ms-3">
                                                         <div class="row">
                                                             <input type="radio" name="position_patient[]" value="Lombotomie" class="form-check-input"> Lombotomie
                                                             <div class="row offset-2">
@@ -135,7 +135,7 @@
                                             </tr>
                                             <tr>
                                                 <td><b>Aide opératoire :</b> <span class="text-danger">*</span></td>
-                                                <td class="form-group small">
+                                                <td class="small">
                                                     <div class="form-check">
                                                         <input class="form-check-input" tabIndex="1"
                                                                type="checkbox" name="aide_op[]"
@@ -149,7 +149,7 @@
                                             </tr>
                                             <tr>
                                                 <td><b>Hospitalisation :</b> </td>
-                                                <td class="form-group small">
+                                                <td class="small">
                                                     <div class="form-check">
                                                         <input class="form-check-input" tabIndex="1"
                                                                type="radio" name="hospitalisation"
@@ -159,7 +159,7 @@
                                             </tr>
                                             <tr>
                                                 <td><b>Ambulatoire :</b> </td>
-                                                <td class="form-group small">
+                                                <td class="small">
                                                     <div class="form-check">
                                                         <input class="form-check-input" tabIndex="1"
                                                                type="radio" name="ambulatoire"
@@ -168,7 +168,7 @@
                                             </tr>
                                             <tr>
                                                 <td><b>Anesthésie :</b> <span class="text-danger">*</span></td>
-                                                <td class="form-group small">
+                                                <td class="small">
                                                     <div class="form-check">
                                                         <input class="form-check-input" tabIndex="1"
                                                                type="checkbox" name="anesthesie[]"

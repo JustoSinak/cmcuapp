@@ -81,12 +81,12 @@
                     @can('show', \App\Models\User::class)
                         <div class="row mt-2">
                             <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card border-start border-primary border-4 shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row g-0 align-items-center">
                                             <div class="col me-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Rendez-vous</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $events }}</div>
+                                                <div class="text-xs fw-bold text-primary text-uppercase mb-1">Rendez-vous</div>
+                                                <div class="h5 mb-0 fw-bold text-gray-800">{{ $events }}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -97,12 +97,12 @@
                             </div>
                             <!-- Earnings (Monthly) Card Example -->
                             <div class="col-xl-3 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card border-start border-success border-4 shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row g-0 align-items-center">
                                             <div class="col me-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Patients suivis</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ count($consultation) }}</div>
+                                                <div class="text-xs fw-bold text-success text-uppercase mb-1">Patients suivis</div>
+                                                <div class="h5 mb-0 fw-bold text-gray-800">{{ count($consultation) }}</div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-user fa-2x text-gray-300"></i>
@@ -121,3 +121,5 @@
     <!-- <script src="{{ asset('admin/js/main.js') }}"></script> -->
 </body>
 @stop
+
+

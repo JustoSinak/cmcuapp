@@ -51,15 +51,15 @@
                         <div class="row">
                             <div class="col-sm-8">
                             {{ Form::hidden('patient_id', $patient->id) }}
-                                <div class="custom-file mb-3">
-                                    <input type="file" class="custom-file-input" onchange="handleFiles(files)" id="customFile" name="image">
-                                    <label class="custom-file-label" for="customFile">Choisir une image</label>
+                                <div class="mb-3">
+                                    <input type="file" class="form-control" onchange="handleFiles(files)" id="customFile" name="image">
+                                    <label class="form-label" for="customFile">Choisir une image</label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nom" id="libelle" placeholder=" Libellé">
+                                <div>
+                                    <input type="text" class="form-control mb-3" name="nom" id="libelle" placeholder=" Libellé">
                                 </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="5" id="description" name="description" placeholder="Description"></textarea>
+                                <div>
+                                    <textarea class="form-control mb-3" rows="5" id="description" name="description" placeholder="Description"></textarea>
                                 </div>
 
 

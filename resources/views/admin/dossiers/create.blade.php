@@ -15,7 +15,7 @@
         <div class="container">
             <h1 class="text-center">RENSEIGNER LE DOSSIER DE {{ $patient->name }} {{$patient->prenom}}</h1>
             <hr>
-                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
+                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end"
                        title="Retour à la liste des patients">
                         <i class="fas fa-arrow-left"></i> Retour au dossier patient
                     </a>
@@ -25,7 +25,7 @@
 
                 <div class="col-md-6 pb-3">
                     <label for="exampleAccount"><b>Sexe :</b></label>
-                    <div class="form-group small">
+                    <div class="mb-3 small">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="sexe" id="sexe" value="Masculin"> Masculin

@@ -74,7 +74,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <form action="{{ route('pharmacie.pdf') }}" method="post" class="form-group">
+                        <form action="{{ route('pharmacie.pdf') }}" method="post" class="mb-3">
                             @csrf
                             <td>
                                 <label for="patient"><b>Nom du patient :</b></label>
@@ -97,7 +97,7 @@
                             @endcan
 
                             <td>
-                                <button type="submit" href="{{ route('pharmacie.pdf') }}" title="Imprimer la facture" class="btn btn-success float-right">Imprimer <i class="fas fa-print"></i></button>
+                                <button type="submit" href="{{ route('pharmacie.pdf') }}" title="Imprimer la facture" class="btn btn-success float-end">Imprimer <i class="fas fa-print"></i></button>
                             </td>
                         </form>
                         @endif

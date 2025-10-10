@@ -48,7 +48,7 @@
             text-align: center
         }
         .invoice .invoice-to {
-            text-align: left
+            text-align: start
         }
         .invoice .invoice-to .to {
             margin-top: 0;
@@ -71,8 +71,8 @@
             margin-bottom: 50px
         }
         .invoice main .notices {
-            padding-left: 6px;
-            border-left: 6px solid #3989c6
+            padding-start: 6px;
+            border-start: 6px solid #3989c6
         }
         .invoice main .notices .notice {
             font-size: 1.2em
@@ -199,27 +199,27 @@
                  <table border="0" cellspacing="0" cellpadding="0">
                 <thead>
                         <tr>
-                            <th class="text-left">NOM</th>
-                            <th class="text-left">PRENOM</th>
-                            <th class="text-left"> MONTANT (FCFA)</th>
-                            <th class="text-left"> AVANCE </th>
-                            <th class="text-left"> RESTE </th>
+                            <th class="text-start">NOM</th>
+                            <th class="text-start">PRENOM</th>
+                            <th class="text-start"> MONTANT (FCFA)</th>
+                            <th class="text-start"> AVANCE </th>
+                            <th class="text-start"> RESTE </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="text-left" ><h5> {{ $clients->nom }}</h5></td>
-                            <td class="text-left" ><h5> {{ $clients->prenom }}</h5></td>
-                            <td class="text-left"><h4> {{ $clients->montant }}</h4></td>
+                            <td class="text-start" ><h5> {{ $clients->nom }}</h5></td>
+                            <td class="text-start" ><h5> {{ $clients->prenom }}</h5></td>
+                            <td class="text-start"><h4> {{ $clients->montant }}</h4></td>
                             @if($clients->avance)
-                            <td class="text-left"><h4>{{ $clients->avance }}</h4></td>
+                            <td class="text-start"><h4>{{ $clients->avance }}</h4></td>
                             @else
-                            <td class="text-left"><h4>0</h4></td>
+                            <td class="text-start"><h4>0</h4></td>
                             @endif
                             @if($clients->avance)
-                            <td class="text-left"><h4>{{ $clients->reste }}</h4></td>
+                            <td class="text-start"><h4>{{ $clients->reste }}</h4></td>
                             @else
-                                <td class="text-left"><h4>0</h4></td>
+                                <td class="text-start"><h4>0</h4></td>
                             @endif
                         </tr>
                     <tr>
@@ -270,27 +270,27 @@
                  <table border="0" cellspacing="0" cellpadding="0">
                 <thead>
                         <tr>
-                            <th class="text-left">NOM</th>
-                            <th class="text-left">PRENOM</th>
-                            <th class="text-left"> MONTANT (FCFA)</th>
-                            <th class="text-left"> AVANCE </th>
-                            <th class="text-left"> RESTE </th>
+                            <th class="text-start">NOM</th>
+                            <th class="text-start">PRENOM</th>
+                            <th class="text-start"> MONTANT (FCFA)</th>
+                            <th class="text-start"> AVANCE </th>
+                            <th class="text-start"> RESTE </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="text-left" ><h5> {{ $clients->nom }}</h5></td>
-                            <td class="text-left" ><h5> {{ $clients->prenom }}</h5></td>
-                            <td class="text-left"><h4> {{ $clients->montant }}</h4></td>
+                            <td class="text-start" ><h5> {{ $clients->nom }}</h5></td>
+                            <td class="text-start" ><h5> {{ $clients->prenom }}</h5></td>
+                            <td class="text-start"><h4> {{ $clients->montant }}</h4></td>
                             @if($clients->avance)
-                            <td class="text-left"><h4>{{ $clients->avance }}</h4></td>
+                            <td class="text-start"><h4>{{ $clients->avance }}</h4></td>
                             @else
-                            <td class="text-left"><h4>0</h4></td>
+                            <td class="text-start"><h4>0</h4></td>
                             @endif
                             @if($clients->avance)
-                            <td class="text-left"><h4>{{ $clients->reste }}</h4></td>
+                            <td class="text-start"><h4>{{ $clients->reste }}</h4></td>
                             @else
-                                <td class="text-left"><h4>0</h4></td>
+                                <td class="text-start"><h4>0</h4></td>
                             @endif
                         </tr>
                     <tr>

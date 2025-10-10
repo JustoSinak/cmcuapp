@@ -1,7 +1,8 @@
 {
-  "_bootstrap--do0dWss.js": {
-    "file": "assets/bootstrap--do0dWss.js",
+  "_bootstrap-DrgbVssh.js": {
+    "file": "assets/bootstrap-DrgbVssh.js",
     "name": "bootstrap",
+    "isDynamicEntry": true,
     "imports": [
       "_vendor-Cp6zLMpC.js"
     ]
@@ -21,30 +22,32 @@
     ]
   },
   "resources/assets/css/all.scss": {
-    "file": "assets/all-D6efK75s.css",
+    "file": "assets/all-DK-5-R5g.css",
     "src": "resources/assets/css/all.scss",
     "isEntry": true
   },
   "resources/assets/js/all.js": {
-    "file": "assets/all-BIT30N5F.js",
+    "file": "assets/all-DvrWygua.js",
     "name": "all",
     "src": "resources/assets/js/all.js",
     "isEntry": true,
     "imports": [
-      "_bootstrap--do0dWss.js",
+      "_bootstrap-DrgbVssh.js",
       "_vendor-Cp6zLMpC.js"
     ]
   },
   "resources/assets/js/app.js": {
-    "file": "assets/app-C_9V6CBi.js",
+    "file": "assets/app-DplfMEsj.js",
     "name": "app",
     "src": "resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vendor-Cp6zLMpC.js",
-      "_bootstrap--do0dWss.js"
+      "_vendor-Cp6zLMpC.js"
     ],
     "dynamicImports": [
+      "_bootstrap-DrgbVssh.js",
+      "_bootstrap-DrgbVssh.js",
+      "_bootstrap-DrgbVssh.js",
       "_vendor-Cp6zLMpC.js",
       "node_modules/vue-instantsearch/vue2/es/index.js",
       "resources/assets/js/components/ExampleComponent.vue"

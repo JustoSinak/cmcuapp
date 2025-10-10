@@ -45,7 +45,7 @@
                                     <h3>Total</h3>
                                 </td>
                                 <td></td>
-                                <td class="text-right">
+                                <td class="text-end">
                                     <h3><strong>{{ $facture->prix_total }} Fcfa</strong></h3>
                                 </td>
                                 <td></td>
@@ -55,7 +55,7 @@
                     </table>
 
                     <td>
-                        <a href="{{ route('pharmacie.pdf') }}" title="Imprimer la facture" class="btn btn-success float-right">Imprimer <i class="fas fa-print"></i></a>
+                        <a href="{{ route('pharmacie.pdf') }}" title="Imprimer la facture" class="btn btn-success float-end">Imprimer <i class="fas fa-print"></i></a>
                     </td>
 
                 </div>

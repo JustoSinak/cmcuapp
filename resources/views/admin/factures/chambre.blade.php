@@ -44,8 +44,8 @@
                                     <td>{{$facture->duree }}</td>
                                     <td>{{$facture->tarif }} <b>FCFA</b></td>
                                     <td style="display: inline-flex;">
-                                        <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
-                                            <a class="btn btn-success btn-sm mr-1" title="Imprimer la facture de consultation" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
+                                        <p class="me-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
+                                            <a class="btn btn-success btn-sm me-1" title="Imprimer la facture de consultation" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                         @can('update', \App\Models\User::class)
                                             <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
@@ -63,7 +63,7 @@
                         {{--{{ $factures->links() }}--}}
                     </div>
                 </div>
-                    <form class="form-group table_link_right mb-0" method="POST" action="{{ route('bilan_consultation.pdf') }}">
+                    <form class="mb-3 table_link_right mb-0" method="POST" action="{{ route('bilan_consultation.pdf') }}">
                         @csrf
                         <div class="input-group mb-0">
                         <select name="day" class="form-control" required>

@@ -50,8 +50,8 @@
             padding-bottom: 30px
         }
         .invoice main .notices {
-            padding-left: 6px;
-            border-left: 6px solid #3989c6
+            padding-start: 6px;
+            border-start: 6px solid #3989c6
         }
         .invoice main .notices .notice {
             font-size: 1.2em
@@ -158,27 +158,27 @@
                     <table border="0" cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th class="text-left">NOM</th>
-                            <th class="text-left">PRENOM</th>
-                            <th class="text-left"> MONTANT (FCFA)</th>
-                            <th class="text-left"> AVANCE </th>
-                            <th class="text-left"> RESTE </th>
+                            <th class="text-start">NOM</th>
+                            <th class="text-start">PRENOM</th>
+                            <th class="text-start"> MONTANT (FCFA)</th>
+                            <th class="text-start"> AVANCE </th>
+                            <th class="text-start"> RESTE </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="text-left" ><h5> {{ $facture_devis->patient->name }}</h5></td>
-                            <td class="text-left" ><h5> {{ $facture_devis->patient->prenom }}</h5></td>
-                            <td class="text-left"><h4> {{ $facture_devis->montant_devis }}</h4></td>
+                            <td class="text-start" ><h5> {{ $facture_devis->patient->name }}</h5></td>
+                            <td class="text-start" ><h5> {{ $facture_devis->patient->prenom }}</h5></td>
+                            <td class="text-start"><h4> {{ $facture_devis->montant_devis }}</h4></td>
                             @if($facture_devis->avance_devis)
-                                <td class="text-left"><h4>{{ $facture_devis->avance_devis }}</h4></td>
+                                <td class="text-start"><h4>{{ $facture_devis->avance_devis }}</h4></td>
                             @else
-                                <td class="text-left"><h4>0</h4></td>
+                                <td class="text-start"><h4>0</h4></td>
                             @endif
                             @if($facture_devis->avance_devis)
-                                <td class="text-left"><h4>{{ $facture_devis->reste_devis }}</h4></td>
+                                <td class="text-start"><h4>{{ $facture_devis->reste_devis }}</h4></td>
                             @else
-                                <td class="text-left"><h4>0</h4></td>
+                                <td class="text-start"><h4>0</h4></td>
                             @endif
                         </tr>
                         <tr>
@@ -225,27 +225,27 @@
                     <table border="0" cellspacing="0" cellpadding="0">
                         <thead>
                         <tr>
-                            <th class="text-left">NOM</th>
-                            <th class="text-left">PRENOM</th>
-                            <th class="text-left"> MONTANT (FCFA)</th>
-                            <th class="text-left"> AVANCE </th>
-                            <th class="text-left"> RESTE </th>
+                            <th class="text-start">NOM</th>
+                            <th class="text-start">PRENOM</th>
+                            <th class="text-start"> MONTANT (FCFA)</th>
+                            <th class="text-start"> AVANCE </th>
+                            <th class="text-start"> RESTE </th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td class="text-left" ><h5> {{ $facture_devis->patient->name }}</h5></td>
-                            <td class="text-left" ><h5> {{ $facture_devis->patient->prenom }}</h5></td>
-                            <td class="text-left"><h4> {{ $facture_devis->montant_devis }}</h4></td>
+                            <td class="text-start" ><h5> {{ $facture_devis->patient->name }}</h5></td>
+                            <td class="text-start" ><h5> {{ $facture_devis->patient->prenom }}</h5></td>
+                            <td class="text-start"><h4> {{ $facture_devis->montant_devis }}</h4></td>
                             @if($facture_devis->avance_devis)
-                                <td class="text-left"><h4>{{ $facture_devis->avance_devis }}</h4></td>
+                                <td class="text-start"><h4>{{ $facture_devis->avance_devis }}</h4></td>
                             @else
-                                <td class="text-left"><h4>0</h4></td>
+                                <td class="text-start"><h4>0</h4></td>
                             @endif
                             @if($facture_devis->avance_devis)
-                                <td class="text-left"><h4>{{ $facture_devis->reste_devis }}</h4></td>
+                                <td class="text-start"><h4>{{ $facture_devis->reste_devis }}</h4></td>
                             @else
-                                <td class="text-left"><h4>0</h4></td>
+                                <td class="text-start"><h4>0</h4></td>
                             @endif
                         </tr>
                         <tr>

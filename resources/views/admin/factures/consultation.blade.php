@@ -9,7 +9,7 @@
         }
         .end-date{
             margin-left: 100px;
-            margin-right: 200px;
+            margin-end: 200px;
             
         }
        
@@ -86,14 +86,14 @@
                                 <tr>
                                     <td>{{$facture->id}}</td>
                                     <td ><div class="d-inline-flex">
-                                         <a class="btn btn-success btn-sm mr-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
+                                         <a class="btn btn-success btn-sm me-1" data-placement="top" data-toggle="tooltip" title="Imprimer la facture" href="{{ route('factures.consultation_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         @can('update', $facture)
                                         <!-- Trigger the "edit_acture " modal with a button -->
-                                        <button type="button" class="btn btn-sm btn-info mr-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient['name'] }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-mode_paiement="{{ $facture->mode_paiement }}" data-prise_en_charge="{{ $facture->patient['prise_en_charge'] }}"> <i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-sm btn-info me-1" data-toggle="modal" title="Editer la facture" data-target="#edit_facture_modal" data-id-facture="{{$facture->id}}" data-nom="{{ $facture->patient['name'] }}" data-montant="{{ $facture->montant }}" data-reste="{{ $facture->reste }}" data-mode_paiement="{{ $facture->mode_paiement }}" data-prise_en_charge="{{ $facture->patient['prise_en_charge'] }}"> <i class="fas fa-edit"></i></button>
                                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
                                             @csrf @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm btn-just-icon" data-toggle="tooltip" title="Supprimer la facture" onclick="return confirm('Voulez-vous vraiment suprimer cette facture ?')">
-                                                <i class="fas fa-trash-alt"></i>
+                                                <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
                                         @endcan
@@ -129,7 +129,7 @@
                             </tbody>
                         </table>
 
-                        <form class="form-group table_link_right" method="POST" action="{{ route('bilan_consultation.pdf') }}" title="Imprimer le bilan journalier" data-toggle="tooltip">
+                        <form class="mb-3 table_link_end" method="POST" action="{{ route('bilan_consultation.pdf') }}" title="Imprimer le bilan journalier" data-toggle="tooltip">
                             @csrf
                             <div class="input-group mb-3">
                                 <select name="day" class="form-control col-md-6" required>
@@ -174,25 +174,25 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="montant" class="col-form-label text-md-right">Montant</label>
+                                <div class="mb-3">
+                                    <label for="montant" class="col-form-label text-md-end">Montant</label>
                                     <input name="montant" id="montant" class="form-control" value="" type="number" readonly>
                                 </div>
-                                <div class="form-group">
-                                    <label for="part_patient" class="col-form-label text-md-right">Part patient </label>
+                                <div class="mb-3">
+                                    <label for="part_patient" class="col-form-label text-md-end">Part patient </label>
                                     <input name="part_patient" id="part_patient" class="form-control" type="number" autocomplete="off" min="0" placeholder="0" readonly>
                                 </div>
-                                <div class="form-group">
-                                    <label for="reste" class="col-form-label text-md-right" title="Somme des précédents versements du client">reste </label>
+                                <div class="mb-3">
+                                    <label for="reste" class="col-form-label text-md-end" title="Somme des précédents versements du client">reste </label>
                                     <input name="reste" id="reste" class="form-control" value="" type="number" readonly>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="percu" class="col-form-label text-md-right" title="Montant perçu pour ce versement">montant versé <span class="text-danger">*</span></label>
+                                <div class="mb-3">
+                                    <label for="percu" class="col-form-label text-md-end" title="Montant perçu pour ce versement">montant versé <span class="text-danger">*</span></label>
                                     <input name="percu" id="percu" class="form-control" value="" type="number" placeholder="0" required>
                                 </div>
-                                <div class="form-group m_paiement">
+                                <div class="mb-3 m_paiement">
                                     <label for="mode_paiement">Mode de paiement</label>
                                     <select name="mode_paiement" id="mode_paiement" class="form-control">
 

@@ -46,8 +46,8 @@
                                     <td>{{$facture->medecin_r }}</td>
                                     <td>{{$facture->created_at}}</td>
                                     <td style="display: inline-flex;">
-                                        <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
-                                            <a class="btn btn-success btn-sm mr-1" title="Imprimer la facture du client" href="{{ route('factures.client_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
+                                        <p class="me-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
+                                            <a class="btn btn-success btn-sm me-1" title="Imprimer la facture du client" href="{{ route('factures.client_pdf', $facture->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                         @can('update', \App\Models\User::class)
                                             <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
@@ -63,7 +63,7 @@
                             </tbody>
                         </table>
                         
-                        <form class="form-group col-md-4" method="POST" action="{{ route('bilan_clientexterne.pdf') }}">
+                        <form class="mb-3 col-md-4" method="POST" action="{{ route('bilan_clientexterne.pdf') }}">
                             @csrf
                           <div class="input-group mb-3">
                             <select name="day" class="form-control" required>

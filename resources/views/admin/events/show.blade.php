@@ -22,7 +22,7 @@
         <div class="col-sm-10">
             @include('partials.header')
             <div class="col-md-12  toppad  offset-md-0 ">
-                        <a href="{{ route('events.index') }}" class="btn btn-success float-right">
+                        <a href="{{ route('events.index') }}" class="btn btn-success float-end">
                             <i class="fas fa-arrow-left"></i>  Retour à l'agenda
                         </a>
                     </div>
@@ -65,7 +65,7 @@
                                     <p><span>Statut:</span> <span class="font-weight-bold" id="info_RV_statut"></span></p>
                                     <p class="border border-info rounded p-3 my-3 text-nowrap"><span class="text-info align-top"><i class="fas fa-exclamation-circle"></i></span>&nbsp<i id="info_RV_description" class="text-wrap"></i></p>
 
-                                    <p class="mt-2 mx-0 text-sm-right"><i id="info_RV_dateheure"></i></p>
+                                    <p class="mt-2 mx-0 text-sm-end"><i id="info_RV_dateheure"></i></p>
 
                                 </div>
 
@@ -152,7 +152,7 @@
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'listDay,listWeek,listMonth'
+                    end: 'listDay,listWeek,listMonth'
                 },
                 events: [
                     @foreach($events as $event) {

@@ -14,23 +14,23 @@
               <hr>
           </div>
         <div class="container">
-          <form class="form-group" action="{{ route('consultationsdesuivi.store') }}" method="post">
+          <form class="mb-3" action="{{ route('consultationsdesuivi.store') }}" method="post">
            <div class="row">
-            <div class="form-group  col-md-6">
+            <div class="mb-3  col-md-6">
             @csrf
-            <label for="interrogatoire" class="col-form-label text-md-right">Interrogatoire <span class="text-danger"></span></label>
+            <label for="interrogatoire" class="col-form-label text-md-end">Interrogatoire <span class="text-danger"></span></label>
               <textarea rows="10" name="interrogatoire" class="form-control" value="{{ old('interrogatoire') }}" type="textarea" placeholder="interrogatoire" required>
               </textarea>
               </div>
-              <div class="form-group  col-md-6">
-            <label for="commentaire" class="col-form-label text-md-right">Commentaire <span class="text-danger"></span></label>
+              <div class="mb-3  col-md-6">
+            <label for="commentaire" class="col-form-label text-md-end">Commentaire <span class="text-danger"></span></label>
               <textarea rows="10" name="commentaire" class="form-control" value="{{ old('commentaire') }}" type="textarea" placeholder="votre commentaire" required>
               </textarea>
               </div>
            </div>
            <div class="row">
-             <div class="form-group col-md-6 mb-0">
-           <label for="date_creation" class="col-form-label text-md-right">Date <span class="text-danger"></span></label>
+             <div class="mb-3 col-md-6 mb-0">
+           <label for="date_creation" class="col-form-label text-md-end">Date <span class="text-danger"></span></label>
             <input name="date_creation" class="form-control" value="{{ old('date_creation') }}" type="date"  required>
            </div>
              <div class="col-md-6 d-flex align-items-end">

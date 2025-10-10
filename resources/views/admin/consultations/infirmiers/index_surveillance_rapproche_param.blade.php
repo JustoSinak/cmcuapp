@@ -30,7 +30,7 @@
         </div>
         <hr>
         @can('show', \App\Models\User::class)
-            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" class="btn btn-success float-right  mb-2"
+            <a href="{{ route('surveillance_rapproche.index', $patient->id) }}" class="btn btn-success float-end  mb-2"
                title="Retour à la liste des patients">
                 <i class="fas fa-arrow-left"></i> Retour
             </a>

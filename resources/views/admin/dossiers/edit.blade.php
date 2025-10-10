@@ -15,18 +15,18 @@
         <div class="container">
             <h1 class="text-center">MODIFIER LE DOSSIER DU PATIENT {{$patient->name}} {{$patient->prenom}}</h1>
             <hr>
-                <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
+                <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end"
                     title="Retour à la liste des patients">
                     <i class="fas fa-arrow-left"></i> Retour au dossier patient
                 </a>
             @include('partials.flash_form')
-            <form class="form-row mt-4" method="POST" action="{{ route('dossiers.update', $dossier->id) }}">
+            <form class="row g-3 mt-4" method="POST" action="{{ route('dossiers.update', $dossier->id) }}">
             {{method_field('PATCH')}} @csrf
 
             <input type="hidden" value="{{ $dossier->patient_id }}" name="patient_id">
                 <div class="col-md-8 pb-3">
                     <label for="exampleAccount">Sexe</label>
-                    <div class="form-group small">
+                    <div class="mb-3 small">
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="sexe" id="sexe" value="Masculin"> Masculin

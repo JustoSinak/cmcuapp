@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <ul class="nav nav-tabs">
                     <li><a data-toggle="tab" class="btn btn-primary" href="#menu1">BIOLOGIES</a></li>
-                    <li><a data-toggle="tab" class="btn btn-primary ml-2" href="#menu2">IMAGERIES</a></li>
+                    <li><a data-toggle="tab" class="btn btn-primary ms-2" href="#menu2">IMAGERIES</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">

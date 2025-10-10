@@ -51,7 +51,7 @@
         <hr>
             <div class="container">
                 <div class="row">
-                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
+                    <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end"
                        title="Retour à la liste des patients">
                         <i class="fas fa-arrow-left"></i> Retour au dossier patient
                     </a>

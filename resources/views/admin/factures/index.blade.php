@@ -39,7 +39,7 @@
                                     <td>{{$facture->prix_total }}</td>
                                     <td>{{$facture->created_at }}</td>
                                     <td style="display: inline-flex;">
-                                        <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
+                                        <p class="me-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
                                             <a href="{{ route('factures.show', $facture->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i></a>
                                         </p>
                                         @can('update', \App\Models\User::class)

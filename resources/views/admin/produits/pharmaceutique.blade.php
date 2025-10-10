@@ -18,7 +18,7 @@
         </div>
         <hr>
         <div class="container">
-            <a href="{{ route('pharmaceutique.facturation') }}" title="Proceder à la facturation" class="btn btn-success col-md-1 float-right">
+            <a href="{{ route('pharmaceutique.facturation') }}" title="Proceder à la facturation" class="btn btn-success col-md-1 float-end">
                 Facture
                 <span class="badge text-dark"><p>{{ Session::has('cart') ? Session::get('cart')->totalQte : 0 }}</p></span>
             </a>

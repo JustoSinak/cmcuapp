@@ -17,49 +17,49 @@
                 <div class="card-body">
                     <small class="text-info" title="Les champs marqués par une étoile rouge sont obligatoire"><i class="fas fa-info-circle"></i></small>
                     @include('partials.flash_form')
-                    <form class="form-group" action="{{ route('users.store') }}" method="POST">
+                    <form class="mb-3" action="{{ route('users.store') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
 
                             <div class="row">
-                                <div class="form-group col-md-5">
-                                    <label for="name" class="col-form-label text-md-right">Nom <span class="text-danger">*</span></label>
+                                <div class="mb-3 col-md-5">
+                                    <label for="name" class="col-form-label text-md-end">Nom <span class="text-danger">*</span></label>
                                     <input name="name" class="form-control" value="{{ old('name') }}" type="text" placeholder="Nom" required>
                                 </div>
-                                <div class="form-group col-md-5">
-                                    <label for="prenom" class="col-form-label text-md-right">Prénom <span class="text-danger">*</span></label>
+                                <div class="mb-3 col-md-5">
+                                    <label for="prenom" class="col-form-label text-md-end">Prénom <span class="text-danger">*</span></label>
                                     <input name="prenom" class="form-control" value="{{ old('prenom') }}" type="text" placeholder="Prénom">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-5">
-                                    <label for="lieu_naissance" class="col-form-label text-md-right">Lieu De Naissance <span class="text-danger">*</span></label>
+                                <div class="mb-3 col-md-5">
+                                    <label for="lieu_naissance" class="col-form-label text-md-end">Lieu De Naissance <span class="text-danger">*</span></label>
                                     <input name="lieu_naissance" value="{{ old('lieu_naissance') }}" class="form-control" placeholder="Lieu de naissance" required>
                                 </div>
-                                <div class="form-group col-md-5">
-                                    <label for="date_naissance" class="col-form-label text-md-right">Date De Naissance <span class="text-danger">*</span></label>
+                                <div class="mb-3 col-md-5">
+                                    <label for="date_naissance" class="col-form-label text-md-end">Date De Naissance <span class="text-danger">*</span></label>
                                     <input name="date_naissance" type="date" value="{{ old('date_naissance') }}" class="form-control" placeholder="Date de naissance" required>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="sexe" class="col-form-label text-md-right">Sexe <span class="text-danger">*</span></label>
-                                    <div class="form-group">
+                                    <label for="sexe" class="col-form-label text-md-end">Sexe <span class="text-danger">*</span></label>
+                                    <div class="mb-3">
                                         <label class="mx-2 bx-2"><input type="radio" name="sexe" value="Homme" {{ (old('sexe') == 'Homme') ? 'checked' : '' }} required>Homme</label>
                                         <label class="mx-2 bx-2"><input type="radio" name="sexe" value="Femme" {{ (old('sexe') == 'Femme') ? 'checked' : '' }} required>Femme</label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-5">
-                                    <label for="telephone" class="col-form-label text-md-right">Téléphone <span class="text-danger">*</span></label>
+                                <div class="mb-3 col-md-5">
+                                    <label for="telephone" class="col-form-label text-md-end">Téléphone <span class="text-danger">*</span></label>
                                     <input name="telephone" id="telephone" type="tel" value="{{ old('telephone') }}" class="form-control" placeholder="Téléphone" required>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <label class="col-form-label" for="roles">Rôle <span class="text-danger">*</span></label>
-                                    <select name="roles" class="form-control" id="roles"required>
+                                    <select name="roles" class="form-select" id="roles"required>
                                         <option value="1">ADMINISTRATEUR</option>
                                         <option value="2">MEDECIN</option>
                                         <option value="3">GESTIONNAIRE</option>
@@ -72,19 +72,19 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <label for="login" class="col-form-label">Login <span class="text-danger">*</span></label>
                                     <input name="login" class="form-control" value="{{ old('login') }}" type="text" placeholder="Login" required>
                                 </div>
                             </div>
 
                             <div class="row" id="otherFieldDiv">
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <label class="col-form-label" for="specialite">Spécialité <span class="text-danger">*</span></label>
                                     <input type="text" name="specialite" class="form-control" id="specialite">
                                 </div>
 
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <label class="col-form-label" for="onmc" class="">Onmc <span class="text-danger">*</span></label>
                                     <input name="onmc" id="onmc" class="form-control" value="{{ old('onmc') }}" type="text" placeholder="onmc">
                                 </div>
@@ -92,24 +92,24 @@
 
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="password" class="col-form-label text-md-right">Mot De Passe <span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label text-md-end">Mot De Passe <span class="text-danger">*</span></label>
                                 </div>
                                 <div class="col-md-5">
-                                    <label for="password" class="col-form-label text-md-right">Confirmer Mot De Passe <span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label text-md-end">Confirmer Mot De Passe <span class="text-danger">*</span></label>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <input name="password" type="password" class="form-control" id="password" placeholder="Mot De Passe" required>
                                 </div>
-                                <div class="form-group col-md-5">
+                                <div class="mb-3 col-md-5">
                                     <input id="confirm_password" type="password" class="form-control" name="password_confirmation" placeholder="Confirmer Mot De Passe" required>
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn btn-default" type="button" onclick="show_password()"><i id="show_pass" class="fas fa-eye"></i></button>
                                 </div>
                                 <div class="col-md-1">
-                                    <span id='message' class="ml-1 align-text-bottom"></span>
+                                    <span id='message' class="ms-1 align-text-bottom"></span>
                                 </div>
                             </div>
 

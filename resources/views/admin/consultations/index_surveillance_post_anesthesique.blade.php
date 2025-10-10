@@ -11,7 +11,7 @@
 
         @include('partials.header')
         @can('show', \App\Models\User::class)
-            <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right"
+            <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end"
                title="Retour à la liste des patients">
                 <i class="fas fa-arrow-left"></i> Retour au dossier patient
             </a>

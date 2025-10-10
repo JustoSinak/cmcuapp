@@ -63,6 +63,12 @@ export default defineConfig({
         hmr: {
             host: 'localhost',
         },
+        // proxy: {
+        //     '/': {
+        //         target: 'http://localhost:8000',
+        //         changeOrigin: true,
+        //     },
+        // },
     },
     resolve: {
         alias: {

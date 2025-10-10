@@ -26,10 +26,10 @@
                     <h5 class="card-title">Ajouter un patient</h5>
                     <small class="text-info" title="Les champs marqués par une étoile rouge sont obligatoire"><i class="fas fa-info-circle"></i></small>
                     <hr>
-                    <form class="form-group col-md-10" action="{{ route('patients.store') }}" method="POST">
+                    <form class="col-md-10" action="{{ route('patients.store') }}" method="POST">
                         @csrf
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <b>Médecin :</b> <span class="text-danger">*</span>
 
                                 <select class="form-control" name="medecin_r" id="medecin_r" required>
@@ -41,17 +41,17 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="name" class="col-form-label text-md-right">Nom <span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nom <span class="text-danger">*</span></label>
                                 <input name="name" class="form-control" value="{{ old('name') }}" type="text" placeholder="Nom" required>
                             </div>
-                            <div class="form-group">
-                                <label for="prenom" class="col-form-label text-md-right">Prenom <span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <label for="prenom" class="form-label">Prenom <span class="text-danger">*</span></label>
                                 <input name="prenom" class="form-control" value="{{ old('prenom') }}" type="text" placeholder="prenom">
                             </div>
 
-                            <div class="form-group">
-                                <label for="motif" class="col-form-label text-md-right">Motif : <span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <label for="motif" class="form-label">Motif : <span class="text-danger">*</span></label>
                                 <select class="form-control" name="motif" id="motif" onchange="new_ckChange(this)">
                                     <option selected>Consultation</option>
                                     <option>Acte</option>
@@ -60,53 +60,53 @@
                                 </select>
                             </div>
 
-                            <div class="form-group">
-                                <label for="details_motif" id="label_details_motif" class="col-form-label text-md-right">Détails motif</label>
+                            <div class="mb-3">
+                                <label for="details_motif" id="label_details_motif" class="form-label">Détails motif</label>
                                 <input name="details_motif" id="details_motif" class="form-control" value="{{ old('details_motif') ?? 'Consultation'}}" type="text" placeholder="Précisez le motif">
                             </div>
 
-                            <div class="form-group">
-                                <label for="montant" class="col-form-label text-md-right">Montant <span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <label for="montant" class="form-label">Montant <span class="text-danger">*</span></label>
                                 <input name="montant" class="form-control" value="{{ old('montant') }}" type="number" placeholder="montant">
                             </div>
-                            <div class="form-group">
-                                <label for="avance" class="col-form-label text-md-right">avance <span class="text-danger">*</span></label>
+                            <div class="mb-3">
+                                <label for="avance" class="form-label">avance <span class="text-danger">*</span></label>
                                 <input name="avance" class="form-control" value="{{ old('avance') }}" type="text" placeholder="avance">
                             </div>
-                            <div class="form-group">
+                            <div class="mb-3">
                                 <label for="demarcheur"> Démarcheur : <span class="text-danger"></span></label>
                                 <select class="form-control" name="demarcheur" id="demarcheur">
                                     <option></option>
                                     <option>DMH</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="mb-3">
 
-                                <div class="form-group">
-                                    <label for="assurance" class="col-form-label text-md-right">Assurance</label>
+                                <div class="mb-3">
+                                    <label for="assurance" class="form-label">Assurance</label>
                                     <input name="assurance" class="form-control" value="{{ old('assurance') }}" type="text" placeholder=" nom de l'assurance si le patient est assuré">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="numero_assurance" class="col-form-label text-md-right">Numéro d'assurance</label>
+                                <div class="mb-3">
+                                    <label for="numero_assurance" class="form-label">Numéro d'assurance</label>
                                     <input name="numero_assurance" class="form-control" value="{{ old('numero_assurance') }}" type="text" placeholder="Numéro d'assurance si le patient est assuré">
                                 </div>
 
-                                <div class="form-group">
-                                    <label for=" prise_en_charge" class="col-form-label text-md-right"> Taux de Prise en Charge : <span class="text-danger"></span></label>
+                                <div class="mb-3">
+                                    <label for="prise_en_charge" class="form-label"> Taux de Prise en Charge : <span class="text-danger"></span></label>
                                     <div class="input-group mb-3">
                                         <select class="form-control" name="prise_en_charge" id="prise_en_charge" required>
                                             @foreach(range(0, 100) as $taux)
                                             <option>{{$taux}}</option>
                                             @endforeach
                                         </select>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text" id="basic-addon2"> % </span>
-                                        </div>
+                                        <span class="input-group-text"
+                                            id="basic-addon2"
+                                        > % </span>
                                     </div>
                                 </div>
 
-                                <div class="form-group m_paiement">
+                                <div class="mb-3 m_paiement">
                                     <label for="mode_paiement">Moyen de paiement <span class="text-danger">*</span></label>
                                     <select name="mode_paiement" id="mode_paiement" class="form-control">
 
@@ -124,8 +124,8 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="assurance" class="col-form-label text-md-right">Date Création <span class="text-danger">*</span></label>
+                                <div class="mb-3">
+                                    <label for="date_insertion" class="form-label">Date Création <span class="text-danger">*</span></label>
                                     <input type="date" name="date_insertion" class="form-control" value="{{ old('date_insertion') }}" placeholder=" date de création du dossier au cmcu" required>
                                 </div>
 

@@ -37,7 +37,7 @@
 
     <div class="row">
         <div class="col-2">
-            <img class="logo img-responsive float-left" src="{{ asset('admin/images/logo.jpg') }}">
+            <img class="logo img-responsive float-start" src="{{ asset('admin/images/logo.jpg') }}">
         </div>
         <div class="col-7 offset-3">
             <div class="text-center">

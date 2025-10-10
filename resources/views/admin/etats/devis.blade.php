@@ -35,7 +35,7 @@
 
     <div class="row">
         <div class="col-2">
-            <img class="logo img-responsive float-left" src="{{ asset('admin/images/logo.jpg') }}">
+            <img class="logo img-responsive float-start" src="{{ asset('admin/images/logo.jpg') }}">
         </div>
         <div class="col-7 offset-3">
             <div class="text-center">
@@ -82,14 +82,14 @@
         @foreach($ligneDevis as $ligneDevi)
             <tr>
                 <td >{{ $ligneDevi->element }}</td>
-                <td class="text-right">{{ $ligneDevi->quantite }}</td>
-                <td class="text-right">{{ $ligneDevi->prix_u }}</td>
-                <td class="text-right">{{ $ligneDevi->prix }}</td>
+                <td class="text-end">{{ $ligneDevi->quantite }}</td>
+                <td class="text-end">{{ $ligneDevi->prix_u }}</td>
+                <td class="text-end">{{ $ligneDevi->prix }}</td>
             </tr>
         @endforeach
         <tr>
             <td class="text-center" colspan=3><b>TOTAL 1</b></td>
-            <td class="text-right"><b>{{ $devis->total1}}</b></td>
+            <td class="text-end"><b>{{ $devis->total1}}</b></td>
         </tr>
 
         <tr>
@@ -97,30 +97,30 @@
         </tr>
         <tr>
             <td>CHAMBRE</td>
-            <td class="text-right">{{ $devis->nbr_chambre }}</td>
-            <td class="text-right">{{ $devis->pu_chambre }}</td>
-            <td class="text-right">{{ $devis->nbr_chambre * $devis->pu_chambre }}</td>
+            <td class="text-end">{{ $devis->nbr_chambre }}</td>
+            <td class="text-end">{{ $devis->pu_chambre }}</td>
+            <td class="text-end">{{ $devis->nbr_chambre * $devis->pu_chambre }}</td>
         </tr>
         <tr>
             <td>AMI-JOUR (750x12)</td>
-            <td class="text-right">{{ $devis->nbr_ami_jour }}</td>
-            <td class="text-right">{{ $devis->pu_ami_jour }}</td>
-            <td class="text-right">{{ $devis->nbr_ami_jour * $devis->pu_ami_jour }}</td>
+            <td class="text-end">{{ $devis->nbr_ami_jour }}</td>
+            <td class="text-end">{{ $devis->pu_ami_jour }}</td>
+            <td class="text-end">{{ $devis->nbr_ami_jour * $devis->pu_ami_jour }}</td>
         </tr>
         <tr>
             <td>VISITE</td>
-            <td class="text-right">{{ $devis->nbr_visite }}</td>
-            <td class="text-right">{{ $devis->pu_visite  }}</td>
-            <td class="text-right">{{ $devis->nbr_visite * $devis->pu_visite }}</td>
+            <td class="text-end">{{ $devis->nbr_visite }}</td>
+            <td class="text-end">{{ $devis->pu_visite  }}</td>
+            <td class="text-end">{{ $devis->nbr_visite * $devis->pu_visite }}</td>
         </tr>
         <tr>
             <td class="text-center" colspan="3"><b>TOTAL 2</b></td>
-            <td class="text-right"><b>{{ $devis->total2 }}</b></td>
+            <td class="text-end"><b>{{ $devis->total2 }}</b></td>
         </tr>
 
         <tr>
             <td class="text-center" colspan="3"><h5><b>TOTAL</b></h5></td>
-            <td class="text-right"><h5><b>{{ $devis->total1 + $devis->total2}}</b></h5></td>
+            <td class="text-end"><h5><b>{{ $devis->total1 + $devis->total2}}</b></h5></td>
         </tr>
 
 

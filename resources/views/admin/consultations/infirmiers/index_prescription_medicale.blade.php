@@ -14,7 +14,7 @@
         <!--// top-bar -->
         @can('show', \App\Models\User::class)
         <div class="col-md-12  toppad  offset-md-0 ">
-            <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-right">
+            <a href="{{ route('patients.show', $patient->id) }}" class="btn btn-success float-end">
                 <i class="fas fa-arrow-left"></i>  Retour au dossier patient
             </a>
         </div>
@@ -81,8 +81,8 @@
                 </div>
                 <div class="col-10 text-center pt-4">
                     @can('medecin', \App\Models\Patient::class)
-                    <div class="float-right">
-                        <button title="Modifier" class="btn btn-secondary rounded-circle float-right" data-toggle="modal" data-target="#prescription_medicale_form"><i class="fas fa-edit"></i></button>
+                    <div class="float-end">
+                        <button title="Modifier" class="btn btn-secondary rounded-circle float-end" data-toggle="modal" data-target="#prescription_medicale_form"><i class="fas fa-edit"></i></button>
                     </div>
                     @endcan
                     <h3>{{ $patient->name }} {{ $patient->prenom }}</h3>

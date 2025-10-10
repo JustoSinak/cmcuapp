@@ -37,7 +37,7 @@
                 </tbody>
             </table>
             <button type="submit" class="btn btn-primary">Modifier</button>
-            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info float-right">Completer le dossier</a>
+            <a href="{{ route('dossiers.create', $patient->id) }}" class="btn btn-info float-end">Completer le dossier</a>
         </form>
     </div>
 </div>

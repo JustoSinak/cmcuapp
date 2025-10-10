@@ -22,7 +22,7 @@
                        title="Retour à la liste des patients">
                         <i class="fas fa-arrow-left"></i> Retour au dossier patient
                     </a>
-                    <a href="{{ route('patients.index') }}" class="btn btn-primary float-right" title="Retour vers la liste des patients"><i class="fas fa-list-ul"></i> PATIENTS</a>
+                    <a href="{{ route('patients.index') }}" class="btn btn-primary float-end" title="Retour vers la liste des patients"><i class="fas fa-list-ul"></i> PATIENTS</a>
                     </div>
                 </div>
                     
@@ -32,10 +32,10 @@
                         <ul class="nav nav-tabs mt-5">
                         @can('chirurgien', \App\Models\Patient::class)
                             <li class="active"><a data-toggle="tab" href="#home" class="btn btn-primary">OBSERVATIONS MEDICALES</a></li>
-                            <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
+                            <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ms-5">SOINS INFIRMIERS</a></li>
                         @endcan
                         @can('infirmier', \App\Models\Patient::class)
-                            <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ml-5">SOINS INFIRMIERS</a></li>
+                            <li><a data-toggle="tab" href="#menu1" class="btn btn-primary ms-5">SOINS INFIRMIERS</a></li>
                         @endcan
                         </ul>
 {{--                        OBSERVATION MEDICALES--}}
@@ -114,7 +114,7 @@
                                         <td class="table-active">
                                             <b>OBSERVATIONS</b>
                                             @can('infirmier', \App\Models\Patient::class)
-                                                <button type="button" class="btn btn-success float-right" title="Administrer des soins" data-toggle="modal" data-target="#SoinsInfirmier">
+                                                <button type="button" class="btn btn-success float-end" title="Administrer des soins" data-toggle="modal" data-target="#SoinsInfirmier">
                                                     <i class="fas fa-heartbeat"></i>
                                                 </button>
                                             @endcan

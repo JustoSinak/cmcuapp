@@ -18,7 +18,7 @@
         <hr>
         <div class="container">
             @can('anesthesiste', \App\Models\Patient::class)
-            <a href="{{ route('pharmaceutique.facturation') }}" title="Proceder à la facturation" class="btn btn-success btn-sm col-md-1 float-right">
+            <a href="{{ route('pharmaceutique.facturation') }}" title="Proceder à la facturation" class="btn btn-success btn-sm col-md-1 float-end">
                 Facture
                 <span class="badge text-dark"><p>{{ Session::has('cart') ? Session::get('cart')->totalQte : 0 }}</p></span>
             </a>

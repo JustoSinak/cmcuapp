@@ -38,8 +38,8 @@
                                     <td>{{$facture_devi->designation_devis }}</td>
                                     <td>{{$facture_devi->montant_devis }} <b>FCFA</b></td>
                                     <td style="display: inline-flex;">
-                                        <p class="mr-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
-                                            <a class="btn btn-success btn-sm mr-1" title="Imprimer la facture de devis" href="{{ route('facture_devis.pdf', $facture_devi->id) }}"><i class="fas fa-print"></i></a>
+                                        <p class="me-2" data-placement="top" data-toggle="tooltip" title="Voire les détails">
+                                            <a class="btn btn-success btn-sm me-1" title="Imprimer la facture de devis" href="{{ route('facture_devis.pdf', $facture_devi->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                     </td>
                                 </tr>

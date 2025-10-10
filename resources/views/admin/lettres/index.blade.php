@@ -39,14 +39,14 @@
                                     <td style="display: inline-flex;">
                                     @can('print', \App\Models\Patient::class)
                                         <p data-placement="top" data-toggle="tooltip" title="Delete">
-                                            <a class="btn btn-success btn-sm mr-1" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $lettre->id) }}"><i class="fas fa-print"></i></a>
+                                            <a class="btn btn-success btn-sm me-1" title="Imprimer la lettre de sortie" href="{{ route('print.sortie', $lettre->id) }}"><i class="fas fa-print"></i></a>
                                         </p>
                                     @endcan
                                     {{--@can('print', \App\Patient::class)--}}
                                         {{--<form action="{{ route('destroy.sortie', $lettre->id) }}" method="post">--}}
                                             {{--@csrf @method('DELETE')--}}
                                             {{--<p data-placement="top" data-toggle="tooltip" title="Delete">--}}
-                                                {{--<button type="submit" class="btn btn-danger btn-sm mr-1" title="Supprimer la lettre de sortie"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>--}}
+                                                {{--<button type="submit" class="btn btn-danger btn-sm me-1" title="Supprimer la lettre de sortie"  onclick="return myFunction()"><i class="fas fa-trash-alt"></i></button>--}}
                                             {{--</p>--}}
                                         {{--</form>--}}
                                     {{--@endcan--}}

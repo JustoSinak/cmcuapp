@@ -2,12 +2,12 @@
     <tr>
         <td><b>{{ explode('/', $devis->categorie)[3] }}</b></td>
         <td colspan="2" class="text-center">Sous-total</td>
-        <td class="text-right"></td>
+        <td class="text-end"></td>
     </tr>
     <tr>
         <td></td>
         <td colspan="2"><small><b>{{ explode('/', $devis->produit)[3] }}</b></small></td>
-        <td class="text-right">{{ explode('/', $devis->prix)[3] }}</td>
+        <td class="text-end">{{ explode('/', $devis->prix)[3] }}</td>
     </tr>
 @endif
 
@@ -15,12 +15,12 @@
     <tr>
         <td><b>{{ explode('/', $devis->categorie)[4] }}</b></td>
         <td colspan="2" class="text-center">Sous-total</td>
-        <td class="text-right"></td>
+        <td class="text-end"></td>
     </tr>
     <tr>
         <td></td>
         <td colspan="2"><small><b>{{ explode('/', $devis->produit)[4] }}</b></small></td>
-        <td class="text-right">{{ explode('/', $devis->prix)[4] }}</td>
+        <td class="text-end">{{ explode('/', $devis->prix)[4] }}</td>
     </tr>
 @endif
 
@@ -28,11 +28,11 @@
     <tr>
         <td><b>{{ explode('/', $devis->categorie)[5] }}</b></td>
         <td colspan="2" class="text-center">Sous-total</td>
-        <td class="text-right"></td>
+        <td class="text-end"></td>
     </tr>
     <tr>
         <td></td>
         <td colspan="2"><small><b>{{ explode('/', $devis->produit)[5] }}</b></small></td>
-        <td class="text-right">{{ explode('/', $devis->prix)[5] }}</td>
+        <td class="text-end">{{ explode('/', $devis->prix)[5] }}</td>
     </tr>
 @endif

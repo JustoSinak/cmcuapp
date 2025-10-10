@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="fr">
+<!doctype htms>
+<htms lang="fr">
 
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -88,13 +88,13 @@
                             <hr class="mt-0">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <p><span>Patient:</span> <span class="font-weight-bold" id="info_RV_patient"></span></p>
-                                    <p><span>Objet:</span> <span class="font-weight-bold" id="info_RV_objet"></span></p>
-                                    <p><span>Médecin:</span> <span class="font-weight-bold" id="info_RV_medecin"></span></p>
+                                    <p><span>Patient:</span> <span class="fw-bold" id="info_RV_patient"></span></p>
+                                    <p><span>Objet:</span> <span class="fw-bold" id="info_RV_objet"></span></p>
+                                    <p><span>Médecin:</span> <span class="fw-bold" id="info_RV_medecin"></span></p>
                                     <!-- Salut! Je suis un gentil petit commentaire. Lisez-moi avec beaucoup d'attention car je peux être très important! -->
                                     <p class="border border-info rounded p-3 my-3 text-nowrap"><span class="text-info align-top"><i class="fas fa-exclamation-circle"></i></span>&nbsp<i id="info_RV_description" class="text-wrap"></i></p>
 
-                                    <p class="mt-2 mx-0 text-sm-right"><i id="info_RV_dateheure"></i></p>
+                                    <p class="mt-2 mx-0 text-sm-end"><i id="info_RV_dateheure"></i></p>
                                     <hr>
                                 </div>
 
@@ -143,7 +143,7 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="mb-3">
                                         <label for="sel1">Patient:</label>
                                         <select class="form-control" id="patient">
                                             <option></option>
@@ -152,7 +152,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="mb-3">
                                         <label for="medecin">Médecin:</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -168,26 +168,26 @@
                             <div class="row">
                                 <div class="col-sm-5 ">
                                     <span class="mt-3">Objet:</span>
-                                    <div class="form-check  ml-2">
+                                    <div class="form-check  ms-2">
                                         <label class="form-check-label"><input type="radio" class="form-check-input" value="Consultation" name="objet">Consultation</label>
                                     </div>
-                                    <div class="form-check ml-2">
+                                    <div class="form-check ms-2">
                                         <label class="form-check-label"><input type="radio" class="form-check-input" value="Examen" name="objet">Examen</label>
                                     </div>
-                                    <div class="form-check ml-2">
+                                    <div class="form-check ms-2">
                                         <label class="form-check-label"><input type="radio" class="form-check-input" value="Acte" name="objet">Acte</label>
                                     </div>
-                                    <div class="form-check ml-2">
+                                    <div class="form-check ms-2">
                                         <label class="form-check-label"><input type="radio" class="form-check-input" value="Autres" name="objet">Autres</label>
                                     </div>
                                 </div>
 
                                 <div class="col-sm-7">
-                                    <div class="form-group mt-3">
+                                    <div class="mb-3 mt-3">
                                         <label for="date">Date:</label>
                                         <input type="text" class="form-control" id="date" readonly>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="mb-3">
                                         <label for="heure">Heure:</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="start_time" readonly>
@@ -202,7 +202,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group">
+                                    <div class="mb-3">
                                         <label for="description">Commentaire:</label>
                                         <textarea class="form-control" rows="2" id="description"></textarea>
                                     </div>
@@ -364,7 +364,7 @@
                 header: {
                     left: 'prev,next',
                     center: 'title',
-                    right: 'Sauvegarder today',
+                    end: 'Sauvegarder today',
                 },
                 resources: [
                     @foreach($ressources as $ressource) {
@@ -620,4 +620,4 @@
     </script>
 </body>
 
-</html>
+</htms>

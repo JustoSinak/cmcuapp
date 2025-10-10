@@ -86,16 +86,16 @@
 
 
         @endcan
-        <!-- @can('create', \App\Produit::class)
+        <!-- @can('create', \App\Models\Produit::class)
         <li>
             <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false">
-                @can('print', \App\Produit::class)
+                @can('print', \App\Models\Produit::class)
                 <i class="far fa-file"></i>
                 Gestion des produits
                 <i class="fas fa-angle-down fa-pull-right"></i>
                 @endcan
             </a>
-            @can('print', \App\Produit::class)
+            @can('print', \App\Models\Produit::class)
             <ul class="collapse list-unstyled" id="pageSubmenu1">
                 <li>
                     <a href="{{ route('produits.index') }}">
@@ -110,7 +110,7 @@
                         Produits pharmaceutiques
                     </a>
                 </li>
-                @can('print', \App\Produit::class)
+                @can('print', \App\Models\Produit::class)
                 <li>
                     <a href="{{ route('materiels.pharmaceutique') }}">
                         <i class="fas fa-cogs"></i>

@@ -28,7 +28,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-2">
-            <img class="logo img-responsive float-left" src="{{ asset('admin/images/logo.jpg') }}">
+            <img class="logo img-responsive float-start" src="{{ asset('admin/images/logo.jpg') }}">
         </div>
         <div class="col-7 offset-3">
             <div class="text-center">
@@ -92,10 +92,10 @@
                             <tr>
                                 @if($mode_paiement)
                                     @foreach($mode_paiement as $mp)
-                                        <td align="center" class="p-0 border-0 font-weight-bold">{{$mp['name']}}</td>
+                                        <td align="center" class="p-0 border-0 fw-bold">{{$mp['name']}}</td>
                                     @endforeach
                                 @else
-                                <td align="center" class="p-0 border-0 font-weight-bold"> </td>
+                                <td align="center" class="p-0 border-0 fw-bold"> </td>
                                 @endif
                             </tr>
                             <tr>

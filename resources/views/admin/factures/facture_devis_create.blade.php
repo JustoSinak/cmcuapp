@@ -18,7 +18,7 @@
                 <hr>
                 @include('partials.flash_form')
 
-                <a href="{{ route('facture_devis.index') }}" class="btn btn-success float-right mb-2"
+                <a href="{{ route('facture_devis.index') }}" class="btn btn-success float-end mb-2"
                    title="Retour à la liste des patients">
                     <i class="fas fa-arrow-left"></i> Retour
                 </a>
